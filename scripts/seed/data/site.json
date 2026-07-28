@@ -1,0 +1,200 @@
+{
+  "navigation": {
+    "nav_links": [
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About us",
+        "path": "/about-us"
+      },
+      {
+        "label": "Projects",
+        "path": "/projects"
+      },
+      {
+        "label": "What we do",
+        "path": "/what-we-do"
+      }
+    ],
+    "menu_footer_links": [
+      {
+        "label": "+31765156463",
+        "url": "tel:+31765156463"
+      },
+      {
+        "label": "cu@nine.nl",
+        "url": "mailto:cu@nine.nl"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/nine-nl/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/ninecreativeagency/"
+      },
+      {
+        "label": "Vimeo",
+        "url": "https://vimeo.com/nine"
+      }
+    ]
+  },
+  "footer": {
+    "footer_offices": [
+      {
+        "city": "Breda",
+        "address": "Willemstraat 16\n4811 AL Breda\nThe Netherlands"
+      },
+      {
+        "city": "Rotterdam",
+        "address": "Goudsesingel 194\n3011 KD Rotterdam\nThe Netherlands"
+      }
+    ],
+    "footer_email": "cu@nine.nl",
+    "footer_phone": "+31765156463",
+    "footer_social_links": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/938792/admin/dashboard/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/ninecreativeagency/"
+      },
+      {
+        "label": "Vimeo",
+        "url": "https://vimeo.com/ninefilms"
+      }
+    ],
+    "footer_legal_items": [
+      {
+        "label": "Algemene voorwaarden",
+        "url": "/files/algemene-voorwaarden.pdf"
+      },
+      {
+        "label": "Privacy",
+        "url": "/files/privacy-beleid.pdf"
+      }
+    ],
+    "footer_cta_title": "Let's get in touch",
+    "footer_cta_text": "Contact us",
+    "footer_cta_link": "mailto:cu@nine.nl"
+  },
+  "homeContent": {
+    "how_we_do_it": {
+      "title": "How we do it",
+      "text": "We are a design studio that reinvents reality for a smart and cultured future.",
+      "text2": "With design, voice and forward thinking ideas, we create worlds for brands we love.",
+      "cards": [
+        {
+          "title": "Identity",
+          "text_top": "Mensen moeten in 1 sec. weten dat het om jouw merk gaat. Maar hoe blijf je onderscheidend, met zoveel indrukken? Met een sterke en heldere identiteit.",
+          "text_bottom": "Dus zoeken wij naar de kern, de stickiness van jouw merk. We maken het onmiskenbaar jou en zorgen dat het blijft plakken."
+        },
+        {
+          "title": "Impact",
+          "text_top": "Impact maken betekent zelf de toekomst vormgeven. Als creatief bureau staan wij middenin de samenleving. ",
+          "text_bottom": "Wij weten precies wat er speelt, zien veranderingen al vroeg en anticiperen op wat komen gaat. Zo zorgen wij ervoor dat jouw merk de koers niet volgt, maar bepaalt."
+        },
+        {
+          "title": "Reach",
+          "text_top": "In een wereld vol ruis wil je niet hoeven schreeuwen om een punt te maken. Wij helpen je om de juiste mensen te bereiken",
+          "text_bottom": "Samen met onze partners creëren we de perfecte balans tussen impact, frequentie en bereik. Zodat jij je merk kan laten spreken."
+        },
+        {
+          "title": "Result",
+          "text_top": "We streven vaak naar hetzelfde: groei, succes en bereik. We nemen verschillende routes, maar bewegen in dezelfde richting. Alleen, hoe maak je dan nog het verschil?",
+          "text_bottom": "Wij zorgen ervoor dat jouw merk niet alleen doet wat het belooft, maar dat elke stap gericht is op concrete resultaten die je ziet en voelt. "
+        }
+      ]
+    },
+    "what_we_do": {
+      "title": "What we do",
+      "text": "You already look great, let us make you look fantastic!",
+      "text2": "We live for great design, making you look good is our life's mission. If clothes."
+    },
+    "what_weve_created": {
+      "title": "What we've created",
+      "text": "Take a look at our track record",
+      "text2": "Nine is an independent design studio that reinvents reality for a smart and cultured future. With design, voice and forward thinking ideas, we create worlds for brands we love."
+    },
+    "random_sentences": [
+      {
+        "text": "Hello we’re nine creative agency"
+      },
+      {
+        "text": "Hello we’re your new creative agency"
+      },
+      {
+        "text": "It’s time to shine."
+      },
+      {
+        "text": "This is where the magic happens."
+      },
+      {
+        "text": "We’re a strong strategic and creative agency with offices in Breda and Rotterdam."
+      },
+      {
+        "text": "9|CA: Built on friendship, fueled by creativity and passion."
+      },
+      {
+        "text": "We’ve a desire to drive real positive change through our work."
+      },
+      {
+        "text": "With creative power and smart strategy, we help businesses take off."
+      },
+      {
+        "text": "Bold, impactful ideas that grab attention and deliver real results."
+      },
+      {
+        "text": "No fluff, no fuss, just creativity that works."
+      },
+      {
+        "text": "A brand story that makes sense."
+      },
+      {
+        "text": "What can we do for you?"
+      },
+      {
+        "text": "Where bold ideas meet sharp execution, magic happens"
+      },
+      {
+        "text": "We don’t follow trends. We set the pace for what’s next."
+      },
+      {
+        "text": "Great design turns brands into experiences you can’t forget."
+      },
+      {
+        "text": "Our design makes brands impossible to ignore."
+      },
+      {
+        "text": "Timeless over trendy, always."
+      },
+      {
+        "text": "Not just a pretty face."
+      },
+      {
+        "text": "Great design sparks conversations."
+      },
+      {
+        "text": "It’s all in the details."
+      },
+      {
+        "text": "Less noise, more meaning."
+      },
+      {
+        "text": "Make it iconic."
+      },
+      {
+        "text": "We make campaigns that stick."
+      }
+    ]
+  },
+  "cookieBanner": {
+    "cookie_message": "Deze website maakt gebruik van cookies.\nWe gebruiken cookies om uw ervaring te verbeteren, gepersonaliseerde advertenties of inhoud weer te geven en ons verkeer te analyseren.",
+    "cookie_accept": "Alles accepteren",
+    "cookie_reject": "Alles weigeren"
+  }
+}

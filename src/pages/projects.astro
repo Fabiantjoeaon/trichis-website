@@ -1,0 +1,11 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProjectsBasicView from "@/components/projects/ProjectsBasicView.jsx";
+import { getProjects } from "@/lib/content";
+
+const projects = await getProjects();
+---
+
+<BaseLayout title="Nine Creative Agency: Projects">
+  <ProjectsBasicView client:load projects={projects} />
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CustomPage from "@/components/CustomPage.jsx";
+import { getCustomPage, getCustomPages } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const pages = await getCustomPages();
+  return pages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout title={`${page.title} — Nine Creative Agency`}>
+  <CustomPage client:load page={page} />
+</BaseLayout>

@@ -1,0 +1,864 @@
+/* Chrome component styles ported from nine-ca styled-components.
+   Breakpoints: mobile <712px, tablet-down <1025px (matches responsive.js). */
+
+/* ── Divider / SectionTitle (components/SectionTitle.js) ── */
+
+.divider {
+  width: 100vw;
+  height: 1px;
+  background: var(--color-text);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.section-title {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.section-title__text {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 50rem;
+  line-height: 1.2;
+  font-weight: 300;
+  padding-top: 40rem;
+  padding-bottom: 40rem;
+  margin-left: var(--pagePadding);
+  transform: translateY(100%);
+  color: var(--color-text);
+}
+
+/* ── Badge (components/Badge.js) ── */
+
+.badge {
+  border: 1px solid var(--color-text);
+  padding: 10rem 30rem;
+  border-radius: 10rem;
+  background-color: transparent;
+  cursor: pointer;
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+.badge .txt-shuffle {
+  color: var(--color-text);
+}
+
+.badge--selected {
+  background-color: var(--color-text);
+}
+
+.badge--selected .txt-shuffle {
+  color: var(--color-background);
+}
+
+.badge.active {
+  transform: scale(1);
+}
+
+/* ── AnimatedHoverText (components/AnimatedHoverText.js) ── */
+
+.animated-hover-text {
+  position: relative;
+  display: inline-block;
+  clip-path: inset(0 -110% 0 0);
+}
+
+.animated-hover-text .bold-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(110%);
+  font-weight: 500 !important;
+}
+
+/* ── BorderedIcon (components/BorderedIcon.js) ── */
+
+.icon-container {
+  --icon-size: 120rem;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-container--disabled {
+  cursor: default;
+}
+
+.icon-container h4 {
+  position: relative;
+  margin-left: 50rem;
+  color: var(--color-text);
+  font-family: "Restart Soft", sans-serif;
+  font-size: 48rem;
+  line-height: 1;
+  font-weight: 100;
+}
+
+/* underline hover (theme.js util.iconUnderlineHover) */
+.icon-container h4::before {
+  content: "";
+  position: absolute;
+  bottom: -6rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-text);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.8s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.icon-container:not(.icon-container--disabled):hover h4::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.icon-wrapper {
+  --translation: 150%;
+  --duration: 0.8s;
+
+  border: 1px solid var(--color-text);
+  border-radius: 50%;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  position: relative;
+
+  transform: scale(0) rotate(180deg);
+  transform-origin: center;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.icon-container--disabled .icon-wrapper {
+  opacity: 0.5;
+}
+
+.icon-container--disabled,
+.icon-container--disabled * {
+  pointer-events: none !important;
+}
+
+.icon-wrapper .icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform var(--duration) cubic-bezier(1, 0, 0, 1);
+  z-index: 1;
+  position: relative;
+}
+
+.icon-wrapper .icon svg {
+  width: 75%;
+  height: 75%;
+}
+
+.icon-wrapper .icon svg path {
+  transition: fill var(--duration) cubic-bezier(1, 0, 0, 1);
+}
+
+.icon-wrapper .icon-first path {
+  fill: var(--color-text);
+  stroke: var(--color-text);
+}
+
+.icon-wrapper .icon-duplicate {
+  transform: translateX(calc(var(--translation) * -1));
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform calc(var(--duration) * 0.85)
+    cubic-bezier(0.075, 0.82, 0.165, 1) calc(var(--duration) * 0.35);
+}
+
+.icon-wrapper .icon-duplicate path {
+  fill: var(--color-background);
+  stroke: var(--color-background);
+}
+
+.icon-wrapper .icon-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-text);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform var(--duration) cubic-bezier(1, 0, 0, 1);
+  transition-delay: 0.1s;
+  z-index: 0;
+}
+
+.icon-wrapper.icon-close svg {
+  width: 50%;
+  height: 50%;
+}
+
+.icon-wrapper.icon-close path {
+  stroke: var(--color-text);
+}
+
+.icon-wrapper.icon-chevronRight svg,
+.icon-wrapper.icon-chevronLeft svg {
+  width: 70%;
+  height: 50%;
+}
+
+.icon-wrapper.icon-chevronLeft svg {
+  transform: scaleX(-1);
+}
+
+/* hover state (shared by wrapper hover and container hover) */
+.icon-container:not(.icon-container--disabled):hover .icon-first,
+.icon-wrapper:hover .icon-first {
+  transform: translateX(var(--translation));
+}
+
+.icon-container:not(.icon-container--disabled):hover .icon-duplicate,
+.icon-wrapper:hover .icon-duplicate {
+  transform: translateX(0%) !important;
+}
+
+.icon-container:not(.icon-container--disabled):hover .icon-duplicate path,
+.icon-wrapper:hover .icon-duplicate path {
+  fill: var(--color-background);
+  stroke: var(--color-background);
+}
+
+.icon-container:not(.icon-container--disabled):hover .icon-background,
+.icon-wrapper:hover .icon-background {
+  transform: scale(1.5);
+  transition-delay: 0s;
+}
+
+/* ── Logo ── */
+
+.logo {
+  position: relative;
+  width: 200rem;
+}
+
+.logo svg {
+  width: 100%;
+  height: 100%;
+}
+
+.logo path {
+  fill: var(--color-text);
+}
+
+/* ── NavigationBar (components/Navigation/NavigationBar.js) ── */
+
+.navigation {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: var(--navigationHeight);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: var(--pagePadding);
+  padding-right: var(--pagePadding);
+  background-color: var(--color-background);
+  z-index: 5;
+}
+
+.navigation .navigation__border-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.navigation h2 {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 40rem;
+  line-height: 1.4;
+  font-weight: 100;
+  text-align: center;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.navigation .nav-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navigation .nav-logo {
+  line-height: 1.1;
+}
+
+@media (max-width: 711px) {
+  .navigation .nav-logo {
+    font-weight: 900;
+    font-size: 84rem;
+  }
+}
+
+.theme-switcher {
+  display: flex;
+  gap: 10px;
+}
+
+.theme-switcher p {
+  cursor: pointer;
+}
+
+@media (max-width: 711px) {
+  .theme-switcher {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.nav-menu-icon {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  width: 80rem;
+  --bar-height: 3px;
+  height: calc(60rem - var(--bar-height) * 2);
+}
+
+.nav-menu-icon span {
+  width: 100%;
+  height: var(--bar-height);
+  background-color: var(--color-text);
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  transform-origin: left;
+}
+
+.nav-menu-icon .bar2 {
+  transition-delay: 0.2s;
+}
+
+.nav-menu-icon.active {
+  transform-origin: right;
+}
+
+.nav-menu-icon.active span {
+  transform: scaleX(1);
+}
+
+/* ── Menu (components/Menu/Menu.js) ── */
+
+.menu {
+  --menuWidthMultiplier: 8;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 7;
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+  background-color: var(--color-menuBackground);
+}
+
+.menu__inner {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 320rem;
+  width: calc(100% - var(--pagePadding) * var(--menuWidthMultiplier));
+}
+
+.menu__inner * {
+  color: var(--color-menuText) !important;
+}
+
+.menu__inner .icon-container {
+  position: absolute;
+  top: 50rem;
+  right: 0;
+}
+
+.menu__inner .icon-container .icon-wrapper {
+  color: var(--color-menuText) !important;
+  border-color: var(--color-menuText) !important;
+}
+
+.menu__inner .icon-container .icon-background {
+  background-color: var(--color-menuText) !important;
+}
+
+.menu__inner .icon-container path {
+  fill: var(--color-menuText) !important;
+  stroke: var(--color-menuText) !important;
+}
+
+.menu__inner .icon-container .icon-duplicate,
+.menu__inner .icon-container .icon-duplicate path {
+  fill: var(--color-menuBackground) !important;
+  stroke: var(--color-menuBackground) !important;
+}
+
+.menu__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu__links a {
+  pointer-events: all !important;
+  cursor: pointer !important;
+  display: inline-block;
+}
+
+.menu__links.inactive a {
+  pointer-events: none !important;
+  cursor: default !important;
+  user-select: none !important;
+}
+
+.menu__links h2 {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 150rem;
+  line-height: 1.2;
+  font-weight: 100;
+  white-space: nowrap;
+  margin-bottom: 40rem;
+}
+
+@media (min-width: 1025px) and (min-height: 600px) {
+  .menu__links h2 {
+    font-size: 180rem;
+    line-height: 1.4;
+  }
+}
+
+.menu__bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu__bottom .txt-shuffle {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 50rem;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+@media (min-width: 1025px) and (min-height: 600px) {
+  .menu__bottom .txt-shuffle {
+    font-size: 42rem;
+    line-height: 1.4;
+  }
+}
+
+.menu__contact,
+.menu__socials {
+  display: flex;
+  gap: 150rem;
+}
+
+@media (max-width: 1024px) {
+  .menu__inner {
+    width: calc(100% - var(--pagePadding) * 4);
+    gap: 150rem;
+    margin-bottom: 400rem !important;
+  }
+
+  .menu__inner .icon-container {
+    position: fixed;
+    top: calc(var(--pagePadding) * 2);
+    right: calc(var(--pagePadding) * 2);
+  }
+
+  .menu__bottom,
+  .menu__contact {
+    flex-direction: column;
+  }
+
+  .menu__contact {
+    gap: 70rem !important;
+  }
+
+  .menu__socials {
+    position: fixed;
+    bottom: calc(var(--pagePadding) * 3);
+    gap: 100rem !important;
+  }
+}
+
+/* ── Footer (components/Footer/Footer.js) ── */
+
+footer {
+  background-color: var(--color-background);
+}
+
+.footer-wrapper {
+  position: relative;
+}
+
+.footer-wrapper .icon-container {
+  position: absolute;
+  top: 75%;
+  transform: translateY(-50%);
+  right: var(--pagePadding);
+}
+
+@media (max-width: 711px) {
+  .footer-wrapper .icon-container {
+    position: relative;
+    padding-left: var(--pagePadding);
+    right: 0;
+    top: 0;
+    margin-top: 150rem;
+  }
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 100rem;
+  padding-bottom: 100rem;
+}
+
+.footer-inner__left {
+  display: flex;
+  gap: 150rem;
+  max-width: 70%;
+}
+
+.footer-inner__right {
+  width: 600rem;
+  max-width: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 100rem;
+}
+
+.footer-inner ul li {
+  margin-bottom: 20rem;
+}
+
+.footer-inner ul li strong {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.footer-inner ul li p {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 40rem;
+  line-height: 1.4;
+  font-weight: 100;
+  color: var(--color-text);
+}
+
+.footer-inner ul li a p {
+  position: relative;
+  cursor: pointer;
+}
+
+.footer-inner ul li a p::before {
+  content: "";
+  position: absolute;
+  bottom: -4rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-text);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.footer-inner ul li a p:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@media (max-width: 711px) {
+  .footer-inner {
+    flex-flow: column wrap;
+    gap: 30rem;
+  }
+
+  .footer-inner__left {
+    max-width: 100%;
+    gap: 0rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-inner__right {
+    max-width: 100%;
+  }
+
+  .footer-inner ul {
+    flex: 50%;
+    margin-bottom: 50rem;
+  }
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 70rem var(--pagePadding);
+}
+
+.footer-bottom p {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 40rem;
+  line-height: 1.4;
+  font-weight: 100;
+  color: var(--color-text);
+}
+
+.footer-bottom__right {
+  display: flex;
+  gap: 50rem;
+}
+
+.footer-bottom__right p {
+  cursor: pointer;
+  position: relative;
+}
+
+@media (max-width: 711px) {
+  .footer-bottom p {
+    font-size: 30rem;
+  }
+}
+
+/* ── CTAFooter (components/Footer/CTAFooter.js) ── */
+
+.cta-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-footer__inner {
+  padding: 200rem 0rem;
+}
+
+.cta-footer h3 {
+  text-align: center;
+  color: var(--color-text);
+  font-family: "Restart Soft", sans-serif;
+  font-size: 80rem;
+  line-height: 1.1;
+  font-weight: 100;
+  max-width: 800rem;
+}
+
+@media (min-width: 1025px) and (min-height: 600px) {
+  .cta-footer h3 {
+    font-size: 100rem;
+    line-height: 1.2;
+  }
+}
+
+.cta-footer h3 strong {
+  font-weight: 400;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.cta-footer__cta {
+  margin-top: 100rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30rem;
+}
+
+/* ── Loader (components/views/LoaderView.js) ── */
+
+.loader {
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  background-color: var(--color-menuBackground);
+  position: fixed;
+  overflow: hidden;
+  max-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  clip-path: inset(0 0 0 0);
+}
+
+.loader-progress-text {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 500rem;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--color-accent);
+  position: absolute;
+  margin-right: var(--basePadding);
+  margin-bottom: var(--basePadding);
+  text-align: right;
+}
+
+/* ── Global WebGPU canvas (GLBackground wipe + tracked media) ── */
+
+.gl-canvas-root {
+  position: fixed;
+  inset: 0;
+  z-index: 7;
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+  pointer-events: none;
+}
+
+.gl-canvas-root canvas,
+.gl-canvas {
+  pointer-events: none !important;
+}
+
+/* ── CookieBanner (components/CookieBanner.js) ── */
+
+.cookie-banner {
+  z-index: 10000;
+  position: fixed;
+  display: inline-block;
+  max-width: 800rem;
+
+  background-color: #00ffc2;
+  bottom: var(--basePadding);
+  left: var(--basePadding);
+  padding: 50rem;
+  border-radius: 50rem;
+
+  opacity: 0;
+  transform: translateY(30rem);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+  color: #2b393b !important;
+}
+
+.cookie-banner * {
+  color: inherit !important;
+}
+
+.cookie-banner.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cookie-banner h5 {
+  font-size: 50rem;
+  font-weight: 500;
+}
+
+.cookie-banner p {
+  margin-bottom: 30rem;
+  margin-top: 30rem;
+  font-size: 40rem;
+}
+
+.cookie-banner h4 {
+  font-size: 40rem;
+}
+
+.cookie-banner h4::before {
+  background: #2b393b !important;
+}
+
+.cookie-banner .more-info {
+  text-decoration: underline;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cookie-banner .more-info a {
+  color: inherit;
+}
+
+.cookie-banner .cookie-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 30rem;
+  align-items: flex-start;
+}
+
+.cookie-banner .icon-container .icon-wrapper {
+  border-color: #2b393b !important;
+}
+
+.cookie-banner .icon-container .icon-background {
+  background-color: #2b393b !important;
+}
+
+.cookie-banner .icon-container path {
+  fill: #2b393b !important;
+  stroke: #2b393b !important;
+}
+
+.cookie-banner .icon-container .icon-duplicate path {
+  fill: #00ffc2 !important;
+  stroke: #00ffc2 !important;
+}
+
+/* ── Cursor (components/Cursor.js) ── */
+
+.cursor {
+  display: none;
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  min-width: 30px;
+  height: 30px;
+  z-index: 10000;
+  padding: 20rem 40rem;
+  pointer-events: none;
+}
+
+.cursor-inner {
+  position: relative;
+  height: 100%;
+  border: 1px solid var(--color-text);
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 60rem;
+}
+
+.cursor-fill {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-text);
+}
+
+.cursor .txt-shuffle-wrapper {
+  z-index: 9;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.cursor .txt-shuffle {
+  color: var(--color-background) !important;
+  font-weight: 900;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* ── SplitText helpers ── */
+
+.splittext-child {
+  will-change: transform;
+}

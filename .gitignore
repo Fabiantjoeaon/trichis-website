@@ -1,0 +1,19 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# environment
+.env
+.env.local
+.env.production
+
+# seed data (exported from DatoCMS; large binaries)
+scripts/seed/data/assets/
+
+# misc
+.DS_Store
+*.log
+.netlify/

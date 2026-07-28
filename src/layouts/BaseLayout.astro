@@ -1,0 +1,93 @@
+---
+import "@/styles/global.css";
+import "@/styles/chrome.css";
+import "@/styles/pages.css";
+import { SITE_LANG, SITE_LOCALE } from "@/lib/i18n";
+import { getSiteSettings } from "@/lib/content";
+import SiteChrome from "@/components/layout/SiteChrome.jsx";
+import Footer from "@/components/layout/Footer.jsx";
+
+const {
+  title = "Trichis",
+  description = "",
+  theme = "light",
+  showFooter = true,
+} = Astro.props;
+
+let settings = {};
+try {
+  settings = await getSiteSettings();
+} catch (err) {
+  console.warn("[BaseLayout] site settings unavailable:", err?.message ?? err);
+}
+---
+
+<!doctype html>
+<html lang={SITE_LANG} data-theme={theme}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:locale" content={SITE_LOCALE.replace("-", "_")} />
+    <link
+      rel="preload"
+      href="/fonts/RestartSoft-Light.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/RestartSoft-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/IBMPlexMono-Light.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <!-- Covers the page before the React loader hydrates (nine-ca pattern) -->
+    <div class="loader-background"></div>
+
+    <SiteChrome client:load settings={settings} siteName="Nine Creative Agency" />
+
+    <div class="main-inner">
+      <main>
+        <slot />
+      </main>
+      {showFooter && <Footer client:visible settings={settings} />}
+    </div>
+
+    <script>
+      // Fallback: never leave the static cover up if hydration fails.
+      setTimeout(() => {
+        document.querySelector(".loader-background")?.remove();
+      }, 10000);
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  .loader-background {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background-color: var(--color-menuBackground);
+  }
+
+  .main-inner {
+    margin-top: var(--navigationHeight);
+    background-color: var(--color-background);
+    overflow: hidden;
+  }
+</style>

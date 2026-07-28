@@ -1,0 +1,825 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Fonts — ported 1:1 from nine-ca src/styles/fonts.js
+   ========================================================================== */
+
+@font-face {
+  font-family: "Restart Soft";
+  src: url("/fonts/RestartSoft-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Restart Soft";
+  src: url("/fonts/RestartSoft-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Restart Soft";
+  src: url("/fonts/RestartSoft-Bold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBMPlexMono-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   Reset — ported from nine-ca src/mono/lib/styles/reset.js
+   ========================================================================== */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ==========================================================================
+   Fluid rem root — ported from nine-ca setScalableFontSize()
+   Design widths: mobile 1125 / desktop 1320. All sizes in the design are
+   expressed in rem against this root (e.g. 50rem paragraph ≈ 20px @1320w).
+   ========================================================================== */
+
+html {
+  /* mobile: 100 / 1125 vw */
+  font-size: 0.08888888888888889vw;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* mobile small height */
+@media (max-height: 600px) {
+  html {
+    font-size: 0.085vw;
+  }
+}
+
+/* tablet */
+@media (min-width: 712px) {
+  html {
+    font-size: 0.05vw;
+  }
+}
+
+/* desktop: 40 / 1320 vw */
+@media (min-width: 1025px) and (min-height: 600px) {
+  html {
+    font-size: 0.030303030303030304vw;
+  }
+}
+
+/* desktop wide */
+@media (min-width: 1025px) and (min-aspect-ratio: 20 / 11) {
+  html {
+    font-size: 0.025vw;
+  }
+}
+
+/* ==========================================================================
+   Theme variables — ported from nine-ca src/common/theme.js themesMap
+   Default = light. Switch by setting data-theme="dark" | "pink" on <html>.
+   ========================================================================== */
+
+:root {
+  /* light theme */
+  --color-background: #eaeaea;
+  --color-backgroundAccent: #bfbfbf;
+  --color-backgroundAccentLight: #d5d5d5;
+  --color-text: #2b393b;
+  --color-inactiveText: #5c6566;
+  --color-secondaryText: #2b393b;
+  --color-scrollTextBackground: #376a5d;
+  --color-accent: #00ffc2;
+  --color-accent2: #ffd4e5;
+  --color-menuBackground: #2b393b;
+  --color-menuBackgroundText: #333e40;
+  --color-menuText: #00ffc2;
+  --color-projectMeta: #2b393b;
+  --color-howWeDoItText: #00ffc2;
+  --color-floatingTitle: #00ffc2;
+  --color-smallDivider: #2b393b;
+  --color-heroGridSecondary: #333e40;
+
+  /* layout */
+  --navigationHeight: 180rem;
+  --basePadding: 60rem;
+  --pagePadding: max(
+    var(--basePadding),
+    calc((100vw - 2000px) / 2 + var(--basePadding))
+  );
+
+  /* theme transition (easeOutQuad) */
+  --theme-transition-duration: 0.6s;
+  --theme-transition-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (min-width: 712px) {
+  :root {
+    --navigationHeight: 150rem;
+    --basePadding: 120rem;
+  }
+}
+
+html[data-theme="dark"] {
+  --color-background: #2b393b;
+  --color-backgroundAccent: #333e40;
+  --color-backgroundAccentLight: #333e40;
+  --color-text: #00ffc2;
+  --color-inactiveText: #376a5d;
+  --color-secondaryText: #eaeaea;
+  --color-scrollTextBackground: #376a5d;
+  --color-accent: #376a5d;
+  --color-accent2: #ffd4e5;
+  --color-menuBackground: #232323;
+  --color-menuBackgroundText: #262626;
+  --color-menuText: #b7b7b7;
+  --color-projectMeta: #eaeaea;
+  --color-howWeDoItText: #5a6466;
+  --color-floatingTitle: #5c6566;
+  --color-smallDivider: #5c6566;
+  --color-heroGridSecondary: #333e40;
+}
+
+html[data-theme="pink"] {
+  --color-background: #2b393b;
+  --color-backgroundAccent: #bfbfbf;
+  --color-text: #00ffc2;
+  --color-inactiveText: #376a5d;
+  --color-secondaryText: #eaeaea;
+  --color-scrollTextBackground: #376a5d;
+  --color-accent: #376a5d;
+  --color-accent2: #ffd4e5;
+  --color-menuBackground: #eaeaea;
+  --color-menuBackgroundText: #333e40;
+}
+
+/* ==========================================================================
+   Base styles — ported from nine-ca src/mono/lib/styles/globalStyles.js
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  user-select: text;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html.theme-transitioning * {
+  transition: color var(--theme-transition-duration)
+    var(--theme-transition-ease);
+  will-change: color;
+}
+
+html.theme-transitioning,
+html.theme-transitioning div,
+html.theme-transitioning article,
+html.theme-transitioning nav,
+html.theme-transitioning section,
+html.theme-transitioning header,
+html.theme-transitioning body,
+html.theme-transitioning main,
+html.theme-transitioning hr {
+  transition:
+    border-color var(--theme-transition-duration) var(--theme-transition-ease),
+    background-color var(--theme-transition-duration)
+      var(--theme-transition-ease);
+  will-change: background-color;
+}
+
+html.theme-transitioning path {
+  transition:
+    fill var(--theme-transition-duration) var(--theme-transition-ease),
+    stroke var(--theme-transition-duration) var(--theme-transition-ease);
+  will-change: fill, stroke;
+}
+
+a {
+  display: inline-block;
+  color: inherit;
+}
+
+::selection {
+  background: #000000;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #000000;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+html {
+  min-height: 100%;
+  height: auto !important;
+  background-color: var(--color-background);
+  color: #ffffff;
+  overscroll-behavior-x: none;
+  overflow: hidden;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background-color: var(--color-background);
+  color: #ffffff;
+  font-family: "Restart Soft", sans-serif;
+}
+
+main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+button,
+input,
+textarea,
+select,
+dialog {
+  -webkit-appearance: none;
+  background: none;
+  font-family: inherit;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-transform: inherit;
+  outline: none;
+  border-radius: 0;
+}
+
+svg {
+  outline: none;
+  display: block;
+}
+
+button,
+div,
+a,
+span {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  object-fit: cover !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  text-wrap: pretty;
+}
+
+/* Lenis smooth scroll */
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* SplitText helpers (ported class names from nine-ca) */
+.splittext-line-parent {
+  clip-path: polygon(0 0, 100% 0, 100% 110%, 0% 100%);
+}
+
+.splittext-parent {
+  position: relative;
+  overflow: hidden;
+}
+
+.splittext-original {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.splittext-child {
+  margin-bottom: -0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.splittext-child-mask,
+.splittext-char-mask {
+  overflow: visible !important;
+  clip-path: inset(-0.1em -0.1em -0.25em -0.1em);
+}
+
+/* ==========================================================================
+   Typography scale — ported from nine-ca theme.js fonts.scale
+   Base value = mobile; desktop override uses the exact nine-ca mqDesktop:
+   (min-width: 1025px) and (min-height: 600px)
+   ========================================================================== */
+
+@layer components {
+  .t-big-title {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 400rem;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  .t-heading1 {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 220rem;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  .t-heading2 {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 100rem;
+    line-height: 1;
+    font-weight: 900;
+  }
+
+  /* Scrolling text */
+  .t-heading3 {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 80rem;
+    line-height: 1.1;
+    font-weight: 500;
+  }
+
+  /* Menu text */
+  .t-heading4 {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 48rem;
+    line-height: 1;
+    font-weight: 100;
+  }
+
+  .t-heading5 {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 250rem;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  /* Section titles */
+  .t-heading6 {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 50rem;
+    line-height: 1;
+    font-weight: 300;
+  }
+
+  .t-loader-text {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 500rem;
+    line-height: 1;
+    font-weight: 500;
+  }
+
+  .t-what-we-do-mobile-slider {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 70rem;
+    font-weight: 400;
+  }
+
+  .t-paragraph {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 50rem;
+    line-height: 1.4;
+    font-weight: 100;
+  }
+
+  .t-paragraph-strong {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 50rem;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  /* Footer text */
+  .t-small-paragraph {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 40rem;
+    line-height: 1.4;
+    font-weight: 100;
+  }
+
+  .t-smaller-paragraph {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 30rem;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .t-mono-small {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 25rem;
+    line-height: 1.4;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .t-mono-medium {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 80rem;
+    line-height: 1.4;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .t-li {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 75rem;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .t-menu-links {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 150rem;
+    line-height: 1.2;
+    font-weight: 100;
+  }
+
+  .t-menu-mono {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 50rem;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+
+  .t-project-number {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 160rem;
+    font-weight: 400;
+  }
+
+  .t-floating-title {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 260rem;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  .t-projects-title {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 80rem;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  .t-hero-text {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 180rem;
+    line-height: 1.1;
+    font-weight: 500;
+  }
+
+  .t-glass-card-number {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 100rem;
+    line-height: 1.1;
+    font-weight: 500;
+  }
+
+  .t-glass-card-title {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 70rem;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  .t-glass-card-paragraph {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 40rem;
+    line-height: 1.4;
+    font-weight: 100;
+  }
+
+  .t-service-hero-title {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 700rem;
+    line-height: 1;
+    font-weight: 500;
+  }
+
+  .t-service-hero-subtitle {
+    font-family: "Restart Soft", sans-serif;
+    font-size: 80rem;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  @media (min-width: 1025px) and (min-height: 600px) {
+    .t-heading3 {
+      font-size: 100rem;
+      line-height: 1.2;
+    }
+
+    .t-menu-links {
+      font-size: 180rem;
+      line-height: 1.4;
+    }
+
+    .t-menu-mono {
+      font-size: 42rem;
+      line-height: 1.4;
+    }
+
+    .t-floating-title {
+      font-size: 300rem;
+    }
+
+    .t-hero-text {
+      font-size: 340rem;
+      line-height: 1.2;
+    }
+
+    .t-glass-card-number {
+      font-size: 110rem;
+      line-height: 1.2;
+    }
+
+    .t-glass-card-title {
+      font-size: 60rem;
+    }
+
+    .t-glass-card-paragraph {
+      font-size: 36rem;
+    }
+
+    .t-service-hero-title {
+      font-size: 900rem;
+    }
+
+    .t-service-hero-subtitle {
+      font-size: 100rem;
+    }
+  }
+
+  /* Layout helpers — ported from nine-ca theme.js util */
+  .inner-width {
+    padding-left: calc(var(--pagePadding));
+    padding-right: calc(var(--pagePadding));
+    margin: 0 auto;
+  }
+
+  .section-top {
+    padding-top: 70rem;
+  }
+
+  .section-bottom {
+    padding-bottom: 280rem;
+  }
+
+  @media (max-width: 711px) {
+    .section-bottom {
+      padding-bottom: 120rem;
+    }
+  }
+}
+
+/* Element defaults mapped to the scale (as in nine-ca globalStyles) */
+h1 {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 220rem;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+h2 {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 100rem;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--color-text);
+}
+
+h3 {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 80rem;
+  line-height: 1.1;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+h4 {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 48rem;
+  line-height: 1;
+  font-weight: 100;
+  color: var(--color-text);
+}
+
+h5 {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 250rem;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+h6 {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 50rem;
+  line-height: 1;
+  font-weight: 300;
+  color: var(--color-text);
+}
+
+p {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 50rem;
+  line-height: 1.4;
+  font-weight: 100;
+  color: var(--color-text);
+}
+
+strong {
+  font-family: "Restart Soft", sans-serif;
+  font-size: 50rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+@media (min-width: 1025px) and (min-height: 600px) {
+  h3 {
+    font-size: 100rem;
+    line-height: 1.2;
+  }
+}
+
+.txt-shuffle,
+.txt-shuffle-wrapper {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 25rem;
+  line-height: 1.4;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--color-text);
+}

@@ -1,0 +1,23 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ServicePage from "@/components/service/ServicePage.jsx";
+import { getService, getServices } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const services = await getServices();
+  return services.map((s) => ({
+    params: { slug: s.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const service = await getService(slug);
+
+if (!service) {
+  return Astro.redirect("/404");
+}
+---
+
+<BaseLayout title={`${service.title} — Nine Creative Agency`}>
+  <ServicePage client:load service={service} />
+</BaseLayout>

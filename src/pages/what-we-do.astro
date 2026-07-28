@@ -1,0 +1,12 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import WhatWeDoPage from "@/components/whatwedo/WhatWeDoPage.jsx";
+import { getSiteSettings } from "@/lib/content";
+
+const settings = await getSiteSettings();
+const howWeDoItCards = settings?.home?.howWeDoIt?.cards ?? [];
+---
+
+<BaseLayout title="Nine Creative Agency: What We Do">
+  <WhatWeDoPage client:load howWeDoItCards={howWeDoItCards} />
+</BaseLayout>

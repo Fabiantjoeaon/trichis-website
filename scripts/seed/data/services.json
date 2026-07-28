@@ -1,0 +1,1941 @@
+[
+  {
+    "id": "VEtfecVCSsSktNLU2BVG4g",
+    "slug": "identity",
+    "title": "Identity",
+    "header": {
+      "headertext": "Merkidentiteit ontwikkelen. Jouw merk, jouw fundament",
+      "paragraph": "**Waarom blijven klanten terugkomen? Door een merk dat indruk maakt**\n\nWil jij dat jouw merk opvalt en impact maakt? Ontdek hoe een sterke merkidentiteit deuren opent naar meer klanten, vertrouwen en groei.",
+      "cta": {
+        "text": "Contact",
+        "url": "mailto:cu@nine.nl"
+      }
+    },
+    "content": [
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775117608-9_ca-2025-website-seo-identity-malarkey.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 60,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 40,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Merkidentiteit ontwikkelen. Jouw merk, jouw fundament"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Waarom blijven klanten terugkomen? Door een merk dat indruk maakt"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Je hebt een sterk product of een geweldige dienst, maar toch blijft de aandacht uit. Jouw merk mist de kracht om te overtuigen. Wat als je merk een verhaal vertelt dat niet alleen opvalt, maar ook raakt? Iedereen schreeuwt tegenwoordig om aandacht. Daarom moet jouw merk méér zijn dan zichtbaar, het moet indruk maken.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Bij 9|CA geloven we dat een sterke brand identity niet zomaar een toevoeging is, maar het fundament van jouw succes. Het maakt je merk herkenbaar, betrouwbaar en onweerstaanbaar. Meer leads. Meer klanten. Meer groei.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 51,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775118470-9_ca-2024-website-new-selected-work-fruit-op-je-werk-bussen.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 49,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Waarom is een brand identiteit belangrijk?"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Een sterk merk maakt niet alleen indruk, het maakt impact"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Branding is geen keuze; het is een noodzaak. Jouw merk moet spreken, niet alleen door een logo of kleuren, maar door een verhaal dat inspireert én converteert. Klanten willen zich verbinden met merken die écht iets te zeggen hebben. Een sterk merk trekt niet alleen de aandacht, maar bouwt relaties op.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Bij 9|CA begrijpen we dat branding verder gaat dan mooi design. Het gaat om relevantie. Een sterke identiteit brengt klanten niet alleen naar je toe, het zorgt ervoor dat ze blijven. Ons doel? Jouw bedrijf laten vliegen. We helpen je door het ontwikkelen van een merkidentiteit die resoneert en resultaten boekt.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048969-9ca-2025-website-klanten-hotelkeyser-def-desktop-1429x2000-roomcard.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 67,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Herken je dit? Jouw merk verdient meer"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Je hebt alles in huis, maar je merk hangt niet samen"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Veel bedrijven hebben alles in huis om succesvol te zijn, maar missen de impact van een sterke identiteit. Het gevolg? **Ze verdwijnen in de massa.** Misschien herken je een van deze situaties:\n\n* **Je boodschap raakt niet:** Wat je zegt klinkt goed, maar resoneert niet met je doelgroep.\n\n* **Je uitstraling is inconsistent:** Je logo, kleuren en toon spreken elkaar tegen en daarmee ook jouw publiek.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Je merk valt niet op:** Terwijl jouw concurrenten indruk maken, blijf jij onzichtbaar.\n\nZonder een sterke identiteit blijf je onzichtbaar. **Maar met een identiteit die klopt, opent jouw merk deuren** naar leads, sales en een stevige plek in de markt.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775050504-9_ca-2024-website-new-selected-work-traksi-billboard-desktop-hero.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Wat voor identiteit kan 9|CA voor jouw merk creëren?"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Wat maakt jouw merk uniek? Een identiteit die indruk maakt"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Bij 9|CA draait een brand identity om meer dan alleen een goed ontwerp. **Het is een compleet verhaal, opgebouwd uit sterke bouwstenen die jouw merk uniek maken.** Elk onderdeel versterkt de kern en zorgt voor een consistente, onvergetelijke indruk. Dit is wat wij voor jouw merk kunnen creëren:\n\n**Bedrijfsnaam of productnaam**\nEen naam die blijft hangen, blijft verkopen.\n\nEen naam die blijft hangen, trekt de aandacht en vertelt direct wie je bent. Of het nu gaat om een nieuwe bedrijfsnaam, een productlijn of een dienst, wij zorgen voor een naam die jouw merkessentie in één woord vangt.\n\n**Brand identity**\nEen uniek gezicht voor een onvergetelijk merk.\n\nVan een opvallend logo tot een consistente visuele stijl: wij rebranden een identiteit die jouw merkverhaal vertelt. Elk detail, kleuren, typografie, en iconen, is zorgvuldig gekozen om herkenning op te bouwen en jouw merk uniek te maken.\n",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "**Identity manual**\nConsistentie maakt je merk sterker.\n\nConsistentie is key. Onze identity manual bevat alle richtlijnen die jouw merkuitingen eenduidig en krachtig houden, van logo- en kleurgebruik tot typografie.\n\n**Communicatiestijl**\nJe merk heeft niet alleen een gezicht, maar ook een stem.\n\nJouw merk is meer dan visueel; het heeft een stem. Wij ontwikkelen een tone of voice en stijl die perfect aansluit bij jouw identiteit en doelgroep. Want je boodschap moet niet alleen gehoord worden, het moet resoneren.\n\n**Communicatieconcept**\nMeer dan branding: concepten die raken.\n\nMeer dan alleen branding. Wij creëren concepten die jouw merk versterken in campagnes en media-uitingen. Denk aan storytelling en creatieve invalshoeken die jouw merk laten opvallen én overtuigen.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775731657-9_ca-2024-website-new-selected-work-badhuys-10-jaar-2.jpg",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117664-9_ca-2025-website-seo-identity-allsetra.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "De voordelen van een sterke identiteit"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Wat levert een krachtige identiteit op? Resultaten"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Een sterke merkidentiteit is een investering die zich keer op keer terugbetaalt. Het zorgt ervoor dat jouw bedrijf opvalt, vertrouwen wint en groeit. **Dit zijn de resultaten die je mag verwachten:**\n\n* **Meer klanten en conversies:** Een consistente en herkenbare identiteit wint vertrouwen en vertrouwen leidt tot actie.\n\n* **Loyaliteit en herkenning:** Klanten verbinden zich met merken die authentiek voelen. Een sterke identiteit zorgt ervoor dat ze blijven én jouw ambassadeurs worden.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Betere communicatie:** Of het nu een social media post, website of brochure is, een heldere identiteit zorgt voor eenduidigheid en impact.\n\n* **Een dominante marktpositie:** Je merk wordt niet langer verward met anderen. Het wordt dé naam die mensen onthouden.\n\nBij 9|CA leveren we niet alleen visuele pracht, maar ook meetbare resultaten. Met een identiteit die klopt, opent jouw merk deuren, naar leads, sales en succes.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 67,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117630-9_ca-2025-website-seo-identity-henra.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Laat jouw merk vliegen"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Wat is jouw volgende stap? Maak je merk onvergetelijk"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Klaar om je merk naar een hoger niveau te tillen? Bij 9|CA tillen we jouw identiteit naar nieuwe hoogtes. Geen generieke oplossingen, maar een traject dat jouw unieke DNA vertaalt naar een merk dat de aandacht pakt en vasthoudt.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Neem vandaag nog contact op en ontdek hoe jouw merk het verschil kan maken. Samen laten we jouw bedrijf vliegen.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "YyKF1TMmRsi4ZDmFFSCW5Q",
+    "slug": "webdesign",
+    "title": "Webdesign",
+    "header": {
+      "headertext": "Professioneel webdesign. Jouw website, jouw verhaal",
+      "paragraph": "**Waarom kiezen mensen voor jouw merk? Het begint met je website**\n\nJouw website kan meer zijn dan een mooi plaatje. Maak van je site een conversie-machine die indruk maakt én werkt. Ontdek hoe 9|CA dit voor je doet.",
+      "cta": {
+        "text": "Contact",
+        "url": "mailto:cu@nine.nl"
+      }
+    },
+    "content": [
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775116882-9_ca-2025-website-seo-webdesign-danneels.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 60,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 40,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Professioneel webdesign. Jouw website, jouw verhaal "
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Waarom kiezen mensen voor jouw merk? Het begint met je website"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Een website die er goed uitziet, maar niets doet? Zonde. Tegenwoordig mag je website geen vraagtekens meer oproepen. Het moet spreken, overtuigen en presteren. Bij 9|CA doen we niet aan half werk. Wij maken van jouw website geen mooi plaatje, maar een krachtig instrument.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Het is jouw verhaal, jouw merk en jouw grootste kans om klanten te overtuigen verpakt in een digitale ervaring die aan alle kanten klopt. Onze belofte: Jouw website zal niet alleen indruk maken, maar ook voor je werken.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 51,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775049812-9ca-2025-website-klanten-yeaz-def-desktop-2000x1429-website.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 49,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Waarom is een professionele website een must?"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Een goed design doet meer dan er goed uitzien, het beweegt mensen"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Iedere klik, iedere beweging en iedere seconde telt. Een sterk webdesign:\n\n* **Maakt impact:** Het vangt direct de aandacht met een uitstraling die bij jouw merk past.\n\n* **Stuurt bezoekers moeiteloos:** Slimme structuren zorgen dat klanten precies vinden wat ze zoeken.\n",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Vertrouwt op consistentie:** Een professionele website straalt betrouwbaarheid uit, op elk apparaat en elk moment.\n\nBij 9|CA zetten we niet alleen de schouders onder jouw website; we maken het dé basis voor groei, conversie en connectie.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049568-9ca-2025-website-klanten-ab-inbev-def-desktop-1600x2000-website.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 67,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Herken je dit? Jouw website kan beter "
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Heb jij dit ook? Dan is het tijd voor verandering"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Misschien lijkt het alsof je website goed genoeg is, maar diep van binnen weet je dat er meer in zit. **Je ziet kansen die je niet benut en bezoekers die afhaken voordat ze actie ondernemen.** Dat is niet wat een website voor jou zou moeten doen. Herken je deze pijnpunten?\n\n* Jouw website ziet er gelikt uit, maar conversies? Die blijven uit.\n\n* Bezoekers verdwalen in een rommelige navigatie en klikken weg.\n",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* Jouw website voelt niet als een verlengstuk van wie jij bent.\n\n* Je concurrent? Die wint klanten dankzij een betere digitale ervaring.\n\nBij 9|CA maken we korte metten met deze obstakels en brengen we jouw digitale presence naar een hoger niveau.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1918,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1755696589-9ca-2025-website-klanten-wicky-def-desktop-2000x1125-website.mp4",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/hyPtLlf01oyrm4gNxQ2DMwjUitFnaKkxK.m3u8",
+                "muxPlaybackId": "hyPtLlf01oyrm4gNxQ2DMwjUitFnaKkxK",
+                "mp4Url": "https://stream.mux.com/hyPtLlf01oyrm4gNxQ2DMwjUitFnaKkxK/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/hyPtLlf01oyrm4gNxQ2DMwjUitFnaKkxK/thumbnail.jpg"
+              }
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Webdesign op topniveau"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Webdesign dat meer doet dan mooi zijn, het maakt impact"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Bij 9|CA pakken we webdesign aan zoals het hoort: strategisch, visueel onderscheidend en tot in de puntjes afgestemd op jouw merk en doelen. We bouwen geen standaard websites, maar digitale experiences die raken en presteren.\n\nDit is wat je krijgt:\n\n* **Strategisch webdesign:** Iedere pixel en elke functionaliteit is afgestemd op jouw merkidentiteit en doelen. Geen losse ideeën, maar een helder plan.\n\n* **Gebruiksvriendelijke structuur:** Of het nu een desktop of een smartphone is, jouw bezoekers vinden moeiteloos hun weg dankzij naadloze navigatie en logische conversiepaden.\n",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Visueel onderscheidend:** Jouw merk wordt uniek gepresenteerd, niet als een van de velen, maar als dé keuze.\n\n* **SEO-vriendelijk:** Wij denken verder dan vandaag. Jouw website is gebouwd om gevonden te worden, met een solide basis voor online zichtbaarheid.\n\n* **Samenwerking met experts:** We brengen de juiste mensen samen, van technische ontwikkelaars tot contentmakers, om het beste resultaat te behalen.\n\nMet onze aanpak zorg je niet alleen voor een betere website, maar voor een betere online strategie.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775116858-9_ca-2025-website-seo-webdesign-ak-advocaten.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 49,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 51,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Voordelen van professioneel webdesign"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Wat levert een goede website jou op? Veel"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Een professioneel ontworpen website doet meer dan je merk vertegenwoordigen, het versterkt, overtuigt en inspireert. Hier zijn de voordelen:\n\n* **Meer betrokken bezoekers:** Mensen blijven langer op jouw website omdat het aantrekkelijk, snel en helder is.\n\n* **Hogere conversies:** Dankzij slimme call-to-actions en een gebruiksvriendelijke structuur worden bezoekers klanten.\n",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Sterker merk:** Een professionele website zorgt voor consistentie, vertrouwen en een blijvende indruk.\n\n* **Online groei:** Jouw website is gebouwd om mee te groeien, met een solide basis voor SEO en digitale marketing.\n\nKortom, een website van 9|CA is niet alleen mooi om te zien, maar vooral effectief. Het zet jouw merk op scherp en zorgt voor tastbare resultaten.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 67,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117065-9_ca-2025-website-seo-webdesign-traksi.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Laat je website ontwerpen door 9|CA"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Wat is jouw volgende stap? Laat jouw website vliegen"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Ben je klaar om je website naar een hoger niveau te tillen? Neem vandaag nog contact met ons op voor een vrijblijvend gesprek.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Bij 9|CA luisteren we naar jouw uitdagingen en creëren we een website die niet alleen indruk maakt, maar ook werkt.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bhWMnHW0S8CN6WWREiZ-EA",
+    "slug": "strategy",
+    "title": "Strategy",
+    "header": {
+      "headertext": "Merkstrategie ontwikkelen. Jouw merk, jouw toekomst",
+      "paragraph": "**In een wereld vol keuzes wint degene met een plan**\n\nRicht jouw merk op succes met een strategie die inspireert én resultaten boekt. Ontdek hoe je met focus en consistentie de concurrentie voorblijft.",
+      "cta": {
+        "text": "Contact",
+        "url": "mailto:cu@nine.nl"
+      }
+    },
+    "content": [
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1280,
+              "height": 720,
+              "url": "https://www.datocms-assets.com/138325/1775123318-traksi-2024-design-reveal-social-9.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/00FJ6WUz5frkfLc6ClS24S2wBW01I69Y2p.m3u8",
+                "muxPlaybackId": "00FJ6WUz5frkfLc6ClS24S2wBW01I69Y2p",
+                "mp4Url": "https://stream.mux.com/00FJ6WUz5frkfLc6ClS24S2wBW01I69Y2p/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/00FJ6WUz5frkfLc6ClS24S2wBW01I69Y2p/thumbnail.jpg"
+              }
+            },
+            "width": 60,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 40,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Merkstrategie ontwikkelen. Jouw merk, jouw toekomst"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "In een wereld vol keuzes wint degene met een plan"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Je hebt ambitie, je hebt ideeën, maar zonder richting blijven het losse flarden. In een markt waarin iedereen aandacht zoekt, kun je het je niet veroorloven om te blijven ronddwalen. Jouw merk heeft een strategie nodig. Niet zomaar een strategie, maar één die precies aansluit bij wie je bent, waar je heen wilt en wat jouw doelgroep nodig heeft.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Een sterke merkstrategie is het fundament van een succesvol merk, een duidelijk verhaal en gerichte groei. 9|CA geeft jouw merk de richting die het nodig om op te vallen en een blijvende impact te maken.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 51,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775118470-9_ca-2024-website-new-selected-work-fruit-op-je-werk-bussen.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 49,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Wat is het belang van een sterke merkstrategie?"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "De kortste weg naar succes begint met een helder plan"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Zonder strategie ben je reactief. Je probeert van alles, maar niets werkt echt samen. Een sterke strategie zorgt voor focus en consistentie, waardoor je inspanningen niet alleen zichtbaar zijn, maar ook resultaat opleveren:\n\n* **Je merk wordt herkenbaar:** Een heldere positionering zorgt dat mensen direct begrijpen wie je bent en wat je uniek maakt.\n\n* **Je groeit gericht:** Met een duidelijke doelgroep en specifieke doelen werk je efficiënter en effectiever.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Je blijft relevant:** Strategische keuzes zorgen dat jouw merk meegaat met de tijd en altijd in contact blijft met je klanten.\n\n* **Je meet succes:** Een strategie maakt je resultaten meetbaar en stelt je in staat om bij te sturen waar nodig.\n\nBij 9|CA zien we strategie als het fundament waarop alles rust. Van branding tot campagnes, het begint allemaal met een plan dat klopt.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1601,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775050297-9_ca-2024-website-new-selected-work-badhuys-website.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 67,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Herken je dit? Jouw merk mist focus"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Je doet van alles, maar niets lijkt écht te werken"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Zonder strategie voelt marketing als een puzzel zonder voorbeeld. Herken je deze situaties?\n\n* **Je merkverhaal is onduidelijk:** Mensen begrijpen niet direct wat je biedt of waarom ze voor jou moeten kiezen.\n\n* **Je communicatie is inconsistent:** Wat je zegt, wat je laat zien en hoe je het doet, het lijkt niet op elkaar aan te sluiten.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Je blijft achter bij de concurrentie:** Zij pakken de aandacht, terwijl jouw merk in de massa verdwijnt.\n\nDit kan anders. Bij 9|CA helpen we jouw merk om sterker, scherper en effectiever te worden. Niet door meer te doen, maar door beter te doen, met een strategie die jou onderscheidt en laat groeien.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775049730-9ca-2025-website-klanten-yeaz-def-desktop-2000x1125-foto-02.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Wat doet 9|CA voor jouw strategie?"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Een strategie die niet in de la belandt, maar jouw merk in beweging zet"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Bij 9|CA bouwen we strategieën die niet alleen mooi klinken, maar ook werken. Wij analyseren, ontdekken en creëren, zodat jouw merk precies weet waar het staat, waar het heen moet en hoe het daar komt. Dit is wat we doen:\n\n1. **Diepgaand onderzoek naar jouw DNA:** We beginnen bij de kern. Wat maakt jouw merk uniek? Welke waarden en beloftes draag je uit? Dit vormt de basis van alles wat we doen.\n\n2. **Doelgroep scherpstellen:** Wie wil je bereiken en waarom? We brengen jouw ideale klant in kaart en bepalen hoe jouw merk hierop aansluit.\n\n3. **Positionering in de markt:** Hoe zorg je dat jouw merk opvalt in een concurrerende markt? We creëren een strategische plek waar jouw merk zich onderscheidt én relevant blijft.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "4. **Boodschappen die raken:** Jouw merkverhaal moet niet alleen consistent zijn, maar ook resoneren. Wij ontwikkelen een heldere, inspirerende boodschap die klanten aantrekt en verbindt.\n\n5. **Actieplan voor implementatie:** Strategie is pas succesvol als het uitgevoerd wordt. Wij leveren een concreet plan met prioriteiten, acties en meetbare doelen.\n\nBij 9|CA geloven we niet in dikke rapporten die stof verzamelen. Wij leveren strategieën die meteen toegepast kunnen worden en resultaten opleveren.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775050175-9_ca-2024-website-new-selected-work-badhuys-landingspagina.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 49,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 51,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "De voordelen van een sterke strategie"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Wat levert een goede strategie jou op? Richting, focus en resultaten"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Een goed doordachte strategie levert niet alleen resultaten op de korte termijn, maar bouwt ook aan de toekomst van jouw merk. Dit kun je verwachten:\n\n* **Herkenbaarheid en consistentie:** Jouw merk spreekt met één stem, op alle kanalen. Dit wekt vertrouwen en versterkt je positie.\n\n* **Gerichte groei:** Door duidelijke doelen en een gefocuste aanpak werk je efficiënter én effectiever.\n\n* **Een stap voor op de concurrentie:** Jij weet waar je heen wilt, terwijl anderen blijven gissen.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Hogere ROI:** Elke euro die je investeert, levert meer op omdat je strategie gericht en meetbaar is.\n\nBij 9|CA zorgen we dat jouw merk niet alleen zichtbaar is, maar ook onmisbaar.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 67,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775047439-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop-1600x2000.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Tijd voor een strategie die wérkt"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Wat is jouw volgende stap? Samen brengen we jouw visie tot leven"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Ben je klaar om je merk naar een hoger niveau te tillen? Bij 9|CA tillen we jouw strategie van idee naar impact. Geen generieke adviezen, maar een plan dat perfect aansluit op jouw merk, doelgroep en doelen.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Neem vandaag nog contact met ons op en ontdek hoe een sterke strategie jouw merk niet alleen laat opvallen, maar ook laat groeien.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "P_6vU8_9QBWlNhSSfrBHJw",
+    "slug": "photo-video",
+    "title": "Photo & Video",
+    "header": {
+      "headertext": "Visuele content creatie met foto & video. De kracht van beeld",
+      "paragraph": "**Wat maakt jouw merk uniek? Het begint met wat mensen zien**\n\nBeelden die raken, overtuigen en blijven hangen? Ontdek hoe krachtige foto’s en video’s jouw merk versterken en jouw verhaal tot leven brengen.",
+      "cta": {
+        "text": "Contact",
+        "url": "mailto:cu@nine.nl"
+      }
+    },
+    "content": [
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1920,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775824779-9ca-2025-website-klanten-wicky-def-desktop-1920x1080-skateboard.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/arjuNQcr4QEmgp8Hf6FxvCfAR8YXknhG.m3u8",
+                "muxPlaybackId": "arjuNQcr4QEmgp8Hf6FxvCfAR8YXknhG",
+                "mp4Url": "https://stream.mux.com/arjuNQcr4QEmgp8Hf6FxvCfAR8YXknhG/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/arjuNQcr4QEmgp8Hf6FxvCfAR8YXknhG/thumbnail.jpg"
+              }
+            },
+            "width": 60,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 40,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Visuele content creatie met foto & video. De kracht van beeld"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Wat maakt jouw merk uniek? Het begint met wat mensen zien"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Een foto die blijft hangen, een video die raakt, dát is wat jouw merk nodig heeft om op te vallen. Of het nu gaat om een klantcase, een wervingscampagne of een branding shoot, visuals zijn de sleutel tot herkenning en vertrouwen. Maar een beeld dat geen verhaal vertelt? Dat valt weg in de massa.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Bij 9|CA geloven we in beelden die méér doen. Wij maken van jouw merk een visueel spektakel. Met foto’s en video’s die niet alleen mooi zijn, maar ook emotie oproepen, overtuigen en blijven hangen. Onze belofte: Jouw verhaal, vastgelegd zoals het verdient.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 51,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1280,
+              "height": 720,
+              "url": "https://www.datocms-assets.com/138325/1775824237-9ca-2025-website-klanten-ab-inbev-def-desktop-1280x720-vid.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/yolmQIQb00OF4qe4g3tKAN5PEXhLC8La5.m3u8",
+                "muxPlaybackId": "yolmQIQb00OF4qe4g3tKAN5PEXhLC8La5",
+                "mp4Url": "https://stream.mux.com/yolmQIQb00OF4qe4g3tKAN5PEXhLC8La5/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/yolmQIQb00OF4qe4g3tKAN5PEXhLC8La5/thumbnail.jpg"
+              }
+            },
+            "width": 49,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Het belang van professionele foto’s en video’s"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Een beeld zegt meer dan duizend woorden, maar alleen als het klopt"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Beelden zijn jouw eerste indruk. En de eerste indruk telt. Professionele foto’s en video’s zorgen ervoor dat je merk niet alleen wordt gezien, maar ook wordt onthouden:\n\n* **Ze trekken de aandacht:** In een wereld vol ruis vallen sterke visuals direct op.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Ze vertellen je verhaal:** Beelden bouwen een connectie met je doelgroep en laten zien waar je voor staat.\n\n*  **Ze vergroten vertrouwen:** Professionele visuals positioneren jouw merk als betrouwbaar en onderscheidend.\n\nBij 9|CA zorgen we ervoor dat jouw beelden niet zomaar mooi zijn, ze maken impact.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1333,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117326-9_ca-2024-website-new-selected-work-malarkey-005.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 67,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Herken je dit? Jouw visuals kunnen beter"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "De tijd van stockfotos is voorbij"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Stel: je hebt een krachtig verhaal, maar je visuals vertellen het niet. **In een wereld waar beeld alles zegt, kunnen slechte foto’s en beelden jouw merk de kop kosten.** Goede visuals horen niet alleen mooi te zijn, ze moeten spreken, inspireren en aansluiten bij je merk. Herken je deze uitdagingen?\n\n* Stockfoto’s die je merk geen recht doen.\n\n* Video’s die niet boeien of aansluiten bij je boodschap.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* Concurrenten met visuals die jou de loef afsteken.\n\n* Prachtige ideeën, maar geen tijd of expertise om ze uit te werken.\n\nDat kan anders. Bij 9|CA zetten we jouw verhaal centraal en vertalen we het naar beelden die spreken, overtuigen en verbinden.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775047233-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop-header.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Professionele bedrijfsfoto’s en video’s "
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Beelden die meer doen dan er goed uitzien, ze bewegen mensen"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Bij 9|CA maken we beelden die resoneren. Geen standaard shoots, maar strategisch en creatief vakwerk:\n\n* **Strategisch ontworpen:** Elk beeld is afgestemd op jouw merkidentiteit en doelen.\n\n* **Verhalen die raken:** Beelden en video’s die niet alleen informeren, maar ook emotie oproepen.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Topproductie:** Hoogwaardige opnames met de beste technieken en een scherp oog voor detail.\n\n* **Afwerking die klopt:** Nauwkeurige editing, muziek en kleurcorrectie maken het af.\n\n* **Samenwerking op maat:** Een team van creatieve experts dat jouw visie tot leven brengt.\n\nMet onze aanpak vertellen we jouw verhaal precies zoals het moet, krachtig en onvergetelijk.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 67,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049783-9ca-2025-website-klanten-yeaz-def-mobile-2000x1429-header.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Voordelen van professioneel webdesign"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Wat leveren krachtige beelden je op? Het verschil tussen kijken en kopen"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Een professioneel beeld trekt niet alleen de aandacht, het bouwt vertrouwen en laat mensen actie ondernemen. Bij 9|CA maken we visuals die echt werken. Dit zijn de resultaten:\n\n* **Meer betrokkenheid:** Mensen scrollen niet zomaar voorbij, maar blijven kijken. Sterke beelden trekken ze dieper jouw merkverhaal in.\n\n* **Hogere conversies:** Een goed geplaatste call-to-action in een pakkende video? Dat zorgt voor actie.\n",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* **Versterkt jouw merk:** Professionele visuals vertellen een consistent verhaal, op alle kanalen, en zorgen dat jouw merk herkend én onthouden wordt.\n\n* **Betere zichtbaarheid:** Of het nu op social media is, in een campagne of op je website, visuals die spreken, zorgen voor meer bereik en interactie.\n\nMet 9|CA krijg je geen standaard plaatjes, maar content die jouw merk laat vliegen.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775119238-9_ca-2024-website-new-selected-work-inzaken-beeld-007.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 49,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 51,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Laat je verhaal in beeld spreken met 9|CA"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Wat is jouw volgende stap? Laat je zien"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Wil jij visuals die niet alleen mooi zijn, maar echt impact maken? Laten we samenwerken. Bij 9|CA brengen we jouw verhaal tot leven met foto’s en video’s die raken en presteren.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Neem vandaag nog contact op en ontdek hoe we jouw merk naar een hoger niveau tillen.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D5dGf_1-TyiKqYSJ0s_-MQ",
+    "slug": "campaign",
+    "title": "Campaign",
+    "header": {
+      "headertext": "Creatieve marketingcampagnes. Creëer impact en resultaat",
+      "paragraph": "**Meer dan marketing, campagnes die raken en werken**\n\nVal op in een wereld vol ruis. Laat jouw campagne niet alleen spreken, maar écht indruk maken. Ontdek hoe 9|CA jouw merk impact geeft.",
+      "cta": {
+        "text": "Contact",
+        "url": "mailto:cu@nine.nl"
+      }
+    },
+    "content": [
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1333,
+              "url": "https://www.datocms-assets.com/138325/1775047961-9_ca-2024-website-new-selected-work-def-yuki-billboard-desktop.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 60,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 40,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Creatieve marketingcampagnes. Creëer impact en resultaat"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Meer dan marketing, campagnes die raken en werken"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Een campagne die niet opvalt, is een gemiste kans. In een wereld waar iedereen roept, moet jij spreken. Of het nu gaat om meer zichtbaarheid, hogere sales of een sterker werkgeversmerk, een goede campagne raakt de juiste snaar. Maar gewoon iets verzinnen? Dat werkt niet. ",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": 100
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Bij 9|CA maken we campagnes die indruk maken én resultaten boeken. Met concepten die jouw boodschap versterken, visuals die opvallen, en strategieën die zorgen dat elke euro telt. Onze belofte: We laten jouw merk vliegen, niet alleen in het hoofd, maar ook in het hart van je doelgroep.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 51,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775049551-9ca-2025-website-klanten-ab-inbev-def-desktop-2000x1429-laptop.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 49,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Waarom een sterke campagne het verschil maakt"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Resultaten die je kunt voelen, zien en meten"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Een goede campagne doet meer dan aandacht trekken. Het is een strategisch instrument dat je merk vooruit helpt:\n\n* Zichtbaarheid vergroten: Mensen gaan je zien, onthouden en zelfs over je praten.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "* Doelen bereiken: Of het nu sales, branding of employer branding is, een campagne brengt je dichter bij wat je wilt bereiken.\n\n* Versterkt je merk: Jouw boodschap wordt glashelder, authentiek en onweerstaanbaar.\n\nBij 9|CA werken we niet zomaar iets uit. We creëren impact waar jouw merk de vruchten van plukt.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1599,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049243-9ca-2025-website-klanten-wicky-def-desktop-1600x2000-advert.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 67,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "Van idee naar impact, jouw campagne bij 9|CA"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Een campagne moet niet alleen indruk maken, maar ook kloppen tot in de puntjes"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Bij 9|CA zetten we onze creativiteit en expertise in om jouw doelen te vertalen naar een campagne die opvalt en presteert. Dit is hoe wij te werk gaan:\n\n1. Diepgaand strategisch inzicht: We beginnen met een grondige intake. Wat is jouw doel? Wie wil je bereiken? Samen leggen we een sterke basis voor succes.\n\n2. Creatieve Blitz: In brainstormsessies ontstaan ideeën die anders durven zijn, maar precies aansluiten op jouw merkidentiteit en boodschap.\n",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "3. Doordacht ontwerp: Van visuals tot slogans, alles wat we creëren, past naadloos binnen jouw merkstrategie en spreekt je doelgroep aan.\n\n4. Mediaplanning met impact: Geen standaardkanalen. Of het nu social media, print of out-of-home is, wij zorgen dat jouw boodschap de juiste mensen bereikt op het juiste moment.\n\n5. Resultaten meten en optimaliseren: Onze campagnes zijn geen eindpunt. Met analyses, aanpassingen en meetbare KPI’s halen we alles uit jouw investering.\n\nBij 9|CA stopt het niet bij een goed idee. Wij zetten dat idee om in actie en zorgen dat het resultaat oplevert.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 51,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1600,
+              "url": "https://www.datocms-assets.com/138325/1775047391-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop-2000x1600px.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 49,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "SectionlineRecord",
+        "title": "De voordelen van een campagne die werkt"
+      },
+      {
+        "__typename": "ScrollingTitleRecord",
+        "text": "Met een goede campagne zet je jouw merk op scherp"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "Een campagne die klopt, maakt impact op ieder niveau. Dit zijn de voordelen die je mag verwachten:\n\n1. Zichtbaarheid opbouwen: Jouw merk springt eruit en wordt opgemerkt door de juiste doelgroep.\n\n2. Hogere conversiepercentages: Of je nu leads wilt genereren of producten wilt verkopen, een gerichte campagne doet het werk.",
+            "align": "top",
+            "cta": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 2,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 39,
+            "mobileWidth": 100,
+            "text": "3. Versterkte merkbeleving: Je boodschap wordt niet alleen gehoord, maar onthouden en dat bouwt aan lange termijn relaties.\n\n4. Meetbaar succes: Geen vaagheid, maar harde cijfers die laten zien dat jouw campagne werkt.\n\nBij 9|CA geloven we niet in losse flodders. Onze campagnes leveren meer dan aandacht, ze zorgen voor concrete resultaten.",
+            "align": "top",
+            "cta": {
+              "text": "Get in contact",
+              "url": "mailto:cu@nine.nl",
+              "isExternal": true
+            }
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 10,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775119732-9_ca-2024-website-new-selected-work-inzaken-header.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  }
+]

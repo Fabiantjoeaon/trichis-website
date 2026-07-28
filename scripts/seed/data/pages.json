@@ -1,0 +1,810 @@
+[
+  {
+    "id": "Srn62uK_RtmfB5c4L2GRdw",
+    "title": "Werving",
+    "slug": "werving",
+    "coverImage": {
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.datocms-assets.com/138325/1776348496-d_output.mp4",
+      "alt": null,
+      "video": {
+        "streamingUrl": "https://stream.mux.com/1LM31DKraKaxmkGTPAo88xPaw02VI01CzH.m3u8",
+        "muxPlaybackId": "1LM31DKraKaxmkGTPAo88xPaw02VI01CzH",
+        "mp4Url": "https://stream.mux.com/1LM31DKraKaxmkGTPAo88xPaw02VI01CzH/high.mp4",
+        "thumbnailUrl": "https://image.mux.com/1LM31DKraKaxmkGTPAo88xPaw02VI01CzH/thumbnail.jpg"
+      }
+    },
+    "mobileCoverImage": {
+      "width": 1464,
+      "height": 2048,
+      "url": "https://www.datocms-assets.com/138325/1776348496-m_output.mp4",
+      "alt": null,
+      "video": {
+        "streamingUrl": "https://stream.mux.com/6T5fihvcnzF8fMTVgu8Yuiq00WunOir3P.m3u8",
+        "muxPlaybackId": "6T5fihvcnzF8fMTVgu8Yuiq00WunOir3P",
+        "mp4Url": "https://stream.mux.com/6T5fihvcnzF8fMTVgu8Yuiq00WunOir3P/high.mp4",
+        "thumbnailUrl": "https://image.mux.com/6T5fihvcnzF8fMTVgu8Yuiq00WunOir3P/thumbnail.jpg"
+      }
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Wij creëren communicatie die aandacht verdient, merkbeloftes waarmaakt en bedrijven laat groeien.\n\nStrategie, campagnes, websites, logo-ontwerp, AI-communicatieoplossingen, sterke beelden, online marketing: wat er ook nodig is om jouw verhaal krachtig naar buiten te brengen.\n\nJij brengt de ambitie. Wij vertalen die naar communicatie die klanten niet vergeten.",
+        "paragraphHeader": "9CA is een creatief reclame- en communicatiebureau",
+        "bigTitle": "Let's go",
+        "sectionTitle": "Hi, wij zijn Nine Creative Agency"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1080,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775814450-9ca-behind-the-scenes-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/VfAkk7qOo00NvPzNSl12SPpxysMQWWoId.m3u8",
+                "muxPlaybackId": "VfAkk7qOo00NvPzNSl12SPpxysMQWWoId",
+                "mp4Url": "https://stream.mux.com/VfAkk7qOo00NvPzNSl12SPpxysMQWWoId/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/VfAkk7qOo00NvPzNSl12SPpxysMQWWoId/thumbnail.jpg"
+              }
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1000,
+              "height": 1000,
+              "url": "https://www.datocms-assets.com/138325/1775822369-team-9ca-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/z6QYaSQNTKMlxj00vUIkp5v5f6mjc4Bih.m3u8",
+                "muxPlaybackId": "z6QYaSQNTKMlxj00vUIkp5v5f6mjc4Bih",
+                "mp4Url": "https://stream.mux.com/z6QYaSQNTKMlxj00vUIkp5v5f6mjc4Bih/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/z6QYaSQNTKMlxj00vUIkp5v5f6mjc4Bih/thumbnail.jpg"
+              }
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "**9CA - ontstaan uit vriendschap, gedreven door creativiteit, energie en plezier.**\n\nVanuit die basis werken we als betrokken communicatiepartner voor bedrijven met ambitie.\n\nWe denken mee, dagen uit en vertalen ideeën naar sterke concepten, campagnes en middelen die bijdragen aan groei."
+      },
+      {
+        "__typename": "FormSectionRecord",
+        "title": "<p>Doe de gratis\n<strong>Quickscan</strong></p>\n",
+        "subtitle": "Wij kijken met frisse ogen naar jouw merk & communicatie. Je ontvangt binnen enkele dagen de quickscan in je mail.",
+        "ctaText": "Verzenden",
+        "successTitle": "Lekker bezig!",
+        "successMessage": "<p>We komen snel bij je terug met onze bevindingen.</p>\n",
+        "formName": "lets-go",
+        "formFields": [
+          {
+            "label": "Naam",
+            "name": "naam",
+            "fieldType": "text",
+            "required": true,
+            "options": "",
+            "placeholder": "Je volledige naam",
+            "width": "half"
+          },
+          {
+            "label": "Bedrijfsnaam",
+            "name": "bedrijfsnaam",
+            "fieldType": "text",
+            "required": true,
+            "options": "",
+            "placeholder": "Je bedrijfsnaam",
+            "width": "half"
+          },
+          {
+            "label": "Emailadres",
+            "name": "email",
+            "fieldType": "email",
+            "required": true,
+            "options": "",
+            "placeholder": "naam@bedrijf.nl",
+            "width": "half"
+          },
+          {
+            "label": "Waar ben je naar op zoek",
+            "name": "interest",
+            "fieldType": "select",
+            "required": true,
+            "options": "Quickscan,Neem contact met mij op",
+            "placeholder": "Selecteer...",
+            "width": "half"
+          },
+          {
+            "label": "Bericht",
+            "name": "bericht",
+            "fieldType": "longtext",
+            "required": false,
+            "options": "",
+            "placeholder": "Vertel ons meer over je project...",
+            "width": "full"
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Strategie",
+        "title": "Sounds like a plan",
+        "titleBottom": "",
+        "paragraph": "<p><strong>In een wereld vol keuzes wint degene met een plan</strong></p>\n\n<p>Een sterk merk geeft je richting. Het zorgt dat je verhaal helder is, je uitstraling klopt en je doelgroep je sneller herkent. Zo bouw je aan een merk dat vertrouwen wekt, blijft hangen en meer impact maakt.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Brand Identity",
+        "title": "Show some ID",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Merkidentiteit ontwikkelen. Jouw merk, jouw fundament.</strong></p>\n\n<p>Waarom blijven klanten terugkomen? Door een merk dat indruk maakt.</p>\n\n<p>Wil jij dat jouw merk opvalt en impact maakt? Ontdek hoe een sterke merkidentiteit deuren opent naar meer klanten, vertrouwen en groei.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1920,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775810598-brand-identity-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/900rdYFFKhqBXDW1XYF1zUJZgkGa9qbWk.m3u8",
+                "muxPlaybackId": "900rdYFFKhqBXDW1XYF1zUJZgkGa9qbWk",
+                "mp4Url": "https://stream.mux.com/900rdYFFKhqBXDW1XYF1zUJZgkGa9qbWk/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/900rdYFFKhqBXDW1XYF1zUJZgkGa9qbWk/thumbnail.jpg"
+              }
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Graphic Design",
+        "title": "One style, one story",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Alles wat je laat zien, vertelt iets over je merk.</strong></p>\n\n<p>Van social content tot presentaties en van campagnes tot je website. Als daarin geen duidelijke lijn zit, voelt je merk versnipperd en minder sterk.</p>\n\n<p>9CA zorgt voor design dat verbindt, versterkt en herkenning opbouwt. Zo maak je van losse middelen één krachtig verhaal.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1512,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775810699-graphic-design-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/i8O3Ek8lOK3L2JSnFtI9FikpNpMdsJ92.m3u8",
+                "muxPlaybackId": "i8O3Ek8lOK3L2JSnFtI9FikpNpMdsJ92",
+                "mp4Url": "https://stream.mux.com/i8O3Ek8lOK3L2JSnFtI9FikpNpMdsJ92/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/i8O3Ek8lOK3L2JSnFtI9FikpNpMdsJ92/thumbnail.jpg"
+              }
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 864,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1776168613-graphic-design-beurs.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/7etHU1YTBzyLLuQ901u4RuWU00kdK3oRBz.m3u8",
+                "muxPlaybackId": "7etHU1YTBzyLLuQ901u4RuWU00kdK3oRBz",
+                "mp4Url": "https://stream.mux.com/7etHU1YTBzyLLuQ901u4RuWU00kdK3oRBz/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/7etHU1YTBzyLLuQ901u4RuWU00kdK3oRBz/thumbnail.jpg"
+              }
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Beeld Visuals",
+        "title": "Attention grabbing",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Een sterk beeld pakt aandacht, brengt gevoel en laat je verhaal direct landen.</strong></p>\n\n<p>Wat maakt jouw merk uniek? Het begint met wat mensen zien, Beelden die raken, overtuigen en blijven hangen. Ontdek hoe krachtige foto’s en video’s jouw merk versterken en jouw verhaal tot leven brengen.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1920,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775810540-beeld-visuals-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/awdXD00ElIYaSDsGS7MHpjVR01uDv2sdnt.m3u8",
+                "muxPlaybackId": "awdXD00ElIYaSDsGS7MHpjVR01uDv2sdnt",
+                "mp4Url": "https://stream.mux.com/awdXD00ElIYaSDsGS7MHpjVR01uDv2sdnt/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/awdXD00ElIYaSDsGS7MHpjVR01uDv2sdnt/thumbnail.jpg"
+              }
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Creatieve Campagnes / Werving & Employer Branding.",
+        "title": "Show time",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Meer dan marketing, campagnes die raken en werken.</strong></p>\n\n<p>Een campagne die niet opvalt, is een gemiste kans.</p>\n\n<p>In een wereldwaar iedereen roept, moet jij spreken. Of het nu gaat om meer zichtbaarheid, hogere sales of een sterker werkgeversmerk, een goede campagne raakt de juiste snaar. Maar gewoon iets verzinnen? Dat werkt niet.</p>\n\n<p><strong>Nieuw talent aantrekken om je organisatie te versterken, en tegelijk je huidige team laten uitgroeien tot trotse ambassadeurs van je merk.</strong></p>\n\n<p>Een sterk werkgeversmerk laat zien wie je bent, waar je voor staat en waarom mensen juist bij jou willen werken. Met een helder verhaal trek je nieuwe mensen aan én zorg je dat collega’s willen blijven.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 864,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775810638-creatieve-campagnes-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/00TKN026NWi4giJNc9aQ02ee00SPNTZMNnsH.m3u8",
+                "muxPlaybackId": "00TKN026NWi4giJNc9aQ02ee00SPNTZMNnsH",
+                "mp4Url": "https://stream.mux.com/00TKN026NWi4giJNc9aQ02ee00SPNTZMNnsH/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/00TKN026NWi4giJNc9aQ02ee00SPNTZMNnsH/thumbnail.jpg"
+              }
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1512,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775810666-employer-branding-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/7Ktr2yEu01wmVVIlIXgyF005MHv2X1bvF4.m3u8",
+                "muxPlaybackId": "7Ktr2yEu01wmVVIlIXgyF005MHv2X1bvF4",
+                "mp4Url": "https://stream.mux.com/7Ktr2yEu01wmVVIlIXgyF005MHv2X1bvF4/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/7Ktr2yEu01wmVVIlIXgyF005MHv2X1bvF4/thumbnail.jpg"
+              }
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Online Marketing",
+        "title": "Scroll stoppers",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Jij de focus, wij het resultaat.</strong></p>\n\n<p>Online marketing kan veel opleveren, als je weet waar je op moet sturen. En laat dat nou precies zijn waar wij jou goed zijn. Wij bouwen, beheren en verbeteren jouw campagnes op social media en Google, zodat jij zichtbaar bent op de momenten die ertoe doen.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775809420-online-marketing-malarkey.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775809477-online-marketing-z-eventships.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Websites",
+        "title": "Shine online",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Jouw website geen mooi plaatje, maar een krachtig instrument.</strong></p>\n\n<p>Een website moet meer zijn dan een mooi plaatje. Maak van je site een conversie-machine die indruk maakt én werkt. Het is jouw verhaal, jouw merk en jouw grootste kans om klanten te overtuigen verpakt in een digitale ervaring die aan alle kanten klopt.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775730986-websites-def.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/NnDdmYWtkKqv0187pzzHvYw4aL01HXrM02o.m3u8",
+                "muxPlaybackId": "NnDdmYWtkKqv0187pzzHvYw4aL01HXrM02o",
+                "mp4Url": "https://stream.mux.com/NnDdmYWtkKqv0187pzzHvYw4aL01HXrM02o/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/NnDdmYWtkKqv0187pzzHvYw4aL01HXrM02o/thumbnail.jpg"
+              }
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "CtasectionRecord",
+        "title": "<p>So... is it your time to <strong>shine</strong>?</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      }
+    ]
+  },
+  {
+    "id": "S3OG4WVeQguRPbwR-aLMXw",
+    "title": "Let's Go",
+    "slug": "lets-go",
+    "coverImage": {
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.datocms-assets.com/138325/1776348496-d_output.mp4",
+      "alt": null,
+      "video": {
+        "streamingUrl": "https://stream.mux.com/1LM31DKraKaxmkGTPAo88xPaw02VI01CzH.m3u8",
+        "muxPlaybackId": "1LM31DKraKaxmkGTPAo88xPaw02VI01CzH",
+        "mp4Url": "https://stream.mux.com/1LM31DKraKaxmkGTPAo88xPaw02VI01CzH/high.mp4",
+        "thumbnailUrl": "https://image.mux.com/1LM31DKraKaxmkGTPAo88xPaw02VI01CzH/thumbnail.jpg"
+      }
+    },
+    "mobileCoverImage": {
+      "width": 1464,
+      "height": 2048,
+      "url": "https://www.datocms-assets.com/138325/1776348496-m_output.mp4",
+      "alt": null,
+      "video": {
+        "streamingUrl": "https://stream.mux.com/6T5fihvcnzF8fMTVgu8Yuiq00WunOir3P.m3u8",
+        "muxPlaybackId": "6T5fihvcnzF8fMTVgu8Yuiq00WunOir3P",
+        "mp4Url": "https://stream.mux.com/6T5fihvcnzF8fMTVgu8Yuiq00WunOir3P/high.mp4",
+        "thumbnailUrl": "https://image.mux.com/6T5fihvcnzF8fMTVgu8Yuiq00WunOir3P/thumbnail.jpg"
+      }
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Wij creëren communicatie die aandacht verdient, merkbeloftes waarmaakt en bedrijven laat groeien.\n\nStrategie, campagnes, websites, logo-ontwerp, AI-communicatieoplossingen, sterke beelden, online marketing: wat er ook nodig is om jouw verhaal krachtig naar buiten te brengen.\n\nJij brengt de ambitie. Wij vertalen die naar communicatie die klanten niet vergeten.",
+        "paragraphHeader": "9CA is een creatief reclame- en communicatiebureau",
+        "bigTitle": "Let's go",
+        "sectionTitle": "Hi, wij zijn Nine Creative Agency"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1080,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775814450-9ca-behind-the-scenes-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/VfAkk7qOo00NvPzNSl12SPpxysMQWWoId.m3u8",
+                "muxPlaybackId": "VfAkk7qOo00NvPzNSl12SPpxysMQWWoId",
+                "mp4Url": "https://stream.mux.com/VfAkk7qOo00NvPzNSl12SPpxysMQWWoId/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/VfAkk7qOo00NvPzNSl12SPpxysMQWWoId/thumbnail.jpg"
+              }
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1000,
+              "height": 1000,
+              "url": "https://www.datocms-assets.com/138325/1775822369-team-9ca-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/z6QYaSQNTKMlxj00vUIkp5v5f6mjc4Bih.m3u8",
+                "muxPlaybackId": "z6QYaSQNTKMlxj00vUIkp5v5f6mjc4Bih",
+                "mp4Url": "https://stream.mux.com/z6QYaSQNTKMlxj00vUIkp5v5f6mjc4Bih/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/z6QYaSQNTKMlxj00vUIkp5v5f6mjc4Bih/thumbnail.jpg"
+              }
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "**9CA - ontstaan uit vriendschap, gedreven door creativiteit, energie en plezier.**\n\nVanuit die basis werken we als betrokken communicatiepartner voor bedrijven met ambitie.\n\nWe denken mee, dagen uit en vertalen ideeën naar sterke concepten, campagnes en middelen die bijdragen aan groei."
+      },
+      {
+        "__typename": "FormSectionRecord",
+        "title": "<p>Doe de gratis\n<strong>Quickscan</strong></p>\n",
+        "subtitle": "Wij kijken met frisse ogen naar jouw merk & communicatie. Je ontvangt binnen enkele dagen de quickscan in je mail.",
+        "ctaText": "Verzenden",
+        "successTitle": "Lekker bezig!",
+        "successMessage": "<p>We komen snel bij je terug met onze bevindingen.</p>\n",
+        "formName": "lets-go",
+        "formFields": [
+          {
+            "label": "Naam",
+            "name": "naam",
+            "fieldType": "text",
+            "required": true,
+            "options": "",
+            "placeholder": "Je volledige naam",
+            "width": "half"
+          },
+          {
+            "label": "Bedrijfsnaam",
+            "name": "bedrijfsnaam",
+            "fieldType": "text",
+            "required": true,
+            "options": "",
+            "placeholder": "Je bedrijfsnaam",
+            "width": "half"
+          },
+          {
+            "label": "Emailadres",
+            "name": "email",
+            "fieldType": "email",
+            "required": true,
+            "options": "",
+            "placeholder": "naam@bedrijf.nl",
+            "width": "half"
+          },
+          {
+            "label": "Waar ben je naar op zoek",
+            "name": "interest",
+            "fieldType": "select",
+            "required": true,
+            "options": "Quickscan,Neem contact met mij op",
+            "placeholder": "Selecteer...",
+            "width": "half"
+          },
+          {
+            "label": "Bericht",
+            "name": "bericht",
+            "fieldType": "longtext",
+            "required": false,
+            "options": "",
+            "placeholder": "Vertel ons meer over je project...",
+            "width": "full"
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Strategie",
+        "title": "Sounds like a plan",
+        "titleBottom": "",
+        "paragraph": "<p><strong>In een wereld vol keuzes wint degene met een plan</strong></p>\n\n<p>Een sterk merk geeft je richting. Het zorgt dat je verhaal helder is, je uitstraling klopt en je doelgroep je sneller herkent. Zo bouw je aan een merk dat vertrouwen wekt, blijft hangen en meer impact maakt.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Brand Identity",
+        "title": "Show some ID",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Merkidentiteit ontwikkelen. Jouw merk, jouw fundament.</strong></p>\n\n<p>Waarom blijven klanten terugkomen? Door een merk dat indruk maakt.</p>\n\n<p>Wil jij dat jouw merk opvalt en impact maakt? Ontdek hoe een sterke merkidentiteit deuren opent naar meer klanten, vertrouwen en groei.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1920,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775810598-brand-identity-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/900rdYFFKhqBXDW1XYF1zUJZgkGa9qbWk.m3u8",
+                "muxPlaybackId": "900rdYFFKhqBXDW1XYF1zUJZgkGa9qbWk",
+                "mp4Url": "https://stream.mux.com/900rdYFFKhqBXDW1XYF1zUJZgkGa9qbWk/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/900rdYFFKhqBXDW1XYF1zUJZgkGa9qbWk/thumbnail.jpg"
+              }
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Graphic Design",
+        "title": "One style, one story",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Alles wat je laat zien, vertelt iets over je merk.</strong></p>\n\n<p>Van social content tot presentaties en van campagnes tot je website. Als daarin geen duidelijke lijn zit, voelt je merk versnipperd en minder sterk.</p>\n\n<p>9CA zorgt voor design dat verbindt, versterkt en herkenning opbouwt. Zo maak je van losse middelen één krachtig verhaal.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1512,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775810699-graphic-design-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/i8O3Ek8lOK3L2JSnFtI9FikpNpMdsJ92.m3u8",
+                "muxPlaybackId": "i8O3Ek8lOK3L2JSnFtI9FikpNpMdsJ92",
+                "mp4Url": "https://stream.mux.com/i8O3Ek8lOK3L2JSnFtI9FikpNpMdsJ92/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/i8O3Ek8lOK3L2JSnFtI9FikpNpMdsJ92/thumbnail.jpg"
+              }
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 864,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1776168613-graphic-design-beurs.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/7etHU1YTBzyLLuQ901u4RuWU00kdK3oRBz.m3u8",
+                "muxPlaybackId": "7etHU1YTBzyLLuQ901u4RuWU00kdK3oRBz",
+                "mp4Url": "https://stream.mux.com/7etHU1YTBzyLLuQ901u4RuWU00kdK3oRBz/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/7etHU1YTBzyLLuQ901u4RuWU00kdK3oRBz/thumbnail.jpg"
+              }
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Beeld Visuals",
+        "title": "Attention grabbing",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Een sterk beeld pakt aandacht, brengt gevoel en laat je verhaal direct landen.</strong></p>\n\n<p>Wat maakt jouw merk uniek? Het begint met wat mensen zien, Beelden die raken, overtuigen en blijven hangen. Ontdek hoe krachtige foto’s en video’s jouw merk versterken en jouw verhaal tot leven brengen.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1920,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775810540-beeld-visuals-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/awdXD00ElIYaSDsGS7MHpjVR01uDv2sdnt.m3u8",
+                "muxPlaybackId": "awdXD00ElIYaSDsGS7MHpjVR01uDv2sdnt",
+                "mp4Url": "https://stream.mux.com/awdXD00ElIYaSDsGS7MHpjVR01uDv2sdnt/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/awdXD00ElIYaSDsGS7MHpjVR01uDv2sdnt/thumbnail.jpg"
+              }
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Creatieve Campagnes / Werving & Employer Branding.",
+        "title": "Show time",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Meer dan marketing, campagnes die raken en werken.</strong></p>\n\n<p>Een campagne die niet opvalt, is een gemiste kans.</p>\n\n<p>In een wereldwaar iedereen roept, moet jij spreken. Of het nu gaat om meer zichtbaarheid, hogere sales of een sterker werkgeversmerk, een goede campagne raakt de juiste snaar. Maar gewoon iets verzinnen? Dat werkt niet.</p>\n\n<p><strong>Nieuw talent aantrekken om je organisatie te versterken, en tegelijk je huidige team laten uitgroeien tot trotse ambassadeurs van je merk.</strong></p>\n\n<p>Een sterk werkgeversmerk laat zien wie je bent, waar je voor staat en waarom mensen juist bij jou willen werken. Met een helder verhaal trek je nieuwe mensen aan én zorg je dat collega’s willen blijven.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 864,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775810638-creatieve-campagnes-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/00TKN026NWi4giJNc9aQ02ee00SPNTZMNnsH.m3u8",
+                "muxPlaybackId": "00TKN026NWi4giJNc9aQ02ee00SPNTZMNnsH",
+                "mp4Url": "https://stream.mux.com/00TKN026NWi4giJNc9aQ02ee00SPNTZMNnsH/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/00TKN026NWi4giJNc9aQ02ee00SPNTZMNnsH/thumbnail.jpg"
+              }
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1512,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775810666-employer-branding-def-small.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/7Ktr2yEu01wmVVIlIXgyF005MHv2X1bvF4.m3u8",
+                "muxPlaybackId": "7Ktr2yEu01wmVVIlIXgyF005MHv2X1bvF4",
+                "mp4Url": "https://stream.mux.com/7Ktr2yEu01wmVVIlIXgyF005MHv2X1bvF4/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/7Ktr2yEu01wmVVIlIXgyF005MHv2X1bvF4/thumbnail.jpg"
+              }
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Online Marketing",
+        "title": "Scroll stoppers",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Jij de focus, wij het resultaat.</strong></p>\n\n<p>Online marketing kan veel opleveren, als je weet waar je op moet sturen. En laat dat nou precies zijn waar wij jou goed zijn. Wij bouwen, beheren en verbeteren jouw campagnes op social media en Google, zodat jij zichtbaar bent op de momenten die ertoe doen.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775809420-online-marketing-malarkey.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775809477-online-marketing-z-eventships.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "PageheaderRecord",
+        "sectionTitle": "Websites",
+        "title": "Shine online",
+        "titleBottom": "",
+        "paragraph": "<p><strong>Jouw website geen mooi plaatje, maar een krachtig instrument.</strong></p>\n\n<p>Een website moet meer zijn dan een mooi plaatje. Maak van je site een conversie-machine die indruk maakt én werkt. Het is jouw verhaal, jouw merk en jouw grootste kans om klanten te overtuigen verpakt in een digitale ervaring die aan alle kanten klopt.</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775730986-websites-def.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/NnDdmYWtkKqv0187pzzHvYw4aL01HXrM02o.m3u8",
+                "muxPlaybackId": "NnDdmYWtkKqv0187pzzHvYw4aL01HXrM02o",
+                "mp4Url": "https://stream.mux.com/NnDdmYWtkKqv0187pzzHvYw4aL01HXrM02o/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/NnDdmYWtkKqv0187pzzHvYw4aL01HXrM02o/thumbnail.jpg"
+              }
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "CtasectionRecord",
+        "title": "<p>So... is it your time to <strong>shine</strong>?</p>\n",
+        "ctaText": "Get in contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      }
+    ]
+  },
+  {
+    "id": "fLeW9a9LRC2dUPg1Ud5yCQ",
+    "title": "Test",
+    "slug": "test",
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775129056-9_ca-2026-website-klanten-mfm-beelden-vid-16_9-02-geconverteerd-van-png.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 2000,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775133819-9_ca-2026-website-klanten-mfm-beelden-website-1_1-01-2-geconverteerd-van-png.webp",
+      "alt": null,
+      "video": null
+    },
+    "content": []
+  }
+]

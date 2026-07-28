@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProjectPage from "@/components/project/ProjectPage.jsx";
+import { getProject, getProjects } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project, index) => {
+    const next = projects[(index + 1) % projects.length];
+    return {
+      params: { slug: project.slug },
+      props: { project, nextProject: next },
+    };
+  });
+}
+
+const { project, nextProject } = Astro.props;
+---
+
+<BaseLayout title={`${project.title} — Nine Creative Agency`}>
+  <ProjectPage client:load project={project} nextProject={nextProject} />
+</BaseLayout>

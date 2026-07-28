@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TransitionLink from "@/components/ui/TransitionLink.jsx";
+import { t } from "@/lib/i18n";
+---
+
+<BaseLayout title={t("notFound.title")} showFooter={false}>
+  <section class="inner-width section-top section-bottom not-found">
+    <h1>{t("notFound.title")}</h1>
+    <TransitionLink client:load href="/">{t("notFound.cta")}</TransitionLink>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    gap: 40rem;
+    justify-content: center;
+  }
+</style>

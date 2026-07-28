@@ -1,0 +1,3305 @@
+[
+  {
+    "id": "CHg5CjyyRN6idNrQ07QRhw",
+    "title": "Malarkey",
+    "slug": "malarkey",
+    "year": 2023,
+    "featured": false,
+    "featuredOrder": null,
+    "deliverables": [
+      {
+        "id": "ZI9HZmPtRG2CwG632wUSVw",
+        "title": "Identity"
+      },
+      {
+        "id": "JjPo6saBTjqsczSChMHh1w",
+        "title": "Campaign"
+      },
+      {
+        "id": "QWAymtBkTry1xhqqw2NfRQ",
+        "title": "Photography"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775117310-9_ca-2024-website-new-selected-work-malarkey-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775117282-9_ca-2024-website-new-selected-work-malarkey-header-mobile.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": null,
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "In een wereld voor bier en bierbouwers hebben we gekozen om het merk als een lifestyle brand te positioneren. Alles is al zo serieus, dus daarom sturen we aan op de niet zo serieuze momenten van geouwehoer en de slappe lach onder vrienden.",
+        "paragraphHeader": "Malarkey! Serious beer for unserious moments. ",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117420-9_ca-2024-website-new-selected-work-malarkey-001.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117490-9_ca-2024-website-new-selected-work-malarkey-002.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "**Een naam die je proeft voor je drinkt.**\n\nWe zochten niet zomaar een naam. We zochten een gevoel. Eentje die schuimt van karakter, tintelt van lef en net zo lang blijft hangen als de afdronk van een goed verhaal. Zo kwamen we bij Malarkey: Een naam die je bestelt, onthoudt, en nog eens bestelt."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117450-9_ca-2024-website-new-selected-work-malarkey-003.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": null,
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 66,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117344-9_ca-2024-website-new-selected-work-malarkey-004.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Vanuit die naam gaven we vorm aan een eigenzinnige identiteit en communicatiestijl in een toon met karakter en lef. Die lijn trokken we overal door. Van etiketten tot website, van social campagnes tot film en give aways . Eén verhaal, één smoel."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1333,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117326-9_ca-2024-website-new-selected-work-malarkey-005.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1343,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117466-9_ca-2024-website-new-selected-work-malarkey-006.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1333,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775117436-9_ca-2024-website-new-selected-work-malarkey-007.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D2OiB2DRTmC-zUyJMGvcLg",
+    "title": "InZaken",
+    "slug": "inzaken",
+    "year": 2023,
+    "featured": false,
+    "featuredOrder": null,
+    "deliverables": [
+      {
+        "id": "IK18Ok2sREytpLaZjPW4dQ",
+        "title": "Identity"
+      },
+      {
+        "id": "XQMtuSjLTfWCeCV-EIhBOg",
+        "title": "Reqruitment campaign"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775119732-9_ca-2024-website-new-selected-work-inzaken-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775119699-9_ca-2024-website-new-selected-work-inzaken-header-mobile.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": null,
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "En dat willen ze ook zo laten zien. Niet saai of voorspelbaar, maar fris, opvallend en met een knipoog. ",
+        "paragraphHeader": "InZaken doet het net even anders.",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 7,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775119338-9_ca-2024-website-new-selected-work-inzaken-beeld-001.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775047315-9_ca-2024-website-new-selected-work-inzaken-beeld-002.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 50,
+            "mobileWidth": null,
+            "text": "Wij gaven de identity daarom een flinke upgrade, bedachten een communicatieconcept dat blijft hangen en lanceerden een employer branding campagne die je niet snel vergeet.\n\nOm te laten zien dat werken in accountancy allesbehalve stoffig is, creëerden we een wervingscampagne die je – letterlijk – van je sokken blaast. Van concept tot beeld: wij regelden de fotografie, de styling, de modellen en de juiste locaties. "
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 17,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775119316-9_ca-2024-website-new-selected-work-inzaken-beeld-003.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1333,
+              "url": "https://www.datocms-assets.com/138325/1775119292-9_ca-2024-website-new-selected-work-inzaken-beeld-005.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1599,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775047301-9_ca-2024-website-new-selected-work-inzaken-beeld-004.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 30,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Alles met één doel: laten zien dat cijfers ook cool kunnen zijn. Mission accomplished."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775119272-9_ca-2024-website-new-selected-work-inzaken-beeld-006.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "EpJGRIl5SLqMX8W6oOjraQ",
+    "title": "Wicky",
+    "slug": "wicky",
+    "year": 2025,
+    "featured": true,
+    "featuredOrder": 1,
+    "deliverables": [
+      {
+        "id": "EG8vHnFbRDGX7BSFDrXL_g",
+        "title": "Brand Awareness Campaign"
+      },
+      {
+        "id": "JUnyy3BgSqCWwX3IVSYlmg",
+        "title": "Landing page"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775049200-9ca-2025-website-klanten-wicky-def-desktop-2000x1125-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1428,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775049217-9ca-2025-website-klanten-wicky-def-mobile-2000x1429-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 1024,
+      "height": 576,
+      "url": "https://www.datocms-assets.com/138325/1755618462-wicky-featured.mp4",
+      "alt": null,
+      "video": {
+        "streamingUrl": "https://stream.mux.com/nwEFibBr502BBU5ohjpWZQQ1soI6dpyAO.m3u8",
+        "muxPlaybackId": "nwEFibBr502BBU5ohjpWZQQ1soI6dpyAO",
+        "mp4Url": "https://stream.mux.com/nwEFibBr502BBU5ohjpWZQQ1soI6dpyAO/high.mp4",
+        "thumbnailUrl": "https://image.mux.com/nwEFibBr502BBU5ohjpWZQQ1soI6dpyAO/thumbnail.jpg"
+      }
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Met één helder doel: zorgen dat iedereen, vooral kinderen, Wicky niet alleen kent, maar onthoudt.",
+        "paragraphHeader": "Voor Wicky gingen we all-in op naamsbekendheid.",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1920,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775824779-9ca-2025-website-klanten-wicky-def-desktop-1920x1080-skateboard.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/arjuNQcr4QEmgp8Hf6FxvCfAR8YXknhG.m3u8",
+                "muxPlaybackId": "arjuNQcr4QEmgp8Hf6FxvCfAR8YXknhG",
+                "mp4Url": "https://stream.mux.com/arjuNQcr4QEmgp8Hf6FxvCfAR8YXknhG/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/arjuNQcr4QEmgp8Hf6FxvCfAR8YXknhG/thumbnail.jpg"
+              }
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1920,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775824757-9ca-2025-website-klanten-wicky-def-desktop-1920x1080-trampoline.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/378CPVKzp8ktLpz1Qx4xcOsn1x7VAhxW.m3u8",
+                "muxPlaybackId": "378CPVKzp8ktLpz1Qx4xcOsn1x7VAhxW",
+                "mp4Url": "https://stream.mux.com/378CPVKzp8ktLpz1Qx4xcOsn1x7VAhxW/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/378CPVKzp8ktLpz1Qx4xcOsn1x7VAhxW/thumbnail.jpg"
+              }
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "We bedachten een communicatieconcept vol energie en plezier, en werkten dat uit tot twee knallende films. Wij schreven de scripts, zorgden voor de styling, scoutten modellen en locaties, en regelden de voice-over. Alles in één vloeiende productie.\n\nOmdat beeld minstens zo belangrijk is, maakten we aanvullend sprekende fotografie. Samen vormen de films en beelden de basis voor alle social uitingen van de online awarenesscampagne."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1599,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049243-9ca-2025-website-klanten-wicky-def-desktop-1600x2000-advert.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1510,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775046681-9ca-2025-website-klanten-wicky-def-desktop-2000x1125-screen.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/E00dmXZnDOaC9vpvff4R00P02OLUI4O7zab.m3u8",
+                "muxPlaybackId": "E00dmXZnDOaC9vpvff4R00P02OLUI4O7zab",
+                "mp4Url": "https://stream.mux.com/E00dmXZnDOaC9vpvff4R00P02OLUI4O7zab/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/E00dmXZnDOaC9vpvff4R00P02OLUI4O7zab/thumbnail.jpg"
+              }
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049256-9ca-2025-website-klanten-wicky-def-desktop-2000x2000-phone.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775049230-9ca-2025-website-klanten-wicky-def-desktop-2000x1429-poster.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 30,
+            "mobileWidth": null,
+            "text": "**Wicky Landingspagina**\n\nEn om het helemaal rond te maken? Een landingspagina in de stijl van het concept, die voelt alsof je er zo in kunt springen. Kortom: twee toffe films, sterke beelden en een campagne die de doelgroep niet snel vergeet."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 70,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1918,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1755696589-9ca-2025-website-klanten-wicky-def-desktop-2000x1125-website.mp4",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/hyPtLlf01oyrm4gNxQ2DMwjUitFnaKkxK.m3u8",
+                "muxPlaybackId": "hyPtLlf01oyrm4gNxQ2DMwjUitFnaKkxK",
+                "mp4Url": "https://stream.mux.com/hyPtLlf01oyrm4gNxQ2DMwjUitFnaKkxK/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/hyPtLlf01oyrm4gNxQ2DMwjUitFnaKkxK/thumbnail.jpg"
+              }
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MhHJcAb1Rgy_nQuVwIhlbQ",
+    "title": "MFM",
+    "slug": "mfm",
+    "year": 2026,
+    "featured": false,
+    "featuredOrder": 4,
+    "deliverables": [
+      {
+        "id": "Bpbo2OYcT9ajL21dcDdVjw",
+        "title": "Identity"
+      },
+      {
+        "id": "VBDdY6VxSsKjdrBez6U3gw",
+        "title": "Launch"
+      }
+    ],
+    "coverImage": {
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.datocms-assets.com/138325/1775127380-9_ca-2026-website-klanten-mfm-beelden-billboard-16_9-geconverteerd-van-png.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775134753-9_ca-2026-website-klanten-mfm-beelden-billboard-16_9-geconverteerd-van-png-1-01.png",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 1596,
+      "height": 1080,
+      "url": "https://www.datocms-assets.com/138325/1775811338-9-ca-2026-website-klanten-mfm-beelden-vid-16-9.webm",
+      "alt": null,
+      "video": {
+        "streamingUrl": "https://stream.mux.com/6801Cu743SLhHG1b9a007ko41nCFD01Ow16.m3u8",
+        "muxPlaybackId": "6801Cu743SLhHG1b9a007ko41nCFD01Ow16",
+        "mp4Url": "https://stream.mux.com/6801Cu743SLhHG1b9a007ko41nCFD01Ow16/high.mp4",
+        "thumbnailUrl": "https://image.mux.com/6801Cu743SLhHG1b9a007ko41nCFD01Ow16/thumbnail.jpg"
+      }
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Van start-up naar scale-up. Media Futures Market was klaar voor meer. De ambitie groeide en steeds meer agencies sloten zich aan bij MFM. Tijd voor de volgende stap. We scherpten de positionering aan en ontwikkelden een nieuwe identity: bold, opvallend en future ready. \n",
+        "paragraphHeader": "2026 - Media Futures Market",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1596,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775811338-9-ca-2026-website-klanten-mfm-beelden-vid-16-9.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/6801Cu743SLhHG1b9a007ko41nCFD01Ow16.m3u8",
+                "muxPlaybackId": "6801Cu743SLhHG1b9a007ko41nCFD01Ow16",
+                "mp4Url": "https://stream.mux.com/6801Cu743SLhHG1b9a007ko41nCFD01Ow16/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/6801Cu743SLhHG1b9a007ko41nCFD01Ow16/thumbnail.jpg"
+              }
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "We startten bij de kern. Vanuit een nieuwe positionering brachten we focus aan in het verhaal en ontwikkelden we een krachtige pay-off. Deze vormt het fundament voor alles wat volgt. Eén duidelijke lijn, doorvertaald naar alle middelen. Consistent, herkenbaar en richtinggevend."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775128725-9_ca-2026-website-klanten-mfm-beelden-key-4_5-geconverteerd-van-png.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775128788-9_ca-2026-website-klanten-mfm-beelden-phone-7_5-geconverteerd-van-png.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "De nieuwe identity bouwt voort op die strategische basis. Het kenmerkende oranje blijft, versterkt met diep zwart voor contrast, rust en leesbaarheid. "
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775129056-9_ca-2026-website-klanten-mfm-beelden-vid-16_9-02-geconverteerd-van-png.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775133765-9_ca-2026-website-klanten-mfm-beelden-website-1_1-01-1-geconverteerd-van-png.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": 50
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775133819-9_ca-2026-website-klanten-mfm-beelden-website-1_1-01-2-geconverteerd-van-png.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": 50
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775133901-9_ca-2026-website-klanten-mfm-beelden-phone-5_7-2-01-geconverteerd-van-png.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775133917-9_ca-2026-website-klanten-mfm-beelden-phone-5_7-2-02-geconverteerd-van-png.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 50,
+            "mobileWidth": null,
+            "text": "Vanuit de identity ontwikkelden we middelen die het merk overal hetzelfde laten spreken. Visueel sterk, inhoudelijk helder."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 17,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775134105-9_ca-2026-website-klanten-mfm-beelden-phone-7_5-2-02-geconverteerd-van-png.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1920,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775812827-9-ca-2026-website-klanten-mfm-beelden-vid.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/5tN2HUIe01Tp02G5kZaZxwBzBuC02oWO01Zp.m3u8",
+                "muxPlaybackId": "5tN2HUIe01Tp02G5kZaZxwBzBuC02oWO01Zp",
+                "mp4Url": "https://stream.mux.com/5tN2HUIe01Tp02G5kZaZxwBzBuC02oWO01Zp/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/5tN2HUIe01Tp02G5kZaZxwBzBuC02oWO01Zp/thumbnail.jpg"
+              }
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Mxk6mhSuRd-ul3KJFoqnGw",
+    "title": "Direct Source International",
+    "slug": "direct-source-international",
+    "year": 2025,
+    "featured": true,
+    "featuredOrder": 3,
+    "deliverables": [
+      {
+        "id": "GaiW5RKeSoKZdTVMClGU4w",
+        "title": "Identity"
+      },
+      {
+        "id": "TeHW_x3nSgS6HpC2vkildQ",
+        "title": "Communication"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775048546-9_ca-2025-website-klanten-direct-source-def-desktop-2000x1125-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775048509-9_ca-2025-website-klanten-direct-source-def-desktop-1429x2000-homepage.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775048318-9_ca-2025-website-klanten-direct-source-def-desktop-1429x2000-homepage.webp",
+      "alt": null,
+      "video": null
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Direct Source International is de specialist in druiven en citrusvruchten. Met jarenlange ervaring weten ze precies hoe ze kwaliteit en betrouwbaarheid combineren met een frisse, slimme aanpak. Ze doen het nét even anders, en altijd met aandacht voor hun klanten.",
+        "paragraphHeader": "2025 - Direct Source - Identity",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775048628-9_ca-2025-website-klanten-direct-source-def-desktop-2000x1125-logo.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048391-9_ca-2025-website-klanten-direct-source-def-desktop-2000x2000-poster-01.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048370-9_ca-2025-website-klanten-direct-source-def-desktop-2000x2000-photo-03.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Voor Direct Source ontwikkelden we een communicatiestijl die klopt. Professioneel, helder en benaderbaar. Met energie en betrokkenheid, maar zonder poespas. Zo voelt het merk dichtbij en toegankelijk, terwijl de expertise duidelijk zichtbaar blijft."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775044807-9_ca-2025-website-klanten-direct-source-def-desktop-1600x2000-digital.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/tVb01eknWGEvu00kFyVBF7eHQSE7kJPI2n.m3u8",
+                "muxPlaybackId": "tVb01eknWGEvu00kFyVBF7eHQSE7kJPI2n",
+                "mp4Url": "https://stream.mux.com/tVb01eknWGEvu00kFyVBF7eHQSE7kJPI2n/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/tVb01eknWGEvu00kFyVBF7eHQSE7kJPI2n/thumbnail.jpg"
+              }
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048354-9_ca-2025-website-klanten-direct-source-def-desktop-2000x2000-photo-02.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048431-9_ca-2025-website-klanten-direct-source-def-desktop-2000x2000-poster-02.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Het merk kreeg een visuele update waarin alles samenkomt. Logo, kleuren, typografie en grafische elementen zijn vernieuwd en doorgevoerd in alle uitingen. Consistent en modern. Een uitstraling die vertrouwen wekt en laat zien waar Direct Source voor staat. We lieten een illustrator verschillende fruitsoorten illustreren, die nu een herkenbare rol spelen binnen de communicatiestijl. Ze geven het merk kleur, maken het eigen en zorgen voor samenhang in alle middelen."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775731698-9_ca-2025-website-klanten-direct-source-def-desktop-2000x1429-ipad.jpg",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 35,
+            "mobileWidth": null,
+            "text": "Voor de beurs ontwierpen we een stand die uitnodigt tot contact en ontmoeting. Geen klassieke verkoopstand, maar een prettige plek voor vaste relaties en klanten. De indeling is helder en doordacht, met een uitstraling die professioneel is en gastvrij aanvoelt."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048483-9_ca-2025-website-klanten-direct-source-def-desktop-2000x2000-tickets.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 864,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775824536-9_ca-2025-website-klanten-direct-source-def-desktop-1600x2000-aftermovie.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/7AMOAWsh65sXmlyxnk29ZJGfFOdIMG01N.m3u8",
+                "muxPlaybackId": "7AMOAWsh65sXmlyxnk29ZJGfFOdIMG01N",
+                "mp4Url": "https://stream.mux.com/7AMOAWsh65sXmlyxnk29ZJGfFOdIMG01N/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/7AMOAWsh65sXmlyxnk29ZJGfFOdIMG01N/thumbnail.jpg"
+              }
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775048458-9_ca-2025-website-klanten-direct-source-def-desktop-2000x1429-stand.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775048410-9_ca-2025-website-klanten-direct-source-def-desktop-2000x1429-posts.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 35,
+            "mobileWidth": null,
+            "text": "Om het merk overal herkenbaar te maken, ontwikkelden we diverse communicatiemiddelen. Van social templates en brochures tot nieuwsbrieven, fotografie en video. Alles sluit op elkaar aan en vertelt hetzelfde verhaal. Online én offline."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 30,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775045024-9_ca-2025-website-klanten-direct-source-def-desktop-1600x2000-screensaver.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/cW4Pi00lXJxzdCOIG7NQBXqH3VIKJLf59.m3u8",
+                "muxPlaybackId": "cW4Pi00lXJxzdCOIG7NQBXqH3VIKJLf59",
+                "mp4Url": "https://stream.mux.com/cW4Pi00lXJxzdCOIG7NQBXqH3VIKJLf59/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/cW4Pi00lXJxzdCOIG7NQBXqH3VIKJLf59/thumbnail.jpg"
+              }
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775048599-9_ca-2025-website-klanten-direct-source-def-desktop-2000x1125-laptop.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775048334-9_ca-2025-website-klanten-direct-source-def-desktop-2000x1125-group.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "OdGPJN0_QvS7aNP-PEYccw",
+    "title": "Fruit op je werk",
+    "slug": "fruit-op-je-werk",
+    "year": 2021,
+    "featured": false,
+    "featuredOrder": null,
+    "deliverables": [
+      {
+        "id": "QXKdraQ1Qta1T4kLg-fyoQ",
+        "title": "Rebranding"
+      },
+      {
+        "id": "KMk4VBYPSfi1PO4RQqYdOQ",
+        "title": "Website"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775118485-9_ca-2024-website-new-selected-work-fruit-op-je-werk-beelden-003-desktop-hero.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775118367-9_ca-2024-website-new-selected-work-fruit-op-je-werk-beelden-003-desktop.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775118367-9_ca-2024-website-new-selected-work-fruit-op-je-werk-beelden-003-desktop.webp",
+      "alt": null,
+      "video": null
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "We ontwierpen een nieuwe identity die straalt van energie, met een communicatiestijl die je meteen een glimlach geeft. Alles ademt de frisse, vrolijke en gezonde uitstraling waar het bedrijf om bekendstaat.",
+        "paragraphHeader": "Voor deze supergezonde opdrachtgever mochten we écht uitpakken.",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775118386-9_ca-2024-website-new-selected-work-fruit-op-je-werk-logo.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2001,
+              "url": "https://www.datocms-assets.com/138325/1775118402-9_ca-2024-website-new-selected-work-fruit-op-je-werk-visitekaartjes.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Het fruit speelt de hoofdrol, kleurrijk, sappig en altijd in beweging. Het vertelt het verhaal zonder woorden: vers, gezond en vol leven. Van daaruit hebben we de stijl doorvertaald naar allerlei middelen. Denk aan bussen die door de stad rijden als vrolijke eyecatchers. "
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 772,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1736515480-9_ca-2024-website-new-selected-work-fruit-op-je-werk-foto-s.mp4",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/HJ102I1UoLI02huXpX9rj6Qn02ol7Pw00Vou.m3u8",
+                "muxPlaybackId": "HJ102I1UoLI02huXpX9rj6Qn02ol7Pw00Vou",
+                "mp4Url": "https://stream.mux.com/HJ102I1UoLI02huXpX9rj6Qn02ol7Pw00Vou/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/HJ102I1UoLI02huXpX9rj6Qn02ol7Pw00Vou/thumbnail.jpg"
+              }
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775118351-9_ca-2024-website-new-selected-work-fruit-op-je-werk-website.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Ook hebben we een website ontwikkeld die net zo fris voelt als een hap in een sappige appel, en nog veel meer uitingen die het merk laten sprankelen."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775118330-9_ca-2024-website-new-selected-work-fruit-op-je-werk-social.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775118470-9_ca-2024-website-new-selected-work-fruit-op-je-werk-bussen.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 35,
+            "mobileWidth": null,
+            "text": "Het resultaat? Een merk dat niet alleen opvalt, maar ook aanstekelijk werkt. \nJe krijgt er spontaan zin van in een portie fruit ;)."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775118436-9_ca-2024-website-new-selected-work-fruit-op-je-werk-book.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775118456-9_ca-2024-website-new-selected-work-fruit-op-je-werk-cards.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "PMKUWDDWQraoigD0qIE6Lw",
+    "title": "AK Advocaten",
+    "slug": "ak-advocaten",
+    "year": 2024,
+    "featured": true,
+    "featuredOrder": 5,
+    "deliverables": [
+      {
+        "id": "ArLJ_Dz1S3C0F7q9DCoFCQ",
+        "title": "Social campaigns"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775047260-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775047573-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-mobile-hero.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775047260-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop.webp",
+      "alt": null,
+      "video": null
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Niet braaf, niet standaard – maar opvallend. Tot in de puntjes.\nEen kantoor dat snapt dat je je moet onderscheiden als je het verschil wilt maken.\nOmdat het vinden van de juiste mensen niet vanzelf ging, bedachten we een wervingscampagne die eruit sprong. Gebaseerd op een sterk concept, met strakke fotografie, zorgvuldig gekozen styling, modellen én locaties. Alles klopte.",
+        "paragraphHeader": "2024 - Wervingscampagne",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1500,
+              "height": 1500,
+              "url": "https://www.datocms-assets.com/138325/1775116131-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop-2000x2000px-v1.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775116458-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop-2000x2000px-v2.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775047233-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop-header.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "En zeg nou zelf: voor zo’n hip én professioneel advocatenkantoor val je toch meteen?\nDe campagne sloeg aan. Vacatures? Razendsnel gevuld.\n\nReacties? Alleen maar positief."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775047439-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop-1600x2000.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 772,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775122977-9-ca-2024-website-new-selected-work-ak-desktop-fotos-2000x1429px.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/4mWsgGHDpOXRWsLttK1FAol61ID01qVAH.m3u8",
+                "muxPlaybackId": "4mWsgGHDpOXRWsLttK1FAol61ID01qVAH",
+                "mp4Url": "https://stream.mux.com/4mWsgGHDpOXRWsLttK1FAol61ID01qVAH/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/4mWsgGHDpOXRWsLttK1FAol61ID01qVAH/thumbnail.jpg"
+              }
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1600,
+              "url": "https://www.datocms-assets.com/138325/1775047391-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop-2000x1600px.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ProjectnumberRecord",
+        "numbers": [
+          {
+            "number": 26672,
+            "text": "Aantal mensen bereikt met campagne"
+          },
+          {
+            "number": 11620,
+            "text": "Aantal weergaven"
+          },
+          {
+            "number": 1062,
+            "text": "Aantal clicks naar landingspagina"
+          }
+        ],
+        "titleLeft": "Alle vacatures zijn binnen 3 maanden ingevuld.",
+        "titleRight": "Impact"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 30,
+            "mobileWidth": null,
+            "text": "**2020 - Identity & Communicatiestijl**\n\nIn de advocatenwereld klinkt communicatie vaak hetzelfde: veilig, netjes en voorspelbaar. Prima natuurlijk, maar ook een beetje saai. AK Advocaten vindt dat het anders kan en eerlijk gezegd, ook leuker."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 70,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1428,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775116108-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop-1428x2000-v2.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 772,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1736266696-9-ca-2024-website-new-selected-work-ak-desktop-mov.mp4",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/VY7DEcvFOchGAAT3FFPnkUxCjUUh01ORc.m3u8",
+                "muxPlaybackId": "VY7DEcvFOchGAAT3FFPnkUxCjUUh01ORc",
+                "mp4Url": "https://stream.mux.com/VY7DEcvFOchGAAT3FFPnkUxCjUUh01ORc/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/VY7DEcvFOchGAAT3FFPnkUxCjUUh01ORc/thumbnail.jpg"
+              }
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Daarom hebben we een frisse, eigen identiteit ontwikkeld en een communicatiestijl die net wat meer lef laat zien. We doorbreken het standaard beeld van een advocatenkantoor en laten zien dat je ook met energie, duidelijkheid en een vleugje eigenwijsheid verschil kunt maken."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775116272-9_ca-2024-website-new-selected-work-ak-beelden-def-letselschade-desktop-2000x1125-banners.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "QGLOl6-eSICfi_SS2LpRPA",
+    "title": "Het Badhuys",
+    "slug": "het-badhuys",
+    "year": 2023,
+    "featured": true,
+    "featuredOrder": 8,
+    "deliverables": [
+      {
+        "id": "WOOHVXmDR-ue3pA7FuyBew",
+        "title": "Advertisement"
+      },
+      {
+        "id": "VWkwXFykTTiMLpQ5BVuneg",
+        "title": "Magazine"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775050329-9_ca-2024-website-new-selected-work-badhuys-tas-01.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775050242-9_ca-2024-website-new-selected-work-badhuys-beelden-def-book-desktop.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775050265-9_ca-2024-website-new-selected-work-badhuys-beelden-def-book-desktop.webp",
+      "alt": null,
+      "video": null
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Een badkamer van Het Badhuys is meer dan een functionele ruimte. Het is een plek waar stijl, comfort en persoonlijkheid samenkomen. Bij Het Badhuys geloven ze dat niets standaard hoeft te zijn. Iedere badkamer wordt volledig op maat ontworpen, met oog voor detail en een perfecte balans tussen design en vakmanschap. Zo ontstaat er een ruimte die niet alleen van de hoogste kwaliteit is, maar ook jouw unieke stijl weerspiegelt.",
+        "paragraphHeader": "2022 - Het Badhuys - Identity",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775050189-9_ca-2024-website-new-selected-work-badhuys-magazine-cover.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775050125-9_ca-2024-website-new-selected-work-badhuys-magazine-inside.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Die visie zie je terug in de identity en communicatiestijl van Het Badhuys. Gouden accenten geven een gevoel van luxe en exclusiviteit, terwijl sprekende beelden de creativiteit en warmte tot leven brengen.\n\nDeze visie hebben we doorgetrokken in alle communicatiemiddelen. Van bouwborden, tot advertenties. En van webdesign tot banners. Alles vormt een sterk geheel."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775050280-9_ca-2024-website-new-selected-work-badhuys-flyer.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775050164-9_ca-2024-website-new-selected-work-badhuys-advertentie.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775050207-9_ca-2024-website-new-selected-work-badhuys-visitekaartjes.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Het resultaat is een merk dat precies uitstraalt waar Het Badhuys voor staat: maatwerk, elegantie en een ervaring die je nergens anders vindt."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1601,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775050297-9_ca-2024-website-new-selected-work-badhuys-website.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 30,
+            "mobileWidth": null,
+            "text": "**2024 - Het Badhuys - 10 jaar**\n\nVoor het 10-jarig jubileum van Het Badhuys creëerden we een feestelijke identiteit die doorleeft in de website, opvallende autobestickering en diverse communicatiemiddelen. Een jubileum met een gouden randje."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 70,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775050139-9_ca-2024-website-new-selected-work-badhuys-tas-02.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775050110-9_ca-2024-website-new-selected-work-badhuys-bus.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775050343-9_ca-2024-website-new-selected-work-badhuys-10-jaar.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775050175-9_ca-2024-website-new-selected-work-badhuys-landingspagina.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Q7ow1ZtaQqKjeXVJYsk5qA",
+    "title": "Hotel Keyser",
+    "slug": "hotel-keyser",
+    "year": 2025,
+    "featured": true,
+    "featuredOrder": 7,
+    "deliverables": [
+      {
+        "id": "dhXdkO-vS9S8-lnjHpnJxQ",
+        "title": "Identity"
+      },
+      {
+        "id": "U_J5S_LLSTatiCFHkHOwrw",
+        "title": "Website"
+      },
+      {
+        "id": "emL9M7eXRyWEwHY2oUg1cw",
+        "title": "Photography"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775048944-9ca-2025-website-klanten-hotelkeyser-def-desktop-2000x1125-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775049025-9ca-2025-website-klanten-hotelkeyser-def-mobile-2000x1429-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775119492-9ca-2025-website-klanten-hotelkeyser-def-desktop-1429x2000-featured.webp",
+      "alt": null,
+      "video": null
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Na het afscheid van de Golden Tulip Group koos het hotel voor volledige zelfstandigheid en voor een uitstraling die daar perfect bij past. Wij mochten die nieuwe koers tot leven brengen.",
+        "paragraphHeader": "Hotel Keyser laat zien dat het anders kan.",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775119548-9ca-2025-website-klanten-hotelkeyser-def-desktop-2000x1125-logo.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049052-9ca-2025-website-klanten-hotelkeyser-def-desktop-2000x2000-card.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048885-9ca-2025-website-klanten-hotelkeyser-def-desktop-2000x2000-wine.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048998-9ca-2025-website-klanten-hotelkeyser-def-desktop-1429x2000-bag.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048904-9ca-2025-website-klanten-hotelkeyser-def-desktop-1429x2000-phone.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 50,
+            "mobileWidth": null,
+            "text": "We ontwierpen een frisse, eigentijdse identity die direct laat zien: dit is geen standaard hotel. De communicatiestijl ademt gastvrijheid, maar ook lef en onderscheidend vermogen. Alles klopt, van kleuren en typografie tot de toon van de boodschap."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 17,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048969-9ca-2025-website-klanten-hotelkeyser-def-desktop-1429x2000-roomcard.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048871-9ca-2025-website-klanten-hotelkeyser-def-desktop-2000x2000-laptop.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 30,
+            "mobileWidth": null,
+            "text": "**Hotel Keyser - GIF's & Photography**\n\nVan daaruit verzorgden we de fotografie die het nieuwe verhaal visueel maakt, ontwikkelden we een compleet nieuwe website en vertaalden we de look & feel door naar alle communicatiemiddelen, van drukwerk tot social posts."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 70,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1428,
+              "url": "https://www.datocms-assets.com/138325/1754380626-9ca-2025-website-klanten-hotelkeyser-def-desktop-2000x1429-kiss.mp4",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/gCKADf1j6uYVjjrpQy1wO8utF5Oi2QdM.m3u8",
+                "muxPlaybackId": "gCKADf1j6uYVjjrpQy1wO8utF5Oi2QdM",
+                "mp4Url": "https://stream.mux.com/gCKADf1j6uYVjjrpQy1wO8utF5Oi2QdM/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/gCKADf1j6uYVjjrpQy1wO8utF5Oi2QdM/thumbnail.jpg"
+              }
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049037-9ca-2025-website-klanten-hotelkeyser-def-desktop-1600x2000-vlag.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775048852-9ca-2025-website-klanten-hotelkeyser-def-desktop-2000x1125-pand.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Het resultaat? Een Hotel Keyser dat stevig op eigen benen staat, met een frisse uitstraling die gasten direct prikkelt en uitnodigt. Een hotel dat laat zien dat het anders kan en dat ook durft."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048922-9ca-2025-website-klanten-hotelkeyser-def-desktop-1600x2000-room.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775048984-9ca-2025-website-klanten-hotelkeyser-def-desktop-2000x1429-foto.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 66,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048956-9ca-2025-website-klanten-hotelkeyser-def-desktop-1429x2000-room.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "UjbU20hFRYaMzhU06knRaA",
+    "title": "Visma Yuki",
+    "slug": "yuki",
+    "year": 2023,
+    "featured": true,
+    "featuredOrder": 6,
+    "deliverables": [
+      {
+        "id": "MXPA3BpFRyOntNVDHVAlWA",
+        "title": "Campaign"
+      },
+      {
+        "id": "Ant_xB3kRzGoIrGgFtYKwg",
+        "title": "Landing page"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1333,
+      "url": "https://www.datocms-assets.com/138325/1775047772-9_ca-2024-website-new-selected-work-def-yuki-billboard-desktop.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1430,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775048019-9_ca-2024-website-new-selected-work-yuki-billboard-mobile-hero.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 2000,
+      "height": 1333,
+      "url": "https://www.datocms-assets.com/138325/1775047961-9_ca-2024-website-new-selected-work-def-yuki-billboard-desktop.webp",
+      "alt": null,
+      "video": null
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Voor Yuki ontwikkelden we een krachtig concept voor een brand awareness campagne. Als hét online boekhoudprogramma voor accountants en ondernemers maakten we data de hoofdrolspeler.",
+        "paragraphHeader": "2023 - Visma Yuki - OOH campagne",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1920,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1734535727-9-ca-2024-website-new-selected-work-def-yuki-billboard-ooh-01.mp4",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/aad26V5NBNAbme4W9DqEiZOHn01RqqD5d.m3u8",
+                "muxPlaybackId": "aad26V5NBNAbme4W9DqEiZOHn01RqqD5d",
+                "mp4Url": "https://stream.mux.com/aad26V5NBNAbme4W9DqEiZOHn01RqqD5d/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/aad26V5NBNAbme4W9DqEiZOHn01RqqD5d/thumbnail.jpg"
+              }
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775047941-9_ca-2024-website-new-selected-work-def-yuki-billboard-ooh-04.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1428,
+              "url": "https://www.datocms-assets.com/138325/1775123541-9_ca-2024-website-new-selected-work-def-yuki-billboard-ooh-03.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/ln44GvYb4UPpt4xyIQGMC4eHKZ3JoYPO.m3u8",
+                "muxPlaybackId": "ln44GvYb4UPpt4xyIQGMC4eHKZ3JoYPO",
+                "mp4Url": "https://stream.mux.com/ln44GvYb4UPpt4xyIQGMC4eHKZ3JoYPO/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/ln44GvYb4UPpt4xyIQGMC4eHKZ3JoYPO/thumbnail.jpg"
+              }
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Van cijfers en statistieken maakten we creatieve bouwstenen die het verhaal vertellen. De campagne rolden we uit naar snelwegbanners, een landingspagina en social media. Zo zorgen we ervoor dat Yuki overal zichtbaar én herkenbaar werd."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775047852-9_ca-2024-website-new-selected-work-def-yuki-billboard-ooh-03.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 30,
+            "mobileWidth": null,
+            "text": "**2023 - Visma Yuki - Direct Mailing**\n\nHoe val je als innovatief bedrijf op in de financiële markt én vertel je je verhaal aan nieuwe klanten?\n\nSimpel: door ons iets te laten bedenken dat niemand verwacht. Voor Yuki stuurden we de top van de Nederlandse accountantskantoren een direct mailing die eruit sprong: een echte viewmaster. Niet zomaar eentje, maar volledig in Yuki-stijl vormgegeven – van de verpakking tot het kleinste detail.\n"
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 70,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048036-9_ca-2024-website-new-selected-work-def-yuki-viewmaster-box-01.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775047903-9_ca-2024-website-new-selected-work-def-yuki-viewmaster-box-02.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Door de kijker zie je het verhaal van Yuki tot leven komen in een serie kleurrijke, geïllustreerde visuals. Elke klik een nieuwe scène, elke scène een nieuw stukje van het verhaal.\n\nHet resultaat? Een opvallende, tastbare ervaring die precies laat zien waar Yuki voor staat: innovatief, creatief en nét even anders."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1430,
+              "url": "https://www.datocms-assets.com/138325/1775048053-9_ca-2024-website-new-selected-work-def-yuki-viewmaster-02.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1428,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775048070-9_ca-2024-website-new-selected-work-def-yuki-viewmaster-03.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775047817-9_ca-2024-website-new-selected-work-def-yuki-landingspagina-02.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 67,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775047920-9_ca-2024-website-new-selected-work-def-yuki-landingspagina-01.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Yrtc8J7XQJS24LVyj0n8fA",
+    "title": "Yeaz!",
+    "slug": "yeaz",
+    "year": 2025,
+    "featured": true,
+    "featuredOrder": 9,
+    "deliverables": [
+      {
+        "id": "eApAMouIQ7mhtwfkOtJtEQ",
+        "title": "Campaign"
+      },
+      {
+        "id": "fT9D_i1FQCyvDaYkkzqNPA",
+        "title": "Website"
+      },
+      {
+        "id": "FWUbkP_uQyic2qcCj8UWQg",
+        "title": "Identity"
+      },
+      {
+        "id": "YI5SslnaRsu0j8_dAiVDkg",
+        "title": "Social-media"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775049843-9ca-2025-website-klanten-yeaz-def-desktop-2000x1125-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775049783-9ca-2025-website-klanten-yeaz-def-mobile-2000x1429-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 2000,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775049826-9ca-2025-website-klanten-yeaz-def-desktop-2000x2000-featured.webp",
+      "alt": null,
+      "video": null
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Kan het ook anders? Jazeker! Vanuit dit uitgangspunt hebben we een communicatiestijl ontwikkeld waarin de kernwaarden transparantie, flexibiliteit, vertrouwen en toegankelijkheid centraal staan.",
+        "paragraphHeader": "2025 - Yeaz! - Brand Awareness Campaign",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": null,
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Van daaruit doken we ook in beeld: sterke fotografie, strakke film. En op dit moment? Zijn we de laatste puntjes op de i aan het zetten van een campagnefilm die binnenkort live gaat.\n\n**Stay tuned. Het wordt mooi.**"
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": null,
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": null,
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 30,
+            "mobileWidth": null,
+            "text": "**Met de nieuwe communicatiestijl als fundament kon de identity niet achterblijven.**\n\nWant als de toon staat, moet het jasje kloppen. We gaven ‘m een flinke upgrade: strak, eigentijds en volledig in lijn met de toon. Zo versterken stijl en verhaal elkaar tot één krachtig geheel."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 70,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049716-9ca-2025-website-klanten-yeaz-def-desktop-2000x2000-social.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775049812-9ca-2025-website-klanten-yeaz-def-desktop-2000x1429-website.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775119519-9ca-2025-website-klanten-yeaz-def-desktop-1600x2000-logo.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 30,
+            "mobileWidth": null,
+            "text": "De identiteit en communicatiestijl van YEAZ komen tot leven in combinatie met het beeldmateriaal. Samen zorgen ze voor een webdesign dat strak oogt, maar toch persoonlijk blijft. Door een vast gezicht te koppelen aan het merk krijgt YEAZ bovendien een herkenbaar en menselijk karakter, waardoor het verhaal écht gaat leven."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 70,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775049756-9ca-2025-website-klanten-yeaz-def-desktop-2000x1429-foto-01.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049799-9ca-2025-website-klanten-yeaz-def-desktop-1600x2000-foto-03.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775049730-9ca-2025-website-klanten-yeaz-def-desktop-2000x1125-foto-02.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Bij YEAZ wordt zelfs aanmelden een ervaring. In plaats van een droge klik-en-klaar flow stap je een funnel binnen vol levendige gifjes. Ze brengen beweging, humor en energie, precies in de stijl van YEAZ. Zo voelt elke stap minder als ‘moeten’ en meer als een ontdekkingstocht."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 770,
+              "height": 1080,
+              "url": "https://www.datocms-assets.com/138325/1775045940-9ca-2025-website-klanten-yeaz-def-desktop-1429x2000-gif-03.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/ulWz4p2iERbbLZXxiZin1sQ801UrCKnlr.m3u8",
+                "muxPlaybackId": "ulWz4p2iERbbLZXxiZin1sQ801UrCKnlr",
+                "mp4Url": "https://stream.mux.com/ulWz4p2iERbbLZXxiZin1sQ801UrCKnlr/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/ulWz4p2iERbbLZXxiZin1sQ801UrCKnlr/thumbnail.jpg"
+              }
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1428,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775045525-9ca-2025-website-klanten-yeaz-def-desktop-1429x2000-gif-01.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/R00Vo020000jMaVVMY4UBtrLhdSNJRDXYD022.m3u8",
+                "muxPlaybackId": "R00Vo020000jMaVVMY4UBtrLhdSNJRDXYD022",
+                "mp4Url": "https://stream.mux.com/R00Vo020000jMaVVMY4UBtrLhdSNJRDXYD022/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/R00Vo020000jMaVVMY4UBtrLhdSNJRDXYD022/thumbnail.jpg"
+              }
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1428,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775045574-9ca-2025-website-klanten-yeaz-def-desktop-1429x2000-gif-02.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/GaFyTr8YBsW5HbDDMwhdmYqBT6zoQjF00.m3u8",
+                "muxPlaybackId": "GaFyTr8YBsW5HbDDMwhdmYqBT6zoQjF00",
+                "mp4Url": "https://stream.mux.com/GaFyTr8YBsW5HbDDMwhdmYqBT6zoQjF00/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/GaFyTr8YBsW5HbDDMwhdmYqBT6zoQjF00/thumbnail.jpg"
+              }
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 66,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bIIyJhKcQ7epuQZ5L2-BKw",
+    "title": "Traksi",
+    "slug": "traksi",
+    "year": 2024,
+    "featured": true,
+    "featuredOrder": 4,
+    "deliverables": [
+      {
+        "id": "Qz7CULskTjy2bDXO6hYCQg",
+        "title": "Identity"
+      },
+      {
+        "id": "GOqioL0tSdyLaK00yGKSyg",
+        "title": "Launch"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775050504-9_ca-2024-website-new-selected-work-traksi-billboard-desktop-hero.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775052587-9_ca-2024-website-new-selected-work-traksi-billboard-mobile-hero.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 720,
+      "height": 720,
+      "url": "https://www.datocms-assets.com/138325/1755633090-traksi.mp4",
+      "alt": null,
+      "video": {
+        "streamingUrl": "https://stream.mux.com/jXBFO2ZrIjYJ01mK2Ue1t6vkAeg3sdJ01D.m3u8",
+        "muxPlaybackId": "jXBFO2ZrIjYJ01mK2Ue1t6vkAeg3sdJ01D",
+        "mp4Url": "https://stream.mux.com/jXBFO2ZrIjYJ01mK2Ue1t6vkAeg3sdJ01D/high.mp4",
+        "thumbnailUrl": "https://image.mux.com/jXBFO2ZrIjYJ01mK2Ue1t6vkAeg3sdJ01D/thumbnail.jpg"
+      }
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Met geavanceerde technologie geven ze bestuurders de vrijheid om zelf hun premie te bepalen. En omdat technologie de kern van hun propositie is, moest dat ook zichtbaar zijn in de visuele identiteit.",
+        "paragraphHeader": "Traksi is dé toonaangevende verzekeraar voor taxi’s en bestelwagens.",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1280,
+              "height": 720,
+              "url": "https://www.datocms-assets.com/138325/1775123318-traksi-2024-design-reveal-social-9.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/00FJ6WUz5frkfLc6ClS24S2wBW01I69Y2p.m3u8",
+                "muxPlaybackId": "00FJ6WUz5frkfLc6ClS24S2wBW01I69Y2p",
+                "mp4Url": "https://stream.mux.com/00FJ6WUz5frkfLc6ClS24S2wBW01I69Y2p/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/00FJ6WUz5frkfLc6ClS24S2wBW01I69Y2p/thumbnail.jpg"
+              }
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Wij ontwierpen een moderne, tech-georiënteerde merkidentiteit, compleet met een passende tagline die de belofte van Traksi in één zin vangt. Daarnaast ontwikkelden we een communicatieconcept dat richting en houvast biedt voor alle toekomstige uitingen."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775052485-9_ca-2024-website-new-selected-work-traksi-def-mupi-2.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775052508-9_ca-2024-website-new-selected-work-traksi-def-business-cards.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Het communicatieconcept en de nieuwe identity vertaalden we vervolgens door naar een sprekend webdesign, opvallende social posts, presentatie¬templates en brochures die het merkverhaal versterken."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1125,
+              "url": "https://www.datocms-assets.com/138325/1775050504-9_ca-2024-website-new-selected-work-traksi-billboard-desktop-hero.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 100,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 720,
+              "height": 720,
+              "url": "https://www.datocms-assets.com/138325/1775123202-traksi-2024-teaser-1-subtiel.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/tI3bgNWkLjo3ONOlCYMT00CFRJiuxi9Jg.m3u8",
+                "muxPlaybackId": "tI3bgNWkLjo3ONOlCYMT00CFRJiuxi9Jg",
+                "mp4Url": "https://stream.mux.com/tI3bgNWkLjo3ONOlCYMT00CFRJiuxi9Jg/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/tI3bgNWkLjo3ONOlCYMT00CFRJiuxi9Jg/thumbnail.jpg"
+              }
+            },
+            "width": 50,
+            "mobileWidth": 50
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 720,
+              "height": 720,
+              "url": "https://www.datocms-assets.com/138325/1755633090-traksi.mp4",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/jXBFO2ZrIjYJ01mK2Ue1t6vkAeg3sdJ01D.m3u8",
+                "muxPlaybackId": "jXBFO2ZrIjYJ01mK2Ue1t6vkAeg3sdJ01D",
+                "mp4Url": "https://stream.mux.com/jXBFO2ZrIjYJ01mK2Ue1t6vkAeg3sdJ01D/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/jXBFO2ZrIjYJ01mK2Ue1t6vkAeg3sdJ01D/thumbnail.jpg"
+              }
+            },
+            "width": 50,
+            "mobileWidth": 50
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1429,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775050586-9_ca-2024-website-new-selected-work-traksi-def-social-post-01.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1428,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775050678-9_ca-2024-website-new-selected-work-traksi-def-social-post-02.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "TextcolumnRecord",
+            "width": 50,
+            "mobileWidth": null,
+            "text": "Met één sterke, herkenbare rode draad in handen is Traksi klaar om zich nog krachtiger op de markt te profileren."
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 17,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1500,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775052469-9_ca-2024-website-new-selected-work-traksi-def-flyer.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 33,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775050644-9_ca-2024-website-new-selected-work-traksi-def-beurswand.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775052524-9_ca-2024-website-new-selected-work-traksi-def-brochure-02.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775050662-9_ca-2024-website-new-selected-work-traksi-def-brochure-01.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "eeino8btRHaqqZRXDfRCWw",
+    "title": "AB InBev",
+    "slug": "ab-inbev",
+    "year": 2025,
+    "featured": true,
+    "featuredOrder": 2,
+    "deliverables": [
+      {
+        "id": "XbhlfJK2SdCESNCpMp50Ow",
+        "title": "Recruitment Campaign"
+      },
+      {
+        "id": "NG1hKzBnT0iaO1K5ljqYaw",
+        "title": "Landing page"
+      }
+    ],
+    "coverImage": {
+      "width": 2000,
+      "height": 1125,
+      "url": "https://www.datocms-assets.com/138325/1775049418-9ca-2025-website-klanten-ab-inbev-def-desktop-2000x1125-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "mobileCoverImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775049492-9ca-2025-website-klanten-ab-inbev-def-mobile-2000x1429-header.webp",
+      "alt": null,
+      "video": null
+    },
+    "featuredImage": {
+      "width": 1429,
+      "height": 2000,
+      "url": "https://www.datocms-assets.com/138325/1775049439-9ca-2025-website-klanten-ab-inbev-def-desktop-1429x2000-featured.webp",
+      "alt": null,
+      "video": null
+    },
+    "content": [
+      {
+        "__typename": "ProjectheaderRecord",
+        "paragraph": "Geen standaard praatje of brave beelden, maar een concept dat eruit springt en laat zien: hier wil je werken. Van daaruit zijn we zelf aan de slag gegaan met de fotografie én film. Denk: energieke beelden, echte mensen en een sfeer die klopt. Geen statige settings, maar échte werksituaties met een flinke dosis enthousiasme.",
+        "paragraphHeader": "Voor AB InBev HTS bedachten we een wervingscampagne met pit.",
+        "bigTitle": "",
+        "sectionTitle": ""
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1280,
+              "height": 720,
+              "url": "https://www.datocms-assets.com/138325/1775824237-9ca-2025-website-klanten-ab-inbev-def-desktop-1280x720-vid.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/yolmQIQb00OF4qe4g3tKAN5PEXhLC8La5.m3u8",
+                "muxPlaybackId": "yolmQIQb00OF4qe4g3tKAN5PEXhLC8La5",
+                "mp4Url": "https://stream.mux.com/yolmQIQb00OF4qe4g3tKAN5PEXhLC8La5/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/yolmQIQb00OF4qe4g3tKAN5PEXhLC8La5/thumbnail.jpg"
+              }
+            },
+            "width": 70,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 15,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "De content die we maakten, van krachtige foto's tot een aanstekelijke bedrijfsfilm, vormt de basis van een complete campagne. Alles komt samen op een landingspagina die precies vertelt wat je moet weten, ondersteund door social posts en advertenties die wél opvallen in je feed."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775049450-9ca-2025-website-klanten-ab-inbev-def-desktop-2000x1429-foto-2.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049466-9ca-2025-website-klanten-ab-inbev-def-desktop-1600x2000-foto.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049508-9ca-2025-website-klanten-ab-inbev-def-desktop-1600x2000-social-post.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775049480-9ca-2025-website-klanten-ab-inbev-def-desktop-2000x1429-foto-1.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049540-9ca-2025-website-klanten-ab-inbev-def-desktop-2000x2000-foto-2.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049521-9ca-2025-website-klanten-ab-inbev-def-desktop-2000x2000-foto-1.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ParagraphRecord",
+        "content": "Kortom: één verhaal, op alle fronten goed doorvertaald. En klaar om het juiste talent aan te trekken."
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 1600,
+              "height": 2000,
+              "url": "https://www.datocms-assets.com/138325/1775049568-9ca-2025-website-klanten-ab-inbev-def-desktop-1600x2000-website.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 35,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 2000,
+              "height": 1429,
+              "url": "https://www.datocms-assets.com/138325/1775049551-9ca-2025-website-klanten-ab-inbev-def-desktop-2000x1429-laptop.webp",
+              "alt": null,
+              "video": null
+            },
+            "width": 65,
+            "mobileWidth": null
+          }
+        ]
+      },
+      {
+        "__typename": "ColumnrowRecord",
+        "columns": [
+          {
+            "__typename": "ImagecolumnRecord",
+            "image": {
+              "width": 720,
+              "height": 720,
+              "url": "https://www.datocms-assets.com/138325/1775823827-9ca-2025-website-klanten-ab-inbev-def-desktop-720x720-vid.webm",
+              "alt": null,
+              "video": {
+                "streamingUrl": "https://stream.mux.com/00MeHxFZjV4bZz6Olr5003KkR0000XXyj01pj.m3u8",
+                "muxPlaybackId": "00MeHxFZjV4bZz6Olr5003KkR0000XXyj01pj",
+                "mp4Url": "https://stream.mux.com/00MeHxFZjV4bZz6Olr5003KkR0000XXyj01pj/high.mp4",
+                "thumbnailUrl": "https://image.mux.com/00MeHxFZjV4bZz6Olr5003KkR0000XXyj01pj/thumbnail.jpg"
+              }
+            },
+            "width": 50,
+            "mobileWidth": null
+          },
+          {
+            "__typename": "EmptycolumnRecord",
+            "width": 50,
+            "mobileWidth": null
+          }
+        ]
+      }
+    ]
+  }
+]

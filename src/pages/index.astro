@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HomePage from "@/components/home/HomePage.jsx";
+import { getFeaturedProjects, getSiteSettings } from "@/lib/content";
+
+const projects = await getFeaturedProjects();
+const settings = await getSiteSettings();
+const howWeDoItCards = settings?.home?.howWeDoIt?.cards ?? [];
+---
+
+<BaseLayout title="Nine Creative Agency" description="Nine is een onafhankelijk creatief bureau.">
+  <HomePage client:load projects={projects} howWeDoItCards={howWeDoItCards} />
+</BaseLayout>

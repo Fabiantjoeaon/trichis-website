@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import "@/styles/global.css";
 import "@/styles/chrome.css";
 import "@/styles/pages.css";
@@ -23,7 +24,9 @@ try {
 ---
 
 <!doctype html>
-<html lang={SITE_LANG} data-theme={theme}>
+<!-- transition:animate="none" — the GL wipe is the page transition; disable
+     the browser's default cross-fade -->
+<html lang={SITE_LANG} data-theme={theme} transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,13 +56,19 @@ try {
       type="font/woff2"
       crossorigin
     />
+    <ClientRouter fallback="swap" />
     <slot name="head" />
   </head>
   <body>
     <!-- Covers the page before the React loader hydrates (nine-ca pattern) -->
     <div class="loader-background"></div>
 
-    <SiteChrome client:load settings={settings} siteName="Nine Creative Agency" />
+    <SiteChrome
+      client:load
+      transition:persist="site-chrome"
+      settings={settings}
+      siteName="Nine Creative Agency"
+    />
 
     <div class="main-inner">
       <main>
@@ -85,9 +94,10 @@ try {
     background-color: var(--color-menuBackground);
   }
 
+  /* No overflow:hidden — nine-ca relies on the hero's own margin collapsing
+     with this one (max wins), not stacking on top of it. */
   .main-inner {
     margin-top: var(--navigationHeight);
     background-color: var(--color-background);
-    overflow: hidden;
   }
 </style>

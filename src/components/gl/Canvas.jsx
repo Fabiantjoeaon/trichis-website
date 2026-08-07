@@ -12,9 +12,23 @@ extend(THREE);
 
 function ReflowOnResize() {
   useEffect(() => {
-    const onResize = () => useCanvasStore.getState().triggerReflow();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const reflow = () => useCanvasStore.getState().triggerReflow();
+    window.addEventListener("resize", reflow);
+
+    // Re-measure trackers when page content resizes too (images/fonts
+    // loading shift layout long after mount) — scroll-rig does the same.
+    let raf = 0;
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(reflow);
+    });
+    observer.observe(document.body);
+
+    return () => {
+      window.removeEventListener("resize", reflow);
+      observer.disconnect();
+      cancelAnimationFrame(raf);
+    };
   }, []);
   return null;
 }
@@ -38,7 +52,6 @@ export default function GLCanvas({ style, ...props }) {
           width: "100vw",
           height: "100%",
           pointerEvents: "none",
-          zIndex: 7,
         }}
         eventSource={typeof document !== "undefined" ? document.documentElement : undefined}
         eventPrefix="client"

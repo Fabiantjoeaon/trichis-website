@@ -1,5 +1,6 @@
 import {
   forwardRef,
+  Suspense,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -207,14 +208,37 @@ const GLImageElement = forwardRef(function GLImageElement(
   const el = useRef();
   const img = useRef();
   const internalRef = useRef();
+  // The GL impl mounts only once its texture is loaded — queue imperative
+  // calls made before that (nine-ca useDeferredFacade behavior) so e.g. an
+  // animateIn fired for above-the-fold images isn't silently dropped.
+  const pendingCalls = useRef([]);
+
+  const call = useCallback((name, args = []) => {
+    const target = internalRef.current;
+    if (target?.[name]) return target[name](...args);
+    pendingCalls.current.push([name, args]);
+    return undefined;
+  }, []);
+
+  const attachInternal = useCallback(
+    (instance) => {
+      internalRef.current = instance;
+      if (!instance) return;
+      const queued = pendingCalls.current.splice(0);
+      queued.forEach(([name, args]) => instance[name]?.(...args));
+      onFacadeReady?.(instance);
+    },
+    [onFacadeReady],
+  );
 
   useImperativeHandle(ref, () => ({
-    animateIn: (...args) => internalRef.current?.animateIn?.(...args),
-    animateOut: (...args) => internalRef.current?.animateOut?.(...args),
+    animateIn: (...args) => call("animateIn", args),
+    animateOut: (...args) => call("animateOut", args),
+    getGroup: () => internalRef.current?.getGroup?.() ?? null,
     visible: () => internalRef.current?.visible?.() ?? false,
-    playVideo: () => internalRef.current?.playVideo?.(),
-    stopVideo: () => internalRef.current?.stopVideo?.(),
-    seekVideo: (t) => internalRef.current?.seekVideo?.(t),
+    playVideo: () => call("playVideo"),
+    stopVideo: () => call("stopVideo"),
+    seekVideo: (t) => call("seekVideo", [t]),
     triggerPointerOver: () => internalRef.current?.triggerPointerOver?.(),
     triggerPointerOut: () => internalRef.current?.triggerPointerOut?.(),
     getElementSize: () => internalRef.current?.getElementSize?.(),
@@ -224,15 +248,10 @@ const GLImageElement = forwardRef(function GLImageElement(
     el: animateOnScroll ? el : { current: null },
     offset,
     handleIn: () => {
-      const target = internalRef.current;
-      if (!target || !animateOnScroll || target.visible?.()) return;
-      target.animateIn();
+      if (!animateOnScroll || internalRef.current?.visible?.()) return;
+      call("animateIn");
     },
   });
-
-  useEffect(() => {
-    if (internalRef.current) onFacadeReady?.(internalRef.current);
-  }, [onFacadeReady]);
 
   return (
     <>
@@ -243,7 +262,9 @@ const GLImageElement = forwardRef(function GLImageElement(
               width: "100%",
               height: "auto",
               display: "block",
+              // Tracker only — the GL plane renders the image (nine-ca parity)
               visibility: "hidden",
+              opacity: 0,
             }}
             crossOrigin="anonymous"
             ref={img}
@@ -273,16 +294,20 @@ const GLImageElement = forwardRef(function GLImageElement(
       <UseCanvas>
         <ScrollScene track={el} hideOffscreen={animateOnScroll} overrideVisible={!animateOnScroll}>
           {(scrollSceneProps) => (
-            <NineGLImage
-              ref={internalRef}
-              tMap={tMap}
-              imgRef={img}
-              isVideo={isVideo}
-              src={src}
-              {...scrollSceneProps}
-              {...props}
-              onReady={onTextureReady}
-            />
+            // Own boundary: a suspending texture (video canplay) must not
+            // hide sibling images and kill their in-flight entrance tweens
+            <Suspense fallback={null}>
+              <NineGLImage
+                ref={attachInternal}
+                tMap={tMap}
+                imgRef={img}
+                isVideo={isVideo}
+                src={src}
+                {...scrollSceneProps}
+                {...props}
+                onReady={onTextureReady}
+              />
+            </Suspense>
           )}
         </ScrollScene>
       </UseCanvas>

@@ -36,7 +36,9 @@ export default function useAnimation({ inParams = {}, outParams = {} } = {}) {
 
   useEffect(() => () => tween.current?.kill(), []);
 
-  return { animateIn, animateOut };
+  const isActive = useCallback(() => tween.current?.isActive() ?? false, []);
+
+  return { animateIn, animateOut, isActive };
 }
 
 // CSS-class based transition helper (adds/removes `active`), ported from

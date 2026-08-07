@@ -122,7 +122,8 @@
   --duration: 0.8s;
 
   border: 1px solid var(--color-text);
-  border-radius: 50%;
+  /* nine-ca misc.borderRadius — rounded square, not a circle */
+  border-radius: 20%;
   width: var(--icon-size);
   height: var(--icon-size);
   position: relative;
@@ -503,6 +504,15 @@ footer {
 
 .footer-wrapper {
   position: relative;
+  /* nine-ca Footer util.inner vertical rhythm */
+  padding-top: 70rem;
+  padding-bottom: 280rem;
+}
+
+@media (max-width: 711px) {
+  .footer-wrapper {
+    padding-bottom: 120rem;
+  }
 }
 
 .footer-wrapper .icon-container {
@@ -713,10 +723,16 @@ footer {
 .gl-canvas-root {
   position: fixed;
   inset: 0;
-  z-index: 7;
+  /* Below navigation (5) so tracked GL media never covers the nav bar;
+     raised above it only while the page-transition wipe is running. */
+  z-index: 4;
   width: 100vw;
   height: calc(var(--vh, 1vh) * 100);
   pointer-events: none;
+}
+
+.gl-canvas-root--overlay {
+  z-index: 7;
 }
 
 .gl-canvas-root canvas,

@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
 import SplitText from "@/components/ui/SplitText";
 import emitter from "@/lib/emitter";
-import useEvent from "@/hooks/useEvent";
-import { events } from "@/lib/events";
+import usePageEnter from "@/hooks/usePageEnter";
 import { useGlobalStore } from "@/stores/global";
 import { isMediaVideo } from "@/lib/cms";
 
@@ -34,22 +33,12 @@ export default function ProjectHero({
   useEffect(() => {
     if (!noWebGLImages) return;
     emitter.emit("PROJECT:PAGE_READY");
-    transitionCompleteRef.current = true;
-    tryAnimateIn();
   }, [noWebGLImages]);
 
-  useEvent(events.LOADING_OUT_COMPLETE, () => {
+  usePageEnter(() => {
     transitionCompleteRef.current = true;
     tryAnimateIn();
   });
-
-  useEffect(() => {
-    const t = setTimeout(() => {
-      transitionCompleteRef.current = true;
-      tryAnimateIn();
-    }, 1200);
-    return () => clearTimeout(t);
-  }, []);
 
   const activeAsset = isMobileLayout ? mobileCoverImage || coverImage : coverImage;
   const video = activeAsset?.video;

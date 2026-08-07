@@ -16,6 +16,7 @@ import emitter from "@/lib/emitter";
 import { events } from "@/lib/events";
 import { clamp, lerp } from "@/lib/math";
 import { useGlobalStore } from "@/stores/global";
+import { SectionTitle } from "@/components/ui/Divider";
 
 function Card({ children, i, trackRef }) {
   const innerRef = useRef(null);
@@ -23,6 +24,7 @@ function Card({ children, i, trackRef }) {
   const trackTracker = useTracker(trackRef, { autoUpdate: false });
   const cardTrackerRef = useRef(cardTracker);
   const trackTrackerRef = useRef(trackTracker);
+  const lastKey = useRef("");
   cardTrackerRef.current = cardTracker;
   trackTrackerRef.current = trackTracker;
 
@@ -34,6 +36,10 @@ function Card({ children, i, trackRef }) {
     section.measure?.();
     section.update?.();
     if (!card.scale.y || !section.scale.y) return;
+
+    const key = `${card.scale.x.toFixed(2)}:${card.scale.y.toFixed(2)}:${(card.position.x - section.position.x).toFixed(2)}:${card.bounds.width}:${card.bounds.height}`;
+    if (key === lastKey.current) return;
+    lastKey.current = key;
 
     howWeDoItStore.getState().addTransform(
       {
@@ -53,19 +59,21 @@ function Card({ children, i, trackRef }) {
   }, [i]);
 
   useEffect(() => {
-    sync();
-    window.addEventListener("resize", sync);
-    return () => window.removeEventListener("resize", sync);
+    const run = () => requestAnimationFrame(sync);
+    run();
+    window.addEventListener("resize", run);
+    return () => window.removeEventListener("resize", run);
   }, [sync]);
 
+  useTicker(
+    () => {
+      sync();
+    },
+    { initiallyActive: true },
+  );
+
   return (
-    <article
-      ref={innerRef}
-      className="how-we-do-it__card flex flex-1 flex-col items-start justify-start select-none p-[100rem] min-w-0"
-      style={{
-        width: `calc(100% / var(--hwdi-count) - (var(--cardGap) * 2))`,
-      }}
-    >
+    <article ref={innerRef} className="how-we-do-it__card">
       {children}
     </article>
   );
@@ -140,41 +148,27 @@ export default function HowWeDoIt({ data, cards: cardsProp, title: titleProp }) 
 
   return (
     <>
-      <h2 className="inner-width text-text">{title}</h2>
+      <SectionTitle>{title}</SectionTitle>
 
       <section
         ref={track}
-        className="how-we-do-it__wrapper relative w-full inner-width"
+        className="how-we-do-it__wrapper"
         style={{
-          paddingTop: "100rem",
-          paddingBottom: "100rem",
-          touchAction: "pan-x",
-          overscrollBehaviorY: "contain",
-          ["--cardGap"]: "20rem",
           ["--hwdi-count"]: cards.length || 1,
         }}
       >
-        <div
-          ref={inner}
-          className="how-we-do-it__card__inner flex w-full items-stretch justify-between gap-[var(--cardGap)]"
-        >
+        <div ref={inner} className="how-we-do-it__card__inner">
           {cards.map((card, i) => (
             <Card i={i} key={`${card.title}-${i}`} trackRef={track}>
-              <h3 className="t-glass-card-number mb-[50rem] text-text">
-                0{i + 1}
-              </h3>
-              <h4 className="t-glass-card-title mb-[60rem] text-text">
-                {card.title}
-              </h4>
+              <h3 className="t-glass-card-number">0{i + 1}</h3>
+              <h4 className="t-glass-card-title">{card.title}</h4>
               {card.textTop && (
-                <p className="t-glass-card-paragraph how-we-do-it__card__text-top mb-[40rem] text-text">
+                <p className="t-glass-card-paragraph how-we-do-it__card__text-top">
                   {card.textTop}
                 </p>
               )}
               {card.textBottom && (
-                <p className="t-glass-card-paragraph text-text">
-                  {card.textBottom}
-                </p>
+                <p className="t-glass-card-paragraph">{card.textBottom}</p>
               )}
             </Card>
           ))}
@@ -190,26 +184,19 @@ export default function HowWeDoIt({ data, cards: cardsProp, title: titleProp }) 
 
         <div
           ref={indicatorWrapper}
-          className="how-we-do-it__mobile-indicator absolute left-1/2 -translate-x-1/2 hidden max-[711px]:flex"
-          style={{
-            bottom: "calc(250rem * 0.5 - 40rem)",
-            width: "50%",
-            height: "40rem",
-            justifyContent: "space-between",
-          }}
+          className="how-we-do-it__mobile-indicator"
         >
           {cards.map((_, i) => (
-            <div
-              key={i}
-              className="h-full w-[40rem] rounded-[10px] border border-text"
-            />
+            <div key={i} className="how-we-do-it__card__mobile-indicator-item" />
           ))}
           <div
             ref={activeItem}
-            className="absolute left-0 top-0 h-full w-[40rem] rounded-[10px] bg-text"
+            className="how-we-do-it__card__mobile-indicator-item active"
           />
         </div>
       </section>
+
+      <SectionTitle />
     </>
   );
 }

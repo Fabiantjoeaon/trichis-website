@@ -7,6 +7,9 @@ import emitter from "@/lib/emitter";
 import { events } from "@/lib/events";
 import { gsap } from "@/lib/gsap";
 import { bindMouse } from "@/lib/mouse";
+import { wait } from "@/lib/math";
+import { TRANSITION_DURATION, waitForEvent } from "@/lib/transitions";
+import { useCanvasStore } from "@/lib/gl/canvasStore";
 import { useGlobalStore } from "@/stores/global";
 import useEvent from "@/hooks/useEvent";
 import { setRandomSentences } from "@/components/ui/ShuffledText";
@@ -20,6 +23,8 @@ import VideoPlayer from "@/components/VideoPlayer";
 const GLCanvas = lazy(() => import("@/components/gl/Canvas"));
 
 const THEME_KEY = "trichis:theme";
+// Matches --theme-transition-duration in global.css
+const THEME_TRANSITION_MS = 600;
 
 function useViewport() {
   useEffect(() => {
@@ -77,7 +82,17 @@ function useTheme() {
   }, []);
 
   useEvent(events.SWITCH_THEME, (theme) => {
-    document.documentElement.dataset.theme = theme;
+    const root = document.documentElement;
+
+    // Temporarily enable global color/background transitions (nine-ca
+    // ThemeWrapper behavior) so the switch animates instead of snapping.
+    root.classList.add("theme-transitioning");
+    if (window.__themeTransitionTO) clearTimeout(window.__themeTransitionTO);
+    window.__themeTransitionTO = setTimeout(() => {
+      root.classList.remove("theme-transitioning");
+    }, THEME_TRANSITION_MS + 50);
+
+    root.dataset.theme = theme;
     useGlobalStore.setState({ theme });
     try {
       localStorage.setItem(THEME_KEY, theme);
@@ -85,10 +100,115 @@ function useTheme() {
   });
 }
 
+// Astro view-transition lifecycle: this island (and the GL canvas inside it)
+// persists across client-side navigations. The GL wipe is woven into the
+// router's own phases so every navigation — TransitionLink, plain links,
+// back/forward — gets the same choreography:
+//
+//   before-preparation  cover the screen (wipe in) while Astro loads the
+//                       next page in parallel; the swap only happens covered
+//   after-swap          reset scroll/theme behind the cover
+//   page-load           let islands hydrate + trackers re-measure, reveal
+//                       (wipe out), then fire the page entrance animations
+function useAstroNavigation() {
+  useEffect(() => {
+    let navigated = false;
+
+    const coverScreen = async (route) => {
+      useGlobalStore.setState({ pageRevealed: false });
+      useGlobalStore.getState().lenis?.stop();
+
+      if (useGlobalStore.getState().menuOpen) {
+        // The menu (and its GL background) already covers the screen —
+        // just give its links a moment to animate out.
+        emitter.emit(events.ROUTE_CHANGE_START, { route });
+        await wait(400);
+        return;
+      }
+
+      const covered = waitForEvent(events.GL_BACKGROUND_IN_COMPLETE, {
+        timeout: TRANSITION_DURATION + 800,
+      });
+      emitter.emit(events.ROUTE_CHANGE_START, { route });
+      await covered;
+    };
+
+    const onBeforePreparation = (event) => {
+      navigated = true;
+      const originalLoader = event.loader;
+      event.loader = async function (...args) {
+        await Promise.all([
+          originalLoader.apply(this, args),
+          coverScreen(event.to?.pathname),
+        ]);
+      };
+    };
+
+    const onAfterSwap = () => {
+      if (!navigated) return;
+
+      // The static pre-hydration cover comes back with the swapped body
+      document.querySelector(".loader-background")?.remove();
+
+      // The swapped <html> carries the page's default theme; keep the user's
+      let stored;
+      try {
+        stored = localStorage.getItem(THEME_KEY);
+      } catch {}
+      if (stored) document.documentElement.dataset.theme = stored;
+
+      window.scrollTo(0, 0);
+      const lenis = useGlobalStore.getState().lenis;
+      lenis?.scrollTo?.(0, { immediate: true, force: true });
+    };
+
+    const onPageLoad = async () => {
+      if (!navigated) return;
+      navigated = false;
+
+      // Screen is covered — let the new page's islands hydrate and fonts
+      // settle so the reveal shows a finished page (nine-ca waits too).
+      await document.fonts.ready;
+      await wait(300);
+
+      useGlobalStore.setState({ menuOpen: false });
+      window.scrollTo(0, 0);
+      const lenis = useGlobalStore.getState().lenis;
+      lenis?.scrollTo?.(0, { immediate: true, force: true });
+      lenis?.resize?.();
+      useCanvasStore.getState().triggerReflow();
+
+      // Reveal (wipe out), then start the page entrances — same order as
+      // nine-ca: content animates in on an already-visible page.
+      const revealed = waitForEvent(events.GL_BACKGROUND_OUT_COMPLETE, {
+        timeout: TRANSITION_DURATION + 800,
+      });
+      emitter.emit(events.GL_BACKGROUND_OUT);
+      await revealed;
+
+      lenis?.start();
+      emitter.emit(events.LOADING_OUT_COMPLETE);
+    };
+
+    document.addEventListener("astro:before-preparation", onBeforePreparation);
+    document.addEventListener("astro:after-swap", onAfterSwap);
+    document.addEventListener("astro:page-load", onPageLoad);
+    return () => {
+      document.removeEventListener(
+        "astro:before-preparation",
+        onBeforePreparation,
+      );
+      document.removeEventListener("astro:after-swap", onAfterSwap);
+      document.removeEventListener("astro:page-load", onPageLoad);
+    };
+  }, []);
+}
+
 export default function SiteChrome({ settings = {}, siteName }) {
   useViewport();
   useLenis();
   useTheme();
+  useAstroNavigation();
 
   useEffect(() => {
     bindMouse();
@@ -96,12 +216,8 @@ export default function SiteChrome({ settings = {}, siteName }) {
   }, [settings]);
 
   useEvent(events.LOADING_OUT_COMPLETE, () => {
+    useGlobalStore.setState({ pageRevealed: true });
     useGlobalStore.getState().lenis?.start();
-  });
-
-  useEvent(events.GL_BACKGROUND_IN_COMPLETE, () => {
-    window.scrollTo(0, 0);
-    useGlobalStore.getState().lenis?.scrollTo?.(0, { immediate: true });
   });
 
   return (

@@ -4,8 +4,14 @@ export const lerp = (target, current, factor, delta = 1) =>
 
 export const simpleLerp = (a, b, t) => a + (b - a) * t;
 
-export const map = (value, inMin, inMax, outMin, outMax) =>
-  ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+export const map = (value, inMin, inMax, outMin, outMax, clampOutput = false) => {
+  const mapped =
+    ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+  if (!clampOutput) return mapped;
+  const min = Math.min(outMin, outMax);
+  const max = Math.max(outMin, outMax);
+  return Math.min(Math.max(mapped, min), max);
+};
 
 export const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 

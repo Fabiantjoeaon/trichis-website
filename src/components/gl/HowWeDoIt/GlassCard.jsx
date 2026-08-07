@@ -8,7 +8,6 @@ import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import {
-  Color,
   MeshBasicNodeMaterial,
   PlaneGeometry,
   RepeatWrapping,
@@ -20,7 +19,6 @@ import {
   uv,
   uniform,
   vec2,
-  vec3,
   vec4,
   mix,
   texture as tslTexture,
@@ -34,46 +32,63 @@ import {
   viewportCoordinate,
   viewportSize,
 } from "three/tsl";
-import { howWeDoItTextTexture } from "./stores";
+import { howWeDoItTextScroll, howWeDoItTextTexture } from "./stores";
 
 const sharedGeometry = new PlaneGeometry(1, 1, 32, 32);
 
-function cssVar(name, fallback) {
-  if (typeof document === "undefined") return fallback;
-  return (
-    getComputedStyle(document.documentElement).getPropertyValue(name).trim() ||
-    fallback
-  );
-}
-
-function buildGlassMaterial({ tScene, tBlurNoise, tBlurNoise2, borderColor, size }) {
-  const uBorderColor = uniform(new Color(borderColor));
+function buildGlassMaterial({
+  tMask,
+  tBlurNoise,
+  tBlurNoise2,
+  themeColors,
+  size,
+}) {
   const uSize = uniform(new Vector2(size.x, size.y));
-  const sceneNode = tslTexture(tScene);
+  const uOffset = uniform(0);
+  const uRepeat = uniform(1);
+  const maskNode = tslTexture(tMask);
   const noiseNode = tslTexture(tBlurNoise);
   const noise2Node = tslTexture(tBlurNoise2);
+  // Own uniform nodes per material, backed by the shared Color instances
+  // (TSL uniform nodes can't be shared across materials).
+  const uBgColor = uniform(themeColors.bg);
+  const uTextColor = uniform(themeColors.text);
+  const uCardBorderColor = uniform(themeColors.border);
 
   const material = new MeshBasicNodeMaterial();
   material.transparent = true;
   material.depthWrite = false;
+  material.depthTest = false;
 
   material.fragmentNode = Fn(() => {
     const st = uv();
     // Screen-space UV (parity with nine-ca gl_FragCoord / uResolution)
     const screen = viewportCoordinate.xy.div(max(viewportSize, vec2(1)));
-    let uuv = vec2(
-      screen.x.sub(0.0635),
+    const screenUv = vec2(
+      screen.x,
       st.y.mul(pow(float(0.84), st.y.mul(1.1))),
     ).toVar();
+    // Mask-space UV: scrolled + aspect-correct repeat, lines up with the
+    // section text plane behind the card
+    const maskUv = vec2(
+      screenUv.x.sub(0.0635).add(uOffset).mul(uRepeat),
+      screenUv.y,
+    ).toVar();
 
-    const noise = noiseNode.sample(uuv.mul(40)).xy.mul(0.1);
-    const noise2 = noise2Node.sample(uuv.mul(50)).xy.mul(0.05);
-    const warped = uuv.add(noise).add(noise2);
+    // Noise sampled in screen space; displacement scaled into mask space so
+    // the on-screen warp amplitude matches nine-ca
+    const noise = noiseNode.sample(screenUv.mul(40)).xy.mul(0.1);
+    const noise2 = noise2Node.sample(screenUv.mul(50)).xy.mul(0.05);
+    const warped = maskUv.add(noise.add(noise2).mul(vec2(uRepeat, float(1))));
 
-    const blurred = sceneNode.sample(warped).rgb;
-    const sharp = sceneNode.sample(uuv).rgb;
-    let color = mix(blurred, sharp, float(0.5)).toVar();
-    color.assign(pow(color, vec3(0.4545)).mul(0.9));
+    // Reconstruct the render-target scene color (background + text) from
+    // the transparent text mask, matching nine-ca's RenderTexture contents.
+    const blurred = mix(uBgColor, uTextColor, maskNode.sample(warped).a);
+    const sharp = mix(uBgColor, uTextColor, maskNode.sample(maskUv).a);
+    const color = mix(blurred, sharp, float(0.5)).toVar();
+    // nine-ca darkens by 0.9 in gamma space; the render pipeline already
+    // outputs sRGB, so apply the linear-space equivalent (0.9^2.2)
+    color.assign(color.mul(float(0.79)));
 
     const radius = float(10);
     const thickness = float(1);
@@ -97,16 +112,15 @@ function buildGlassMaterial({ tScene, tBlurNoise, tBlurNoise2, borderColor, size
       smoothstep(deltaD.negate(), deltaD, d.sub(squareThickness.mul(0.5))),
     );
 
-    const final = mix(color, uBorderColor, border);
-    return vec4(final, inside);
+    const final = mix(color, uCardBorderColor, border);
+    return vec4(final, max(inside, border));
   })();
 
-  return { material, uBorderColor, uSize, sceneNode };
+  return { material, uSize, uOffset, uRepeat, maskNode };
 }
 
-export default function GlassCard({ i, transform }) {
+export default function GlassCard({ i, transform, themeColors }) {
   const group = useRef();
-  const themeTick = useRef(0);
   const texture = howWeDoItTextTexture();
 
   const tBlurNoise = useTexture("/assets/rgba-noise-medium.png");
@@ -117,23 +131,22 @@ export default function GlassCard({ i, transform }) {
     tBlurNoise2.wrapS = tBlurNoise2.wrapT = RepeatWrapping;
   }, [tBlurNoise, tBlurNoise2]);
 
-  const borderColor = cssVar("--color-text", "#2B393B");
   const size = {
     x: transform?.rect?.width || transform?.scale?.x || 1,
     y: transform?.rect?.height || transform?.scale?.y || 1,
   };
 
   const built = useMemo(() => {
-    if (!texture) return null;
+    if (!texture || !themeColors) return null;
     return buildGlassMaterial({
-      tScene: texture,
+      tMask: texture,
       tBlurNoise,
       tBlurNoise2,
-      borderColor,
+      themeColors,
       size,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [texture, tBlurNoise, tBlurNoise2]);
+  }, [texture, tBlurNoise, tBlurNoise2, themeColors]);
 
   useEffect(() => {
     if (!built || !transform) return;
@@ -146,14 +159,12 @@ export default function GlassCard({ i, transform }) {
   useFrame(() => {
     if (!built) return;
     const tex = howWeDoItTextTexture.getState();
-    if (tex && built.sceneNode.value !== tex) {
-      built.sceneNode.value = tex;
+    if (tex && built.maskNode.value !== tex) {
+      built.maskNode.value = tex;
     }
-    // Refresh border color occasionally for theme switches
-    themeTick.current += 1;
-    if (themeTick.current % 30 === 0) {
-      built.uBorderColor.value.set(cssVar("--color-text", "#2B393B"));
-    }
+    const { offset, repeat } = howWeDoItTextScroll.getState();
+    built.uOffset.value = offset;
+    built.uRepeat.value = repeat;
   });
 
   if (!transform?.scale || !built) return null;

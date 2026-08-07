@@ -10,6 +10,9 @@ export const useGlobalStore = create((set) => ({
   lenis: null,
   menuOpen: false,
   loaderDone: false,
+  // False while the loader / GL transition wipe covers the page; pages hold
+  // their entrance animations until it flips true (see usePageEnter).
+  pageRevealed: false,
   mouse: { x: 0, y: 0 },
   // Set true to force DOM fallback for NineGLImageElement
   noWebGLImages: false,

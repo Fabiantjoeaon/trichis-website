@@ -14,6 +14,10 @@ import { gsap, SplitText as SplitTextLib, useGSAP } from "@/lib/gsap";
 import useInView from "@/hooks/useInView";
 import { animations } from "./splittext-animations";
 
+// GSAP warns on undefined/empty targets (e.g. component unmounted mid-wait
+// during an Astro page swap)
+const hasTargets = (t) => (Array.isArray(t) ? t.length > 0 : !!t);
+
 const SplitText = forwardRef(
   (
     {
@@ -37,6 +41,10 @@ const SplitText = forwardRef(
 
     const [isMounted, setIsMounted] = useState(false);
     const isAnimatedIn = useRef(false);
+    // Entrance tween in flight — needed because autoSplit can replace the
+    // split nodes mid-tween (persisted islands get moved on Astro page swaps)
+    const isAnimatingIn = useRef(false);
+    const lastInParams = useRef(undefined);
 
     const hasSplitPromise = useRef(null);
     const hasSplitPromiseResolve = useRef(null);
@@ -107,11 +115,11 @@ const SplitText = forwardRef(
       isAnimatedIn.current = false;
 
       if (isDouble) {
-        if (splitRefOriginal.current?.[typeKey])
+        if (hasTargets(splitRefOriginal.current?.[typeKey]))
           gsap.set(splitRefOriginal.current[typeKey], animation.set.original);
-        if (splitRefDouble.current?.[typeKey])
+        if (hasTargets(splitRefDouble.current?.[typeKey]))
           gsap.set(splitRefDouble.current[typeKey], animation.set.double);
-      } else if (splitRefChild.current?.[typeKey]) {
+      } else if (hasTargets(splitRefChild.current?.[typeKey])) {
         gsap.set(splitRefChild.current[typeKey], animation.set.original);
       }
     }, [typeKey, isDouble, animation]);
@@ -126,7 +134,15 @@ const SplitText = forwardRef(
       await document.fonts.ready;
 
       const handleOnSplit = () => {
-        if (!isAnimatedIn.current) setAnimateIn();
+        if (isAnimatingIn.current) {
+          // autoSplit replaced the nodes while the entrance tween was running
+          // (layout shift / persisted island moved on page swap) — the tween
+          // now targets orphaned nodes, so restart it on the fresh ones.
+          setAnimateIn();
+          animateInRef.current?.(lastInParams.current);
+        } else if (!isAnimatedIn.current) {
+          setAnimateIn();
+        }
         if (hasSplitPromiseResolve.current) hasSplitPromiseResolve.current();
         localRef.current?.classList.add("splittext-ready");
       };
@@ -193,12 +209,19 @@ const SplitText = forwardRef(
           if (hasSplitPromise.current) await hasSplitPromise.current;
         }
 
+        // Component may have unmounted (page swap) while waiting
+        if (!hasTargets(targetSplit.current?.[typeKey])) return;
+
         killAll();
         setAnimateIn();
         show();
 
+        isAnimatingIn.current = true;
+        lastInParams.current = params;
+
         const handleOnComplete = () => {
           isAnimatedIn.current = true;
+          isAnimatingIn.current = false;
           params?.onComplete?.();
         };
 
@@ -210,7 +233,8 @@ const SplitText = forwardRef(
               onComplete: handleOnComplete,
             }),
           );
-          track(gsap.to(splitRefDouble.current?.[typeKey], { ...double }));
+          if (hasTargets(splitRefDouble.current?.[typeKey]))
+            track(gsap.to(splitRefDouble.current?.[typeKey], { ...double }));
         } else {
           const { original } = animation.in(params);
           track(
@@ -224,9 +248,14 @@ const SplitText = forwardRef(
       [animation, typeKey, isDouble, setAnimateIn, killAll],
     );
 
+    // setup() is declared before animateIn — reach it through a ref
+    const animateInRef = useRef(null);
+    animateInRef.current = animateIn;
+
     const animateOut = useCallback(
       (params = {}) => {
         killAll();
+        isAnimatingIn.current = false;
 
         const initialParams = animation.out(params);
         const tp = initialParams.type ?? typeKey;
@@ -238,6 +267,7 @@ const SplitText = forwardRef(
         };
 
         if (isDouble) {
+          if (!hasTargets(splitRefDouble.current?.[tp])) return;
           const { double } = initialParams;
           track(
             gsap.to(splitRefDouble.current?.[tp], {
@@ -246,6 +276,7 @@ const SplitText = forwardRef(
             }),
           );
         } else {
+          if (!hasTargets(splitRefChild.current?.[tp])) return;
           const { original } = initialParams;
           track(
             gsap.to(splitRefChild.current?.[tp], {
@@ -263,12 +294,13 @@ const SplitText = forwardRef(
         if (!animation.hoverIn) return;
         killAll();
 
-        if (isDouble) {
+        if (isDouble && hasTargets(splitRefDouble.current?.[typeKey])) {
           gsap.set(splitRefDouble.current?.[typeKey], animation.setHover.double);
           const { double } = animation.hoverIn(params);
           track(gsap.to(splitRefDouble.current?.[typeKey], { ...double }));
         }
 
+        if (!hasTargets(splitRefOriginal.current?.[typeKey])) return;
         gsap.set(splitRefOriginal.current?.[typeKey], animation.setHover.original);
         const { original } = animation.hoverIn(params);
         track(gsap.to(splitRefOriginal.current?.[typeKey], { ...original }));
@@ -281,11 +313,12 @@ const SplitText = forwardRef(
         if (!animation.hoverOut) return;
         killAll();
 
-        if (isDouble) {
+        if (isDouble && hasTargets(splitRefDouble.current?.[typeKey])) {
           const { double } = animation.hoverOut(params);
           track(gsap.to(splitRefDouble.current?.[typeKey], { ...double }));
         }
 
+        if (!hasTargets(splitRefOriginal.current?.[typeKey])) return;
         const { original } = animation.hoverOut(params);
         track(gsap.to(splitRefOriginal.current?.[typeKey], { ...original }));
       },

@@ -357,7 +357,7 @@ html {
   min-height: 100%;
   height: auto !important;
   background-color: var(--color-background);
-  color: #ffffff;
+  color: var(--color-text);
   overscroll-behavior-x: none;
   overflow: hidden;
   overflow-x: hidden;
@@ -371,14 +371,15 @@ body {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   background-color: var(--color-background);
-  color: #ffffff;
+  color: var(--color-text);
   font-family: "Restart Soft", sans-serif;
 }
 
+/* Block (not flex) so the hero's nav+base margin collapses with
+   .main-inner's nav margin, exactly as in nine-ca's layout. */
 main {
   flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
 button,
@@ -722,6 +723,8 @@ span {
 
   /* Layout helpers — ported from nine-ca theme.js util */
   .inner-width {
+    width: 100%;
+    box-sizing: border-box;
     padding-left: calc(var(--pagePadding));
     padding-right: calc(var(--pagePadding));
     margin: 0 auto;

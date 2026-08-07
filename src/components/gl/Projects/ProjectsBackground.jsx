@@ -47,9 +47,11 @@ function buildBackgroundMaterial({ tGrid, bg, grid }) {
     gridUV.x.assign(gridUV.x.mul(2.5));
     gridUV.assign(gridUV.add(uGridXY.mul(0.002)));
     const g = float(1).sub(mapNode.sample(gridUV).r);
-    const final = mix(uBackgroundColor, uGridColor, g);
-    return vec4(final, float(1));
+    // Transparent clear so DOM project cards show through; only dots paint
+    return vec4(uGridColor, g.mul(0.35));
   })();
+
+  material.transparent = true;
 
   return { material, uBackgroundColor, uGridColor, uGridXY };
 }

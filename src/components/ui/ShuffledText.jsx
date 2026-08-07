@@ -106,10 +106,10 @@ const ShuffledText = forwardRef(
 
     useEffect(() => {
       return () => {
-        if (measurementRef.current?.parentNode) {
-          document.body.removeChild(measurementRef.current);
-          measurementRef.current = null;
-        }
+        // .remove() is safe even after Astro swaps document.body, in which
+        // case the node's parent is the detached old body
+        measurementRef.current?.remove();
+        measurementRef.current = null;
       };
     }, []);
 

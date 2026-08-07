@@ -38,7 +38,7 @@ function ProjectCard({ project, index, cardRef }) {
             </div>
           )}
         </div>
-        <h3 className="t-project-title mt-[30rem] text-text">{project.title}</h3>
+        <h3 className="t-projects-title mt-[30rem] text-text">{project.title}</h3>
         {project.year && (
           <p className="t-small-paragraph mt-[10rem] text-inactiveText">
             {project.year}

@@ -8,17 +8,16 @@ export default function AboutUsHero() {
 
   return (
     <section ref={track} className="about-hero home-hero">
-      <UseCanvas>
-        <ScrollScene track={track}>
-          {(props) => <HeroGrid {...props} brandText="nine" brandMobile="n" />}
-        </ScrollScene>
-      </UseCanvas>
-      {/* DOM fallback visible until GL paints */}
-      <div className="about-hero__grid" aria-hidden>
+      <div className="about-hero__grid" aria-hidden="true">
         {Array.from({ length: 12 }).map((_, i) => (
           <div key={i} className="about-hero__cell" />
         ))}
       </div>
+      <UseCanvas id="about-hero-grid">
+        <ScrollScene track={track}>
+          {(props) => <HeroGrid {...props} brandText="nine" brandMobile="n" />}
+        </ScrollScene>
+      </UseCanvas>
     </section>
   );
 }

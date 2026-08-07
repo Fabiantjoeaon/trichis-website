@@ -28,6 +28,15 @@ import { TRANSITION_DURATION } from "@/lib/transitions";
 
 const overlayDelay = 0.125;
 
+// The wipe must cover the navigation (like nine-ca's separate z-7 overlay
+// canvas), but tracked GL media should stay below it — so the shared canvas
+// is only raised above the nav while the wipe is visible.
+function setCanvasOverlay(on) {
+  document
+    .querySelector(".gl-canvas-root")
+    ?.classList.toggle("gl-canvas-root--overlay", on);
+}
+
 const COLORS = {
   light: { background: "#2B393B", accent: "#00FFC2" },
   dark: { background: "#232323", accent: "#376A5D" },
@@ -141,15 +150,22 @@ export default memo(function GLBackground() {
         onComplete: () => {
           isAnimating.current = false;
           if (group.current) group.current.visible = false;
+          setCanvasOverlay(false);
           emitter.emit(events.GL_BACKGROUND_OUT_COMPLETE);
         },
       },
     });
 
   function animateIn() {
-    if (visible.current) return;
+    if (visible.current) {
+      // Already covering — let waiters (router loader) proceed immediately
+      if (!isAnimating.current)
+        emitter.emit(events.GL_BACKGROUND_IN_COMPLETE);
+      return;
+    }
     if (group.current) group.current.visible = true;
     visible.current = true;
+    setCanvasOverlay(true);
     animateBackgroundIn();
   }
 

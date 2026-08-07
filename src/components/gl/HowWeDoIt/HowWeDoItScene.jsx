@@ -1,23 +1,25 @@
 /**
  * HowWeDoItScene — TSL port of nine-ca HowWeDoItScene.
- * Shortcuts:
- * - Scrolling brand text is a canvas-texture strip (troika GLText is WebGL-bound).
- * - No live RenderTexture of orthographic GLText + colored plane; cards sample
- *   the canvas strip via howWeDoItTextTexture store.
- * - Mobile drag uses pointer events on the DOM wrapper (no @use-gesture).
+ * The scrolling brand text is drawn as a transparent white mask
+ * (canvas texture); the section plane paints only the text pixels so the
+ * page background shows through (transparent render-target look), and the
+ * glass cards reconstruct the "scene" color from the same mask + theme
+ * uniforms, which are tweened on SWITCH_THEME like nine-ca's GL theme lerp.
  */
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import {
   CanvasTexture,
+  Color,
   LinearFilter,
   MeshBasicNodeMaterial,
   NoColorSpace,
   RepeatWrapping,
 } from "three/webgpu";
-import { Fn, uv, uniform, texture as tslTexture } from "three/tsl";
+import { Fn, uv, uniform, vec4, texture as tslTexture } from "three/tsl";
 import useEvent from "@/hooks/useEvent";
 import useAnimation from "@/hooks/useAnimation";
+import { gsap } from "@/lib/gsap";
 import { clamp, lerp, map } from "@/lib/math";
 import { events } from "@/lib/events";
 import { useGlobalStore } from "@/stores/global";
@@ -26,10 +28,15 @@ import {
   howWeDoItProgress,
   howWeDoItScale,
   howWeDoItStore,
+  howWeDoItTextScroll,
   howWeDoItTextTexture,
   howWeDoItX,
   minScale,
 } from "./stores";
+
+const MASK_WIDTH = 2048;
+const MASK_HEIGHT = 256;
+const MASK_ASPECT = MASK_WIDTH / MASK_HEIGHT;
 
 function cssVar(name, fallback) {
   if (typeof document === "undefined") return fallback;
@@ -39,24 +46,29 @@ function cssVar(name, fallback) {
   );
 }
 
-function createScrollingTextTexture({
-  text = "trichistrichistrichis",
-  color = "#00ffc2",
-  bg = "#eaeaea",
-  width = 1024,
-  height = 256,
+// White-on-transparent, horizontally seamless text mask
+function createScrollingTextMask({
+  word = "nine",
+  width = MASK_WIDTH,
+  height = MASK_HEIGHT,
 } = {}) {
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext("2d");
-  ctx.fillStyle = bg;
-  ctx.fillRect(0, 0, width, height);
-  ctx.fillStyle = color;
-  ctx.font = `500 ${Math.floor(height * 0.55)}px "Restart Soft", sans-serif`;
+  ctx.clearRect(0, 0, width, height);
+  ctx.fillStyle = "#ffffff";
+  ctx.font = `500 ${Math.floor(height * 0.62)}px "Restart Soft", sans-serif`;
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
-  ctx.fillText(text, 24, height * 0.55);
+
+  // Repeat the word with an exact advance so the texture tiles seamlessly
+  const wordWidth = Math.max(1, ctx.measureText(word).width);
+  const count = Math.max(1, Math.round(width / wordWidth));
+  const advance = width / count;
+  for (let i = 0; i < count; i++) {
+    ctx.fillText(word, i * advance, height * 0.55);
+  }
 
   const texture = new CanvasTexture(canvas);
   texture.colorSpace = NoColorSpace;
@@ -66,17 +78,19 @@ function createScrollingTextTexture({
   texture.magFilter = LinearFilter;
   texture.generateMipmaps = false;
   texture.needsUpdate = true;
-  return { texture, canvas, ctx, width, height, dispose: () => texture.dispose() };
+  return { texture, dispose: () => texture.dispose() };
 }
 
-function HowWeDoItGlassCard({ i }) {
+function HowWeDoItGlassCard({ i, themeColors }) {
   const cardTransforms = howWeDoItStore((s) => s.cardTransforms);
   const entry = useMemo(
     () => cardTransforms.find((t) => t.i === i),
     [cardTransforms, i],
   );
   if (!entry) return null;
-  return <GlassCard i={i} transform={entry.transform} />;
+  return (
+    <GlassCard i={i} transform={entry.transform} themeColors={themeColors} />
+  );
 }
 
 export default function HowWeDoItScene({ scale, cardCount = 4 }) {
@@ -96,38 +110,84 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
   const lenis = useGlobalStore((s) => s.lenis);
 
+  // Theme colors as shared Color instances (each material wraps them in its
+  // own uniform() node — TSL nodes must not be shared across materials).
+  // Tweened on SWITCH_THEME like nine-ca's useThemeTransitionGLUniforms.
+  const themeColors = useMemo(
+    () => ({
+      bg: new Color(cssVar("--color-background", "#eaeaea")),
+      text: new Color(cssVar("--color-howWeDoItText", "#00ffc2")),
+      border: new Color(cssVar("--color-text", "#2B393B")),
+    }),
+    [],
+  );
+
+  useEvent(events.SWITCH_THEME, () => {
+    // Read targets after data-theme has been applied to <html>
+    requestAnimationFrame(() => {
+      const targets = [
+        [themeColors.bg, cssVar("--color-background", "#eaeaea")],
+        [themeColors.text, cssVar("--color-howWeDoItText", "#00ffc2")],
+        [themeColors.border, cssVar("--color-text", "#2B393B")],
+      ];
+      for (const [color, css] of targets) {
+        const to = new Color(css);
+        gsap.to(color, {
+          r: to.r,
+          g: to.g,
+          b: to.b,
+          duration: 0.6,
+          ease: "quad.out",
+          overwrite: true,
+        });
+      }
+    });
+  });
+
   const builtTextPlane = useMemo(() => {
-    const placeholder = createScrollingTextTexture();
+    const placeholder = createScrollingTextMask();
     textData.current = placeholder;
-    howWeDoItTextTexture.setState(placeholder.texture);
+    // replace=true: zustand would otherwise merge the Texture into a plain
+    // object and strip its prototype (breaks TSL texture sampling)
+    howWeDoItTextTexture.setState(placeholder.texture, true);
 
     const uOffset = uniform(0);
+    const uRepeat = uniform(1);
     const mapNode = tslTexture(placeholder.texture);
     const material = new MeshBasicNodeMaterial();
-    material.transparent = false;
+    // Transparent: only the text pixels paint, page background shows through
+    material.transparent = true;
     material.depthTest = false;
     material.depthWrite = false;
     material.fragmentNode = Fn(() => {
       const st = uv().toVar();
-      st.x.assign(st.x.add(uOffset));
-      // Tile text strip across the section width
-      st.x.assign(st.x.mul(3));
-      return mapNode.sample(st);
+      // Aspect-correct repeat so glyphs keep their proportions
+      st.x.assign(st.x.add(uOffset).mul(uRepeat));
+      const mask = mapNode.sample(st).a;
+      return vec4(uniform(themeColors.text), mask);
     })();
-    return { material, uOffset, mapNode, placeholder };
+    return { material, uOffset, uRepeat, mapNode, placeholder };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    const color = cssVar("--color-howWeDoItText", "#00ffc2");
-    const bgColor = cssVar("--color-background", "#eaeaea");
-    const next = createScrollingTextTexture({ color, bg: bgColor });
-    textData.current?.dispose?.();
-    textData.current = next;
-    howWeDoItTextTexture.setState(next.texture);
-    builtTextPlane.mapNode.value = next.texture;
+    let cancelled = false;
+
+    const rebuild = () => {
+      if (cancelled) return;
+      const next = createScrollingTextMask();
+      textData.current?.dispose?.();
+      textData.current = next;
+      howWeDoItTextTexture.setState(next.texture, true);
+      builtTextPlane.mapNode.value = next.texture;
+    };
+
+    rebuild();
+    // Redraw once the brand font is available
+    document.fonts?.ready?.then(rebuild);
+
     return () => {
-      next.dispose();
-      howWeDoItTextTexture.setState(null);
+      cancelled = true;
     };
   }, [windowSize.width, builtTextPlane]);
 
@@ -227,6 +287,11 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
     textOffset.current += (0.015 + scrollVel.current) * dt * 60 * 0.016;
     builtTextPlane.uOffset.value = textOffset.current;
 
+    const repeat =
+      scale?.x && scale?.y ? scale.x / scale.y / MASK_ASPECT : 1;
+    builtTextPlane.uRepeat.value = repeat;
+    howWeDoItTextScroll.setState({ offset: textOffset.current, repeat });
+
     if (isMobileLayout && cards.current && scaleGroup.current) {
       const x = howWeDoItX.getState();
       const newX = lerp(dragX.current, x, 0.05, dt);
@@ -257,7 +322,7 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
       <group ref={scaleGroup}>
         <group ref={cards}>
           {Array.from({ length: cardCount }, (_, i) => (
-            <HowWeDoItGlassCard key={i} i={i} />
+            <HowWeDoItGlassCard key={i} i={i} themeColors={themeColors} />
           ))}
         </group>
       </group>

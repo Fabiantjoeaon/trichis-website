@@ -9,6 +9,25 @@ import { useGlobalStore } from "@/stores/global";
 
 export const TRANSITION_DURATION = 800;
 
+/**
+ * Resolve when an emitter event fires (or after `timeout` ms as a safety net
+ * — e.g. the GL canvas may not be ready to play the wipe at all).
+ */
+export function waitForEvent(eventName, { timeout = 5000 } = {}) {
+  return new Promise((resolve) => {
+    let resolved = false;
+    const finish = () => {
+      if (resolved) return;
+      resolved = true;
+      off();
+      clearTimeout(timer);
+      resolve();
+    };
+    const off = emitter.on(eventName, finish);
+    const timer = setTimeout(finish, timeout);
+  });
+}
+
 let isNavigating = false;
 
 export async function navigateWithTransition(href) {

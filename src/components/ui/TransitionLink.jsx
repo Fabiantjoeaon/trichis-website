@@ -1,13 +1,12 @@
-// MPA replacement for nine-ca's TransitionLink: plays the GL wipe (via
-// ROUTE_CHANGE_START), waits for it to cover the screen, then navigates.
-// The next page reveals itself on load (see SiteChrome).
+// Port of nine-ca's TransitionLink for the Astro build. The GL wipe itself
+// is woven into Astro's router lifecycle by SiteChrome (astro:before-
+// preparation covers the screen, astro:page-load reveals it), so this only
+// needs to hand the navigation to the ClientRouter — every navigation
+// (including plain links and back/forward) gets the same transition.
 import { useCallback, useEffect, useState } from "react";
-import emitter from "@/lib/emitter";
-import { events } from "@/lib/events";
-import { wait } from "@/lib/math";
-import { useGlobalStore } from "@/stores/global";
+import { navigate } from "astro:transitions/client";
 
-export const TRANSITION_DURATION = 800;
+export { TRANSITION_DURATION } from "@/lib/transitions";
 
 function normalizePath(path) {
   if (!path) return "/";
@@ -16,16 +15,23 @@ function normalizePath(path) {
   return bare || "/";
 }
 
+let isNavigating = false;
+
 export async function handleRouteChange(href) {
+  if (isNavigating) return;
+  isNavigating = true;
+
   try {
-    useGlobalStore.getState().lenis?.stop();
-    emitter.emit(events.ROUTE_CHANGE_START, { route: href });
-    await wait(TRANSITION_DURATION);
-    sessionStorage.setItem("trichis:navigated", "1");
-    window.location.assign(href);
+    await navigate(href);
   } catch (error) {
     console.error("Navigation error:", error);
-    useGlobalStore.getState().lenis?.start();
+    // Full-page fallback; the loader plays a quick reveal on the next load
+    try {
+      sessionStorage.setItem("trichis:navigated", "1");
+    } catch {}
+    window.location.assign(href);
+  } finally {
+    isNavigating = false;
   }
 }
 
@@ -37,12 +43,18 @@ export const TransitionLink = ({
   ...props
 }) => {
   // SSR + first client paint must match; resolve same-route after mount.
+  // Links in the persisted chrome island (nav/menu) survive navigations, so
+  // re-resolve after every swap or e.g. the "Home" link stays disabled.
   const [isSameRoute, setIsSameRoute] = useState(false);
 
   useEffect(() => {
-    setIsSameRoute(
-      normalizePath(window.location.pathname) === normalizePath(href),
-    );
+    const update = () =>
+      setIsSameRoute(
+        normalizePath(window.location.pathname) === normalizePath(href),
+      );
+    update();
+    document.addEventListener("astro:after-swap", update);
+    return () => document.removeEventListener("astro:after-swap", update);
   }, [href]);
 
   const shouldStartAnimation = useCallback(

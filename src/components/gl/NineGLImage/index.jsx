@@ -157,7 +157,11 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
     onReady?.();
   }, [tMap, scale, built, onReady]);
 
-  const { animateIn: animateInUp, animateOut: animateOutUp } = useAnimation({
+  const {
+    animateIn: animateInUp,
+    animateOut: animateOutUp,
+    isActive: isInUpActive,
+  } = useAnimation({
     inParams: {
       ease: EASE_CUSTOM_4,
       duration: isMobileLayout ? 1 : 1.4,
@@ -191,6 +195,16 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
       },
     },
   });
+
+  // If a sibling suspends (video texture loading), React hides this subtree
+  // and disconnects effects, killing an in-flight entrance tween. On reveal,
+  // snap to the final state instead of staying frozen mid-animation.
+  useEffect(() => {
+    if (!built || !hasAnimatedIn.current || isInUpActive()) return;
+    built.uniforms.uTransition.value = 1;
+    group.current?.scale.setScalar(1);
+    if (mesh.current && !hide) mesh.current.visible = visible.current;
+  }, [built, hide, isInUpActive]);
 
   function resetAndPlayVideo(currentTexture) {
     const el = currentTexture?.source?.data || currentTexture?.image;
@@ -234,6 +248,7 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
       hasAnimatedIn.current = false;
     },
     group: group.current,
+    getGroup: () => group.current,
     visible: () => visible.current,
     playVideo: () => resetAndPlayVideo(tMap),
     stopVideo: () => {

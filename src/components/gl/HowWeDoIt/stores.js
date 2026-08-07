@@ -23,5 +23,8 @@ export const howWeDoItProgress = create(() => 0);
 export const howWeDoItX = create(() => 0);
 export const howWeDoItScale = create(() => 1);
 export const howWeDoItTextTexture = create(() => null);
+// Scroll offset + aspect-correct repeat of the text mask, shared between the
+// section text plane and the glass card materials
+export const howWeDoItTextScroll = create(() => ({ offset: 0, repeat: 1 }));
 
 export const minScale = 0.9;

@@ -2,25 +2,32 @@ import { useRef } from "react";
 import { UseCanvas } from "@/components/gl";
 import ProjectsScene from "@/components/gl/Projects/ProjectsScene";
 import { Project } from "@/components/Project";
+import usePageEnter from "@/hooks/usePageEnter";
 
 /**
- * Projects list (nine-ca ProjectsBasicView) + TSL dotted background / tile field.
+ * Projects list (nine-ca ProjectsBasicView) + TSL dotted background.
+ * Cards animate in staggered once the page is revealed, like nine-ca's
+ * PROJECTS:ON_ENTERING flow.
  */
 export default function ProjectsBasicView({ projects = [] }) {
   const projectRefs = useRef([]);
 
+  usePageEnter(() => {
+    projectRefs.current.forEach((r, i) => r?.animateIn?.({ delay: i * 0.2 }));
+  });
+
   return (
-    <section className="projects-basic relative w-full">
+    <section className="projects-basic">
       <UseCanvas id="projects-scene">
         <ProjectsScene />
       </UseCanvas>
 
-      <div className="projects-basic__grid inner-width relative z-[1] my-[50rem] flex flex-row-reverse flex-wrap justify-between gap-[100rem] max-[711px]:gap-[50rem]">
+      <div className="projects-basic__grid inner-width">
         {projects.map((project, index) => {
           const coverImage = project.featuredImage || project.coverImage;
           return (
             <div
-              className="projects-basic__item relative w-[calc(50%-50rem)] max-[711px]:w-full"
+              className="projects-basic__item"
               key={project.id || project.slug}
             >
               <Project
@@ -30,7 +37,7 @@ export default function ProjectsBasicView({ projects = [] }) {
                   projectRefs.current[index] = r;
                 }}
                 coverImage={coverImage}
-                animateOnScroll
+                animateOnScroll={false}
               />
             </div>
           );

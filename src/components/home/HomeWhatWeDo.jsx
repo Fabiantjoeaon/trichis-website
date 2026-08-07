@@ -1,26 +1,53 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TransitionLink from "@/components/ui/TransitionLink";
 import SplitText from "@/components/ui/SplitText";
 import { SectionTitle } from "@/components/ui/Divider";
 import { ScrollingText } from "@/components/ui/ScrollingText";
 import { serviceMap, SERVICE_IMAGE_URLS } from "@/lib/constants";
 import useInView from "@/hooks/useInView";
+import { useTicker } from "@/hooks/useTicker";
+import { lerp } from "@/lib/math";
 
 export default function HomeWhatWeDo({ currentService } = {}) {
   const keys = Object.keys(serviceMap);
   const initial = Math.max(0, keys.indexOf(currentService));
   const [currIndex, setCurrIndex] = useState(initial >= 0 ? initial : 0);
   const track = useRef(null);
-  const leftRefs = useRef([]);
-  const rightRefs = useRef([]);
+  const listRef = useRef(null);
+  const itemsRef = useRef([]);
+  const indicatorRef = useRef(null);
+  const captionRef = useRef(null);
+  const gap = useRef(0);
+  const _pos = useRef(0);
 
   useInView({
     el: track,
     handleIn: () => {
-      leftRefs.current[currIndex]?.animateIn?.();
-      rightRefs.current[currIndex]?.animateIn?.({ delay: 0.3 });
+      captionRef.current?.animateIn?.({ delay: 0.3 });
     },
   });
+
+  useEffect(() => {
+    const first = itemsRef.current[0];
+    if (!first) return;
+    const computedStyle = window.getComputedStyle(first);
+    const marginBottom = parseInt(computedStyle.marginBottom, 10) || 0;
+    gap.current = first.offsetHeight + marginBottom;
+  }, [keys.length]);
+
+  useEffect(() => {
+    captionRef.current?.animateIn?.({ delay: 0.1 });
+  }, [currIndex]);
+
+  useTicker(
+    ({ delta }) => {
+      if (!indicatorRef.current) return;
+      const target = gap.current * currIndex;
+      _pos.current = lerp(target, _pos.current, 0.05, delta);
+      indicatorRef.current.style.transform = `translateY(${_pos.current}px)`;
+    },
+    { initiallyActive: true },
+  );
 
   const currentKey = keys[currIndex];
   const currentUrl = `/service/${currentKey}`;
@@ -29,29 +56,34 @@ export default function HomeWhatWeDo({ currentService } = {}) {
     <>
       <SectionTitle>What we do</SectionTitle>
       <section className="home-what-we-do inner-width" ref={track}>
-        <ScrollingText>
-          You already look great, let us make you look fantastic!
-        </ScrollingText>
+        <div className="home-what-we-do__top">
+          <ScrollingText>
+            You got the vibe, we got the tools.
+          </ScrollingText>
+          <SplitText tag="p" className="home-what-we-do__intro t-paragraph" animateOnScroll>
+            Opvallen is niet genoeg. Wij zorgen ervoor dat jouw merk onthouden
+            wordt. Voorbij de hype, recht het hart in. Alleen zo blijf je top of
+            mind.
+          </SplitText>
+        </div>
 
         <div className="home-what-we-do__bottom">
-          <div className="home-what-we-do__list">
+          <div className="home-what-we-do__list" ref={listRef}>
             <ul>
               {keys.map((key, i) => (
                 <li
                   key={key}
+                  ref={(el) => {
+                    itemsRef.current[i] = el;
+                  }}
                   className={i === currIndex ? "is-active" : ""}
                   onMouseEnter={() => setCurrIndex(i)}
                 >
+                  {i === 0 && (
+                    <div ref={indicatorRef} className="list-indicator" />
+                  )}
                   <TransitionLink href={`/service/${key}`}>
-                    <SplitText
-                      tag="span"
-                      ref={(r) => {
-                        leftRefs.current[i] = r;
-                      }}
-                      animateOnScroll={false}
-                    >
-                      {serviceMap[key]}
-                    </SplitText>
+                    <span className="t-li">{serviceMap[key]}</span>
                   </TransitionLink>
                 </li>
               ))}
@@ -67,11 +99,9 @@ export default function HomeWhatWeDo({ currentService } = {}) {
             </article>
             <SplitText
               tag="p"
-              ref={(r) => {
-                rightRefs.current[currIndex] = r;
-              }}
+              ref={captionRef}
               animateOnScroll={false}
-              className="home-what-we-do__caption"
+              className="home-what-we-do__caption t-li"
             >
               {serviceMap[currentKey]}
             </SplitText>

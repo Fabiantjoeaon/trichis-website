@@ -1,0 +1,4 @@
+[build.environment]
+  # These PUBLIC_* / seed flags are config, not secrets. Their values (especially
+  # PUBLIC_WP_SOURCE=local) appear all over the repo and trip Netlify's scanner.
+  SECRETS_SCAN_OMIT_KEYS = "PUBLIC_WP_SOURCE,PUBLIC_WP_GRAPHQL_URL_LOCAL,PUBLIC_WP_GRAPHQL_URL_FLYWHEEL,PUBLIC_USE_SEED_DATA,PUBLIC_R2_PUBLIC_URL,USE_SEED_DATA"

@@ -1,10 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useTracker } from "@/lib/gl/useTracker";
+import { useCanvasStore } from "@/lib/gl/canvasStore";
 
 /**
  * Positions children over a tracked DOM element while scrolling.
  * Drop-in replacement for r3f-scroll-rig ScrollScene (no scissor).
+ *
+ * Uses live getBoundingClientRect each frame so Lenis / layout shifts
+ * can't leave GL planes stuck on the fixed canvas.
  */
 export default function ScrollScene({
   track,
@@ -16,25 +20,34 @@ export default function ScrollScene({
   ...props
 }) {
   const contentRef = useRef();
-  const { scale, position, scrollState, inViewport } = useTracker(track, {
+  const scaleMultiplier = useCanvasStore((s) => s.scaleMultiplier);
+  const { scale, scrollState, inViewport } = useTracker(track, {
     rootMargin: inViewportMargin,
   });
 
-  useEffect(() => {
-    if (!contentRef.current) return;
-    if (overrideVisible) {
-      contentRef.current.visible = true;
-    } else {
-      contentRef.current.visible = hideOffscreen
-        ? inViewport && visible
-        : visible;
-    }
-  }, [inViewport, hideOffscreen, visible, overrideVisible]);
-
   useFrame(() => {
-    if (!contentRef.current) return;
-    contentRef.current.position.x = position.x;
-    contentRef.current.position.y = position.y;
+    const group = contentRef.current;
+    const el = track?.current;
+    if (!group || !el) return;
+
+    const r = el.getBoundingClientRect();
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const inView = r.bottom > 0 && r.top < h && r.right > 0 && r.left < w;
+
+    if (overrideVisible) {
+      group.visible = true;
+    } else if (hideOffscreen) {
+      group.visible = inView && visible;
+    } else {
+      group.visible = visible;
+    }
+
+    if (!group.visible && hideOffscreen && !overrideVisible) return;
+
+    const sm = scaleMultiplier;
+    group.position.x = (r.left + r.width * 0.5 - w * 0.5) * sm;
+    group.position.y = -(r.top + r.height * 0.5 - h * 0.5) * sm;
   });
 
   if (!scale.x || !scale.y) return null;

@@ -58,12 +58,21 @@ export function useTracker(track, { autoUpdate = true, rootMargin = "0px" } = {}
     viewport: -1,
   }).current;
 
+  const getScroll = useCallback(() => {
+    // Lenis keeps the authoritative animated scroll; window.scrollY can lag
+    // a frame behind and leave tracked GL content visually stuck.
+    const y =
+      typeof lenis?.scroll === "number" ? lenis.scroll : window.scrollY;
+    const x =
+      typeof lenis?.scroll === "number" ? 0 : window.scrollX;
+    return { scrollY: y, scrollX: x };
+  }, [lenis]);
+
   const measure = useCallback(() => {
     const el = track?.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
-    const scrollY = window.scrollY;
-    const scrollX = window.scrollX;
+    const { scrollY, scrollX } = getScroll();
     rect.top = r.top + scrollY;
     rect.bottom = r.bottom + scrollY;
     rect.left = r.left + scrollX;
@@ -77,7 +86,7 @@ export function useTracker(track, { autoUpdate = true, rootMargin = "0px" } = {}
         ? prev
         : { x: nextX, y: nextY, z: 1 },
     );
-  }, [track, scaleMultiplier]);
+  }, [track, scaleMultiplier, getScroll]);
 
   const update = useCallback(
     ({ onlyUpdateInViewport = false } = {}) => {
@@ -88,8 +97,7 @@ export function useTracker(track, { autoUpdate = true, rootMargin = "0px" } = {}
         width: windowSize.width || window.innerWidth,
         height: windowSize.height || window.innerHeight,
       };
-      const scrollY = window.scrollY;
-      const scrollX = window.scrollX;
+      const { scrollY, scrollX } = getScroll();
 
       updateBounds(bounds, rect, scrollY, scrollX, size);
       position.x = bounds.x * scaleMultiplier;
@@ -106,7 +114,7 @@ export function useTracker(track, { autoUpdate = true, rootMargin = "0px" } = {}
       scrollState.visibility = map(pxInside, 0, bounds.height, 0, 1);
       scrollState.viewport = map(pxInside, 0, size.height, 0, 1);
     },
-    [track, windowSize, scaleMultiplier],
+    [track, windowSize, scaleMultiplier, getScroll],
   );
 
   useEffect(() => {

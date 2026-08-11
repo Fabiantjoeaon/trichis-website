@@ -292,7 +292,12 @@ const GLImageElement = forwardRef(function GLImageElement(
       </div>
 
       <UseCanvas>
-        <ScrollScene track={el} hideOffscreen={animateOnScroll} overrideVisible={!animateOnScroll}>
+        <ScrollScene
+          track={el}
+          hideOffscreen={animateOnScroll}
+          overrideVisible={!animateOnScroll}
+          inViewportMargin="20%"
+        >
           {(scrollSceneProps) => (
             // Own boundary: a suspending texture (video canplay) must not
             // hide sibling images and kill their in-flight entrance tweens

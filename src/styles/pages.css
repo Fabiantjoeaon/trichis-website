@@ -232,7 +232,7 @@
   color: var(--color-inactiveText);
   transition: color 0.2s cubic-bezier(0.95, 0.05, 0.795, 0.035);
   /* setTypography("li") — size on li so indicator gap matches nine-ca */
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 75rem;
   line-height: 1.1;
   font-weight: 400;
@@ -843,7 +843,7 @@
 }
 
 .form-section__success {
-  background: #00ffc2;
+  background: var(--color-accent);
   border-radius: 15px;
   padding: 80rem 60rem;
   display: flex;
@@ -856,14 +856,14 @@
 
 .form-section__success h3,
 .form-section__success p {
-  color: #2b393b;
+  color: var(--color-background);
 }
 
 .form-section__success-icon {
   width: 60rem;
   height: 60rem;
   margin-bottom: 30rem;
-  color: #2b393b;
+  color: var(--color-background);
 }
 
 .form-field--half {

@@ -1,6 +1,5 @@
 import ProjectHero from "@/components/project/ProjectHero";
 import DynamicContent from "@/components/blocks/DynamicContent";
-import { NiceToMeetYou } from "@/components/NiceToMeetYou";
 
 export default function CustomPage({ page }) {
   if (!page) return null;
@@ -11,7 +10,6 @@ export default function CustomPage({ page }) {
         content={page.content}
         page={{ ...page, __typename: "PageRecord" }}
       />
-      <NiceToMeetYou />
     </>
   );
 }

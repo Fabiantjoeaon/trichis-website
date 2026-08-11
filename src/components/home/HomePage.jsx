@@ -6,7 +6,6 @@ import HomeMore from "./HomeMore";
 import HomeWhatWeveCreated from "./HomeWhatWeveCreated";
 import HomeShowReel from "./HomeShowReel";
 import FormSection from "@/components/blocks/FormSection";
-import { NiceToMeetYou } from "@/components/NiceToMeetYou";
 import { QUICKSCAN_FORM } from "@/lib/constants";
 
 export default function HomePage({ projects = [], howWeDoItCards = [] }) {
@@ -20,7 +19,6 @@ export default function HomePage({ projects = [], howWeDoItCards = [] }) {
       <HomeWhatWeveCreated projects={projects} />
       <HomeShowReel />
       <FormSection data={QUICKSCAN_FORM} />
-      <NiceToMeetYou />
     </>
   );
 }

@@ -47,16 +47,16 @@ const sharedGeometry = new PlaneGeometry(SIZE, SIZE);
 
 const THEME_COLORS = {
   light: {
-    background: "#eaeaea",
-    heroGridSecondary: "#333e40",
-    accent: "#00FFC2",
-    accent2: "#ffd4e5",
+    background: "#f0ece1",
+    heroGridSecondary: "#161817",
+    accent: "#b84626",
+    accent2: "#ffd401",
   },
   dark: {
-    background: "#2B393B",
-    heroGridSecondary: "#333e40",
-    accent: "#376A5D",
-    accent2: "#ffd4e5",
+    background: "#161817",
+    heroGridSecondary: "#231f20",
+    accent: "#b84626",
+    accent2: "#ffd401",
   },
 };
 

@@ -68,8 +68,8 @@ export default function ProjectsBackground() {
     () =>
       buildBackgroundMaterial({
         tGrid,
-        bg: cssVar("--color-background", "#eaeaea"),
-        grid: cssVar("--color-text", "#2B393B"),
+        bg: cssVar("--color-background", "#f0ece1"),
+        grid: cssVar("--color-text", "#231f20"),
       }),
     [tGrid],
   );
@@ -79,9 +79,9 @@ export default function ProjectsBackground() {
     built.uGridXY.value.x -= xy.x;
     built.uGridXY.value.y -= xy.y;
     built.uBackgroundColor.value.set(
-      cssVar("--color-background", "#eaeaea"),
+      cssVar("--color-background", "#f0ece1"),
     );
-    built.uGridColor.value.set(cssVar("--color-text", "#2B393B"));
+    built.uGridColor.value.set(cssVar("--color-text", "#231f20"));
   });
 
   return (

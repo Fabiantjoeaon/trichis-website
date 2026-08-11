@@ -58,7 +58,7 @@ function createScrollingTextMask({
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = "#ffffff";
-  ctx.font = `500 ${Math.floor(height * 0.62)}px "Restart Soft", sans-serif`;
+  ctx.font = `500 ${Math.floor(height * 0.62)}px "SG Grotesk", sans-serif`;
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
 
@@ -115,9 +115,9 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
   // Tweened on SWITCH_THEME like nine-ca's useThemeTransitionGLUniforms.
   const themeColors = useMemo(
     () => ({
-      bg: new Color(cssVar("--color-background", "#eaeaea")),
-      text: new Color(cssVar("--color-howWeDoItText", "#00ffc2")),
-      border: new Color(cssVar("--color-text", "#2B393B")),
+      bg: new Color(cssVar("--color-background", "#f0ece1")),
+      text: new Color(cssVar("--color-howWeDoItText", "#b84626")),
+      border: new Color(cssVar("--color-text", "#231f20")),
     }),
     [],
   );
@@ -126,9 +126,9 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
     // Read targets after data-theme has been applied to <html>
     requestAnimationFrame(() => {
       const targets = [
-        [themeColors.bg, cssVar("--color-background", "#eaeaea")],
-        [themeColors.text, cssVar("--color-howWeDoItText", "#00ffc2")],
-        [themeColors.border, cssVar("--color-text", "#2B393B")],
+        [themeColors.bg, cssVar("--color-background", "#f0ece1")],
+        [themeColors.text, cssVar("--color-howWeDoItText", "#b84626")],
+        [themeColors.border, cssVar("--color-text", "#231f20")],
       ];
       for (const [color, css] of targets) {
         const to = new Color(css);

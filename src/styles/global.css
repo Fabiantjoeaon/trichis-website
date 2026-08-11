@@ -3,29 +3,85 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   Fonts — ported 1:1 from nine-ca src/styles/fonts.js
+   Fonts — Trichis brand (SG Grotesk + AG Book Stencil from project layout)
    ========================================================================== */
 
 @font-face {
-  font-family: "Restart Soft";
-  src: url("/fonts/RestartSoft-Light.woff2") format("woff2");
+  font-family: "SG Grotesk";
+  src: url("/fonts/SGGrotesk-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SG Grotesk";
+  src: url("/fonts/SGGrotesk-ExLight.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SG Grotesk";
+  src: url("/fonts/SGGrotesk-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Restart Soft";
-  src: url("/fonts/RestartSoft-Medium.woff2") format("woff2");
+  font-family: "SG Grotesk";
+  src: url("/fonts/SGGrotesk-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SG Grotesk";
+  src: url("/fonts/SGGrotesk-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Restart Soft";
-  src: url("/fonts/RestartSoft-Bold.woff2") format("woff2");
+  font-family: "SG Grotesk";
+  src: url("/fonts/SGGrotesk-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SG Grotesk";
+  src: url("/fonts/SGGrotesk-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SG Grotesk";
+  src: url("/fonts/SGGrotesk-ExBold.woff2") format("woff2");
   font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SG Grotesk";
+  src: url("/fonts/SGGrotesk-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AG Book Stencil";
+  src: url("/fonts/AGBook-Stencil.woff2") format("woff2");
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -214,29 +270,34 @@ html {
 }
 
 /* ==========================================================================
-   Theme variables — ported from nine-ca src/common/theme.js themesMap
+   Theme variables — Trichis palette from project-layout prototype
+   cream #f0ece1 · ink #231f20 · ink-deep #161817 · rust #b84626 · volt #ffd401
    Default = light. Switch by setting data-theme="dark" | "pink" on <html>.
    ========================================================================== */
 
 :root {
+  --font-sans: "SG Grotesk", sans-serif;
+  --font-display: "AG Book Stencil", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
   /* light theme */
-  --color-background: #eaeaea;
-  --color-backgroundAccent: #bfbfbf;
-  --color-backgroundAccentLight: #d5d5d5;
-  --color-text: #2b393b;
-  --color-inactiveText: #5c6566;
-  --color-secondaryText: #2b393b;
-  --color-scrollTextBackground: #376a5d;
-  --color-accent: #00ffc2;
-  --color-accent2: #ffd4e5;
-  --color-menuBackground: #2b393b;
-  --color-menuBackgroundText: #333e40;
-  --color-menuText: #00ffc2;
-  --color-projectMeta: #2b393b;
-  --color-howWeDoItText: #00ffc2;
-  --color-floatingTitle: #00ffc2;
-  --color-smallDivider: #2b393b;
-  --color-heroGridSecondary: #333e40;
+  --color-background: #f0ece1;
+  --color-backgroundAccent: #ddd8cb;
+  --color-backgroundAccentLight: #e5e0d4;
+  --color-text: #231f20;
+  --color-inactiveText: #a1a0a1;
+  --color-secondaryText: #231f20;
+  --color-scrollTextBackground: #b84626;
+  --color-accent: #b84626;
+  --color-accent2: #ffd401;
+  --color-menuBackground: #161817;
+  --color-menuBackgroundText: #231f20;
+  --color-menuText: #ffd401;
+  --color-projectMeta: #231f20;
+  --color-howWeDoItText: #b84626;
+  --color-floatingTitle: #b84626;
+  --color-smallDivider: #231f20;
+  --color-heroGridSecondary: #161817;
 
   /* layout */
   --navigationHeight: 180rem;
@@ -259,36 +320,36 @@ html {
 }
 
 html[data-theme="dark"] {
-  --color-background: #2b393b;
-  --color-backgroundAccent: #333e40;
-  --color-backgroundAccentLight: #333e40;
-  --color-text: #00ffc2;
-  --color-inactiveText: #376a5d;
-  --color-secondaryText: #eaeaea;
-  --color-scrollTextBackground: #376a5d;
-  --color-accent: #376a5d;
-  --color-accent2: #ffd4e5;
-  --color-menuBackground: #232323;
-  --color-menuBackgroundText: #262626;
-  --color-menuText: #b7b7b7;
-  --color-projectMeta: #eaeaea;
-  --color-howWeDoItText: #5a6466;
-  --color-floatingTitle: #5c6566;
-  --color-smallDivider: #5c6566;
-  --color-heroGridSecondary: #333e40;
+  --color-background: #161817;
+  --color-backgroundAccent: #231f20;
+  --color-backgroundAccentLight: #231f20;
+  --color-text: #f0ece1;
+  --color-inactiveText: #a1a0a1;
+  --color-secondaryText: #f0ece1;
+  --color-scrollTextBackground: #b84626;
+  --color-accent: #b84626;
+  --color-accent2: #ffd401;
+  --color-menuBackground: #0f1010;
+  --color-menuBackgroundText: #1a1c1b;
+  --color-menuText: #b9b3a4;
+  --color-projectMeta: #f0ece1;
+  --color-howWeDoItText: #a1a0a1;
+  --color-floatingTitle: #a1a0a1;
+  --color-smallDivider: #a1a0a1;
+  --color-heroGridSecondary: #231f20;
 }
 
 html[data-theme="pink"] {
-  --color-background: #2b393b;
-  --color-backgroundAccent: #bfbfbf;
-  --color-text: #00ffc2;
-  --color-inactiveText: #376a5d;
-  --color-secondaryText: #eaeaea;
-  --color-scrollTextBackground: #376a5d;
-  --color-accent: #376a5d;
-  --color-accent2: #ffd4e5;
-  --color-menuBackground: #eaeaea;
-  --color-menuBackgroundText: #333e40;
+  --color-background: #161817;
+  --color-backgroundAccent: #ddd8cb;
+  --color-text: #ffd401;
+  --color-inactiveText: #a1a0a1;
+  --color-secondaryText: #f0ece1;
+  --color-scrollTextBackground: #b84626;
+  --color-accent: #b84626;
+  --color-accent2: #ffd401;
+  --color-menuBackground: #f0ece1;
+  --color-menuBackgroundText: #231f20;
 }
 
 /* ==========================================================================
@@ -342,14 +403,14 @@ a {
 }
 
 ::selection {
-  background: #000000;
-  color: #ffffff;
+  background: var(--color-accent);
+  color: var(--color-background);
   text-shadow: none;
 }
 
 ::-moz-selection {
-  background: #000000;
-  color: #ffffff;
+  background: var(--color-accent);
+  color: var(--color-background);
   text-shadow: none;
 }
 
@@ -372,7 +433,7 @@ body {
   -webkit-overflow-scrolling: touch;
   background-color: var(--color-background);
   color: var(--color-text);
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
 }
 
 /* Block (not flex) so the hero's nav+base margin collapses with
@@ -482,21 +543,21 @@ span {
 
 @layer components {
   .t-big-title {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 400rem;
     line-height: 1;
     font-weight: 400;
   }
 
   .t-heading1 {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 220rem;
     line-height: 1;
     font-weight: 400;
   }
 
   .t-heading2 {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 100rem;
     line-height: 1;
     font-weight: 900;
@@ -504,7 +565,7 @@ span {
 
   /* Scrolling text */
   .t-heading3 {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 80rem;
     line-height: 1.1;
     font-weight: 500;
@@ -512,14 +573,14 @@ span {
 
   /* Menu text */
   .t-heading4 {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 48rem;
     line-height: 1;
     font-weight: 100;
   }
 
   .t-heading5 {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 250rem;
     line-height: 1;
     font-weight: 400;
@@ -527,34 +588,34 @@ span {
 
   /* Section titles */
   .t-heading6 {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 50rem;
     line-height: 1;
     font-weight: 300;
   }
 
   .t-loader-text {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 500rem;
     line-height: 1;
     font-weight: 500;
   }
 
   .t-what-we-do-mobile-slider {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 70rem;
     font-weight: 400;
   }
 
   .t-paragraph {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 50rem;
     line-height: 1.4;
     font-weight: 100;
   }
 
   .t-paragraph-strong {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 50rem;
     line-height: 1.4;
     font-weight: 500;
@@ -562,14 +623,14 @@ span {
 
   /* Footer text */
   .t-small-paragraph {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 40rem;
     line-height: 1.4;
     font-weight: 100;
   }
 
   .t-smaller-paragraph {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 30rem;
     line-height: 1.4;
     font-weight: 400;
@@ -592,14 +653,14 @@ span {
   }
 
   .t-li {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 75rem;
     line-height: 1.4;
     font-weight: 400;
   }
 
   .t-menu-links {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 150rem;
     line-height: 1.2;
     font-weight: 100;
@@ -613,62 +674,62 @@ span {
   }
 
   .t-project-number {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 160rem;
     font-weight: 400;
   }
 
   .t-floating-title {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 260rem;
     line-height: 1;
     font-weight: 400;
   }
 
   .t-projects-title {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 80rem;
     line-height: 1.2;
     font-weight: 500;
   }
 
   .t-hero-text {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 180rem;
     line-height: 1.1;
     font-weight: 500;
   }
 
   .t-glass-card-number {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 100rem;
     line-height: 1.1;
     font-weight: 500;
   }
 
   .t-glass-card-title {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 70rem;
     line-height: 1.2;
     font-weight: 500;
   }
 
   .t-glass-card-paragraph {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 40rem;
     line-height: 1.4;
     font-weight: 100;
   }
 
   .t-service-hero-title {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 700rem;
     line-height: 1;
     font-weight: 500;
   }
 
   .t-service-hero-subtitle {
-    font-family: "Restart Soft", sans-serif;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 80rem;
     line-height: 1;
     font-weight: 400;
@@ -747,7 +808,7 @@ span {
 
 /* Element defaults mapped to the scale (as in nine-ca globalStyles) */
 h1 {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 220rem;
   line-height: 1;
   font-weight: 400;
@@ -755,7 +816,7 @@ h1 {
 }
 
 h2 {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 100rem;
   line-height: 1;
   font-weight: 900;
@@ -763,7 +824,7 @@ h2 {
 }
 
 h3 {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 80rem;
   line-height: 1.1;
   font-weight: 500;
@@ -771,7 +832,7 @@ h3 {
 }
 
 h4 {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 48rem;
   line-height: 1;
   font-weight: 100;
@@ -779,7 +840,7 @@ h4 {
 }
 
 h5 {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 250rem;
   line-height: 1;
   font-weight: 400;
@@ -787,7 +848,7 @@ h5 {
 }
 
 h6 {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 50rem;
   line-height: 1;
   font-weight: 300;
@@ -795,7 +856,7 @@ h6 {
 }
 
 p {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 50rem;
   line-height: 1.4;
   font-weight: 100;
@@ -803,7 +864,7 @@ p {
 }
 
 strong {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 50rem;
   line-height: 1.4;
   font-weight: 500;

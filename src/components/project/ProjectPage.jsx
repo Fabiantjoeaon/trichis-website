@@ -2,8 +2,6 @@ import { useMemo } from "react";
 import ProjectHero from "./ProjectHero";
 import ProjectNext from "./ProjectNext";
 import DynamicContent from "@/components/blocks/DynamicContent";
-import CTAFooter from "@/components/layout/CTAFooter";
-import { NiceToMeetYou } from "@/components/NiceToMeetYou";
 
 export default function ProjectPage({ project, nextProject }) {
   const sortedContent = useMemo(() => {
@@ -22,9 +20,7 @@ export default function ProjectPage({ project, nextProject }) {
         content={sortedContent}
         page={{ ...project, __typename: "ProjectRecord" }}
       />
-      <CTAFooter />
       <ProjectNext project={nextProject} />
-      <NiceToMeetYou />
     </>
   );
 }

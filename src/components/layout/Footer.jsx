@@ -1,139 +1,184 @@
-// Port of nine-ca components/Footer/Footer.js — content comes from Site
-// Settings (seeded with nine-ca's hardcoded offices/links) via props.
-import { useMemo, useRef } from "react";
-import SplitText from "@/components/ui/SplitText";
-import BorderedIcon from "@/components/ui/BorderedIcon";
-import { SectionTitle } from "@/components/ui/Divider";
+import { useMemo } from "react";
 import { TransitionLink } from "@/components/ui/TransitionLink";
-import useInView from "@/hooks/useInView";
 
-function FooterList({ heading, items, registerItem }) {
-  return (
-    <ul>
-      <li>
-        <SplitText tag="strong" animateOnScroll={false} ref={registerItem}>
-          {heading}
-        </SplitText>
-      </li>
-      {items.map((item, i) => (
-        <li key={i}>
-          {item.href ? (
-            item.internal ? (
-              <TransitionLink href={item.href}>
-                <SplitText tag="p" animateOnScroll={false} ref={registerItem}>
-                  {item.label}
-                </SplitText>
-              </TransitionLink>
-            ) : (
-              <a href={item.href} target={item.blank ? "_blank" : undefined} rel={item.blank ? "noopener noreferrer" : undefined}>
-                <SplitText tag="p" animateOnScroll={false} ref={registerItem}>
-                  {item.label}
-                </SplitText>
-              </a>
-            )
-          ) : (
-            <SplitText tag="p" animateOnScroll={false} ref={registerItem}>
-              {item.label}
-            </SplitText>
-          )}
-        </li>
-      ))}
-    </ul>
-  );
+const DEFAULT_TITLE = "Klaar voor de\nvolgende stap?";
+const DEFAULT_LEAD_HEAD = "Laten we kennismaken";
+const DEFAULT_LEAD_BODY =
+  "De beste ideeën beginnen met een goed gesprek. Heb je een vraag, een uitdaging of ben je benieuwd wat we voor je kunnen betekenen? Bel ons, stuur een bericht of kom langs voor een lekker bakkie. We maken graag tijd voor je.";
+
+const DEFAULT_OFFICES = [
+  {
+    city: "Rotterdam",
+    address: "Goudsesingel 194\n3011 KD Rotterdam",
+    phone: "+31 10 477 85 25",
+    phoneHref: "tel:+31104778525",
+  },
+  {
+    city: "Breda",
+    address: "Rozenlaan 1\n4835 PB Breda",
+    phone: "+31 76 520 48 60",
+    phoneHref: "tel:+31765204860",
+  },
+];
+
+const DEFAULT_SOCIAL = [
+  {
+    label: "LinkedIn",
+    url: "https://www.linkedin.com/company/trichis",
+  },
+  {
+    label: "Instagram",
+    url: "https://www.instagram.com/trichis",
+  },
+];
+
+const DEFAULT_LEGAL = [
+  { label: "Algemene voorwaarden", url: "#" },
+  { label: "Privacy", url: "#" },
+  { label: "Cookies", url: "#" },
+  { label: "Sitemap", url: "/sitemap.xml" },
+];
+
+function addressLines(address = "") {
+  return String(address)
+    .replace(/<br\s*\/?>/gi, "\n")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+}
+
+function formatYear(year) {
+  return String(year).replaceAll("0", "☺");
+}
+
+function FooterLink({ href, children, external }) {
+  if (!href || href === "#") {
+    return <span>{children}</span>;
+  }
+
+  if (external || href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+    return (
+      <a
+        href={href}
+        target={external || href.startsWith("http") ? "_blank" : undefined}
+        rel={external || href.startsWith("http") ? "noopener noreferrer" : undefined}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return <TransitionLink href={href}>{children}</TransitionLink>;
 }
 
 export default function Footer({ settings = {} }) {
-  const items = useRef([]);
-  const wrapper = useRef();
-  const indexRef = useRef(0);
-
-  const registerItem = (r) => {
-    if (r) items.current[indexRef.current++] = r;
-  };
-
-  useInView({
-    el: wrapper,
-    offset: -0.25,
-    handleIn: () => {
-      items.current.forEach((item, index) => {
-        item?.animateIn({ delay: index * 0.04 });
-      });
-    },
-  });
-
   const year = useMemo(() => new Date().getFullYear(), []);
-
   const footer = settings.footer ?? {};
-  const email = footer.email || "cu@nine.nl";
 
-  const officeLists = (footer.offices ?? []).map((office) => ({
-    heading: office.city,
-    items: (office.address ?? "")
-      .split("\n")
-      .filter(Boolean)
-      .map((line) => ({ label: line })),
-  }));
+  const title = (footer.ctaTitle || DEFAULT_TITLE).replace(/<br\s*\/?>/gi, "\n");
+  const email = footer.email || "info@trichis.nl";
+  const sharedPhone = footer.phone || "";
 
-  // First office column also carries the email link (nine-ca layout)
-  if (officeLists[0]) {
-    officeLists[0].items.push({ label: email, href: `mailto:${email}` });
-  }
+  const offices = (footer.offices?.length ? footer.offices : DEFAULT_OFFICES).map(
+    (office, index) => {
+      const fallback = DEFAULT_OFFICES.find(
+        (item) => item.city.toLowerCase() === String(office.city || "").toLowerCase(),
+      );
+      const phone = office.phone || fallback?.phone || (index === 0 ? sharedPhone : "");
+      const phoneHref =
+        office.phoneHref ||
+        fallback?.phoneHref ||
+        (phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "");
 
-  const menuItems = (settings.navLinks ?? [])
-    .filter((l) => l.path !== "/")
-    .map((l) => ({ label: l.label, href: l.path, internal: true }));
-  menuItems.push({ label: "Contact", href: `mailto:${email}` });
+      return {
+        city: office.city,
+        lines: addressLines(office.address || fallback?.address || ""),
+        phone,
+        phoneHref,
+      };
+    },
+  );
 
-  const socialItems = (footer.socialLinks ?? []).map((s) => ({
-    label: s.label,
-    href: s.url,
-    blank: true,
-  }));
+  const socialItems = footer.socialLinks?.length
+    ? footer.socialLinks
+    : DEFAULT_SOCIAL;
 
-  const legalItems = footer.legalItems ?? [];
+  const legalItems = footer.legalItems?.length
+    ? footer.legalItems
+    : DEFAULT_LEGAL;
 
   return (
-    <footer ref={wrapper}>
-      <SectionTitle>Get in touch</SectionTitle>
-      <div className="footer-wrapper inner-width">
-        <div className="footer-inner">
-          <div className="footer-inner__left">
-            {officeLists.map((list, i) => (
-              <FooterList
-                key={i}
-                heading={list.heading}
-                items={list.items}
-                registerItem={registerItem}
-              />
-            ))}
-            <FooterList heading="Menu" items={menuItems} registerItem={registerItem} />
-            <FooterList heading="Follow us" items={socialItems} registerItem={registerItem} />
-          </div>
-
-          <div className="footer-inner__right">
-            <BorderedIcon
-              offset={-0.25}
-              href={`mailto:${email}`}
-              text="Contact us"
-              dontTriggerPageTransition
-            />
-          </div>
-        </div>
-      </div>
-      <SectionTitle />
-
-      <div className="footer-bottom">
-        <p>Nine Creative Agency - {year}</p>
-        <div className="footer-bottom__right">
-          {legalItems.map((item, i) => (
-            <a key={i} href={item.url} target="_blank" rel="noopener noreferrer">
-              <SplitText tag="p" animateOnScroll>
-                {item.label}
-              </SplitText>
-            </a>
+    <footer className="site-footer" id="contact">
+      <div className="site-footer__inner inner-width">
+        <p className="site-footer__title">
+          {title.split("\n").map((line, i, arr) => (
+            <span key={i}>
+              {line}
+              {i < arr.length - 1 ? <br /> : null}
+            </span>
           ))}
+        </p>
+
+        <div className="site-footer__cols">
+          <div className="site-footer__col site-footer__col--lead">
+            <p className="site-footer__head">{DEFAULT_LEAD_HEAD}</p>
+            <p>{DEFAULT_LEAD_BODY}</p>
+          </div>
+
+          {offices.map((office) => (
+            <div className="site-footer__col" key={office.city}>
+              <p className="site-footer__head">{office.city}</p>
+              <p>
+                {office.lines.map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+                <FooterLink href={`mailto:${email}`}>{email}</FooterLink>
+                {office.phone ? (
+                  <>
+                    <br />
+                    <FooterLink href={office.phoneHref}>{office.phone}</FooterLink>
+                  </>
+                ) : null}
+              </p>
+            </div>
+          ))}
+
+          <div className="site-footer__col">
+            <p className="site-footer__head">Follow us</p>
+            <p>
+              {socialItems.map((item, i) => (
+                <span key={i}>
+                  <FooterLink href={item.url} external>
+                    {item.label}
+                  </FooterLink>
+                  {i < socialItems.length - 1 ? <br /> : null}
+                </span>
+              ))}
+            </p>
+          </div>
         </div>
       </div>
+
+      <div className="site-footer__rule" />
+
+      <div className="site-footer__bottom inner-width">
+        <span>
+          Trichis {formatYear(year)}
+        </span>
+        <nav className="site-footer__legal" aria-label="Juridisch">
+          {legalItems.map((item, i) => (
+            <FooterLink key={i} href={item.url} external={item.url?.startsWith("http")}>
+              → {item.label}
+            </FooterLink>
+          ))}
+        </nav>
+      </div>
+
+      <div className="site-footer__rule" />
+      <div className="site-footer__tail" />
     </footer>
   );
 }

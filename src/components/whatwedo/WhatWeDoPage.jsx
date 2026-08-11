@@ -7,7 +7,6 @@ import WhatWeDoServicePhotoVideo from "@/components/whatwedo/services/WhatWeDoSe
 import WhatWeDoServiceCampaign from "@/components/whatwedo/services/WhatWeDoServiceCampaign";
 import HowWeDoIt from "@/components/home/HowWeDoIt";
 import HomeMore from "@/components/home/HomeMore";
-import { NiceToMeetYou } from "@/components/NiceToMeetYou";
 
 export default function WhatWeDoPage({ howWeDoItCards = [] }) {
   return (
@@ -19,7 +18,7 @@ export default function WhatWeDoPage({ howWeDoItCards = [] }) {
           **Waarom blijven klanten terugkomen? Door een merk dat indruk maakt.**
           Wil jij dat jouw merk opvalt en impact maakt? Ontdek hoe een sterke merkidentiteit deuren opent naar meer klanten, vertrouwen en groei.
         `}
-        cta={{ text: "Contact", href: "mailto:cu@nine.nl" }}
+        cta={{ text: "Contact", href: "mailto:info@trichis.nl" }}
       />
       <WhatWeDoExpertises />
       <WhatWeDoServiceIdentity />
@@ -29,7 +28,6 @@ export default function WhatWeDoPage({ howWeDoItCards = [] }) {
       <WhatWeDoServiceCampaign />
       <HowWeDoIt cards={howWeDoItCards} />
       <HomeMore />
-      <NiceToMeetYou />
     </>
   );
 }

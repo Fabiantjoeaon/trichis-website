@@ -145,7 +145,7 @@ export default memo(function Menu({ settings = {} }) {
 
   const footer = settings.footer ?? {};
   const phone = footer.phone || "+31765156463";
-  const email = footer.email || "cu@nine.nl";
+  const email = footer.email || "info@trichis.nl";
   const socials = footer.socialLinks?.length
     ? footer.socialLinks
     : [

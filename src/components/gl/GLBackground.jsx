@@ -38,8 +38,8 @@ function setCanvasOverlay(on) {
 }
 
 const COLORS = {
-  light: { background: "#2B393B", accent: "#00FFC2" },
-  dark: { background: "#232323", accent: "#376A5D" },
+  light: { background: "#161817", accent: "#b84626" },
+  dark: { background: "#0f1010", accent: "#b84626" },
 };
 
 function buildWipeMaterial({ backgroundColor, borderColor, tTransition }) {

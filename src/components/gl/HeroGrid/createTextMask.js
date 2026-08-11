@@ -21,7 +21,7 @@ export function createTextMask({
   const label = isMobile ? mobileText : text;
   const fontSize = isMobile ? Math.floor(size * 0.72) : Math.floor(size * 0.28);
   ctx.fillStyle = "#ffffff";
-  ctx.font = `800 ${fontSize}px "Restart Soft", sans-serif`;
+  ctx.font = `800 ${fontSize}px "SG Grotesk", sans-serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText(label, size * 0.5, size * 0.52);

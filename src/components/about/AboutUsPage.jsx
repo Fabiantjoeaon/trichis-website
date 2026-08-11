@@ -1,7 +1,6 @@
 import AboutUsHero from "./AboutUsHero";
 import AboutUsIntro from "./AboutUsIntro";
 import AboutUsOffices from "./AboutUsOffices";
-import { NiceToMeetYou } from "@/components/NiceToMeetYou";
 
 export default function AboutUsPage() {
   return (
@@ -9,7 +8,6 @@ export default function AboutUsPage() {
       <AboutUsHero />
       <AboutUsIntro />
       <AboutUsOffices />
-      <NiceToMeetYou />
     </>
   );
 }

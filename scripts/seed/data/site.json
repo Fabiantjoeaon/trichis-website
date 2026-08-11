@@ -44,28 +44,24 @@
   "footer": {
     "footer_offices": [
       {
-        "city": "Breda",
-        "address": "Willemstraat 16\n4811 AL Breda\nThe Netherlands"
+        "city": "Rotterdam",
+        "address": "Goudsesingel 194\n3011 KD Rotterdam"
       },
       {
-        "city": "Rotterdam",
-        "address": "Goudsesingel 194\n3011 KD Rotterdam\nThe Netherlands"
+        "city": "Breda",
+        "address": "Rozenlaan 1\n4835 PB Breda"
       }
     ],
-    "footer_email": "cu@nine.nl",
-    "footer_phone": "+31765156463",
+    "footer_email": "info@trichis.nl",
+    "footer_phone": "+31104778525",
     "footer_social_links": [
       {
         "label": "LinkedIn",
-        "url": "https://www.linkedin.com/company/938792/admin/dashboard/"
+        "url": "https://www.linkedin.com/company/trichis"
       },
       {
         "label": "Instagram",
-        "url": "https://www.instagram.com/ninecreativeagency/"
-      },
-      {
-        "label": "Vimeo",
-        "url": "https://vimeo.com/ninefilms"
+        "url": "https://www.instagram.com/trichis"
       }
     ],
     "footer_legal_items": [
@@ -76,11 +72,19 @@
       {
         "label": "Privacy",
         "url": "/files/privacy-beleid.pdf"
+      },
+      {
+        "label": "Cookies",
+        "url": "#"
+      },
+      {
+        "label": "Sitemap",
+        "url": "/sitemap.xml"
       }
     ],
-    "footer_cta_title": "Let's get in touch",
-    "footer_cta_text": "Contact us",
-    "footer_cta_link": "mailto:cu@nine.nl"
+    "footer_cta_title": "Klaar voor de\nvolgende stap?",
+    "footer_cta_text": "Neem contact op",
+    "footer_cta_link": "mailto:info@trichis.nl"
   },
   "homeContent": {
     "how_we_do_it": {

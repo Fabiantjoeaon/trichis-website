@@ -18,7 +18,7 @@
 }
 
 .section-title__text {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 50rem;
   line-height: 1.2;
   font-weight: 300;
@@ -92,7 +92,7 @@
   position: relative;
   margin-left: 50rem;
   color: var(--color-text);
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 48rem;
   line-height: 1;
   font-weight: 100;
@@ -277,7 +277,7 @@
 }
 
 .navigation h2 {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 40rem;
   line-height: 1.4;
   font-weight: 100;
@@ -426,7 +426,7 @@
 }
 
 .menu__links h2 {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 150rem;
   line-height: 1.2;
   font-weight: 100;
@@ -496,152 +496,146 @@
   }
 }
 
-/* ── Footer (components/Footer/Footer.js) ── */
+/* ── Footer — Trichis CTA footer (project-layout prototype) ── */
 
-footer {
-  background-color: var(--color-background);
+.site-footer {
+  background: var(--color-accent);
+  color: var(--color-background);
+  padding-top: 80rem;
+  border-top: 1px solid rgba(22, 24, 23, 0.36);
 }
 
-.footer-wrapper {
-  position: relative;
-  /* nine-ca Footer util.inner vertical rhythm */
-  padding-top: 70rem;
-  padding-bottom: 280rem;
+.site-footer__inner {
+  padding-bottom: 0;
 }
 
-@media (max-width: 711px) {
-  .footer-wrapper {
-    padding-bottom: 120rem;
-  }
+.site-footer__title {
+  font-family: "SG Grotesk", sans-serif;
+  font-size: 180rem;
+  line-height: 1.15;
+  font-weight: 200;
+  letter-spacing: -0.005em;
+  color: var(--color-background);
+  max-width: 18ch;
 }
 
-.footer-wrapper .icon-container {
-  position: absolute;
-  top: 75%;
-  transform: translateY(-50%);
-  right: var(--pagePadding);
+.site-footer__cols {
+  display: grid;
+  grid-template-columns: 1.6fr 0.85fr 0.85fr 0.7fr;
+  gap: 60rem;
+  margin-top: 140rem;
+  padding-bottom: 80rem;
+  font-family: "SG Grotesk", sans-serif;
+  font-size: 36rem;
+  line-height: 1.35;
+  font-weight: 200;
 }
 
-@media (max-width: 711px) {
-  .footer-wrapper .icon-container {
-    position: relative;
-    padding-left: var(--pagePadding);
-    right: 0;
-    top: 0;
-    margin-top: 150rem;
-  }
+.site-footer__col--lead p:last-child {
+  max-width: 42ch;
 }
 
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 100rem;
-  padding-bottom: 100rem;
+.site-footer__head {
+  color: var(--color-accent2);
+  margin-bottom: 18rem;
+  font-weight: 200;
 }
 
-.footer-inner__left {
-  display: flex;
-  gap: 150rem;
-  max-width: 70%;
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.footer-inner__right {
-  width: 600rem;
-  max-width: 20%;
-  display: flex;
-  flex-direction: column;
-  gap: 100rem;
+.site-footer a:hover {
+  background-size: 100% 1px;
 }
 
-.footer-inner ul li {
-  margin-bottom: 20rem;
-}
-
-.footer-inner ul li strong {
-  color: var(--color-text);
-  font-weight: 500;
-}
-
-.footer-inner ul li p {
-  font-family: "Restart Soft", sans-serif;
-  font-size: 40rem;
-  line-height: 1.4;
-  font-weight: 100;
-  color: var(--color-text);
-}
-
-.footer-inner ul li a p {
-  position: relative;
-  cursor: pointer;
-}
-
-.footer-inner ul li a p::before {
-  content: "";
-  position: absolute;
-  bottom: -4rem;
-  left: 0;
-  width: 100%;
+.site-footer__rule {
   height: 1px;
-  background: var(--color-text);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  background: rgba(22, 24, 23, 0.36);
 }
 
-.footer-inner ul li a p:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-@media (max-width: 711px) {
-  .footer-inner {
-    flex-flow: column wrap;
-    gap: 30rem;
-  }
-
-  .footer-inner__left {
-    max-width: 100%;
-    gap: 0rem;
-    flex-wrap: wrap;
-  }
-
-  .footer-inner__right {
-    max-width: 100%;
-  }
-
-  .footer-inner ul {
-    flex: 50%;
-    margin-bottom: 50rem;
-  }
-}
-
-.footer-bottom {
+.site-footer__bottom {
   display: flex;
   justify-content: space-between;
-  padding: 70rem var(--pagePadding);
+  align-items: baseline;
+  gap: 40rem;
+  font-family: "SG Grotesk", sans-serif;
+  font-size: 28rem;
+  line-height: 1.3;
+  font-weight: 200;
+  padding-top: 40rem;
+  padding-bottom: 32rem;
 }
 
-.footer-bottom p {
-  font-family: "Restart Soft", sans-serif;
-  font-size: 40rem;
-  line-height: 1.4;
-  font-weight: 100;
-  color: var(--color-text);
-}
-
-.footer-bottom__right {
+.site-footer__legal {
   display: flex;
-  gap: 50rem;
+  flex-wrap: wrap;
+  gap: 0 48rem;
+  flex: none;
 }
 
-.footer-bottom__right p {
-  cursor: pointer;
-  position: relative;
+.site-footer__tail {
+  height: 60rem;
+}
+
+@media (max-width: 1024px) {
+  .site-footer__title {
+    font-size: 120rem;
+    max-width: none;
+  }
+
+  .site-footer__cols {
+    grid-template-columns: 1fr 1fr;
+    gap: 50rem 40rem;
+    margin-top: 80rem;
+  }
+
+  .site-footer__col--lead {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 711px) {
-  .footer-bottom p {
+  .site-footer {
+    padding-top: 60rem;
+  }
+
+  .site-footer__title {
+    font-size: 90rem;
+  }
+
+  .site-footer__cols {
+    grid-template-columns: 1fr;
+    gap: 48rem;
+    margin-top: 60rem;
+    font-size: 40rem;
+    padding-bottom: 60rem;
+  }
+
+  .site-footer__col--lead p:last-child {
+    max-width: none;
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+    gap: 24rem;
     font-size: 30rem;
+    padding-top: 32rem;
+    padding-bottom: 28rem;
+  }
+
+  .site-footer__legal {
+    gap: 18rem 32rem;
+  }
+
+  .site-footer__tail {
+    height: 36rem;
   }
 }
 
@@ -660,7 +654,7 @@ footer {
 .cta-footer h3 {
   text-align: center;
   color: var(--color-text);
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 80rem;
   line-height: 1.1;
   font-weight: 100;
@@ -707,7 +701,7 @@ footer {
 }
 
 .loader-progress-text {
-  font-family: "Restart Soft", sans-serif;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 500rem;
   line-height: 1;
   font-weight: 500;
@@ -748,7 +742,7 @@ footer {
   display: inline-block;
   max-width: 800rem;
 
-  background-color: #00ffc2;
+  background-color: var(--color-accent);
   bottom: var(--basePadding);
   left: var(--basePadding);
   padding: 50rem;
@@ -760,7 +754,7 @@ footer {
     opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 
-  color: #2b393b !important;
+  color: var(--color-background) !important;
 }
 
 .cookie-banner * {
@@ -788,7 +782,7 @@ footer {
 }
 
 .cookie-banner h4::before {
-  background: #2b393b !important;
+  background: var(--color-background) !important;
 }
 
 .cookie-banner .more-info {
@@ -809,21 +803,21 @@ footer {
 }
 
 .cookie-banner .icon-container .icon-wrapper {
-  border-color: #2b393b !important;
+  border-color: var(--color-background) !important;
 }
 
 .cookie-banner .icon-container .icon-background {
-  background-color: #2b393b !important;
+  background-color: var(--color-background) !important;
 }
 
 .cookie-banner .icon-container path {
-  fill: #2b393b !important;
-  stroke: #2b393b !important;
+  fill: var(--color-background) !important;
+  stroke: var(--color-background) !important;
 }
 
 .cookie-banner .icon-container .icon-duplicate path {
-  fill: #00ffc2 !important;
-  stroke: #00ffc2 !important;
+  fill: var(--color-accent) !important;
+  stroke: var(--color-accent) !important;
 }
 
 /* ── Cursor (components/Cursor.js) ── */

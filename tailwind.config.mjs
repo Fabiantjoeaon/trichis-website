@@ -41,8 +41,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        restart: ['"Restart Soft"', "sans-serif"],
-        mono: ['"IBM Plex Mono"', "monospace"],
+        sans: ['"SG Grotesk"', "sans-serif"],
+        display: ['"AG Book Stencil"', "sans-serif"],
       },
       colors: {
         ...palette,

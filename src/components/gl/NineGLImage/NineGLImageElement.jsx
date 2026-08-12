@@ -17,11 +17,11 @@ const EASE_CUSTOM_4_CSS = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 const DOM_WRAPPER_STYLE = {
   overflow: "hidden",
-  borderRadius: "10px",
+  borderRadius: "0px",
   position: "relative",
 };
 
-const DOM_MEDIA_RADIUS = "10px";
+const DOM_MEDIA_RADIUS = "0px";
 const DOM_MEDIA_HOVER_STYLE = {
   transform: "scale(1.05)",
   filter: "brightness(0.75)",

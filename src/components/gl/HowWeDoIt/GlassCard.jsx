@@ -90,7 +90,7 @@ function buildGlassMaterial({
     // outputs sRGB, so apply the linear-space equivalent (0.9^2.2)
     color.assign(color.mul(float(0.79)));
 
-    const radius = float(10);
+    const radius = float(0);
     const thickness = float(1);
     const multiplier = max(uSize.x, uSize.y);
     const ratio = uSize.div(multiplier);

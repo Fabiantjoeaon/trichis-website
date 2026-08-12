@@ -86,14 +86,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "IBM Plex Mono";
-  src: url("/fonts/IBMPlexMono-Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* ==========================================================================
    Reset — ported from nine-ca src/mono/lib/styles/reset.js
    ========================================================================== */
@@ -278,7 +270,6 @@ html {
 :root {
   --font-sans: "SG Grotesk", sans-serif;
   --font-display: "AG Book Stencil", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
 
   /* light theme */
   --color-background: #f0ece1;
@@ -637,7 +628,7 @@ span {
   }
 
   .t-mono-small {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 25rem;
     line-height: 1.4;
     font-weight: 400;
@@ -645,7 +636,7 @@ span {
   }
 
   .t-mono-medium {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 80rem;
     line-height: 1.4;
     font-weight: 400;
@@ -667,7 +658,7 @@ span {
   }
 
   .t-menu-mono {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "SG Grotesk", sans-serif;
     font-size: 50rem;
     line-height: 1.2;
     font-weight: 400;
@@ -880,7 +871,7 @@ strong {
 
 .txt-shuffle,
 .txt-shuffle-wrapper {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "SG Grotesk", sans-serif;
   font-size: 25rem;
   line-height: 1.4;
   font-weight: 400;

@@ -106,7 +106,7 @@ function buildHeroMaterial({ colors }) {
 
   material.fragmentNode = Fn(() => {
     const st = uv();
-    const border = roundedBorder(float(0), float(4.1), st, uSize);
+    const border = roundedBorder(float(0), float(0), st, uSize);
     const a = border.y;
 
     const gt = aRandom.x.mul(0.8);

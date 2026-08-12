@@ -74,7 +74,7 @@ function buildImageMaterial({ map, darken = 0 }) {
     textureUV.assign(scaleUV(textureUV, vec2(transitionScale), vec2(0.5)));
 
     const sampled = mapNode.sample(textureUV);
-    const border = roundedBorder(float(0), float(10), st, uElementSize);
+    const border = roundedBorder(float(0), float(0), st, uElementSize);
     const inside = border.y;
 
     let final = sampled.rgb.toVar();

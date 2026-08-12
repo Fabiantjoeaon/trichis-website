@@ -24,7 +24,7 @@ function ProjectCard({ project, index, cardRef }) {
       data-project-index={index}
     >
       <TransitionLink href={`/project/${project.slug}`}>
-        <div className="project-image relative aspect-[6/5] overflow-hidden rounded-[10px]">
+        <div className="project-image relative aspect-[6/5] overflow-hidden rounded-none">
           {src ? (
             <img
               src={src}

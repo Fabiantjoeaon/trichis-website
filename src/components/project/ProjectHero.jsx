@@ -1,16 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
-import SplitText from "@/components/ui/SplitText";
 import emitter from "@/lib/emitter";
 import usePageEnter from "@/hooks/usePageEnter";
 import { useGlobalStore } from "@/stores/global";
 import { isMediaVideo } from "@/lib/cms";
 
 export default function ProjectHero({
-  project: { title, coverImage, mobileCoverImage } = {},
-  isProject = true,
+  project: { coverImage, mobileCoverImage } = {},
 }) {
-  const titleRef = useRef(null);
   const glImage = useRef(null);
   const noWebGLImages = useGlobalStore((s) => s.noWebGLImages);
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
@@ -27,7 +24,6 @@ export default function ProjectHero({
     hasAnimatedRef.current = true;
     setIsLoading(false);
     glImage.current?.animateIn?.();
-    setTimeout(() => titleRef.current?.animateIn?.({ stagger: 0.04 }), 200);
   }
 
   useEffect(() => {
@@ -65,17 +61,6 @@ export default function ProjectHero({
           tryAnimateIn();
         }}
       />
-      {isProject && (
-        <SplitText
-          tag="h1"
-          ref={titleRef}
-          animateOnScroll={false}
-          animation="charClipped"
-          type="chars"
-        >
-          {title}
-        </SplitText>
-      )}
     </section>
   );
 }

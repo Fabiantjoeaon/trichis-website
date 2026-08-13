@@ -60,7 +60,6 @@
 
 /* Hero sizing — matches nine-ca util.heroSizing */
 .home-hero,
-.project-hero,
 .about-hero {
   position: relative;
   width: calc(100% - (var(--pagePadding) * 2));
@@ -79,9 +78,26 @@
 
 @media (max-width: 711px) {
   .home-hero,
-  .project-hero,
   .about-hero {
     aspect-ratio: 5 / 7;
+    margin-bottom: calc(var(--basePadding) * 2);
+  }
+}
+
+/* The project hero bleeds edge to edge under the nav (project-layout
+   prototype), at the artboard's 841.89 x 380.4 ratio */
+.project-hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 841.89 / 380.4;
+  margin: 0 0 150rem;
+  overflow: hidden;
+  background: var(--color-heroGridSecondary);
+}
+
+@media (max-width: 711px) {
+  .project-hero {
+    aspect-ratio: 16 / 10;
     margin-bottom: calc(var(--basePadding) * 2);
   }
 }
@@ -90,17 +106,6 @@
 .project-hero__gl {
   width: 100%;
   height: 100%;
-}
-
-.project-hero h1 {
-  position: absolute;
-  left: var(--basePadding);
-  bottom: var(--basePadding);
-  z-index: 2;
-  color: var(--color-floatingTitle);
-  font-size: 220rem;
-  line-height: 0.9;
-  font-weight: 400;
 }
 
 .project-hero__spinner {
@@ -1314,24 +1319,39 @@
   padding-bottom: 50rem;
 }
 
-.project-header {
-  display: flex;
-  gap: 5%;
-}
-
+/* Project pages stack: title, then copy indented 55%. Only non-project
+   pages put the two side by side (nine-ca ProjectHeader). */
 .project-header.is-project .project-header__copy {
   margin-left: 55%;
 }
 
-.project-header.is-page .project-header__title,
+.project-header.is-page {
+  display: flex;
+}
+
+.project-header.is-page .project-header__title {
+  width: 50%;
+}
+
 .project-header.is-page .project-header__copy {
-  width: 47.5%;
+  width: 50%;
 }
 
 .project-header h1 {
+  display: block;
   color: var(--color-floatingTitle);
   font-size: 220rem;
   line-height: 0.9;
+}
+
+.project-header h6,
+.project-header p {
+  max-width: 90%;
+}
+
+.project-header h6 {
+  font-weight: 500;
+  margin-bottom: 30rem;
 }
 
 .project-numbers__top {
@@ -1630,9 +1650,24 @@
   .about-intro__top,
   .what-we-do-expertises,
   .about-offices,
-  .project-header,
   .project-numbers__top {
     flex-direction: column;
+  }
+
+  .project-header {
+    display: block;
+  }
+
+  .project-header h1 {
+    text-align: right;
+  }
+
+  .project-header h6 {
+    margin-bottom: 0;
+  }
+
+  .project-header__title {
+    margin-bottom: 150rem;
   }
 
   .next-lead {

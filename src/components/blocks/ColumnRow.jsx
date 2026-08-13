@@ -49,6 +49,7 @@ export default function ColumnRow({
   isImageColumnAndNextItemIsImageColumn,
   isJustTextColumn,
   isColumnRowAndNeedsMoreSpacingBottom,
+  showSwoosh,
 }) {
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
   const columns = data?.columns || [];
@@ -62,6 +63,14 @@ export default function ColumnRow({
     <div
       className={`column-row-wrap inner-width${hasMultipleColumns ? " multi" : ""}${isColumnRowAndNeedsMoreSpacingBottom ? " more-bottom" : ""}`}
     >
+      {showSwoosh && (
+        <img
+          className="swoosh swoosh--b"
+          src="/images/swoosh-b.svg"
+          alt=""
+          aria-hidden="true"
+        />
+      )}
       {columns.map((column, index) => {
         const {
           __typename,

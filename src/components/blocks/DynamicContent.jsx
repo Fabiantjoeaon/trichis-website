@@ -9,6 +9,7 @@ import FormSection from "./FormSection";
 import { SectionTitle } from "@/components/ui/Divider";
 import { ScrollingText } from "@/components/ui/ScrollingText";
 import { useGlobalStore } from "@/stores/global";
+import { isMediaVideo } from "@/lib/cms";
 
 function ScrollingTitle({ data }) {
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
@@ -40,9 +41,20 @@ export const ContentComponents = {
   FormSectionRecord: ({ data }) => <FormSection data={data} />,
 };
 
+function hasVideoColumn(item) {
+  return !!item?.columns?.some(
+    (c) =>
+      c.__typename === "ImagecolumnRecord" &&
+      isMediaVideo(c.image?.url, c.image?.video),
+  );
+}
+
 export default function DynamicContent({ content, page }) {
   if (!content?.length) return null;
   const pageType = page?.__typename;
+
+  // The prototype hangs the yellow swoosh over the first video in the page
+  const swooshIndex = content.findIndex(hasVideoColumn);
 
   return content.map((item, index) => {
     const Component = ContentComponents[item.__typename];
@@ -92,6 +104,7 @@ export default function DynamicContent({ content, page }) {
         isColumnRowAndNeedsMoreSpacingBottom={
           isColumnRowAndNeedsMoreSpacingBottom
         }
+        showSwoosh={index === swooshIndex}
         {...page}
       />
     );

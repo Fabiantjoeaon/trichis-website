@@ -6,17 +6,20 @@ import { getProject, getProjects } from "@/lib/content";
 export async function getStaticPaths() {
   const projects = await getProjects();
   return projects.map((project, index) => {
-    const next = projects[(index + 1) % projects.length];
+    const nextProjects = [1, 2]
+      .map((step) => projects[(index + step) % projects.length])
+      .filter((p, i, arr) => p && p.slug !== project.slug && arr.indexOf(p) === i);
+
     return {
       params: { slug: project.slug },
-      props: { project, nextProject: next },
+      props: { project, nextProjects },
     };
   });
 }
 
-const { project, nextProject } = Astro.props;
+const { project, nextProjects } = Astro.props;
 ---
 
 <BaseLayout title={`${project.title} — Nine Creative Agency`}>
-  <ProjectPage client:load project={project} nextProject={nextProject} />
+  <ProjectPage client:load project={project} nextProjects={nextProjects} />
 </BaseLayout>

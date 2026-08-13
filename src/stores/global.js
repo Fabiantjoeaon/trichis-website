@@ -1,11 +1,13 @@
 import { create } from "zustand";
 
-// Breakpoint mirror of nine-ca's isMobileLayout (width < breakpointTablet)
-const BREAKPOINT_TABLET = 712;
+// Breakpoint mirrors of nine-ca's responsive helpers
+const BREAKPOINT_TABLET = 712; // isMobileLayout: width < breakpointTablet
+const BREAKPOINT_DESKTOP = 1025; // isTabletOrSmallerLayout: width < breakpointDesktop
 
 export const useGlobalStore = create((set) => ({
   windowSize: { width: 0, height: 0 },
   isMobileLayout: false,
+  isTabletOrSmallerLayout: false,
   theme: "light",
   lenis: null,
   menuOpen: false,
@@ -21,6 +23,7 @@ export const useGlobalStore = create((set) => ({
     set({
       windowSize: { width, height },
       isMobileLayout: width < BREAKPOINT_TABLET,
+      isTabletOrSmallerLayout: width < BREAKPOINT_DESKTOP,
     }),
   setTheme: (theme) => set({ theme }),
 }));

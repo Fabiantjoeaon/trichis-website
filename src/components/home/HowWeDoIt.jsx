@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import { UseCanvas, ScrollScene } from "@/components/gl";
-import { useTracker } from "@/lib/gl/useTracker";
+import { useCanvasStore } from "@/lib/gl/canvasStore";
 import HowWeDoItScene from "@/components/gl/HowWeDoIt/HowWeDoItScene";
 import {
   howWeDoItProgress,
@@ -20,57 +20,53 @@ import { SectionTitle } from "@/components/ui/Divider";
 
 function Card({ children, i, trackRef }) {
   const innerRef = useRef(null);
-  const cardTracker = useTracker(innerRef, { autoUpdate: false });
-  const trackTracker = useTracker(trackRef, { autoUpdate: false });
-  const cardTrackerRef = useRef(cardTracker);
-  const trackTrackerRef = useRef(trackTracker);
   const lastKey = useRef("");
-  cardTrackerRef.current = cardTracker;
-  trackTrackerRef.current = trackTracker;
+  const pageReflow = useCanvasStore((s) => s.pageReflow);
+  const windowSize = useGlobalStore((s) => s.windowSize);
 
+  // Layout-offset based measurement (nine-ca measures once per resize).
+  // offsetLeft/offsetWidth ignore CSS transforms, so the translateX/scale the
+  // mobile drag applies to the cards' DOM inner can never feed back into the
+  // GL card positions (the GL group applies that same offset itself).
   const sync = useCallback(() => {
-    const card = cardTrackerRef.current;
-    const section = trackTrackerRef.current;
-    card.measure?.();
-    card.update?.();
-    section.measure?.();
-    section.update?.();
-    if (!card.scale.y || !section.scale.y) return;
+    const el = innerRef.current;
+    const section = trackRef.current;
+    if (!el || !section) return;
 
-    const key = `${card.scale.x.toFixed(2)}:${card.scale.y.toFixed(2)}:${(card.position.x - section.position.x).toFixed(2)}:${card.bounds.width}:${card.bounds.height}`;
+    let left = 0;
+    let node = el;
+    while (node && node !== section) {
+      left += node.offsetLeft;
+      node = node.offsetParent;
+    }
+    const width = el.offsetWidth;
+    const height = el.offsetHeight;
+    if (!width || !height) return;
+
+    const sm = useCanvasStore.getState().scaleMultiplier;
+    const x = (left + width * 0.5 - section.offsetWidth * 0.5) * sm;
+
+    const key = `${width}:${height}:${x.toFixed(2)}`;
     if (key === lastKey.current) return;
     lastKey.current = key;
 
     howWeDoItStore.getState().addTransform(
       {
-        scale: { ...card.scale },
-        position: {
-          x: card.position.x - section.position.x,
-          y: 0,
-          z: 0,
-        },
-        rect: {
-          width: card.bounds.width,
-          height: card.bounds.height,
-        },
+        scale: { x: width * sm, y: height * sm, z: 1 },
+        position: { x, y: 0, z: 0 },
+        rect: { width, height },
       },
       i,
     );
-  }, [i]);
+  }, [i, trackRef]);
 
+  // Re-measure on mount, resize and page reflow (fonts/images shifting
+  // layout trigger the body ResizeObserver → pageReflow).
   useEffect(() => {
-    const run = () => requestAnimationFrame(sync);
-    run();
-    window.addEventListener("resize", run);
-    return () => window.removeEventListener("resize", run);
-  }, [sync]);
-
-  useTicker(
-    () => {
-      sync();
-    },
-    { initiallyActive: true },
-  );
+    const raf = requestAnimationFrame(sync);
+    document.fonts?.ready?.then(sync);
+    return () => cancelAnimationFrame(raf);
+  }, [sync, pageReflow, windowSize]);
 
   return (
     <article ref={innerRef} className="how-we-do-it__card">
@@ -137,7 +133,7 @@ export default function HowWeDoIt({ data, cards: cardsProp, title: titleProp }) 
 
   useTicker(
     ({ delta }) => {
-      if (!useGlobalStore.getState().isMobileLayout) return;
+      if (!useGlobalStore.getState().isTabletOrSmallerLayout) return;
       const x = howWeDoItX.getState();
       const scale = howWeDoItScale.getState();
       _scale.current = lerp(scale, _scale.current, 0.9, delta);

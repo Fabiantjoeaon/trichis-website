@@ -1,43 +1,50 @@
-import { useMemo } from "react";
+import { Fragment } from "react";
 import TransitionLink from "@/components/ui/TransitionLink";
-import SplitText from "@/components/ui/SplitText";
 import { SectionTitle } from "@/components/ui/Divider";
-import { ScrollingText } from "@/components/ui/ScrollingText";
 import { Project } from "@/components/Project";
 import { useGlobalStore } from "@/stores/global";
 
-export default function ProjectNext({ project }) {
-  const { coverImage, mobileCoverImage, title, slug } = project || {};
-  const str = useMemo(
-    () =>
-      title
-        ? `There's way more to explore, take a look at ${title}!`
-        : "",
-    [title],
-  );
+export default function ProjectNext({ projects = [], project }) {
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
-  const src = isMobileLayout
-    ? mobileCoverImage?.url || coverImage?.url
-    : coverImage?.url;
+  const items = projects?.length ? projects : [project].filter(Boolean);
 
-  if (!project) return null;
+  if (!items.length) return null;
 
   return (
     <>
-      <SectionTitle>Next project</SectionTitle>
-      <section className="project-next inner-width">
-        <div className="project-next__top">
-          <ScrollingText>{str}</ScrollingText>
-          <TransitionLink href={`/project/${slug}`}>
-            <SplitText tag="h1" animateOnScroll>
-              Next project
-            </SplitText>
-          </TransitionLink>
-        </div>
-        <div className="project-next__bottom">
-          <Project {...project} coverImage={src} i={0} />
-        </div>
+      <div className="next-lead">
+        <img
+          className="swoosh swoosh--a"
+          src="/images/swoosh-a.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <SectionTitle>What&rsquo;s next</SectionTitle>
+      </div>
+
+      <section className="project-next">
+        {items.slice(0, 2).map((item, i) => {
+          const src = isMobileLayout
+            ? item.mobileCoverImage?.url || item.coverImage?.url
+            : item.coverImage?.url;
+
+          return (
+            <Fragment key={item.slug || i}>
+              <div className={`project-next__card project-next__card--${i + 1}`}>
+                <Project {...item} coverImage={src} i={i} />
+              </div>
+              <TransitionLink
+                href={`/project/${item.slug}`}
+                className={`project-next__label project-next__label--${i + 1}`}
+              >
+                {item.title}
+              </TransitionLink>
+            </Fragment>
+          );
+        })}
       </section>
+
+      <SectionTitle>Neem contact op</SectionTitle>
     </>
   );
 }

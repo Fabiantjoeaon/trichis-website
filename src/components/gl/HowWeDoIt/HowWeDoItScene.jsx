@@ -108,6 +108,9 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
 
   const windowSize = useGlobalStore((s) => s.windowSize);
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
+  const isTabletOrSmallerLayout = useGlobalStore(
+    (s) => s.isTabletOrSmallerLayout,
+  );
   const lenis = useGlobalStore((s) => s.lenis);
 
   // Theme colors as shared Color instances (each material wraps them in its
@@ -192,12 +195,18 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
   }, [windowSize.width, builtTextPlane]);
 
   useEffect(() => {
-    const transforms = howWeDoItStore.getState().cardTransforms;
-    if (transforms.length < 2) return;
-    gapInUnits.current =
-      howWeDoItStore.getState().getPosition(1) -
-      (howWeDoItStore.getState().getPosition(0) +
-        howWeDoItStore.getState().getWidth(0));
+    const compute = () => {
+      const transforms = howWeDoItStore.getState().cardTransforms;
+      if (transforms.length < 2) return;
+      gapInUnits.current =
+        howWeDoItStore.getState().getPosition(1) -
+        (howWeDoItStore.getState().getPosition(0) +
+          howWeDoItStore.getState().getWidth(0));
+    };
+    compute();
+    // Card transforms are measured asynchronously (mount rAF / fonts /
+    // reflow) — recompute the gap whenever they land or change.
+    return howWeDoItStore.subscribe(compute);
   }, [windowSize.width, cardCount]);
 
   const { animateIn: animateScaleIn, animateOut: animateScaleOut } =
@@ -218,29 +227,74 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
     const el = document.querySelector(".how-we-do-it__wrapper");
     if (!el) return;
 
-    let lastX = 0;
+    // Manual port of nine-ca's use-gesture drag config: x-axis lock with a
+    // 6px threshold, velocity fling, and preventScroll while dragging.
+    const DRAG_THRESHOLD = 6;
+    const VELOCITY_MULTIPLIER = 3.7;
+    const SPEED = 3.5;
 
-    const onPointerDown = (e) => {
-      if (!useGlobalStore.getState().isMobileLayout) return;
+    let pointerActive = false;
+    let axis = null; // "x" | "y" once intent is known
+    let lastX = 0;
+    let lastY = 0;
+    let lastT = 0;
+
+    const startDrag = () => {
       isDragging.current = true;
-      lastX = e.clientX;
       animateScaleIn();
     };
-    const onPointerMove = (e) => {
-      if (!isDragging.current) return;
-      const dx = e.clientX - lastX;
+
+    const onPointerDown = (e) => {
+      if (!useGlobalStore.getState().isTabletOrSmallerLayout) return;
+      pointerActive = true;
+      axis = null;
       lastX = e.clientX;
+      lastY = e.clientY;
+      lastT = e.timeStamp;
+    };
+    const onPointerMove = (e) => {
+      if (!pointerActive) return;
+
+      if (!axis) {
+        const dxTotal = e.clientX - lastX;
+        const dyTotal = e.clientY - lastY;
+        if (
+          Math.abs(dxTotal) < DRAG_THRESHOLD &&
+          Math.abs(dyTotal) < DRAG_THRESHOLD
+        )
+          return;
+        axis = Math.abs(dxTotal) > Math.abs(dyTotal) ? "x" : "y";
+        if (axis === "x") startDrag();
+        lastX = e.clientX;
+        lastY = e.clientY;
+        lastT = e.timeStamp;
+        return;
+      }
+      if (axis !== "x" || !isDragging.current) return;
+
+      const dx = e.clientX - lastX;
+      const dt = Math.max(e.timeStamp - lastT, 1);
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastT = e.timeStamp;
+
+      const velocity = Math.abs(dx) / dt; // px/ms, like use-gesture
+      const x =
+        dx + velocity * (VELOCITY_MULTIPLIER * Math.sign(dx)) * SPEED;
+
       const totalWidth =
         howWeDoItStore.getState().getTotalWidth() +
         gapInUnits.current * Math.max(cardCount - 1, 0);
       const singleWidth = howWeDoItStore.getState().getWidth(0);
       dragX.current = clamp(
-        dragX.current + dx,
+        dragX.current + x,
         -totalWidth + singleWidth,
         0,
       );
     };
     const onPointerUp = () => {
+      pointerActive = false;
+      axis = null;
       if (!isDragging.current) return;
       isDragging.current = false;
       animateScaleOut();
@@ -254,13 +308,25 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
       dragX.current = clamp(-nearest * singleWidth, -totalWidth + singleWidth, 0);
     };
 
+    // While dragging horizontally, keep the touch from reaching Lenis
+    // (syncTouch would keep scrolling the page under the drag).
+    const onTouchMove = (e) => {
+      if (!isDragging.current) return;
+      if (e.cancelable) e.preventDefault();
+      e.stopPropagation();
+    };
+
     el.addEventListener("pointerdown", onPointerDown);
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
+    window.addEventListener("pointercancel", onPointerUp);
     return () => {
       el.removeEventListener("pointerdown", onPointerDown);
+      el.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
+      window.removeEventListener("pointercancel", onPointerUp);
     };
   }, [animateScaleIn, animateScaleOut, cardCount]);
 
@@ -283,7 +349,7 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
     const dt = Math.min(delta, 0.05);
     const velocity = Math.abs(lenis?.velocity || 0);
     const velMul = isMobileLayout ? 0.01 : 0.025;
-    scrollVel.current = lerp(velocity * velMul, scrollVel.current, 0.05, dt);
+    scrollVel.current = lerp(scrollVel.current, velocity * velMul, 0.05, dt);
     textOffset.current += (0.015 + scrollVel.current) * dt * 60 * 0.016;
     builtTextPlane.uOffset.value = textOffset.current;
 
@@ -292,9 +358,9 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
     builtTextPlane.uRepeat.value = repeat;
     howWeDoItTextScroll.setState({ offset: textOffset.current, repeat });
 
-    if (isMobileLayout && cards.current && scaleGroup.current) {
+    if (isTabletOrSmallerLayout && cards.current && scaleGroup.current) {
       const x = howWeDoItX.getState();
-      const newX = lerp(dragX.current, x, 0.05, dt);
+      const newX = lerp(x, dragX.current, 0.05, dt);
       howWeDoItX.setState(newX);
       cards.current.position.x = newX;
 

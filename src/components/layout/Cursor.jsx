@@ -1,9 +1,9 @@
 // Port of nine-ca components/Cursor.js — custom labeled cursor shown via
 // CURSOR_SHOW/CURSOR_HIDE events.
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { events } from "@/lib/events";
 import { mouseState } from "@/lib/mouse";
-import { lerp, map, wait } from "@/lib/math";
+import { damp, lerp, map, wait } from "@/lib/math";
 import { EASE_CUSTOM_4 } from "@/lib/easing";
 import { useGlobalStore } from "@/stores/global";
 import useEvent from "@/hooks/useEvent";
@@ -14,7 +14,7 @@ import ShuffledText from "@/components/ui/ShuffledText";
 export function Cursor() {
   const wrapper = useRef();
   const cursor = useRef();
-  const pos = useRef({ x: 0, y: 0 });
+  const _pos = useMemo(() => ({ x: 0, y: 0 }), []);
 
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
 
@@ -26,10 +26,12 @@ export function Cursor() {
   const { start, stop } = useTicker(({ delta }) => {
     const { x, y } = mouseState.mouse;
 
-    pos.current.x = lerp(x, pos.current.x, 0.6, delta);
-    pos.current.y = lerp(y, pos.current.y, 0.6, delta);
+    // nine-ca damp2 equivalent: velocity-based smooth damp. Real frame delta
+    // (nine-ca hardcoded 0.01) keeps the speed identical on any refresh rate.
+    damp(_pos, "x", x, 0.1, delta, Infinity);
+    damp(_pos, "y", y, 0.1, delta, Infinity);
 
-    _value.current = lerp(value.current, _value.current, 0.7, delta);
+    _value.current = lerp(_value.current, value.current, 0.7, delta);
 
     const deg = 0;
     let rotation = map(_value.current, 0, 1, -deg, 0);
@@ -38,7 +40,7 @@ export function Cursor() {
     if (cursor.current)
       cursor.current.style.transform = `scale(${_value.current}) rotate(${rotation}deg)`;
     if (wrapper.current)
-      wrapper.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px)`;
+      wrapper.current.style.transform = `translate(${_pos.x}px, ${_pos.y}px)`;
   });
 
   const { animateIn, animateOut } = useAnimation({

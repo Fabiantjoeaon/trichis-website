@@ -282,8 +282,8 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
     } else {
       rot.set(0, 0);
     }
-    _rot.x = lerp(rot.x, _rot.x, 0.1, delta);
-    _rot.y = lerp(rot.y, _rot.y, 0.1, delta);
+    _rot.x = lerp(_rot.x, rot.x, 0.1, delta);
+    _rot.y = lerp(_rot.y, rot.y, 0.1, delta);
     const m = 0.25;
     group.current.rotation.set(_rot.y * -m, _rot.x * m, 0);
   });

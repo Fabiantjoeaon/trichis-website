@@ -3,7 +3,11 @@ import ProjectHero from "./ProjectHero";
 import ProjectNext from "./ProjectNext";
 import DynamicContent from "@/components/blocks/DynamicContent";
 
-export default function ProjectPage({ project, nextProject }) {
+export default function ProjectPage({ project, nextProject, nextProjects }) {
+  const upcoming = nextProjects?.length
+    ? nextProjects
+    : [nextProject].filter(Boolean);
+
   const sortedContent = useMemo(() => {
     if (!project?.content) return [];
     return [...project.content].sort((a, b) => {
@@ -20,7 +24,7 @@ export default function ProjectPage({ project, nextProject }) {
         content={sortedContent}
         page={{ ...project, __typename: "ProjectRecord" }}
       />
-      <ProjectNext project={nextProject} />
+      <ProjectNext projects={upcoming} />
     </>
   );
 }

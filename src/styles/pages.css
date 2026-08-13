@@ -13,7 +13,6 @@
 .service-header,
 .project-header,
 .project-numbers,
-.project-next,
 .projects-basic,
 .what-we-do-expertises,
 .wwd-service__strategy-text,
@@ -35,7 +34,6 @@
   .service-header,
   .project-header,
   .project-numbers,
-  .project-next,
   .projects-basic,
   .what-we-do-expertises,
   .wwd-service__strategy-text,
@@ -282,11 +280,6 @@
   display: block;
 }
 
-.home-what-we-do__caption {
-  margin-top: 20rem;
-  color: var(--color-text);
-}
-
 @media (max-width: 1024px) {
   .home-what-we-do__top {
     flex-flow: column nowrap;
@@ -299,40 +292,116 @@
     max-width: 100%;
     margin: 50rem 0 !important;
   }
+}
 
-  .home-what-we-do__bottom {
-    margin-top: 100rem;
-  }
+/* What we do — mobile/tablet variant (nine-ca WhatWeDoServicesMobile) */
+.what-we-do-mobile__media {
+  margin-top: 140rem;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
 
-  .home-what-we-do__list {
-    width: 50%;
-  }
-
-  .home-what-we-do__list ul {
-    padding-left: 80rem;
-  }
-
-  .home-what-we-do__media {
-    width: 45%;
+@media (min-width: 712px) {
+  .what-we-do-mobile__media {
+    aspect-ratio: 16 / 9;
   }
 }
 
-@media (max-width: 711px) {
-  .home-what-we-do__bottom {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .home-what-we-do__list,
-  .home-what-we-do__media {
-    width: 100%;
-  }
+.what-we-do-mobile__media a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-/* How we do it — matches nine-ca HowWeDoIt (no opaque card bg; glass is GL) */
+.what-we-do-mobile__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.what-we-do-mobile__navigation {
+  --innerMargin: 50rem;
+  --navIconSize: 120rem;
+  margin: 100rem auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--navIconSize);
+}
+
+.what-we-do-mobile__navigation__icon {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+.what-we-do-mobile__navigation__icon.icon-left {
+  left: 0;
+}
+
+.what-we-do-mobile__navigation__icon.icon-right {
+  right: 0;
+}
+
+.what-we-do-mobile__navigation__inner-wrapper {
+  overflow: hidden;
+  width: calc(100% - var(--navIconSize) * 2 - var(--innerMargin) * 2);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 20%,
+    black 80%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 20%,
+    black 80%,
+    transparent
+  );
+  position: relative;
+}
+
+.what-we-do-mobile__navigation__item span {
+  white-space: nowrap;
+}
+
+.what-we-do-mobile__navigation__inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
+  gap: 50rem;
+}
+
+.what-we-do-mobile__navigation__inner span {
+  display: inline-block;
+  text-align: center;
+  font-size: 70rem;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--color-inactiveText);
+  opacity: 0.2;
+  transition:
+    color 0.4s cubic-bezier(0.77, 0, 0.175, 1),
+    opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.what-we-do-mobile__navigation__inner span.active {
+  opacity: 1;
+  color: var(--color-text);
+}
+
+/* How we do it — matches nine-ca HowWeDoIt (no opaque card bg; glass is GL).
+   z-index 4 = same band as .gl-canvas-root so DOM card text paints above the
+   glass (main comes after SiteChrome in the tree), but below nav (5) / menu (7). */
 .how-we-do-it__wrapper {
   position: relative;
-  z-index: 8;
+  z-index: 4;
   width: 100%;
   padding-left: var(--pagePadding);
   padding-right: var(--pagePadding);
@@ -353,7 +422,7 @@
 
 .how-we-do-it__card {
   position: relative;
-  z-index: 8;
+  z-index: 4;
   width: calc(100% / var(--hwdi-count, 4) - (var(--cardGap) * 2));
   display: flex;
   flex-direction: column;
@@ -1159,13 +1228,35 @@
 
 .column-row-wrap {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  gap: 30rem;
   width: 100%;
+  height: fit-content;
+  position: relative;
+  margin-top: 100rem;
+  margin-bottom: 100rem;
+}
+
+.column-row-wrap.more-bottom {
+  margin-bottom: 250rem;
 }
 
 .column-row {
   width: var(--width, 100%);
+  min-width: var(--width, 100%);
   position: relative;
+  overflow: hidden;
+}
+
+.column-row-wrap.multi .column-row {
+  width: calc(var(--width) - 30rem);
+  min-width: calc(var(--width) - 30rem);
+}
+
+.column-row img {
+  height: 100%;
+  object-fit: cover;
 }
 
 .column-row-image,
@@ -1175,7 +1266,17 @@
 }
 
 .column-row-image {
-  aspect-ratio: 4 / 3;
+  height: 100%;
+}
+
+.column-row-image-video {
+  height: 100%;
+}
+
+.column-row-image-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .column-text {
@@ -1189,14 +1290,24 @@
   display: flex;
   flex-direction: column;
   gap: 50rem;
+  width: 100%;
+  height: auto;
+}
+
+.column-text a {
+  width: fit-content;
+  margin-left: 250rem;
+  margin-top: 50rem;
 }
 
 .column-text.has-mb {
   padding-bottom: 100rem;
 }
 
-.column-row-wrap.more-bottom {
-  padding-bottom: 200rem;
+@media (max-width: 711px) {
+  .column-row-wrap .EmptycolumnRecord {
+    display: none;
+  }
 }
 
 .scrolling-title-block {
@@ -1250,30 +1361,114 @@
   font-size: 180rem;
 }
 
-.project-next__top {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 140rem;
-  gap: 40rem;
+.swoosh {
+  position: absolute;
+  pointer-events: none;
+  max-width: none;
+  display: block;
 }
 
-.project-next__top h1 {
-  color: var(--color-floatingTitle);
-  text-align: right;
-  font-size: 220rem;
+.swoosh--a {
+  width: 1213rem;
+  left: calc(var(--pagePadding) + 542rem);
+  top: -592rem;
+  z-index: 0;
 }
 
-.project-next__bottom {
-  margin-top: 100rem;
-  display: flex;
-  justify-content: center;
+.swoosh--b {
+  width: 1099rem;
+  left: calc(var(--pagePadding) + 2684rem);
+  top: -516rem;
+  z-index: 2;
 }
 
-.project-next__bottom .project-card {
+.next-lead {
   position: relative;
-  width: 2000rem;
-  max-width: 100%;
-  aspect-ratio: 16 / 9;
+  margin-top: 567rem;
+}
+
+.next-lead .section-title {
+  position: relative;
+  z-index: 1;
+}
+
+.project-next {
+  position: relative;
+  height: 2356rem;
+}
+
+.project-next__card {
+  position: absolute;
+  height: 1308rem;
+  overflow: hidden;
+}
+
+.project-next__card--1 {
+  left: 0;
+  top: 237rem;
+  width: 43.23%;
+}
+
+.project-next__card--2 {
+  right: 0;
+  top: 654rem;
+  width: 52.9%;
+}
+
+.project-next__card .project-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.project-next__card .project-card > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* The prototype puts the title below the card, so hide the card's own title
+   and meta. The title stays in flow-less layout rather than display:none
+   because Project observes it to trigger the image entrance. */
+.project-next__card .project-card__title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.project-next__card .project-card__meta {
+  display: none;
+}
+
+.project-next__card .project-image {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.project-next__label {
+  position: absolute;
+  font-family: "SG Grotesk", sans-serif;
+  font-size: 67rem;
+  line-height: 1.2;
+  font-weight: 200;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.project-next__label--1 {
+  top: 1583rem;
+  left: var(--pagePadding);
+}
+
+.project-next__label--2 {
+  top: 2004rem;
+  left: 47.1%;
 }
 
 .about-intro__top {
@@ -1436,9 +1631,50 @@
   .what-we-do-expertises,
   .about-offices,
   .project-header,
-  .project-numbers__top,
-  .project-next__top {
+  .project-numbers__top {
     flex-direction: column;
+  }
+
+  .next-lead {
+    margin-top: 200rem;
+  }
+
+  .swoosh--a {
+    width: 433rem;
+    left: -58rem;
+    top: -260rem;
+  }
+
+  .swoosh--b {
+    width: 346rem;
+    left: auto;
+    right: -87rem;
+    top: -202rem;
+  }
+
+  .project-next {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30rem;
+    padding-bottom: 120rem;
+  }
+
+  .project-next__card,
+  .project-next__label {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+  }
+
+  .project-next__card {
+    aspect-ratio: 16 / 11;
+  }
+
+  .project-next__label {
+    margin-inline: var(--pagePadding);
+    font-size: 44rem;
   }
 
   .service-header__left,

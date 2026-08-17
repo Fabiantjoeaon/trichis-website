@@ -212,7 +212,7 @@ export default function SiteChrome({ settings = {}, siteName }) {
 
   useEffect(() => {
     bindMouse();
-    setRandomSentences(settings.home?.randomSentences ?? []);
+    setRandomSentences(settings.randomSentences ?? []);
   }, [settings]);
 
   useEvent(events.LOADING_OUT_COMPLETE, () => {

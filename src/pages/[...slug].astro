@@ -14,6 +14,6 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 ---
 
-<BaseLayout title={`${page.title} — Nine Creative Agency`}>
+<BaseLayout title={page.title} seo={page.seo}>
   <CustomPage client:load page={page} />
 </BaseLayout>

@@ -134,25 +134,12 @@ export default memo(function Menu({ settings = {} }) {
 
   if (!isClient) return null;
 
-  const navLinks = settings.navLinks?.length
-    ? settings.navLinks
-    : [
-        { label: "Home", path: "/" },
-        { label: "About us", path: "/about-us" },
-        { label: "Projects", path: "/projects" },
-        { label: "What we do", path: "/what-we-do" },
-      ];
+  const navLinks = settings.navLinks ?? [];
 
   const footer = settings.footer ?? {};
-  const phone = footer.phone || "+31765156463";
-  const email = footer.email || "info@trichis.nl";
-  const socials = footer.socialLinks?.length
-    ? footer.socialLinks
-    : [
-        { label: "LinkedIn", url: "https://www.linkedin.com/company/nine-nl/" },
-        { label: "Instagram", url: "https://www.instagram.com/ninecreativeagency/" },
-        { label: "Vimeo", url: "https://vimeo.com/nine" },
-      ];
+  const phone = footer.phone ?? "";
+  const email = footer.email ?? "";
+  const socials = footer.socialLinks ?? [];
 
   let shuffleIndex = navLinks.length;
 
@@ -172,12 +159,16 @@ export default memo(function Menu({ settings = {} }) {
         </div>
         <div className="menu__bottom">
           <div className="menu__contact">
-            <a href={`tel:${phone.replace(/\s/g, "")}`}>
-              <ShuffledText ref={(r) => (items.current[shuffleIndex++] = r)} text={phone} />
-            </a>
-            <a href={`mailto:${email}`}>
-              <ShuffledText ref={(r) => (items.current[shuffleIndex++] = r)} text={email} />
-            </a>
+            {phone && (
+              <a href={`tel:${phone.replace(/\s/g, "")}`}>
+                <ShuffledText ref={(r) => (items.current[shuffleIndex++] = r)} text={phone} />
+              </a>
+            )}
+            {email && (
+              <a href={`mailto:${email}`}>
+                <ShuffledText ref={(r) => (items.current[shuffleIndex++] = r)} text={email} />
+              </a>
+            )}
           </div>
           <div className="menu__socials">
             {socials.map((social) => (

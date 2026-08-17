@@ -8,12 +8,7 @@ import { getSiteSettings } from "@/lib/content";
 import SiteChrome from "@/components/layout/SiteChrome.jsx";
 import Footer from "@/components/layout/Footer.jsx";
 
-const {
-  title = "Trichis",
-  description = "",
-  theme = "light",
-  showFooter = true,
-} = Astro.props;
+const { title = "", seo, theme = "light", showFooter = true } = Astro.props;
 
 let settings = {};
 try {
@@ -21,6 +16,16 @@ try {
 } catch (err) {
   console.warn("[BaseLayout] site settings unavailable:", err?.message ?? err);
 }
+
+const general = settings.general ?? {};
+
+// An explicit SEO title wins outright; otherwise the page title gets the
+// site-wide suffix appended.
+const pageTitle =
+  seo?.title || `${title || general.siteName || ""}${general.seoTitleSuffix ?? ""}`;
+const description = seo?.description || general.seoDefaultDescription || "";
+const ogImage = seo?.ogImage || general.seoDefaultOgImage || null;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 ---
 
 <!doctype html>
@@ -30,11 +35,21 @@ try {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
-    <meta property="og:title" content={title} />
+    {seo?.noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    {general.favicon && <link rel="icon" href={general.favicon} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
     {description && <meta property="og:description" content={description} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:url" content={canonical} />
+    {general.siteName && (
+      <meta property="og:site_name" content={general.siteName} />
+    )}
     <meta property="og:locale" content={SITE_LOCALE.replace("-", "_")} />
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
     <link
       rel="preload"
       href="/fonts/SGGrotesk-ExLight.woff2"
@@ -67,7 +82,7 @@ try {
       client:load
       transition:persist="site-chrome"
       settings={settings}
-      siteName="Trichis"
+      siteName={general.siteName ?? ""}
     />
 
     <div class="main-inner">

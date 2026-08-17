@@ -12,14 +12,22 @@ export async function getStaticPaths() {
 
     return {
       params: { slug: project.slug },
-      props: { project, nextProjects },
+      props: { nextProjects },
     };
   });
 }
 
-const { project, nextProjects } = Astro.props;
+const { nextProjects } = Astro.props;
+const { slug } = Astro.params;
+
+// The list query carries no blocks or SEO, so the page itself is fetched here.
+const project = await getProject(slug);
+
+if (!project) {
+  return Astro.redirect("/404");
+}
 ---
 
-<BaseLayout title={`${project.title} — Nine Creative Agency`}>
+<BaseLayout title={project.title} seo={project.seo}>
   <ProjectPage client:load project={project} nextProjects={nextProjects} />
 </BaseLayout>

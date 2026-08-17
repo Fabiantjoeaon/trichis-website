@@ -3,6 +3,7 @@ import TransitionLink from "@/components/ui/TransitionLink";
 import { SectionTitle } from "@/components/ui/Divider";
 import { Project } from "@/components/Project";
 import { useGlobalStore } from "@/stores/global";
+import { t } from "@/lib/i18n";
 
 export default function ProjectNext({ projects = [], project }) {
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
@@ -19,7 +20,7 @@ export default function ProjectNext({ projects = [], project }) {
           alt=""
           aria-hidden="true"
         />
-        <SectionTitle>What&rsquo;s next</SectionTitle>
+        <SectionTitle>{t("project.whatsNext")}</SectionTitle>
       </div>
 
       <section className="project-next">
@@ -44,7 +45,7 @@ export default function ProjectNext({ projects = [], project }) {
         })}
       </section>
 
-      <SectionTitle>Neem contact op</SectionTitle>
+      <SectionTitle>{t("project.contact")}</SectionTitle>
     </>
   );
 }

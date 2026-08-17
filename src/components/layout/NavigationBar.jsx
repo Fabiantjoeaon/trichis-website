@@ -10,6 +10,7 @@ import Badge from "@/components/ui/Badge";
 import Logo from "@/components/ui/Logo";
 import { Divider } from "@/components/ui/Divider";
 import { TransitionLink } from "@/components/ui/TransitionLink";
+import { t } from "@/lib/i18n";
 
 const MobileMenuIcon = memo(function MobileMenuIcon() {
   const [animatedIn, setAnimatedIn] = useState(false);
@@ -84,7 +85,7 @@ export default function NavigationBar({ siteName = "Nine Creative Agency" }) {
           className="nav-menu"
           onClick={() => emitter.emit(events.MENU_OPEN)}
         >
-          Menu
+          {t("nav.menu")}
         </AnimatedHoverText>
       )}
       <div className="theme-switcher">
@@ -94,7 +95,7 @@ export default function NavigationBar({ siteName = "Nine Creative Agency" }) {
           selected={theme === "light"}
           onClick={() => emitter.emit(events.SWITCH_THEME, "light")}
         >
-          Light
+          {t("nav.light")}
         </Badge>
         <Badge
           ref={badge2}
@@ -102,7 +103,7 @@ export default function NavigationBar({ siteName = "Nine Creative Agency" }) {
           selected={theme === "dark"}
           onClick={() => emitter.emit(events.SWITCH_THEME, "dark")}
         >
-          Dark
+          {t("nav.dark")}
         </Badge>
       </div>
       {isMobileLayout && <MobileMenuIcon />}

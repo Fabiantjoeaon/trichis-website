@@ -57,12 +57,8 @@ export default function CookieBanner({ content = {} }) {
 
   if (!visible) return null;
 
-  const title = content.title || "Deze website maakt gebruik van cookies.";
-  const message =
-    content.message ||
-    "We gebruiken cookies om uw ervaring te verbeteren, gepersonaliseerde advertenties of inhoud weer te geven en ons verkeer te analyseren.";
-  const acceptLabel = content.accept || "Alles accepteren";
-  const rejectLabel = content.reject || "Alles weigeren";
+  const { title, message, accept: acceptLabel, reject: rejectLabel } = content;
+  if (!message && !title) return null;
 
   return (
     <div
@@ -72,34 +68,43 @@ export default function CookieBanner({ content = {} }) {
       aria-live="polite"
       aria-label="Cookie consent"
     >
-      <h5>{title}</h5>
+      {title && <h5>{title}</h5>}
       <p>
-        {message}&nbsp;
-        <span className="more-info">
-          <a href="/files/privacy-beleid.pdf">Meer info</a>
-        </span>
+        {message}
+        {content.privacyUrl && content.moreLabel && (
+          <>
+            &nbsp;
+            <span className="more-info">
+              <a href={content.privacyUrl}>{content.moreLabel}</a>
+            </span>
+          </>
+        )}
       </p>
       <div className="cookie-buttons">
-        <BorderedIcon
-          ref={acceptIcon}
-          animateOnScroll={false}
-          onClick={() => storeConsent("accepted")}
-          role="button"
-          aria-label={acceptLabel}
-          disableSplitText
-          size="80rem"
-          text={acceptLabel}
-        />
-        <BorderedIcon
-          ref={rejectIcon}
-          animateOnScroll={false}
-          onClick={() => storeConsent("rejected")}
-          role="button"
-          aria-label={rejectLabel}
-          disableSplitText
-          size="80rem"
-          text={rejectLabel}
-        />
+        {acceptLabel && (
+          <BorderedIcon
+            ref={acceptIcon}
+            animateOnScroll={false}
+            onClick={() => storeConsent("accepted")}
+            role="button"
+            aria-label={acceptLabel}
+            disableSplitText
+            size="80rem"
+            text={acceptLabel}
+          />
+        )}
+        {rejectLabel && (
+          <BorderedIcon
+            ref={rejectIcon}
+            animateOnScroll={false}
+            onClick={() => storeConsent("rejected")}
+            role="button"
+            aria-label={rejectLabel}
+            disableSplitText
+            size="80rem"
+            text={rejectLabel}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,11 +1,18 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import CmsPage from "@/components/CmsPage.jsx";
 import ProjectsBasicView from "@/components/projects/ProjectsBasicView.jsx";
-import { getProjects } from "@/lib/content";
+import { getPageByKey, getProjects } from "@/lib/content";
 
+const page = await getPageByKey("projects");
 const projects = await getProjects();
 ---
 
-<BaseLayout title="Nine Creative Agency: Projects">
+<BaseLayout title={page?.title} seo={page?.seo}>
+  {
+    page?.content?.length ? (
+      <CmsPage client:load content={page.content} projects={projects} />
+    ) : null
+  }
   <ProjectsBasicView client:load projects={projects} />
 </BaseLayout>

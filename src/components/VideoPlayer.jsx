@@ -8,6 +8,7 @@ import { events } from "@/lib/events";
 import { getProcessedSrc } from "@/lib/processedSrc";
 import { useGlobalStore } from "@/stores/global";
 import { VIDEO_PLAYER_PLAY, VIDEO_PLAYER_STOP } from "@/lib/constants";
+import { t } from "@/lib/i18n";
 
 const DURATION = 0.4;
 
@@ -36,7 +37,7 @@ export default function VideoPlayer() {
     const noGL = useGlobalStore.getState().noWebGLImages;
     const next = noGL ? rawSrc : getProcessedSrc(rawSrc);
     setSrc(next?.startsWith("http") || next?.startsWith("/") ? next : `/${next}`);
-    emitter.emit(events.CURSOR_SHOW, { text: "Click anywhere to close" });
+    emitter.emit(events.CURSOR_SHOW, { text: t("video.closeHint") });
   }, []);
 
   const stopVideo = useCallback(async () => {

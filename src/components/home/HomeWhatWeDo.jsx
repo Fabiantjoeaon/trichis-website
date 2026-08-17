@@ -4,14 +4,13 @@ import SplitText from "@/components/ui/SplitText";
 import BorderedIcon from "@/components/ui/BorderedIcon";
 import { SectionTitle } from "@/components/ui/Divider";
 import { ScrollingText } from "@/components/ui/ScrollingText";
-import { serviceMap, SERVICE_IMAGE_URLS } from "@/lib/constants";
 import { useTicker } from "@/hooks/useTicker";
 import { lerp } from "@/lib/math";
 import { useGlobalStore } from "@/stores/global";
 
 // Port of nine-ca WhatWeDoServicesMobile Navigation: chevron buttons with a
 // horizontally sliding, centered list of service titles.
-function ServicesMobileNav({ keys, currIndex, setCurrIndex }) {
+function ServicesMobileNav({ services, currIndex, setCurrIndex }) {
   const wrapper = useRef(null);
   const inner = useRef(null);
   const texts = useRef([]);
@@ -73,7 +72,7 @@ function ServicesMobileNav({ keys, currIndex, setCurrIndex }) {
   );
 
   const move = (direction) =>
-    setCurrIndex((i) => (i + direction + keys.length) % keys.length);
+    setCurrIndex((i) => (i + direction + services.length) % services.length);
 
   return (
     <div className="what-we-do-mobile__navigation">
@@ -87,16 +86,19 @@ function ServicesMobileNav({ keys, currIndex, setCurrIndex }) {
         ref={wrapper}
       >
         <div className="what-we-do-mobile__navigation__inner" ref={inner}>
-          {keys.map((key, index) => (
-            <div key={key} className="what-we-do-mobile__navigation__item">
-              <TransitionLink href={`/service/${key}`}>
+          {services.map((service, index) => (
+            <div
+              key={service.link || service.label || index}
+              className="what-we-do-mobile__navigation__item"
+            >
+              <TransitionLink href={service.link}>
                 <span
                   ref={(el) => {
                     texts.current[index] = el;
                   }}
                   className={index === currIndex ? "active" : ""}
                 >
-                  {serviceMap[key]}
+                  {service.label}
                 </span>
               </TransitionLink>
             </div>
@@ -112,10 +114,13 @@ function ServicesMobileNav({ keys, currIndex, setCurrIndex }) {
   );
 }
 
-export default function HomeWhatWeDo({ currentService } = {}) {
-  const keys = Object.keys(serviceMap);
-  const initial = Math.max(0, keys.indexOf(currentService));
-  const [currIndex, setCurrIndex] = useState(initial >= 0 ? initial : 0);
+export default function HomeWhatWeDo({ data, currentService } = {}) {
+  const services = data?.services ?? [];
+  const initial = Math.max(
+    0,
+    services.findIndex((s) => s.link?.endsWith(`/${currentService}`)),
+  );
+  const [currIndex, setCurrIndex] = useState(initial);
   const track = useRef(null);
   const listRef = useRef(null);
   const itemsRef = useRef([]);
@@ -133,7 +138,7 @@ export default function HomeWhatWeDo({ currentService } = {}) {
     const computedStyle = window.getComputedStyle(first);
     const marginBottom = parseInt(computedStyle.marginBottom, 10) || 0;
     gap.current = first.offsetHeight + marginBottom;
-  }, [keys.length, isTabletOrSmallerLayout]);
+  }, [services.length, isTabletOrSmallerLayout]);
 
   useTicker(
     ({ delta }) => {
@@ -145,36 +150,32 @@ export default function HomeWhatWeDo({ currentService } = {}) {
     { initiallyActive: true },
   );
 
-  const currentKey = keys[currIndex];
-  const currentUrl = `/service/${currentKey}`;
+  const current = services[currIndex];
 
   return (
     <>
-      <SectionTitle>What we do</SectionTitle>
-      <section className="home-what-we-do inner-width" ref={track}>
+      <SectionTitle>{data?.sectionTitle}</SectionTitle>
+      <section
+        className="home-what-we-do inner-width"
+        id={data?.anchorId || undefined}
+        ref={track}
+      >
         <div className="home-what-we-do__top">
-          <ScrollingText>
-            You got the vibe, we got the tools.
-          </ScrollingText>
+          <ScrollingText>{data?.scrollingText}</ScrollingText>
           <SplitText tag="p" className="home-what-we-do__intro t-paragraph" animateOnScroll>
-            Opvallen is niet genoeg. Wij zorgen ervoor dat jouw merk onthouden
-            wordt. Voorbij de hype, recht het hart in. Alleen zo blijf je top of
-            mind.
+            {data?.intro}
           </SplitText>
         </div>
 
         {isTabletOrSmallerLayout ? (
           <>
             <div className="what-we-do-mobile__media">
-              <TransitionLink href={currentUrl}>
-                <img
-                  src={SERVICE_IMAGE_URLS[currentKey]}
-                  alt={serviceMap[currentKey]}
-                />
+              <TransitionLink href={current?.link}>
+                <img src={current?.media?.url} alt={current?.label} />
               </TransitionLink>
             </div>
             <ServicesMobileNav
-              keys={keys}
+              services={services}
               currIndex={currIndex}
               setCurrIndex={setCurrIndex}
             />
@@ -183,9 +184,9 @@ export default function HomeWhatWeDo({ currentService } = {}) {
           <div className="home-what-we-do__bottom">
             <div className="home-what-we-do__list" ref={listRef}>
               <ul>
-                {keys.map((key, i) => (
+                {services.map((service, i) => (
                   <li
-                    key={key}
+                    key={service.link || service.label || i}
                     ref={(el) => {
                       itemsRef.current[i] = el;
                     }}
@@ -195,20 +196,20 @@ export default function HomeWhatWeDo({ currentService } = {}) {
                     {i === 0 && (
                       <div ref={indicatorRef} className="list-indicator" />
                     )}
-                    <TransitionLink href={`/service/${key}`}>
-                      <span className="t-li">{serviceMap[key]}</span>
+                    <TransitionLink href={service.link}>
+                      <span className="t-li">{service.label}</span>
                     </TransitionLink>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <TransitionLink href={currentUrl} className="home-what-we-do__media">
+            <TransitionLink
+              href={current?.link}
+              className="home-what-we-do__media"
+            >
               <article>
-                <img
-                  src={SERVICE_IMAGE_URLS[currentKey]}
-                  alt={serviceMap[currentKey]}
-                />
+                <img src={current?.media?.url} alt={current?.label} />
               </article>
             </TransitionLink>
           </div>

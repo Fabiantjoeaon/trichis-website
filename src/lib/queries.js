@@ -87,6 +87,7 @@ function blockFragments(prefix, blocks) {
     `,
     project_numbers: `
       ... on ${prefix}ProjectNumbersLayout {
+        sectionTitle
         titleLeft
         titleRight
         numbers {
@@ -121,8 +122,150 @@ function blockFragments(prefix, blocks) {
         }
       }
     `,
+
+    // Page sections. No DatoCMS ancestor — these lift the formerly
+    // hard-coded home / about / what-we-do sections into the page builder.
+    home_hero: `
+      ... on ${prefix}HomeHeroLayout {
+        media { ${MEDIA} }
+        mobileMedia { ${MEDIA} }
+      }
+    `,
+    home_who_we_are: `
+      ... on ${prefix}HomeWhoWeAreLayout {
+        sectionTitle
+        body
+      }
+    `,
+    home_what_we_do: `
+      ... on ${prefix}HomeWhatWeDoLayout {
+        sectionTitle
+        scrollingText
+        intro
+        services {
+          label
+          link
+          media { ${MEDIA} }
+        }
+      }
+    `,
+    home_what_weve_created: `
+      ... on ${prefix}HomeWhatWeveCreatedLayout {
+        sectionTitle
+        scrollingText
+        intro
+        listLabel
+        ctaText
+        ctaLink
+      }
+    `,
+    how_we_do_it: `
+      ... on ${prefix}HowWeDoItLayout {
+        title
+        glWord
+        cards {
+          title
+          textTop
+          textBottom
+        }
+      }
+    `,
+    home_showreel: `
+      ... on ${prefix}HomeShowreelLayout {
+        textTop
+        textBottom
+        media { ${MEDIA} }
+        mobileMedia { ${MEDIA} }
+      }
+    `,
+    link_band: `
+      ... on ${prefix}LinkBandLayout {
+        title
+        link
+      }
+    `,
+    service_hero: `
+      ... on ${prefix}ServiceHeroLayout {
+        title
+        headerText
+        paragraph
+        ctaText
+        ctaLink
+      }
+    `,
+    about_hero: `
+      ... on ${prefix}AboutHeroLayout {
+        brandText
+        brandMobile
+      }
+    `,
+    about_intro: `
+      ... on ${prefix}AboutIntroLayout {
+        sectionTitle
+        scrollingText
+        lead
+        ctaText
+        ctaLink
+        imageA { ${MEDIA} }
+        imageB { ${MEDIA} }
+        imageWide { ${MEDIA} }
+        body
+      }
+    `,
+    offices: `
+      ... on ${prefix}OfficesLayout {
+        sectionTitle
+        intro
+        offices {
+          title
+          address
+          media { ${MEDIA} }
+        }
+      }
+    `,
+    expertises: `
+      ... on ${prefix}ExpertisesLayout {
+        sectionTitle
+        heading
+        body
+        ctaText
+        ctaLink
+      }
+    `,
+    service_teaser: `
+      ... on ${prefix}ServiceTeaserLayout {
+        sectionTitle
+        fullServiceName
+        serviceName
+        serviceNameBottom
+        paragraphs {
+          text
+        }
+        ctaText
+        ctaLink
+        rows {
+          columns {
+            width
+            media { ${MEDIA} }
+          }
+        }
+        trailingText
+        trailingCtaText
+        trailingCtaLink
+      }
+    `,
   };
-  return blocks.map((name) => defs[name]).join("\n");
+  // Every block also carries an anchor id, on the same inline fragment.
+  return blocks
+    .map((name) => {
+      const def = defs[name];
+      if (!def) return "";
+      return def.replace(
+        /^(\s*\.\.\. on \S+ \{)/m,
+        `$1\n        anchorId`,
+      );
+    })
+    .join("\n");
 }
 
 const PAGE_BLOCKS = blockFragments("PageBuilderPageBlocks", [
@@ -135,7 +278,30 @@ const PAGE_BLOCKS = blockFragments("PageBuilderPageBlocks", [
   "paragraph",
   "section_line",
   "scrolling_title",
+  "home_hero",
+  "home_who_we_are",
+  "home_what_we_do",
+  "home_what_weve_created",
+  "how_we_do_it",
+  "home_showreel",
+  "link_band",
+  "service_hero",
+  "about_hero",
+  "about_intro",
+  "offices",
+  "expertises",
+  "service_teaser",
 ]);
+
+// Per-record SEO, identical on every content type.
+const SEO_FIELDS = /* GraphQL */ `
+  seo {
+    seoTitle
+    seoDescription
+    ogImage { ${IMG} }
+    noindex
+  }
+`;
 
 const PROJECT_BLOCKS = blockFragments("ProjectDetailsPageBlocks", [
   "project_header",
@@ -186,6 +352,7 @@ export const PROJECT_QUERY = /* GraphQL */ `
   query GetProject($slug: ID!) {
     project(id: $slug, idType: SLUG) {
       ${PROJECT_FIELDS}
+      ${SEO_FIELDS}
       projectDetails {
         year
         featured
@@ -222,6 +389,7 @@ export const SERVICE_QUERY = /* GraphQL */ `
       id
       title
       slug
+      ${SEO_FIELDS}
       serviceDetails {
         header {
           headerText
@@ -247,6 +415,7 @@ export const ALL_PAGES_QUERY = /* GraphQL */ `
         id
         title
         slug
+        ${SEO_FIELDS}
         pageBuilder {
           pageKey
           cover { ${MEDIA} }
@@ -266,6 +435,15 @@ export const ALL_PAGES_QUERY = /* GraphQL */ `
 export const SITE_SETTINGS_QUERY = /* GraphQL */ `
   query GetSiteSettings {
     siteSettings {
+      general {
+        siteName
+        logo { ${IMG} }
+        logoAlt { ${IMG} }
+        favicon { ${IMG} }
+        seoTitleSuffix
+        seoDefaultDescription
+        seoDefaultOgImage { ${IMG} }
+      }
       navigation {
         navLinks {
           label
@@ -277,9 +455,13 @@ export const SITE_SETTINGS_QUERY = /* GraphQL */ `
         }
       }
       footer {
+        footerLeadHead
+        footerLeadBody
         footerOffices {
           city
           address
+          phone
+          phoneHref
         }
         footerEmail
         footerPhone
@@ -295,36 +477,27 @@ export const SITE_SETTINGS_QUERY = /* GraphQL */ `
         footerCtaText
         footerCtaLink
       }
-      homeContent {
-        howWeDoIt {
-          title
-          text
-          text2
-          cards {
-            title
-            textTop
-            textBottom
-          }
-        }
-        whatWeDo {
-          title
-          text
-          text2
-        }
-        whatWeveCreated {
-          title
-          text
-          text2
-        }
+      interfaceSettings {
         randomSentences {
           text
         }
-        showreel { ${MEDIA} }
       }
       cookieBanner {
+        cookieTitle
         cookieMessage
         cookieAccept
         cookieReject
+        cookieMoreLabel
+        privacyDocument {
+          node {
+            mediaItemUrl
+          }
+        }
+      }
+      notFound {
+        notFoundTitle
+        notFoundCtaText
+        notFoundCtaLink
       }
       uiStrings {
         uiStrings {

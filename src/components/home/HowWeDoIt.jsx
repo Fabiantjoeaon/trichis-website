@@ -77,9 +77,9 @@ function Card({ children, i, trackRef }) {
 
 /**
  * How we do it — DOM cards + TSL glass / scrolling text scene.
- * Accepts either `data={{ title, cards }}` or a bare `cards` array (HomePage).
+ * `data` is the how_we_do_it block: { title, glWord, cards }.
  */
-export default function HowWeDoIt({ data, cards: cardsProp, title: titleProp }) {
+export default function HowWeDoIt({ data }) {
   const track = useRef(null);
   const inner = useRef(null);
   const activeItem = useRef(null);
@@ -89,8 +89,9 @@ export default function HowWeDoIt({ data, cards: cardsProp, title: titleProp }) 
   const _x = useRef(0);
   const _scale = useRef(1);
 
-  const cards = cardsProp ?? data?.cards ?? [];
-  const title = titleProp || data?.title || "How we do it";
+  const cards = data?.cards ?? [];
+  const title = data?.title ?? "";
+  const glWord = data?.glWord ?? "";
 
   const handleBounds = useCallback(() => {
     if (!indicatorWrapper.current || !activeItem.current) return;
@@ -173,7 +174,11 @@ export default function HowWeDoIt({ data, cards: cardsProp, title: titleProp }) 
         <UseCanvas id="how-we-do-it">
           <ScrollScene track={track}>
             {(props) => (
-              <HowWeDoItScene {...props} cardCount={cards.length} />
+              <HowWeDoItScene
+                {...props}
+                cardCount={cards.length}
+                word={glWord}
+              />
             )}
           </ScrollScene>
         </UseCanvas>

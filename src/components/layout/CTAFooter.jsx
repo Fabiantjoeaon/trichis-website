@@ -2,10 +2,9 @@
 import SplitText from "@/components/ui/SplitText";
 import BorderedIcon from "@/components/ui/BorderedIcon";
 
-export default function CTAFooter({
-  title = "Klaar voor de <strong>volgende stap</strong>?",
-  cta = { href: "mailto:info@trichis.nl", text: "Neem contact op" },
-}) {
+export default function CTAFooter({ title = "", cta }) {
+  if (!title && !cta?.text) return null;
+
   return (
     <div className="cta-footer inner-width">
       <div className="cta-footer__inner">
@@ -16,9 +15,15 @@ export default function CTAFooter({
         >
           {title}
         </SplitText>
-        <div className="cta-footer__cta">
-          <BorderedIcon dontTriggerPageTransition href={cta.href} text={cta.text} />
-        </div>
+        {cta?.text && (
+          <div className="cta-footer__cta">
+            <BorderedIcon
+              dontTriggerPageTransition
+              href={cta.href}
+              text={cta.text}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

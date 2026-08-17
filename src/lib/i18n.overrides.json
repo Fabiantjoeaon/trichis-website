@@ -1,1 +1,25 @@
-{}
+{
+  "nav.menu": "Menu",
+  "nav.close": "Sluiten",
+  "nav.light": "Light",
+  "nav.dark": "Dark",
+  "footer.follow": "Follow us",
+  "footer.legalLabel": "Juridisch",
+  "footer.backToTop": "Back to top",
+  "service.sectionTitle": "What we do - {name}",
+  "project.aboutProject": "About the project",
+  "project.aboutCampaign": "About the campaign",
+  "project.whatsNext": "What's next",
+  "project.contact": "Neem contact op",
+  "projectNumbers.sectionTitle": "It's all about the numbers right?",
+  "form.submit": "Verzenden",
+  "form.submitting": "Bezig...",
+  "form.successTitle": "Bedankt!",
+  "form.required": "Dit veld is verplicht",
+  "form.chooseOption": "Maak een keuze",
+  "form.minOneOption": "Selecteer minimaal één optie",
+  "form.checkEmail": "Controleer je emailadres",
+  "form.error": "Sorry, er ging iets mis. Controleer je informatie.",
+  "form.selectPlaceholder": "Selecteer...",
+  "video.closeHint": "Click anywhere to close"
+}

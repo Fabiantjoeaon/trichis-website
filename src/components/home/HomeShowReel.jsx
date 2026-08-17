@@ -3,20 +3,25 @@ import BorderedIcon from "@/components/ui/BorderedIcon";
 import SplitText from "@/components/ui/SplitText";
 import emitter from "@/lib/emitter";
 import { VIDEO_PLAYER_PLAY } from "@/lib/constants";
+import { isMediaVideo } from "@/lib/cms";
 import { useGlobalStore } from "@/stores/global";
 
-export default function HomeShowReel() {
+export default function HomeShowReel({ data }) {
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
-  const videoSrc = isMobileLayout
-    ? "/video/showreel_mobile.mp4"
-    : "/video/showreel.mp4";
+
+  const active = (isMobileLayout && data?.mobileMedia) || data?.media;
+  const videoSrc = active?.url ?? "";
+  if (!videoSrc) return null;
 
   return (
-    <section className="home-showreel inner-width">
+    <section
+      className="home-showreel inner-width"
+      id={data?.anchorId || undefined}
+    >
       <div className="home-showreel__reel">
         <NineGLImageElement
           className="home-showreel__gl"
-          isVideo
+          isVideo={isMediaVideo(videoSrc, active?.video)}
           src={videoSrc}
           animateOnScroll
           useHover={false}
@@ -24,14 +29,14 @@ export default function HomeShowReel() {
         />
         <div className="home-showreel__overlay">
           <SplitText animateOnScroll tag="h3">
-            Watch our
+            {data?.textTop}
           </SplitText>
           <SplitText
             animateOnScroll
             tag="h3"
             className="home-showreel__text-bottom"
           >
-            showreel
+            {data?.textBottom}
           </SplitText>
           <BorderedIcon
             dontTriggerPageTransition

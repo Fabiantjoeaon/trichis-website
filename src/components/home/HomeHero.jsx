@@ -4,9 +4,10 @@ import { useEffect, useRef } from "react";
 import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
 import usePageEnter from "@/hooks/usePageEnter";
 import { map } from "@/lib/math";
+import { isMediaVideo } from "@/lib/cms";
 import { useGlobalStore } from "@/stores/global";
 
-function HeroVideo({ track, ...props }) {
+function HeroVideo({ track, media, mobileMedia, ...props }) {
   const videoRef = useRef();
   const textureReadyRef = useRef(false);
   const transitionCompleteRef = useRef(false);
@@ -14,9 +15,8 @@ function HeroVideo({ track, ...props }) {
   const noWebGLImages = useGlobalStore((s) => s.noWebGLImages);
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
 
-  const videoSrc = isMobileLayout
-    ? "/video/showreel_mobile.mp4"
-    : "/video/showreel.mp4";
+  const active = (isMobileLayout && mobileMedia) || media;
+  const videoSrc = active?.url ?? "";
 
   function tryAnimateIn() {
     if (hasAnimatedRef.current) return;
@@ -58,11 +58,13 @@ function HeroVideo({ track, ...props }) {
     };
   }, [noWebGLImages, track]);
 
+  if (!videoSrc) return null;
+
   return (
     <NineGLImageElement
       ref={videoRef}
       className="home-hero__gl"
-      isVideo
+      isVideo={isMediaVideo(videoSrc, active?.video)}
       src={videoSrc}
       animateOnScroll={false}
       useHover={false}
@@ -76,12 +78,20 @@ function HeroVideo({ track, ...props }) {
   );
 }
 
-export default function HomeHero({ className = "" }) {
+export default function HomeHero({ data, className = "" }) {
   const track = useRef(null);
 
   return (
-    <section ref={track} className={`home-hero ${className}`}>
-      <HeroVideo track={track} />
+    <section
+      ref={track}
+      id={data?.anchorId || undefined}
+      className={`home-hero ${className}`}
+    >
+      <HeroVideo
+        track={track}
+        media={data?.media}
+        mobileMedia={data?.mobileMedia}
+      />
     </section>
   );
 }

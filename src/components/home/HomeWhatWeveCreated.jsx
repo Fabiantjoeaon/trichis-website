@@ -6,7 +6,7 @@ import { SectionTitle } from "@/components/ui/Divider";
 import { ScrollingText } from "@/components/ui/ScrollingText";
 import { Project } from "@/components/Project";
 
-export default function HomeWhatWeveCreated({ projects = [] }) {
+export default function HomeWhatWeveCreated({ data, projects = [] }) {
   const projectsRef = useRef(null);
 
   const measureProjectsHeight = useCallback(() => {
@@ -34,20 +34,18 @@ export default function HomeWhatWeveCreated({ projects = [] }) {
 
   return (
     <>
-      <SectionTitle>What we've done so far</SectionTitle>
-      <section className="home-wwc inner-width">
+      <SectionTitle>{data?.sectionTitle}</SectionTitle>
+      <section className="home-wwc inner-width" id={data?.anchorId || undefined}>
         <div className="home-wwc__top">
-          <ScrollingText>Discover your impact</ScrollingText>
+          <ScrollingText>{data?.scrollingText}</ScrollingText>
           <SplitText tag="p" animateOnScroll>
-            Nine is een onafhankelijk creatief bureau dat de toekomst opnieuw
-            vormgeeft. Met slim design, een heldere visie en grensverleggende
-            ideeën bouwen we samen aan een nieuwe wereld.
+            {data?.intro}
           </SplitText>
         </div>
 
         <div className="home-wwc__projects-title">
           <SplitText className="home-wwc__projects-label" tag="h5" animateOnScroll>
-            Projects
+            {data?.listLabel}
           </SplitText>
           <div className="home-wwc__random">
             <ShuffledText animateOnScroll useRandomText />
@@ -70,20 +68,20 @@ export default function HomeWhatWeveCreated({ projects = [] }) {
           })}
         </div>
 
-        <div className="home-wwc__more">
-          <div className="home-wwc__more-inner">
-            <SplitText
-              tag="h3"
-              animation="charDoubleClipped"
-              type="chars"
-              animateOnScroll
-              dangerouslySetInnerHTML={{
-                __html: "All our <strong>projects</strong>",
-              }}
-            />
-            <BorderedIcon href="/projects" />
+        {(data?.ctaText || data?.ctaLink) && (
+          <div className="home-wwc__more">
+            <div className="home-wwc__more-inner">
+              <SplitText
+                tag="h3"
+                animation="charDoubleClipped"
+                type="chars"
+                animateOnScroll
+                dangerouslySetInnerHTML={{ __html: data?.ctaText ?? "" }}
+              />
+              {data?.ctaLink && <BorderedIcon href={data.ctaLink} />}
+            </div>
           </div>
-        </div>
+        )}
       </section>
     </>
   );

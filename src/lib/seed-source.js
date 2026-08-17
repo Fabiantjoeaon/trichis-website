@@ -49,10 +49,9 @@ export async function getService(slug) {
   return services.find((s) => s.slug === slug) ?? null;
 }
 
-export async function getPageByKey() {
-  // Fixed routes (home/about/what-we-do/projects) had no CMS pages in Dato;
-  // their content comes from site settings + hard-wired sections.
-  return null;
+export async function getPageByKey(key) {
+  const pages = readJson("route-pages.json") ?? [];
+  return pages.find((p) => p.pageKey === key) ?? null;
 }
 
 export async function getCustomPages() {
@@ -68,10 +67,26 @@ export async function getCustomPage(slug) {
 export async function getSiteSettings() {
   const site = readJson("site.json") ?? {};
   return {
+    general: {
+      siteName: site.general?.site_name ?? "",
+      logo: site.general?.logo ?? null,
+      logoAlt: site.general?.logo_alt ?? null,
+      favicon: site.general?.favicon ?? null,
+      seoTitleSuffix: site.general?.seo_title_suffix ?? "",
+      seoDefaultDescription: site.general?.seo_default_description ?? "",
+      seoDefaultOgImage: site.general?.seo_default_og_image ?? null,
+    },
     navLinks: site.navigation?.nav_links ?? [],
     menuFooterLinks: site.navigation?.menu_footer_links ?? [],
     footer: {
-      offices: site.footer?.footer_offices ?? [],
+      leadHead: site.footer?.footer_lead_head ?? "",
+      leadBody: site.footer?.footer_lead_body ?? "",
+      offices: (site.footer?.footer_offices ?? []).map((o) => ({
+        city: o.city,
+        address: o.address,
+        phone: o.phone ?? "",
+        phoneHref: o.phone_href ?? "",
+      })),
       email: site.footer?.footer_email ?? "",
       phone: site.footer?.footer_phone ?? "",
       socialLinks: site.footer?.footer_social_links ?? [],
@@ -80,27 +95,24 @@ export async function getSiteSettings() {
       ctaText: site.footer?.footer_cta_text ?? "",
       ctaLink: site.footer?.footer_cta_link ?? "",
     },
-    home: {
-      howWeDoIt: {
-        title: site.homeContent?.how_we_do_it?.title ?? "",
-        text: site.homeContent?.how_we_do_it?.text ?? "",
-        text2: site.homeContent?.how_we_do_it?.text2 ?? "",
-        cards: (site.homeContent?.how_we_do_it?.cards ?? []).map((c) => ({
-          title: c.title,
-          textTop: c.text_top,
-          textBottom: c.text_bottom,
-        })),
-      },
-      whatWeDo: site.homeContent?.what_we_do ?? {},
-      whatWeveCreated: site.homeContent?.what_weve_created ?? {},
-      randomSentences: (site.homeContent?.random_sentences ?? []).map((r) => r.text),
-      showreel: null,
-    },
+    randomSentences: (
+      site.interfaceSettings?.random_sentences ?? []
+    ).map((r) => r.text),
     cookieBanner: {
+      title: site.cookieBanner?.cookie_title ?? "",
       message: site.cookieBanner?.cookie_message ?? "",
       accept: site.cookieBanner?.cookie_accept ?? "",
       reject: site.cookieBanner?.cookie_reject ?? "",
+      moreLabel: site.cookieBanner?.cookie_more_label ?? "",
+      privacyUrl: site.cookieBanner?.privacy_document ?? null,
     },
-    uiStrings: {},
+    notFound: {
+      title: site.notFound?.not_found_title ?? "",
+      ctaText: site.notFound?.not_found_cta_text ?? "",
+      ctaLink: site.notFound?.not_found_cta_link ?? "",
+    },
+    uiStrings: Object.fromEntries(
+      (site.uiStrings?.ui_strings ?? []).map((u) => [u.string_key, u.text]),
+    ),
   };
 }

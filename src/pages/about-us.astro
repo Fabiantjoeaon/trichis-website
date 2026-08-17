@@ -1,8 +1,11 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import AboutUsPage from "@/components/about/AboutUsPage.jsx";
+import CmsPage from "@/components/CmsPage.jsx";
+import { getPageByKey } from "@/lib/content";
+
+const page = await getPageByKey("about");
 ---
 
-<BaseLayout title="Nine Creative Agency: About us">
-  <AboutUsPage client:load />
+<BaseLayout title={page?.title} seo={page?.seo}>
+  <CmsPage client:load content={page?.content ?? []} />
 </BaseLayout>

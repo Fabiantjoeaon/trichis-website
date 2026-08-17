@@ -7,14 +7,20 @@
  *
  * What it does:
  *  - creates deliverable terms, projects, services, pages
+ *  - creates the four fixed-route pages (home, about, what-we-do, projects)
+ *    from route-pages.json, blocks and all
  *  - sideloads exported images into the media library (deduped by source URL)
  *  - stores Mux video fields so the site keeps the same video streaming
  *  - maps Dato modular content records onto the ACF flexible content blocks
- *  - fills Site Settings (nav, footer, home content, cookie banner)
+ *  - fills Site Settings (general, nav, footer, cookie banner, 404, UI strings)
  *  - creates AF field groups for the quickscan/contact forms from the
  *    FormSection definitions
  *
  * Requires: ACF Pro active. Advanced Forms is used when active.
+ *
+ * Post fields are written by field key, not name: `page_blocks`, `cover` and
+ * `mobile_cover` exist on the page, project and service groups alike, and
+ * update_field() resolves an ambiguous name to whichever group registered last.
  */
 
 if (!defined('ABSPATH') && !defined('WP_CLI')) exit;
@@ -22,6 +28,8 @@ if (!defined('ABSPATH') && !defined('WP_CLI')) exit;
 class Trichis_Seed_Command {
 
     private string $data_dir;
+
+    private string $public_dir;
 
     /** @var array<string,int> source URL → attachment ID */
     private array $attachment_cache = [];
@@ -47,8 +55,10 @@ class Trichis_Seed_Command {
             WP_CLI::error('ACF (Pro) must be active before seeding.');
         }
 
-        $default_dir = dirname(TRICHIS_CORE_DIR, 3) . '/scripts/seed/data';
-        $this->data_dir = rtrim($assoc_args['dir'] ?? $default_dir, '/');
+        $repo_root        = dirname(TRICHIS_CORE_DIR, 3);
+        $default_dir      = "{$repo_root}/scripts/seed/data";
+        $this->data_dir   = rtrim($assoc_args['dir'] ?? $default_dir, '/');
+        $this->public_dir = "{$repo_root}/public";
 
         if (!is_dir($this->data_dir)) {
             WP_CLI::error("Seed data directory not found: {$this->data_dir}. Run `pnpm seed:export` first.");
@@ -116,12 +126,17 @@ class Trichis_Seed_Command {
         }
 
         $entry = $this->manifest[$url] ?? null;
-        if (!$entry) {
+        if ($entry) {
+            $local = "{$this->data_dir}/{$entry['file']}";
+        } elseif (str_starts_with($url, '/')) {
+            // Route-page content references files shipped in the repo's
+            // public/ directory rather than the DatoCMS export.
+            $local = $this->public_dir . $url;
+        } else {
             WP_CLI::warning("No local file for {$url}");
             return 0;
         }
 
-        $local = "{$this->data_dir}/{$entry['file']}";
         if (!file_exists($local)) {
             WP_CLI::warning("Missing asset file {$local}");
             return 0;
@@ -159,22 +174,32 @@ class Trichis_Seed_Command {
     /** Build the value for a trichis media group from a Dato image asset. */
     private function media_value(?array $asset): array {
         $video = $asset['video'] ?? null;
+        $url   = $asset['url'] ?? '';
+
+        // The asset URL points at a video file: on Dato records it is the
+        // source next to the Mux fields, on route pages it is a file in
+        // public/video. Either way it belongs in the video fields, and there
+        // is no still image to sideload.
+        $is_video = $url !== '' && preg_match('/\.(mp4|webm|m3u8|mov)(\?|$)/i', $url);
+
         return [
-            'image'                 => $this->attach_image($asset),
+            'image'                 => $is_video ? 0 : $this->attach_image($asset),
             'video_streaming_url'   => $video['streamingUrl'] ?? '',
             'video_mux_playback_id' => $video['muxPlaybackId'] ?? '',
-            'video_mp4_url'         => $video['mp4Url'] ?? '',
+            'video_mp4_url'         => $video['mp4Url'] ?? ($is_video ? $url : ''),
             'video_thumbnail_url'   => $video['thumbnailUrl'] ?? '',
         ];
     }
 
     // ── content blocks ───────────────────────────────────────────────────
 
-    /** Map Dato modular content records to ACF flexible content rows. */
+    /** Map normalized content records to ACF flexible content rows. */
     private function map_blocks(?array $content): array {
         $rows = [];
         foreach ((array) $content as $block) {
-            $type = $block['__typename'] ?? '';
+            $type   = $block['__typename'] ?? '';
+            $before = count($rows);
+
             switch ($type) {
                 case 'ProjectheaderRecord':
                     $rows[] = [
@@ -218,7 +243,7 @@ class Trichis_Seed_Command {
                             'name'        => $f['name'] ?? '',
                             'field_type'  => $f['fieldType'] ?? 'text',
                             'required'    => !empty($f['required']),
-                            'width'       => $f['width'] ?? '',
+                            'width'       => $this->field_width($f['width'] ?? null),
                             'placeholder' => $f['placeholder'] ?? '',
                             'options'     => $f['options'] ?? '',
                         ], (array) ($block['formFields'] ?? [])),
@@ -252,6 +277,7 @@ class Trichis_Seed_Command {
                 case 'ProjectnumberRecord':
                     $rows[] = [
                         'acf_fc_layout' => 'project_numbers',
+                        'section_title' => $block['sectionTitle'] ?? '',
                         'title_left'    => $block['titleLeft'] ?? '',
                         'title_right'   => $block['titleRight'] ?? '',
                         'numbers'       => array_map(fn($n) => [
@@ -278,9 +304,166 @@ class Trichis_Seed_Command {
                         'text'          => $block['text'] ?? '',
                     ];
                     break;
+
+                // ── page sections ──
+                case 'HomeheroRecord':
+                    $rows[] = [
+                        'acf_fc_layout' => 'home_hero',
+                        'media'         => $this->media_value($block['media'] ?? null),
+                        'mobile_media'  => $this->media_value($block['mobileMedia'] ?? null),
+                    ];
+                    break;
+                case 'HomewhoweareRecord':
+                    $rows[] = [
+                        'acf_fc_layout' => 'home_who_we_are',
+                        'section_title' => $block['sectionTitle'] ?? '',
+                        'body'          => $block['body'] ?? '',
+                    ];
+                    break;
+                case 'HomewhatwedoRecord':
+                    $rows[] = [
+                        'acf_fc_layout'  => 'home_what_we_do',
+                        'section_title'  => $block['sectionTitle'] ?? '',
+                        'scrolling_text' => $block['scrollingText'] ?? '',
+                        'intro'          => $block['intro'] ?? '',
+                        'services'       => array_map(fn($s) => [
+                            'label' => $s['label'] ?? '',
+                            'link'  => $s['link'] ?? '',
+                            'media' => $this->media_value($s['media'] ?? null),
+                        ], (array) ($block['services'] ?? [])),
+                    ];
+                    break;
+                case 'HomewhatwevecreatedRecord':
+                    $rows[] = [
+                        'acf_fc_layout'  => 'home_what_weve_created',
+                        'section_title'  => $block['sectionTitle'] ?? '',
+                        'scrolling_text' => $block['scrollingText'] ?? '',
+                        'intro'          => $block['intro'] ?? '',
+                        'list_label'     => $block['listLabel'] ?? '',
+                        'cta_text'       => $block['ctaText'] ?? '',
+                        'cta_link'       => $block['ctaLink'] ?? '',
+                    ];
+                    break;
+                case 'HowwedoitRecord':
+                    $rows[] = [
+                        'acf_fc_layout' => 'how_we_do_it',
+                        'title'         => $block['title'] ?? '',
+                        'gl_word'       => $block['glWord'] ?? '',
+                        'cards'         => array_map(fn($c) => [
+                            'title'       => $c['title'] ?? '',
+                            'text_top'    => $c['textTop'] ?? '',
+                            'text_bottom' => $c['textBottom'] ?? '',
+                        ], (array) ($block['cards'] ?? [])),
+                    ];
+                    break;
+                case 'HomeshowreelRecord':
+                    $rows[] = [
+                        'acf_fc_layout' => 'home_showreel',
+                        'text_top'      => $block['textTop'] ?? '',
+                        'text_bottom'   => $block['textBottom'] ?? '',
+                        'media'         => $this->media_value($block['media'] ?? null),
+                        'mobile_media'  => $this->media_value($block['mobileMedia'] ?? null),
+                    ];
+                    break;
+                case 'LinkbandRecord':
+                    $rows[] = [
+                        'acf_fc_layout' => 'link_band',
+                        'title'         => $block['title'] ?? '',
+                        'link'          => $block['link'] ?? '',
+                    ];
+                    break;
+                case 'ServiceheroRecord':
+                    $rows[] = [
+                        'acf_fc_layout' => 'service_hero',
+                        'title'         => $block['title'] ?? '',
+                        'header_text'   => $block['headerText'] ?? '',
+                        'paragraph'     => $block['paragraph'] ?? '',
+                        'cta_text'      => $block['ctaText'] ?? '',
+                        'cta_link'      => $block['ctaLink'] ?? '',
+                    ];
+                    break;
+                case 'AboutheroRecord':
+                    $rows[] = [
+                        'acf_fc_layout' => 'about_hero',
+                        'brand_text'    => $block['brandText'] ?? '',
+                        'brand_mobile'  => $block['brandMobile'] ?? '',
+                    ];
+                    break;
+                case 'AboutintroRecord':
+                    $rows[] = [
+                        'acf_fc_layout'  => 'about_intro',
+                        'section_title'  => $block['sectionTitle'] ?? '',
+                        'scrolling_text' => $block['scrollingText'] ?? '',
+                        'lead'           => $block['lead'] ?? '',
+                        'cta_text'       => $block['ctaText'] ?? '',
+                        'cta_link'       => $block['ctaLink'] ?? '',
+                        'image_a'        => $this->media_value($block['imageA'] ?? null),
+                        'image_b'        => $this->media_value($block['imageB'] ?? null),
+                        'image_wide'     => $this->media_value($block['imageWide'] ?? null),
+                        'body'           => $block['body'] ?? '',
+                    ];
+                    break;
+                case 'OfficesRecord':
+                    $rows[] = [
+                        'acf_fc_layout' => 'offices',
+                        'section_title' => $block['sectionTitle'] ?? '',
+                        'intro'         => $block['intro'] ?? '',
+                        'offices'       => array_map(fn($o) => [
+                            'title'   => $o['title'] ?? '',
+                            'address' => $o['address'] ?? '',
+                            'media'   => $this->media_value($o['media'] ?? null),
+                        ], (array) ($block['offices'] ?? [])),
+                    ];
+                    break;
+                case 'ExpertisesRecord':
+                    $rows[] = [
+                        'acf_fc_layout' => 'expertises',
+                        'section_title' => $block['sectionTitle'] ?? '',
+                        'heading'       => $block['heading'] ?? '',
+                        'body'          => $block['body'] ?? '',
+                        'cta_text'      => $block['ctaText'] ?? '',
+                        'cta_link'      => $block['ctaLink'] ?? '',
+                    ];
+                    break;
+                case 'ServiceteaserRecord':
+                    $rows[] = [
+                        'acf_fc_layout'       => 'service_teaser',
+                        'section_title'       => $block['sectionTitle'] ?? '',
+                        'full_service_name'   => $block['fullServiceName'] ?? '',
+                        'service_name'        => $block['serviceName'] ?? '',
+                        'service_name_bottom' => $block['serviceNameBottom'] ?? '',
+                        'paragraphs'          => array_map(
+                            fn($p) => ['text' => is_array($p) ? ($p['text'] ?? '') : $p],
+                            (array) ($block['paragraphs'] ?? []),
+                        ),
+                        'cta_text'            => $block['ctaText'] ?? '',
+                        'cta_link'            => $block['ctaLink'] ?? '',
+                        'rows'                => array_map(fn($row) => [
+                            'columns' => array_map(fn($c) => [
+                                'width' => $c['width'] ?? '',
+                                'media' => $this->media_value($c['media'] ?? null),
+                            ], (array) ($row['columns'] ?? [])),
+                        ], (array) ($block['rows'] ?? [])),
+                        'trailing_text'     => $block['trailingText'] ?? '',
+                        'trailing_cta_text' => $block['trailingCtaText'] ?? '',
+                        'trailing_cta_link' => $block['trailingCtaLink'] ?? '',
+                    ];
+                    break;
+            }
+
+            // Every layout carries an anchor; set it once rather than in each arm.
+            if (count($rows) > $before) {
+                $rows[count($rows) - 1]['anchor_id'] = $block['anchorId'] ?? '';
             }
         }
         return $rows;
+    }
+
+    /** The Dato export stores form field widths as percentages; ACF uses full/half. */
+    private function field_width($raw): string {
+        if ($raw === 'half' || $raw === 'full') return $raw;
+        if (is_numeric($raw) && (int) $raw > 0 && (int) $raw <= 50) return 'half';
+        return 'full';
     }
 
     // ── post helpers ─────────────────────────────────────────────────────
@@ -329,13 +512,13 @@ class Trichis_Seed_Command {
             $id = $this->upsert_post('project', $p['slug'], $p['title']);
             if (!$id) continue;
 
-            update_field('year', (string) ($p['year'] ?? ''), $id);
-            update_field('featured', !empty($p['featured']), $id);
-            update_field('featured_order', $p['featuredOrder'] ?? '', $id);
-            update_field('cover', $this->media_value($p['coverImage'] ?? null), $id);
-            update_field('mobile_cover', $this->media_value($p['mobileCoverImage'] ?? null), $id);
-            update_field('featured_media', $this->media_value($p['featuredImage'] ?? null), $id);
-            update_field('page_blocks', $this->map_blocks($p['content'] ?? []), $id);
+            update_field('field_project_year', (string) ($p['year'] ?? ''), $id);
+            update_field('field_project_featured', !empty($p['featured']), $id);
+            update_field('field_project_featured_order', $p['featuredOrder'] ?? '', $id);
+            update_field('field_project_cover', $this->media_value($p['coverImage'] ?? null), $id);
+            update_field('field_project_mobile_cover', $this->media_value($p['mobileCoverImage'] ?? null), $id);
+            update_field('field_project_featured_media', $this->media_value($p['featuredImage'] ?? null), $id);
+            update_field('field_project_page_blocks', $this->map_blocks($p['content'] ?? []), $id);
 
             // Featured image doubles as the WP thumbnail for admin lists.
             $thumb = $this->attach_image($p['coverImage'] ?? null);
@@ -349,6 +532,7 @@ class Trichis_Seed_Command {
                 }
             }
             wp_set_object_terms($id, $term_ids, 'deliverable');
+            $this->seed_seo($id, $p['seo'] ?? null);
 
             WP_CLI::log("  project: {$p['slug']}");
         }
@@ -367,13 +551,14 @@ class Trichis_Seed_Command {
             if (!$id) continue;
 
             $header = $s['header'] ?? [];
-            update_field('header', [
+            update_field('field_service_header', [
                 'header_text' => $header['headertext'] ?? '',
                 'paragraph'   => $header['paragraph'] ?? '',
                 'cta_text'    => $header['cta']['text'] ?? '',
                 'cta_url'     => $header['cta']['url'] ?? '',
             ], $id);
-            update_field('page_blocks', $this->map_blocks($s['content'] ?? []), $id);
+            update_field('field_service_page_blocks', $this->map_blocks($s['content'] ?? []), $id);
+            $this->seed_seo($id, $s['seo'] ?? null);
 
             WP_CLI::log("  service: {$s['slug']}");
         }
@@ -392,10 +577,11 @@ class Trichis_Seed_Command {
             $id = $this->upsert_post('page', $p['slug'], $p['title']);
             if (!$id) continue;
 
-            update_field('page_key', 'custom', $id);
-            update_field('cover', $this->media_value($p['coverImage'] ?? null), $id);
-            update_field('mobile_cover', $this->media_value($p['mobileCoverImage'] ?? null), $id);
-            update_field('page_blocks', $this->map_blocks($p['content'] ?? []), $id);
+            update_field('field_page_key', 'custom', $id);
+            update_field('field_page_cover', $this->media_value($p['coverImage'] ?? null), $id);
+            update_field('field_page_mobile_cover', $this->media_value($p['mobileCoverImage'] ?? null), $id);
+            update_field('field_page_page_blocks', $this->map_blocks($p['content'] ?? []), $id);
+            $this->seed_seo($id, $p['seo'] ?? null);
 
             WP_CLI::log("  page: {$p['slug']}");
         }
@@ -403,19 +589,34 @@ class Trichis_Seed_Command {
 
     /** Fixed routes (home, about, what-we-do, projects) as WP pages. */
     private function seed_route_pages(): void {
-        $routes = [
-            'home'      => ['slug' => 'home', 'title' => 'Home'],
-            'about'     => ['slug' => 'about-us', 'title' => 'About us'],
-            'whatWeDo'  => ['slug' => 'what-we-do', 'title' => 'What we do'],
-            'projects'  => ['slug' => 'projects', 'title' => 'Projects'],
-        ];
+        $pages = $this->read_json('route-pages.json');
+        if (!$pages) {
+            WP_CLI::warning('route-pages.json missing, skipping route pages.');
+            return;
+        }
 
-        WP_CLI::log('Seeding route pages…');
-        foreach ($routes as $key => $route) {
-            $id = $this->upsert_post('page', $route['slug'], $route['title']);
+        WP_CLI::log('Seeding ' . count($pages) . ' route pages…');
+        foreach ($pages as $p) {
+            $id = $this->upsert_post('page', $p['slug'], $p['title']);
             if (!$id) continue;
-            update_field('page_key', $key, $id);
-            WP_CLI::log("  route page: {$route['slug']} ({$key})");
+
+            update_field('field_page_key', $p['pageKey'] ?? 'custom', $id);
+            update_field('field_page_cover', $this->media_value($p['coverImage'] ?? null), $id);
+            update_field('field_page_mobile_cover', $this->media_value($p['mobileCoverImage'] ?? null), $id);
+            update_field('field_page_page_blocks', $this->map_blocks($p['content'] ?? []), $id);
+            $this->seed_seo($id, $p['seo'] ?? null);
+
+            WP_CLI::log("  route page: {$p['slug']} ({$p['pageKey']})");
+        }
+    }
+
+    private function seed_seo(int $post_id, ?array $seo): void {
+        if (!$seo) return;
+        update_field('field_seo_title', $seo['title'] ?? '', $post_id);
+        update_field('field_seo_description', $seo['description'] ?? '', $post_id);
+        update_field('field_seo_noindex', !empty($seo['noindex']), $post_id);
+        if (!empty($seo['ogImage'])) {
+            update_field('field_seo_og_image', $this->attach_image(['url' => $seo['ogImage']]), $post_id);
         }
     }
 
@@ -429,8 +630,15 @@ class Trichis_Seed_Command {
         WP_CLI::log('Seeding site settings…');
 
         $fields = [
+            'site_name'               => $site['general']['site_name'] ?? '',
+            'seo_title_suffix'        => $site['general']['seo_title_suffix'] ?? '',
+            'seo_default_description' => $site['general']['seo_default_description'] ?? '',
+
             'nav_links'         => $site['navigation']['nav_links'] ?? [],
             'menu_footer_links' => $site['navigation']['menu_footer_links'] ?? [],
+
+            'footer_lead_head'    => $site['footer']['footer_lead_head'] ?? '',
+            'footer_lead_body'    => $site['footer']['footer_lead_body'] ?? '',
             'footer_offices'      => $site['footer']['footer_offices'] ?? [],
             'footer_email'        => $site['footer']['footer_email'] ?? '',
             'footer_phone'        => $site['footer']['footer_phone'] ?? '',
@@ -439,13 +647,20 @@ class Trichis_Seed_Command {
             'footer_cta_title'    => $site['footer']['footer_cta_title'] ?? '',
             'footer_cta_text'     => $site['footer']['footer_cta_text'] ?? '',
             'footer_cta_link'     => $site['footer']['footer_cta_link'] ?? '',
-            'how_we_do_it'      => $site['homeContent']['how_we_do_it'] ?? [],
-            'what_we_do'        => $site['homeContent']['what_we_do'] ?? [],
-            'what_weve_created' => $site['homeContent']['what_weve_created'] ?? [],
-            'random_sentences'  => $site['homeContent']['random_sentences'] ?? [],
-            'cookie_message' => $site['cookieBanner']['cookie_message'] ?? '',
-            'cookie_accept'  => $site['cookieBanner']['cookie_accept'] ?? '',
-            'cookie_reject'  => $site['cookieBanner']['cookie_reject'] ?? '',
+
+            'random_sentences' => $site['interfaceSettings']['random_sentences'] ?? [],
+
+            'cookie_title'      => $site['cookieBanner']['cookie_title'] ?? '',
+            'cookie_message'    => $site['cookieBanner']['cookie_message'] ?? '',
+            'cookie_accept'     => $site['cookieBanner']['cookie_accept'] ?? '',
+            'cookie_reject'     => $site['cookieBanner']['cookie_reject'] ?? '',
+            'cookie_more_label' => $site['cookieBanner']['cookie_more_label'] ?? '',
+
+            'not_found_title'    => $site['notFound']['not_found_title'] ?? '',
+            'not_found_cta_text' => $site['notFound']['not_found_cta_text'] ?? '',
+            'not_found_cta_link' => $site['notFound']['not_found_cta_link'] ?? '',
+
+            'ui_strings' => $site['uiStrings']['ui_strings'] ?? [],
         ];
 
         foreach ($fields as $name => $value) {
@@ -464,28 +679,18 @@ class Trichis_Seed_Command {
         }
         if (!function_exists('acf_update_field_group')) return;
 
-        $pages = $this->read_json('pages.json') ?: [];
+        $sources = array_merge(
+            $this->read_json('pages.json') ?: [],
+            $this->read_json('route-pages.json') ?: [],
+        );
+
         $form_sections = [];
-        foreach ($pages as $p) {
+        foreach ($sources as $p) {
             foreach ((array) ($p['content'] ?? []) as $block) {
                 if (($block['__typename'] ?? '') === 'FormSectionRecord' && !empty($block['formName'])) {
                     $form_sections[$block['formName']] = $block;
                 }
             }
-        }
-
-        // The quickscan form lives on the (hard-coded) homepage in nine-ca;
-        // ensure it exists with the known fields even when no CMS page uses it.
-        if (!isset($form_sections['quickscan'])) {
-            $form_sections['quickscan'] = [
-                'formName'   => 'quickscan',
-                'formFields' => [
-                    ['label' => 'Naam', 'name' => 'name', 'fieldType' => 'text', 'required' => true, 'width' => 50],
-                    ['label' => 'Bedrijf', 'name' => 'company', 'fieldType' => 'text', 'required' => false, 'width' => 50],
-                    ['label' => 'E-mail', 'name' => 'email', 'fieldType' => 'email', 'required' => true, 'width' => 50],
-                    ['label' => 'Website', 'name' => 'website', 'fieldType' => 'text', 'required' => false, 'width' => 50],
-                ],
-            ];
         }
 
         trichis_bootstrap_forms();
@@ -539,7 +744,7 @@ class Trichis_Seed_Command {
                     'required'    => !empty($f['required']),
                     'placeholder' => $f['placeholder'] ?? '',
                     'choices'     => $this->parse_options($f['options'] ?? ''),
-                    'wrapper'     => ['width' => (string) ($f['width'] ?? '')],
+                    'wrapper'     => ['width' => $this->field_width($f['width'] ?? null) === 'half' ? '50' : '100'],
                     'parent'      => $group_id,
                     'menu_order'  => $i,
                 ]);

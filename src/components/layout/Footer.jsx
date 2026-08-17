@@ -1,43 +1,6 @@
 import { useMemo } from "react";
 import { TransitionLink } from "@/components/ui/TransitionLink";
-
-const DEFAULT_TITLE = "Klaar voor de\nvolgende stap?";
-const DEFAULT_LEAD_HEAD = "Laten we kennismaken";
-const DEFAULT_LEAD_BODY =
-  "De beste ideeën beginnen met een goed gesprek. Heb je een vraag, een uitdaging of ben je benieuwd wat we voor je kunnen betekenen? Bel ons, stuur een bericht of kom langs voor een lekker bakkie. We maken graag tijd voor je.";
-
-const DEFAULT_OFFICES = [
-  {
-    city: "Rotterdam",
-    address: "Goudsesingel 194\n3011 KD Rotterdam",
-    phone: "+31 10 477 85 25",
-    phoneHref: "tel:+31104778525",
-  },
-  {
-    city: "Breda",
-    address: "Rozenlaan 1\n4835 PB Breda",
-    phone: "+31 76 520 48 60",
-    phoneHref: "tel:+31765204860",
-  },
-];
-
-const DEFAULT_SOCIAL = [
-  {
-    label: "LinkedIn",
-    url: "https://www.linkedin.com/company/trichis",
-  },
-  {
-    label: "Instagram",
-    url: "https://www.instagram.com/trichis",
-  },
-];
-
-const DEFAULT_LEGAL = [
-  { label: "Algemene voorwaarden", url: "#" },
-  { label: "Privacy", url: "#" },
-  { label: "Cookies", url: "#" },
-  { label: "Sitemap", url: "/sitemap.xml" },
-];
+import { t } from "@/lib/i18n";
 
 function addressLines(address = "") {
   return String(address)
@@ -74,38 +37,28 @@ function FooterLink({ href, children, external }) {
 export default function Footer({ settings = {} }) {
   const year = useMemo(() => new Date().getFullYear(), []);
   const footer = settings.footer ?? {};
+  const siteName = settings.general?.siteName ?? "";
 
-  const title = (footer.ctaTitle || DEFAULT_TITLE).replace(/<br\s*\/?>/gi, "\n");
-  const email = footer.email || "info@trichis.nl";
-  const sharedPhone = footer.phone || "";
+  const title = (footer.ctaTitle ?? "").replace(/<br\s*\/?>/gi, "\n");
+  const email = footer.email ?? "";
+  const sharedPhone = footer.phone ?? "";
 
-  const offices = (footer.offices?.length ? footer.offices : DEFAULT_OFFICES).map(
-    (office, index) => {
-      const fallback = DEFAULT_OFFICES.find(
-        (item) => item.city.toLowerCase() === String(office.city || "").toLowerCase(),
-      );
-      const phone = office.phone || fallback?.phone || (index === 0 ? sharedPhone : "");
-      const phoneHref =
-        office.phoneHref ||
-        fallback?.phoneHref ||
-        (phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "");
+  const offices = (footer.offices ?? []).map((office, index) => {
+    const phone = office.phone || (index === 0 ? sharedPhone : "");
+    const phoneHref =
+      office.phoneHref ||
+      (phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "");
 
-      return {
-        city: office.city,
-        lines: addressLines(office.address || fallback?.address || ""),
-        phone,
-        phoneHref,
-      };
-    },
-  );
+    return {
+      city: office.city,
+      lines: addressLines(office.address),
+      phone,
+      phoneHref,
+    };
+  });
 
-  const socialItems = footer.socialLinks?.length
-    ? footer.socialLinks
-    : DEFAULT_SOCIAL;
-
-  const legalItems = footer.legalItems?.length
-    ? footer.legalItems
-    : DEFAULT_LEGAL;
+  const socialItems = footer.socialLinks ?? [];
+  const legalItems = footer.legalItems ?? [];
 
   return (
     <footer className="site-footer" id="contact">
@@ -121,8 +74,8 @@ export default function Footer({ settings = {} }) {
 
         <div className="site-footer__cols">
           <div className="site-footer__col site-footer__col--lead">
-            <p className="site-footer__head">{DEFAULT_LEAD_HEAD}</p>
-            <p>{DEFAULT_LEAD_BODY}</p>
+            <p className="site-footer__head">{footer.leadHead}</p>
+            <p>{footer.leadBody}</p>
           </div>
 
           {offices.map((office) => (
@@ -135,7 +88,9 @@ export default function Footer({ settings = {} }) {
                     <br />
                   </span>
                 ))}
-                <FooterLink href={`mailto:${email}`}>{email}</FooterLink>
+                {email ? (
+                  <FooterLink href={`mailto:${email}`}>{email}</FooterLink>
+                ) : null}
                 {office.phone ? (
                   <>
                     <br />
@@ -147,7 +102,7 @@ export default function Footer({ settings = {} }) {
           ))}
 
           <div className="site-footer__col">
-            <p className="site-footer__head">Follow us</p>
+            <p className="site-footer__head">{t("footer.follow")}</p>
             <p>
               {socialItems.map((item, i) => (
                 <span key={i}>
@@ -166,9 +121,9 @@ export default function Footer({ settings = {} }) {
 
       <div className="site-footer__bottom inner-width">
         <span>
-          Trichis {formatYear(year)}
+          {siteName} {formatYear(year)}
         </span>
-        <nav className="site-footer__legal" aria-label="Juridisch">
+        <nav className="site-footer__legal" aria-label={t("footer.legalLabel")}>
           {legalItems.map((item, i) => (
             <FooterLink key={i} href={item.url} external={item.url?.startsWith("http")}>
               → {item.label}

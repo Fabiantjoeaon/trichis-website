@@ -1,4 +1,13 @@
 {
+  "general": {
+    "site_name": "Trichis",
+    "logo": null,
+    "logo_alt": null,
+    "favicon": null,
+    "seo_title_suffix": " — Trichis",
+    "seo_default_description": "Nine is een onafhankelijk creatief bureau met een culture driven visie. Met strategy, identity en design creëren we nieuwe werelden voor brands we love.",
+    "seo_default_og_image": null
+  },
   "navigation": {
     "nav_links": [
       {
@@ -42,14 +51,20 @@
     ]
   },
   "footer": {
+    "footer_lead_head": "Laten we kennismaken",
+    "footer_lead_body": "De beste ideeën beginnen met een goed gesprek. Heb je een vraag, een uitdaging of ben je benieuwd wat we voor je kunnen betekenen? Bel ons, stuur een bericht of kom langs voor een lekker bakkie. We maken graag tijd voor je.",
     "footer_offices": [
       {
         "city": "Rotterdam",
-        "address": "Goudsesingel 194\n3011 KD Rotterdam"
+        "address": "Goudsesingel 194\n3011 KD Rotterdam",
+        "phone": "+31 10 477 85 25",
+        "phone_href": "tel:+31104778525"
       },
       {
         "city": "Breda",
-        "address": "Rozenlaan 1\n4835 PB Breda"
+        "address": "Rozenlaan 1\n4835 PB Breda",
+        "phone": "+31 76 520 48 60",
+        "phone_href": "tel:+31765204860"
       }
     ],
     "footer_email": "info@trichis.nl",
@@ -86,44 +101,7 @@
     "footer_cta_text": "Neem contact op",
     "footer_cta_link": "mailto:info@trichis.nl"
   },
-  "homeContent": {
-    "how_we_do_it": {
-      "title": "How we do it",
-      "text": "We are a design studio that reinvents reality for a smart and cultured future.",
-      "text2": "With design, voice and forward thinking ideas, we create worlds for brands we love.",
-      "cards": [
-        {
-          "title": "Identity",
-          "text_top": "Mensen moeten in 1 sec. weten dat het om jouw merk gaat. Maar hoe blijf je onderscheidend, met zoveel indrukken? Met een sterke en heldere identiteit.",
-          "text_bottom": "Dus zoeken wij naar de kern, de stickiness van jouw merk. We maken het onmiskenbaar jou en zorgen dat het blijft plakken."
-        },
-        {
-          "title": "Impact",
-          "text_top": "Impact maken betekent zelf de toekomst vormgeven. Als creatief bureau staan wij middenin de samenleving. ",
-          "text_bottom": "Wij weten precies wat er speelt, zien veranderingen al vroeg en anticiperen op wat komen gaat. Zo zorgen wij ervoor dat jouw merk de koers niet volgt, maar bepaalt."
-        },
-        {
-          "title": "Reach",
-          "text_top": "In een wereld vol ruis wil je niet hoeven schreeuwen om een punt te maken. Wij helpen je om de juiste mensen te bereiken",
-          "text_bottom": "Samen met onze partners creëren we de perfecte balans tussen impact, frequentie en bereik. Zodat jij je merk kan laten spreken."
-        },
-        {
-          "title": "Result",
-          "text_top": "We streven vaak naar hetzelfde: groei, succes en bereik. We nemen verschillende routes, maar bewegen in dezelfde richting. Alleen, hoe maak je dan nog het verschil?",
-          "text_bottom": "Wij zorgen ervoor dat jouw merk niet alleen doet wat het belooft, maar dat elke stap gericht is op concrete resultaten die je ziet en voelt. "
-        }
-      ]
-    },
-    "what_we_do": {
-      "title": "What we do",
-      "text": "You already look great, let us make you look fantastic!",
-      "text2": "We live for great design, making you look good is our life's mission. If clothes."
-    },
-    "what_weve_created": {
-      "title": "What we've created",
-      "text": "Take a look at our track record",
-      "text2": "Nine is an independent design studio that reinvents reality for a smart and cultured future. With design, voice and forward thinking ideas, we create worlds for brands we love."
-    },
+  "interfaceSettings": {
     "random_sentences": [
       {
         "text": "Hello we’re nine creative agency"
@@ -197,8 +175,52 @@
     ]
   },
   "cookieBanner": {
-    "cookie_message": "Deze website maakt gebruik van cookies.\nWe gebruiken cookies om uw ervaring te verbeteren, gepersonaliseerde advertenties of inhoud weer te geven en ons verkeer te analyseren.",
+    "cookie_title": "Deze website maakt gebruik van cookies.",
+    "cookie_message": "We gebruiken cookies om uw ervaring te verbeteren, gepersonaliseerde advertenties of inhoud weer te geven en ons verkeer te analyseren.",
     "cookie_accept": "Alles accepteren",
-    "cookie_reject": "Alles weigeren"
+    "cookie_reject": "Alles weigeren",
+    "cookie_more_label": "Meer info",
+    "privacy_document": null
+  },
+  "notFound": {
+    "not_found_title": "Pagina niet gevonden",
+    "not_found_cta_text": "Terug naar home",
+    "not_found_cta_link": "/"
+  },
+  "uiStrings": {
+    "ui_strings": [
+      { "string_key": "nav.menu", "text": "Menu" },
+      { "string_key": "nav.close", "text": "Sluiten" },
+      { "string_key": "nav.light", "text": "Light" },
+      { "string_key": "nav.dark", "text": "Dark" },
+      { "string_key": "footer.follow", "text": "Follow us" },
+      { "string_key": "footer.legalLabel", "text": "Juridisch" },
+      { "string_key": "footer.backToTop", "text": "Back to top" },
+      { "string_key": "service.sectionTitle", "text": "What we do - {name}" },
+      { "string_key": "project.aboutProject", "text": "About the project" },
+      { "string_key": "project.aboutCampaign", "text": "About the campaign" },
+      { "string_key": "project.whatsNext", "text": "What's next" },
+      { "string_key": "project.contact", "text": "Neem contact op" },
+      {
+        "string_key": "projectNumbers.sectionTitle",
+        "text": "It's all about the numbers right?"
+      },
+      { "string_key": "form.submit", "text": "Verzenden" },
+      { "string_key": "form.submitting", "text": "Bezig..." },
+      { "string_key": "form.successTitle", "text": "Bedankt!" },
+      { "string_key": "form.required", "text": "Dit veld is verplicht" },
+      { "string_key": "form.chooseOption", "text": "Maak een keuze" },
+      {
+        "string_key": "form.minOneOption",
+        "text": "Selecteer minimaal één optie"
+      },
+      { "string_key": "form.checkEmail", "text": "Controleer je emailadres" },
+      {
+        "string_key": "form.error",
+        "text": "Sorry, er ging iets mis. Controleer je informatie."
+      },
+      { "string_key": "form.selectPlaceholder", "text": "Selecteer..." },
+      { "string_key": "video.closeHint", "text": "Click anywhere to close" }
+    ]
   }
 }

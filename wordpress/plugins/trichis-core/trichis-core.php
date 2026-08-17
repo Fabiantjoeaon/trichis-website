@@ -16,6 +16,7 @@ require_once TRICHIS_CORE_DIR . '/includes/blocks.php';
 require_once TRICHIS_CORE_DIR . '/includes/field-groups/page.php';
 require_once TRICHIS_CORE_DIR . '/includes/field-groups/project.php';
 require_once TRICHIS_CORE_DIR . '/includes/field-groups/service.php';
+require_once TRICHIS_CORE_DIR . '/includes/field-groups/seo.php';
 require_once TRICHIS_CORE_DIR . '/includes/options.php';
 require_once TRICHIS_CORE_DIR . '/includes/admin-menu.php';
 require_once TRICHIS_CORE_DIR . '/includes/rest-forms.php';

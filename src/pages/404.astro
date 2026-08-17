@@ -1,13 +1,26 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import TransitionLink from "@/components/ui/TransitionLink.jsx";
-import { t } from "@/lib/i18n";
+import { getSiteSettings } from "@/lib/content";
+
+let notFound = {};
+try {
+  notFound = (await getSiteSettings()).notFound ?? {};
+} catch {
+  // settings unavailable — render the shell without copy
+}
 ---
 
-<BaseLayout title={t("notFound.title")} showFooter={false}>
+<BaseLayout title={notFound.title} seo={{ noindex: true }} showFooter={false}>
   <section class="inner-width section-top section-bottom not-found">
-    <h1>{t("notFound.title")}</h1>
-    <TransitionLink client:load href="/">{t("notFound.cta")}</TransitionLink>
+    <h1>{notFound.title}</h1>
+    {
+      notFound.ctaText && (
+        <TransitionLink client:load href={notFound.ctaLink || "/"}>
+          {notFound.ctaText}
+        </TransitionLink>
+      )
+    }
   </section>
 </BaseLayout>
 

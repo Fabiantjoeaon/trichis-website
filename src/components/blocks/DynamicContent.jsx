@@ -6,6 +6,19 @@ import PageHeader from "./PageHeader";
 import Paragraph from "./Paragraph";
 import ColumnRow from "./ColumnRow";
 import FormSection from "./FormSection";
+import HomeHero from "@/components/home/HomeHero";
+import HomeWhoWeAre from "@/components/home/HomeWhoWeAre";
+import HomeWhatWeDo from "@/components/home/HomeWhatWeDo";
+import HomeWhatWeveCreated from "@/components/home/HomeWhatWeveCreated";
+import HowWeDoIt from "@/components/home/HowWeDoIt";
+import HomeShowReel from "@/components/home/HomeShowReel";
+import HomeMore from "@/components/home/HomeMore";
+import ServicePageHero from "@/components/service/ServicePageHero";
+import AboutUsHero from "@/components/about/AboutUsHero";
+import AboutUsIntro from "@/components/about/AboutUsIntro";
+import AboutUsOffices from "@/components/about/AboutUsOffices";
+import WhatWeDoExpertises from "@/components/whatwedo/WhatWeDoExpertises";
+import ServiceTeaser from "@/components/whatwedo/ServiceTeaser";
 import { SectionTitle } from "@/components/ui/Divider";
 import { ScrollingText } from "@/components/ui/ScrollingText";
 import { useGlobalStore } from "@/stores/global";
@@ -39,6 +52,29 @@ export const ContentComponents = {
     />
   ),
   FormSectionRecord: ({ data }) => <FormSection data={data} />,
+
+  // Page sections
+  HomeheroRecord: HomeHero,
+  HomewhoweareRecord: HomeWhoWeAre,
+  HomewhatwedoRecord: HomeWhatWeDo,
+  HomewhatwevecreatedRecord: HomeWhatWeveCreated,
+  HowwedoitRecord: HowWeDoIt,
+  HomeshowreelRecord: HomeShowReel,
+  LinkbandRecord: HomeMore,
+  ServiceheroRecord: ({ data }) => (
+    <ServicePageHero
+      title={data?.title}
+      header={data?.headerText}
+      paragraph={data?.paragraph}
+      cta={{ text: data?.ctaText, href: data?.ctaLink }}
+      anchorId={data?.anchorId}
+    />
+  ),
+  AboutheroRecord: AboutUsHero,
+  AboutintroRecord: AboutUsIntro,
+  OfficesRecord: AboutUsOffices,
+  ExpertisesRecord: WhatWeDoExpertises,
+  ServiceteaserRecord: ServiceTeaser,
 };
 
 function hasVideoColumn(item) {

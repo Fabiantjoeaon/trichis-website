@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { t } from "@/lib/i18n";
 
 const ERROR_COLOR = "#E74C3C";
 
@@ -73,7 +74,7 @@ function SelectInput({
         onBlur={onBlur}
       >
         <option value="" disabled hidden>
-          {placeholder || "Selecteer..."}
+          {placeholder || t("form.selectPlaceholder")}
         </option>
         {parsedOptions.map((opt) => (
           <option key={opt} value={opt}>

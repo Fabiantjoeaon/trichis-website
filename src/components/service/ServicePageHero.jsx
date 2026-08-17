@@ -5,10 +5,11 @@ import { convertMultiParagraphToNineFormat } from "@/lib/cms";
 import usePageEnter from "@/hooks/usePageEnter";
 
 export default function ServicePageHero({
-  title = "Web-design",
+  title,
   header,
   paragraph,
   cta,
+  anchorId,
 }) {
   const titleRef = useRef(null);
   const headerRef = useRef(null);
@@ -24,7 +25,10 @@ export default function ServicePageHero({
   });
 
   return (
-    <section className="service-page-hero inner-width">
+    <section
+      className="service-page-hero inner-width"
+      id={anchorId || undefined}
+    >
       <div className="service-page-hero__titles" aria-hidden>
         <div className="service-page-hero__titles-inner">
           <SplitText tag="h1" ref={titleRef} animateOnScroll={false} className="t-service-hero-title">
@@ -63,7 +67,7 @@ export default function ServicePageHero({
         {cta?.text && (
           <BorderedIcon
             text={cta.text}
-            href={cta.href || cta.url || "mailto:cu@nine.nl"}
+            href={cta.href || cta.url}
             dontTriggerPageTransition={(cta.href || cta.url || "").startsWith(
               "mailto:",
             )}

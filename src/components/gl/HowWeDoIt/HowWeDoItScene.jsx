@@ -48,7 +48,7 @@ function cssVar(name, fallback) {
 
 // White-on-transparent, horizontally seamless text mask
 function createScrollingTextMask({
-  word = "nine",
+  word = "",
   width = MASK_WIDTH,
   height = MASK_HEIGHT,
 } = {}) {
@@ -62,12 +62,15 @@ function createScrollingTextMask({
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
 
-  // Repeat the word with an exact advance so the texture tiles seamlessly
-  const wordWidth = Math.max(1, ctx.measureText(word).width);
-  const count = Math.max(1, Math.round(width / wordWidth));
-  const advance = width / count;
-  for (let i = 0; i < count; i++) {
-    ctx.fillText(word, i * advance, height * 0.55);
+  // Repeat the word with an exact advance so the texture tiles seamlessly.
+  // No word means an empty mask — the plane simply paints nothing.
+  const wordWidth = word ? ctx.measureText(word).width : 0;
+  if (wordWidth > 0) {
+    const count = Math.max(1, Math.round(width / wordWidth));
+    const advance = width / count;
+    for (let i = 0; i < count; i++) {
+      ctx.fillText(word, i * advance, height * 0.55);
+    }
   }
 
   const texture = new CanvasTexture(canvas);
@@ -93,7 +96,7 @@ function HowWeDoItGlassCard({ i, themeColors }) {
   );
 }
 
-export default function HowWeDoItScene({ scale, cardCount = 4 }) {
+export default function HowWeDoItScene({ scale, cardCount = 4, word = "" }) {
   const cards = useRef();
   const scaleGroup = useRef();
   const bg = useRef();
@@ -148,7 +151,7 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
   });
 
   const builtTextPlane = useMemo(() => {
-    const placeholder = createScrollingTextMask();
+    const placeholder = createScrollingTextMask({ word });
     textData.current = placeholder;
     // replace=true: zustand would otherwise merge the Texture into a plain
     // object and strip its prototype (breaks TSL texture sampling)
@@ -178,7 +181,7 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
 
     const rebuild = () => {
       if (cancelled) return;
-      const next = createScrollingTextMask();
+      const next = createScrollingTextMask({ word });
       textData.current?.dispose?.();
       textData.current = next;
       howWeDoItTextTexture.setState(next.texture, true);
@@ -192,7 +195,7 @@ export default function HowWeDoItScene({ scale, cardCount = 4 }) {
     return () => {
       cancelled = true;
     };
-  }, [windowSize.width, builtTextPlane]);
+  }, [windowSize.width, builtTextPlane, word]);
 
   useEffect(() => {
     const compute = () => {

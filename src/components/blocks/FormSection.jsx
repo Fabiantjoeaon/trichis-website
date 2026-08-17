@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import BorderedIcon from "@/components/ui/BorderedIcon";
 import FormField from "./FormField";
 import { submitForm } from "@/lib/forms";
+import { t } from "@/lib/i18n";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -9,16 +10,16 @@ function validateField(field, value) {
   if (field.required) {
     if (field.fieldType === "checkbox") {
       if (!Array.isArray(value) || value.length === 0)
-        return "Selecteer minimaal één optie";
+        return t("form.minOneOption");
     } else if (!value || (typeof value === "string" && !value.trim())) {
       return field.fieldType === "select"
-        ? "Maak een keuze"
-        : "Dit veld is verplicht";
+        ? t("form.chooseOption")
+        : t("form.required");
     }
   }
 
   if (field.fieldType === "email" && value && !EMAIL_REGEX.test(value)) {
-    return "Controleer je emailadres";
+    return t("form.checkEmail");
   }
 
   return null;
@@ -52,8 +53,8 @@ export default function FormSection({ data }) {
   const {
     title,
     subtitle,
-    ctaText = "Verzenden",
-    successTitle = "Bedankt!",
+    ctaText,
+    successTitle,
     successMessage = "",
     formName = "contact",
     formFields = [],
@@ -155,7 +156,7 @@ export default function FormSection({ data }) {
               />
             </svg>
           </div>
-          <h3>{successTitle}</h3>
+          <h3>{successTitle || t("form.successTitle")}</h3>
           {successMessage && (
             <p
               dangerouslySetInnerHTML={{
@@ -169,7 +170,7 @@ export default function FormSection({ data }) {
   }
 
   return (
-    <section className="form-section inner-width">
+    <section className="form-section inner-width" id={data?.anchorId || undefined}>
       {cleanTitle && (
         <div className="form-section__title-wrap">
           <div className="form-section__asterisk" aria-hidden>
@@ -198,13 +199,13 @@ export default function FormSection({ data }) {
           {(submitError || hasErrors) && (
             <div className="form-section__general-error">
               <span className="form-section__error-badge">!</span>
-              Sorry, er ging iets mis. Controleer je informatie.
+              {t("form.error")}
             </div>
           )}
         </div>
         <BorderedIcon
           icon="arrow"
-          text={pending ? "Bezig..." : ctaText}
+          text={pending ? t("form.submitting") : ctaText || t("form.submit")}
           onClick={handleSubmit}
           disabled={hasErrors || pending}
           animateOnScroll={false}

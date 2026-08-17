@@ -1,0 +1,458 @@
+[
+  {
+    "title": "Home",
+    "slug": "home",
+    "pageKey": "home",
+    "seo": {
+      "title": "Nine Creative Agency",
+      "description": "Nine is een onafhankelijk creatief bureau.",
+      "ogImage": null,
+      "noindex": false
+    },
+    "coverImage": null,
+    "mobileCoverImage": null,
+    "content": [
+      {
+        "__typename": "HomeheroRecord",
+        "anchorId": null,
+        "media": { "url": "/video/showreel.mp4" },
+        "mobileMedia": { "url": "/video/showreel_mobile.mp4" }
+      },
+      {
+        "__typename": "HomewhoweareRecord",
+        "anchorId": null,
+        "sectionTitle": "Who we are",
+        "body": "Nine is een onafhankelijk creatief bureau met een culture driven visie. Met strategy, identity en design, creëren we nieuwe werelden voor brands we love."
+      },
+      {
+        "__typename": "HomewhatwedoRecord",
+        "anchorId": null,
+        "sectionTitle": "What we do",
+        "scrollingText": "You got the vibe, we got the tools.",
+        "intro": "Opvallen is niet genoeg. Wij zorgen ervoor dat jouw merk onthouden wordt. Voorbij de hype, recht het hart in. Alleen zo blijf je top of mind.",
+        "services": [
+          {
+            "label": "Identity",
+            "link": "/service/identity",
+            "media": { "url": "/images/services/identity.webp" }
+          },
+          {
+            "label": "Webdesign",
+            "link": "/service/webdesign",
+            "media": { "url": "/images/services/web-design.webp" }
+          },
+          {
+            "label": "Photo & video",
+            "link": "/service/photo-video",
+            "media": { "url": "/images/services/photo-video.webp" }
+          },
+          {
+            "label": "Campaign",
+            "link": "/service/campaign",
+            "media": { "url": "/images/services/campaign.webp" }
+          },
+          {
+            "label": "Strategy",
+            "link": "/service/strategy",
+            "media": { "url": "/images/services/strategy.webp" }
+          }
+        ]
+      },
+      {
+        "__typename": "HowwedoitRecord",
+        "anchorId": null,
+        "title": "How we do it",
+        "glWord": "nine",
+        "cards": [
+          {
+            "title": "Identity",
+            "textTop": "Mensen moeten in 1 sec. weten dat het om jouw merk gaat. Maar hoe blijf je onderscheidend, met zoveel indrukken? Met een sterke en heldere identiteit.",
+            "textBottom": "Dus zoeken wij naar de kern, de stickiness van jouw merk. We maken het onmiskenbaar jou en zorgen dat het blijft plakken."
+          },
+          {
+            "title": "Impact",
+            "textTop": "Impact maken betekent zelf de toekomst vormgeven. Als creatief bureau staan wij middenin de samenleving. ",
+            "textBottom": "Wij weten precies wat er speelt, zien veranderingen al vroeg en anticiperen op wat komen gaat. Zo zorgen wij ervoor dat jouw merk de koers niet volgt, maar bepaalt."
+          },
+          {
+            "title": "Reach",
+            "textTop": "In een wereld vol ruis wil je niet hoeven schreeuwen om een punt te maken. Wij helpen je om de juiste mensen te bereiken",
+            "textBottom": "Samen met onze partners creëren we de perfecte balans tussen impact, frequentie en bereik. Zodat jij je merk kan laten spreken."
+          },
+          {
+            "title": "Result",
+            "textTop": "We streven vaak naar hetzelfde: groei, succes en bereik. We nemen verschillende routes, maar bewegen in dezelfde richting. Alleen, hoe maak je dan nog het verschil?",
+            "textBottom": "Wij zorgen ervoor dat jouw merk niet alleen doet wat het belooft, maar dat elke stap gericht is op concrete resultaten die je ziet en voelt. "
+          }
+        ]
+      },
+      {
+        "__typename": "LinkbandRecord",
+        "anchorId": null,
+        "title": "More About <strong>nine</strong>",
+        "link": "/about-us"
+      },
+      {
+        "__typename": "HomewhatwevecreatedRecord",
+        "anchorId": null,
+        "sectionTitle": "What we've done so far",
+        "scrollingText": "Discover your impact",
+        "intro": "Nine is een onafhankelijk creatief bureau dat de toekomst opnieuw vormgeeft. Met slim design, een heldere visie en grensverleggende ideeën bouwen we samen aan een nieuwe wereld.",
+        "listLabel": "Projects",
+        "ctaText": "All our <strong>projects</strong>",
+        "ctaLink": "/projects"
+      },
+      {
+        "__typename": "HomeshowreelRecord",
+        "anchorId": null,
+        "textTop": "Watch our",
+        "textBottom": "showreel",
+        "media": { "url": "/video/showreel.mp4" },
+        "mobileMedia": { "url": "/video/showreel_mobile.mp4" }
+      },
+      {
+        "__typename": "FormSectionRecord",
+        "anchorId": null,
+        "title": "Wil je een gratis <strong>Quickscan?</strong>",
+        "subtitle": "Neem contact op en wij laten je zien waar de kansen liggen!",
+        "ctaText": "Verzenden",
+        "successTitle": "Bedankt voor je reactie",
+        "successMessage": "We komen zo snel mogelijk bij je terug. Kijk in de tussentijd voor meer inspiratie ;)",
+        "formName": "quickscan",
+        "formFields": [
+          {
+            "label": "Naam",
+            "name": "naam",
+            "fieldType": "text",
+            "required": true,
+            "width": "half",
+            "placeholder": "Je volledige naam"
+          },
+          {
+            "label": "Bedrijfsnaam",
+            "name": "bedrijfsnaam",
+            "fieldType": "text",
+            "required": true,
+            "width": "half",
+            "placeholder": "Je bedrijfsnaam"
+          },
+          {
+            "label": "Emailadres",
+            "name": "email",
+            "fieldType": "email",
+            "required": true,
+            "width": "half",
+            "placeholder": "naam@bedrijf.nl"
+          },
+          {
+            "label": "Waar ben je naar op zoek?",
+            "name": "type",
+            "fieldType": "checkbox",
+            "required": true,
+            "width": "half",
+            "options": "Quickscan,Strategie,Brand Identity,Graphic Design,Beeld Visuals,Creatieve Campagne,Werving & Employer Branding,Online Marketing,Website,AI Oplossingen"
+          },
+          {
+            "label": "Bericht",
+            "name": "bericht",
+            "fieldType": "longtext",
+            "required": true,
+            "width": "full",
+            "placeholder": "Vertel ons meer over je project..."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "About us",
+    "slug": "about-us",
+    "pageKey": "about",
+    "seo": {
+      "title": "Nine Creative Agency: About us",
+      "description": null,
+      "ogImage": null,
+      "noindex": false
+    },
+    "coverImage": null,
+    "mobileCoverImage": null,
+    "content": [
+      {
+        "__typename": "AboutheroRecord",
+        "anchorId": null,
+        "brandText": "nine",
+        "brandMobile": "n"
+      },
+      {
+        "__typename": "AboutintroRecord",
+        "anchorId": null,
+        "sectionTitle": "First things first",
+        "scrollingText": "Wij zijn nine creative agency.",
+        "lead": "Als je zegt dat de wereld snel verandert, ben je eigenlijk al een stap te laat. Anno nu is reageren niet meer genoeg. Daarom denken wij niet vanuit wat hip of on trend is, maar vanuit wat morgen impact maakt. Wij zien veranderingen, herkennen patronen en anticiperen erop voordat ze trends worden. ",
+        "ctaText": "Contact",
+        "ctaLink": "mailto:info@9ca.nl",
+        "imageA": { "url": "/images/about-us/stick.jpeg" },
+        "imageB": { "url": "/images/about-us/quincy.jpeg" },
+        "imageWide": { "url": "/images/about-us/collage.jpeg" },
+        "body": "Al meer dan 20 jaar gaan we hard op creativiteit in elke vorm van het woord. Onze roots liggen bij icons als Adidas, Nike en MTV USA, ons hart klopt in Breda en Rotterdam. Met next level designs, een scherpe visie en concepten die echt anders zijn, zorgen we ervoor dat jouw merk niet alleen gezien wordt, maar ook onthouden. "
+      },
+      {
+        "__typename": "OfficesRecord",
+        "anchorId": null,
+        "sectionTitle": "Our offices",
+        "intro": "Bakske of bakkie pleur? Wees welkom in Breda en Rotterdam.",
+        "offices": [
+          {
+            "title": "R'dam",
+            "address": "Goudsesingel 194\n3011KD Rotterdam",
+            "media": { "url": "/images/about-us/rotterdam.jpeg" }
+          },
+          {
+            "title": "Breda",
+            "address": "Willemstraat 16\n4811AL Breda",
+            "media": { "url": "/images/about-us/breda.jpeg" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "What we do",
+    "slug": "what-we-do",
+    "pageKey": "whatWeDo",
+    "seo": {
+      "title": "Nine Creative Agency: What We Do",
+      "description": null,
+      "ogImage": null,
+      "noindex": false
+    },
+    "coverImage": null,
+    "mobileCoverImage": null,
+    "content": [
+      {
+        "__typename": "ServiceheroRecord",
+        "anchorId": null,
+        "title": "What we do",
+        "headerText": "Merkidentiteit ontwikkelen - jouw merk, jouw fundament.",
+        "paragraph": "**Waarom blijven klanten terugkomen? Door een merk dat indruk maakt.**\nWil jij dat jouw merk opvalt en impact maakt? Ontdek hoe een sterke merkidentiteit deuren opent naar meer klanten, vertrouwen en groei.",
+        "ctaText": "Contact",
+        "ctaLink": "mailto:info@trichis.nl"
+      },
+      {
+        "__typename": "ExpertisesRecord",
+        "anchorId": null,
+        "sectionTitle": "Our expertises",
+        "heading": "Wij zorgen dat merken gezien worden.",
+        "body": "Opvallen in een wereld waar iedereen aandacht wil hebben? Dit is de vraag waar wij elke dag de wekker voor zetten. Nine gaat altijd voor spraakmakend, buitengewoon & zoekt de randen op, met zoveel mogelijke impact voor je merk creëren als einddoel.",
+        "ctaText": "Contact",
+        "ctaLink": "mailto:cu@nine.nl"
+      },
+      {
+        "__typename": "ServiceteaserRecord",
+        "anchorId": null,
+        "sectionTitle": null,
+        "fullServiceName": null,
+        "serviceName": "Identity",
+        "serviceNameBottom": null,
+        "paragraphs": [
+          "Een sterke merkidentiteit is het fundament voor zichtbaarheid, vertrouwen en groei. Bij Nine draait branding om een uniek, consistent en authentiek verhaal dat klanten aantrekt én behoudt. Een krachtige identiteit zorgt voor meer klanten, loyaliteit, herkenning en een sterke marktpositie. Met de juiste uitstraling wordt jouw merk onvergetelijk."
+        ],
+        "ctaText": "More about <strong>identities</strong>",
+        "ctaLink": "/service/identity",
+        "rows": [
+          {
+            "columns": [
+              {
+                "width": 50,
+                "media": { "url": "/images/what-we-do/identity1.jpeg" }
+              },
+              {
+                "width": 50,
+                "media": { "url": "/images/what-we-do/identity2.webp" }
+              }
+            ]
+          }
+        ],
+        "trailingText": null,
+        "trailingCtaText": null,
+        "trailingCtaLink": null
+      },
+      {
+        "__typename": "ServiceteaserRecord",
+        "anchorId": null,
+        "sectionTitle": null,
+        "fullServiceName": null,
+        "serviceName": "Strategy",
+        "serviceNameBottom": null,
+        "paragraphs": [
+          "Bij Nine ontwikkelen we merkstrategieën die richting geven, focus brengen en zorgen voor blijvend succes. Met diepgaand onderzoek, een heldere positionering en een concreet actieplan helpen we jouw merk groeien, relevant blijven en zich onderscheiden van de concurrentie."
+        ],
+        "ctaText": null,
+        "ctaLink": null,
+        "rows": [
+          {
+            "columns": [
+              {
+                "width": 100,
+                "media": { "url": "/images/what-we-do/strategy.jpeg" }
+              }
+            ]
+          }
+        ],
+        "trailingText": "Geen dikke rapporten die in de la belanden, maar een strategie die meteen toepasbaar is en meetbaar resultaat oplevert. Zo bouw je vandaag aan de toekomst van jouw merk.",
+        "trailingCtaText": "More about <strong>strategy</strong>",
+        "trailingCtaLink": "/service/strategy"
+      },
+      {
+        "__typename": "ServiceteaserRecord",
+        "anchorId": null,
+        "sectionTitle": null,
+        "fullServiceName": "Webdesign",
+        "serviceName": "Web-",
+        "serviceNameBottom": "design",
+        "paragraphs": [
+          "Een professionele website is meer dan een mooi plaatje – het is een krachtig middel om klanten te overtuigen. Bij Nine draait webdesign om strategie, gebruiksgemak en een uitstraling die perfect past bij jouw merk.",
+          "Een goed ontwerp vergroot betrokkenheid, verhoogt conversies en versterkt je merk. Met de juiste structuur en visuele impact wordt jouw site een basis voor groei en online succes."
+        ],
+        "ctaText": "More about <strong>webdesign</strong>",
+        "ctaLink": "/service/webdesign",
+        "rows": [
+          {
+            "columns": [
+              {
+                "width": 70,
+                "media": { "url": "/images/what-we-do/webdesign1.jpeg" }
+              },
+              {
+                "width": 30,
+                "media": { "url": "/images/what-we-do/webdesign2.jpeg" }
+              }
+            ]
+          },
+          {
+            "columns": [
+              {
+                "width": 100,
+                "media": { "url": "/images/what-we-do/webdesign3.mp4" }
+              }
+            ]
+          }
+        ],
+        "trailingText": null,
+        "trailingCtaText": null,
+        "trailingCtaLink": null
+      },
+      {
+        "__typename": "ServiceteaserRecord",
+        "anchorId": null,
+        "sectionTitle": null,
+        "fullServiceName": "Photo / Video",
+        "serviceName": "Photo /",
+        "serviceNameBottom": "video",
+        "paragraphs": [
+          "Sterke foto’s en video’s maken jouw merk herkenbaar, betrouwbaar en onvergetelijk. Bij Nine draait visuele content om beelden die emotie oproepen, overtuigen en jouw verhaal tot leven brengen.",
+          "Professionele visuals vergroten aandacht, bouwen vertrouwen op en versterken je merk. Met strategisch ontworpen en perfect afgewerkte content zorgen we dat jouw boodschap blijft hangen.",
+          "Zo maken we van jouw merk een visueel verhaal dat raakt én resultaat oplevert."
+        ],
+        "ctaText": "More about <strong>photo / video</strong>",
+        "ctaLink": "/service/photo-video",
+        "rows": [
+          {
+            "columns": [
+              {
+                "width": 100,
+                "media": { "url": "/images/what-we-do/photo.jpeg" }
+              }
+            ]
+          },
+          {
+            "columns": [
+              {
+                "width": 100,
+                "media": { "url": "/images/what-we-do/photo2.mp4" }
+              }
+            ]
+          }
+        ],
+        "trailingText": null,
+        "trailingCtaText": null,
+        "trailingCtaLink": null
+      },
+      {
+        "__typename": "ServiceteaserRecord",
+        "anchorId": null,
+        "sectionTitle": null,
+        "fullServiceName": null,
+        "serviceName": "Campaigns",
+        "serviceNameBottom": null,
+        "paragraphs": [
+          "Bij Nine ontwikkelen we creatieve marketingcampagnes die opvallen, raken en resultaat opleveren. Met een sterke strategie, onderscheidende concepten en doelgerichte uitvoering vergroten we jouw zichtbaarheid, versterken we je merk en zorgen we voor meetbaar succes. Geen losse ideeën, maar campagnes die de juiste snaar raken en jouw doelen dichterbij brengen.",
+          "Zo laten we jouw merk niet alleen opvallen, maar écht impact maken."
+        ],
+        "ctaText": "More about <strong>campaigns</strong>",
+        "ctaLink": "/service/campaign",
+        "rows": [
+          {
+            "columns": [
+              {
+                "width": 100,
+                "media": { "url": "/images/what-we-do/campaigns.jpeg" }
+              }
+            ]
+          }
+        ],
+        "trailingText": null,
+        "trailingCtaText": null,
+        "trailingCtaLink": null
+      },
+      {
+        "__typename": "HowwedoitRecord",
+        "anchorId": null,
+        "title": "How we do it",
+        "glWord": "nine",
+        "cards": [
+          {
+            "title": "Identity",
+            "textTop": "Mensen moeten in 1 sec. weten dat het om jouw merk gaat. Maar hoe blijf je onderscheidend, met zoveel indrukken? Met een sterke en heldere identiteit.",
+            "textBottom": "Dus zoeken wij naar de kern, de stickiness van jouw merk. We maken het onmiskenbaar jou en zorgen dat het blijft plakken."
+          },
+          {
+            "title": "Impact",
+            "textTop": "Impact maken betekent zelf de toekomst vormgeven. Als creatief bureau staan wij middenin de samenleving. ",
+            "textBottom": "Wij weten precies wat er speelt, zien veranderingen al vroeg en anticiperen op wat komen gaat. Zo zorgen wij ervoor dat jouw merk de koers niet volgt, maar bepaalt."
+          },
+          {
+            "title": "Reach",
+            "textTop": "In een wereld vol ruis wil je niet hoeven schreeuwen om een punt te maken. Wij helpen je om de juiste mensen te bereiken",
+            "textBottom": "Samen met onze partners creëren we de perfecte balans tussen impact, frequentie en bereik. Zodat jij je merk kan laten spreken."
+          },
+          {
+            "title": "Result",
+            "textTop": "We streven vaak naar hetzelfde: groei, succes en bereik. We nemen verschillende routes, maar bewegen in dezelfde richting. Alleen, hoe maak je dan nog het verschil?",
+            "textBottom": "Wij zorgen ervoor dat jouw merk niet alleen doet wat het belooft, maar dat elke stap gericht is op concrete resultaten die je ziet en voelt. "
+          }
+        ]
+      },
+      {
+        "__typename": "LinkbandRecord",
+        "anchorId": null,
+        "title": "More About <strong>nine</strong>",
+        "link": "/about-us"
+      }
+    ]
+  },
+  {
+    "title": "Projects",
+    "slug": "projects",
+    "pageKey": "projects",
+    "seo": {
+      "title": "Nine Creative Agency: Projects",
+      "description": null,
+      "ogImage": null,
+      "noindex": false
+    },
+    "coverImage": null,
+    "mobileCoverImage": null,
+    "content": []
+  }
+]

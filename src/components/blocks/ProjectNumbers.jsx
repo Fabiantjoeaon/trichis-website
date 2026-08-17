@@ -1,14 +1,20 @@
 import SplitText from "@/components/ui/SplitText";
 import { Divider, SectionTitle } from "@/components/ui/Divider";
 import { ScrollingText } from "@/components/ui/ScrollingText";
+import { t } from "@/lib/i18n";
 
 export default function ProjectNumbers({ data }) {
-  const { titleLeft, titleRight, numbers = [] } = data || {};
+  const { sectionTitle, titleLeft, titleRight, numbers = [] } = data || {};
 
   return (
     <>
-      <SectionTitle>It's all about the numbers right?</SectionTitle>
-      <section className="project-numbers inner-width">
+      <SectionTitle>
+        {sectionTitle || t("projectNumbers.sectionTitle")}
+      </SectionTitle>
+      <section
+        className="project-numbers inner-width"
+        id={data?.anchorId || undefined}
+      >
         <div className="project-numbers__top">
           {titleLeft && <ScrollingText maxWidth="40%">{titleLeft}</ScrollingText>}
           {titleRight && (

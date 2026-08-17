@@ -1,17 +1,19 @@
 import SplitText from "@/components/ui/SplitText";
 import { SectionTitle } from "@/components/ui/Divider";
+import { t } from "@/lib/i18n";
 
 export default function ProjectHeader({ title, data, __typename }) {
   const isProject = __typename === "ProjectRecord";
   const displayTitle = data?.bigTitle || title;
   const sectionTitle =
     data?.sectionTitle ||
-    (isProject ? "About the project" : "About the campaign");
+    t(isProject ? "project.aboutProject" : "project.aboutCampaign");
 
   return (
     <>
       <SectionTitle>{sectionTitle}</SectionTitle>
       <section
+        id={data?.anchorId || undefined}
         className={`project-header inner-width${isProject ? " is-project" : " is-page"}`}
       >
         <div className="project-header__title">

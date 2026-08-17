@@ -1,6 +1,7 @@
 import SplitText from "@/components/ui/SplitText";
 import ShuffledText from "@/components/ui/ShuffledText";
 import { SectionTitle } from "@/components/ui/Divider";
+import { t } from "@/lib/i18n";
 
 export function SmallTextSplit({ children, className = "" }) {
   return <div className={`small-text-split ${className}`}>{children}</div>;
@@ -19,9 +20,11 @@ export default function WhatWeDoServiceHeader({
     <>
       {showSectionTitle && (
         <SectionTitle>
-          {sectionTitle
-            ? sectionTitle
-            : `What we do - ${fullServiceName ? fullServiceName : service}`}
+          {sectionTitle ||
+            t("service.sectionTitle").replace(
+              "{name}",
+              fullServiceName || service || "",
+            )}
         </SectionTitle>
       )}
       <header className={`service-header inner-width ${className}`}>

@@ -16,15 +16,29 @@ import {
   SITE_SETTINGS_QUERY,
 } from "./queries.js";
 
+// wpgraphql-acf types every `select` as a list, even when the field is
+// single-value, so choice fields arrive as ["image"] rather than "image".
+function choice(value) {
+  return Array.isArray(value) ? (value[0] ?? null) : (value ?? null);
+}
+
 // ── media ──────────────────────────────────────────────────────────────
 
 function mapMedia(media) {
   if (!media) return null;
   const node = media.image?.node;
-  const hasVideo = media.videoStreamingUrl || media.videoMuxPlaybackId;
+  const hasVideo =
+    media.videoStreamingUrl || media.videoMuxPlaybackId || media.videoMp4Url;
   if (!node && !hasVideo) return null;
   return {
-    url: node?.sourceUrl ?? media.videoThumbnailUrl ?? null,
+    // Components read `url` as the poster; a video with no still falls back to
+    // the video itself, which is what the GL element loads anyway.
+    url:
+      node?.sourceUrl ??
+      media.videoThumbnailUrl ??
+      media.videoMp4Url ??
+      media.videoStreamingUrl ??
+      null,
     alt: node?.altText ?? null,
     width: node?.mediaDetails?.width ?? null,
     height: node?.mediaDetails?.height ?? null,
@@ -51,6 +65,19 @@ const LAYOUT_TO_TYPENAME = {
   ProjectNumbersLayout: "ProjectnumberRecord",
   CtaSectionLayout: "CtasectionRecord",
   FormSectionLayout: "FormSectionRecord",
+  HomeHeroLayout: "HomeheroRecord",
+  HomeWhoWeAreLayout: "HomewhoweareRecord",
+  HomeWhatWeDoLayout: "HomewhatwedoRecord",
+  HomeWhatWeveCreatedLayout: "HomewhatwevecreatedRecord",
+  HowWeDoItLayout: "HowwedoitRecord",
+  HomeShowreelLayout: "HomeshowreelRecord",
+  LinkBandLayout: "LinkbandRecord",
+  ServiceHeroLayout: "ServiceheroRecord",
+  AboutHeroLayout: "AboutheroRecord",
+  AboutIntroLayout: "AboutintroRecord",
+  OfficesLayout: "OfficesRecord",
+  ExpertisesLayout: "ExpertisesRecord",
+  ServiceTeaserLayout: "ServiceteaserRecord",
 };
 
 function layoutName(gqlTypename) {
@@ -61,7 +88,7 @@ function layoutName(gqlTypename) {
 }
 
 function mapColumn(col) {
-  const type = col.columnType;
+  const type = choice(col.columnType);
   if (type === "image") {
     return {
       __typename: "ImagecolumnRecord",
@@ -76,7 +103,7 @@ function mapColumn(col) {
       width: col.width,
       mobileWidth: col.mobileWidth,
       text: col.text,
-      align: col.align,
+      align: choice(col.align),
       cta: col.ctaText
         ? { text: col.ctaText, url: col.ctaUrl, isExternal: !!col.ctaIsExternal }
         : null,
@@ -89,94 +116,206 @@ function mapColumn(col) {
   };
 }
 
+function mapBlock(typename, block) {
+  switch (typename) {
+    case "PageheaderRecord":
+      return {
+        sectionTitle: block.sectionTitle,
+        title: block.title,
+        titleBottom: block.titleBottom,
+        paragraph: block.paragraph,
+        ctaText: block.ctaText,
+        ctaLink: block.ctaLink,
+      };
+    case "ProjectheaderRecord":
+      return {
+        sectionTitle: block.sectionTitle,
+        bigTitle: block.bigTitle,
+        paragraphHeader: block.paragraphHeader,
+        paragraph: block.paragraph,
+      };
+    case "ParagraphRecord":
+      return { content: block.content };
+    case "SectionlineRecord":
+      return { title: block.title };
+    case "ScrollingTitleRecord":
+      return { text: block.text };
+    case "ColumnrowRecord":
+      return { columns: (block.columns ?? []).map(mapColumn) };
+    case "ProjectnumberRecord":
+      return {
+        sectionTitle: block.sectionTitle,
+        titleLeft: block.titleLeft,
+        titleRight: block.titleRight,
+        numbers: (block.numbers ?? []).map((n) => ({
+          number: n.number,
+          text: n.text,
+        })),
+      };
+    case "CtasectionRecord":
+      return {
+        title: block.title,
+        ctaText: block.ctaText,
+        ctaLink: block.ctaLink,
+      };
+    case "FormSectionRecord":
+      return {
+        title: block.title,
+        subtitle: block.subtitle,
+        formName: block.formName,
+        ctaText: block.ctaText,
+        successTitle: block.successTitle,
+        successMessage: block.successMessage,
+        formFields: (block.formFields ?? []).map((f) => ({
+          label: f.label,
+          name: f.name,
+          fieldType: choice(f.fieldType),
+          required: !!f.required,
+          options: f.options,
+          placeholder: f.placeholder,
+          width: choice(f.width),
+        })),
+      };
+
+    // ── page sections ──
+    case "HomeheroRecord":
+      return {
+        media: mapMedia(block.media),
+        mobileMedia: mapMedia(block.mobileMedia),
+      };
+    case "HomewhoweareRecord":
+      return { sectionTitle: block.sectionTitle, body: block.body };
+    case "HomewhatwedoRecord":
+      return {
+        sectionTitle: block.sectionTitle,
+        scrollingText: block.scrollingText,
+        intro: block.intro,
+        services: (block.services ?? []).map((s) => ({
+          label: s.label,
+          link: s.link,
+          media: mapMedia(s.media),
+        })),
+      };
+    case "HomewhatwevecreatedRecord":
+      return {
+        sectionTitle: block.sectionTitle,
+        scrollingText: block.scrollingText,
+        intro: block.intro,
+        listLabel: block.listLabel,
+        ctaText: block.ctaText,
+        ctaLink: block.ctaLink,
+      };
+    case "HowwedoitRecord":
+      return {
+        title: block.title,
+        glWord: block.glWord,
+        cards: (block.cards ?? []).map((c) => ({
+          title: c.title,
+          textTop: c.textTop,
+          textBottom: c.textBottom,
+        })),
+      };
+    case "HomeshowreelRecord":
+      return {
+        textTop: block.textTop,
+        textBottom: block.textBottom,
+        media: mapMedia(block.media),
+        mobileMedia: mapMedia(block.mobileMedia),
+      };
+    case "LinkbandRecord":
+      return { title: block.title, link: block.link };
+    case "ServiceheroRecord":
+      return {
+        title: block.title,
+        headerText: block.headerText,
+        paragraph: block.paragraph,
+        ctaText: block.ctaText,
+        ctaLink: block.ctaLink,
+      };
+    case "AboutheroRecord":
+      return { brandText: block.brandText, brandMobile: block.brandMobile };
+    case "AboutintroRecord":
+      return {
+        sectionTitle: block.sectionTitle,
+        scrollingText: block.scrollingText,
+        lead: block.lead,
+        ctaText: block.ctaText,
+        ctaLink: block.ctaLink,
+        imageA: mapMedia(block.imageA),
+        imageB: mapMedia(block.imageB),
+        imageWide: mapMedia(block.imageWide),
+        body: block.body,
+      };
+    case "OfficesRecord":
+      return {
+        sectionTitle: block.sectionTitle,
+        intro: block.intro,
+        offices: (block.offices ?? []).map((o) => ({
+          title: o.title,
+          address: o.address,
+          media: mapMedia(o.media),
+        })),
+      };
+    case "ExpertisesRecord":
+      return {
+        sectionTitle: block.sectionTitle,
+        heading: block.heading,
+        body: block.body,
+        ctaText: block.ctaText,
+        ctaLink: block.ctaLink,
+      };
+    case "ServiceteaserRecord":
+      return {
+        sectionTitle: block.sectionTitle,
+        fullServiceName: block.fullServiceName,
+        serviceName: block.serviceName,
+        serviceNameBottom: block.serviceNameBottom,
+        paragraphs: (block.paragraphs ?? []).map((p) => p.text),
+        ctaText: block.ctaText,
+        ctaLink: block.ctaLink,
+        rows: (block.rows ?? []).map((row) => ({
+          columns: (row.columns ?? []).map((c) => ({
+            width: c.width,
+            media: mapMedia(c.media),
+          })),
+        })),
+        trailingText: block.trailingText,
+        trailingCtaText: block.trailingCtaText,
+        trailingCtaLink: block.trailingCtaLink,
+      };
+    default:
+      return null;
+  }
+}
+
 export function mapBlocks(blocks) {
   const result = [];
   for (const block of blocks ?? []) {
     const layout = layoutName(block.__typename);
     if (!layout) continue;
     const typename = LAYOUT_TO_TYPENAME[layout];
-
-    switch (typename) {
-      case "PageheaderRecord":
-        result.push({
-          __typename: typename,
-          sectionTitle: block.sectionTitle,
-          title: block.title,
-          titleBottom: block.titleBottom,
-          paragraph: block.paragraph,
-          ctaText: block.ctaText,
-          ctaLink: block.ctaLink,
-        });
-        break;
-      case "ProjectheaderRecord":
-        result.push({
-          __typename: typename,
-          sectionTitle: block.sectionTitle,
-          bigTitle: block.bigTitle,
-          paragraphHeader: block.paragraphHeader,
-          paragraph: block.paragraph,
-        });
-        break;
-      case "ParagraphRecord":
-        result.push({ __typename: typename, content: block.content });
-        break;
-      case "SectionlineRecord":
-        result.push({ __typename: typename, title: block.title });
-        break;
-      case "ScrollingTitleRecord":
-        result.push({ __typename: typename, text: block.text });
-        break;
-      case "ColumnrowRecord":
-        result.push({
-          __typename: typename,
-          columns: (block.columns ?? []).map(mapColumn),
-        });
-        break;
-      case "ProjectnumberRecord":
-        result.push({
-          __typename: typename,
-          titleLeft: block.titleLeft,
-          titleRight: block.titleRight,
-          numbers: (block.numbers ?? []).map((n) => ({
-            number: n.number,
-            text: n.text,
-          })),
-        });
-        break;
-      case "CtasectionRecord":
-        result.push({
-          __typename: typename,
-          title: block.title,
-          ctaText: block.ctaText,
-          ctaLink: block.ctaLink,
-        });
-        break;
-      case "FormSectionRecord":
-        result.push({
-          __typename: typename,
-          title: block.title,
-          subtitle: block.subtitle,
-          formName: block.formName,
-          ctaText: block.ctaText,
-          successTitle: block.successTitle,
-          successMessage: block.successMessage,
-          formFields: (block.formFields ?? []).map((f) => ({
-            label: f.label,
-            name: f.name,
-            fieldType: f.fieldType,
-            required: !!f.required,
-            options: f.options,
-            placeholder: f.placeholder,
-            width: f.width,
-          })),
-        });
-        break;
-    }
+    const mapped = mapBlock(typename, block);
+    if (!mapped) continue;
+    result.push({
+      __typename: typename,
+      anchorId: block.anchorId || null,
+      ...mapped,
+    });
   }
   return result;
 }
 
 // ── entities ───────────────────────────────────────────────────────────
+
+function mapSeo(seo) {
+  if (!seo) return null;
+  return {
+    title: seo.seoTitle || null,
+    description: seo.seoDescription || null,
+    ogImage: seo.ogImage?.node?.sourceUrl || null,
+    noindex: !!seo.noindex,
+  };
+}
 
 function mapProject(node) {
   if (!node) return null;
@@ -195,6 +334,7 @@ function mapProject(node) {
     coverImage: mapMedia(d.cover),
     mobileCoverImage: mapMedia(d.mobileCover),
     featuredImage: mapMedia(d.featuredMedia),
+    seo: mapSeo(node.seo),
     content: mapBlocks(d.pageBlocks),
   };
 }
@@ -215,6 +355,7 @@ function mapService(node) {
             : null,
         }
       : null,
+    seo: mapSeo(node.seo),
     content: mapBlocks(d.pageBlocks),
   };
 }
@@ -226,9 +367,10 @@ function mapPage(node) {
     id: node.id,
     title: node.title,
     slug: node.slug,
-    pageKey: b.pageKey ?? "custom",
+    pageKey: choice(b.pageKey) ?? "custom",
     coverImage: mapMedia(b.cover),
     mobileCoverImage: mapMedia(b.mobileCover),
+    seo: mapSeo(node.seo),
     content: mapBlocks(b.pageBlocks),
   };
 }
@@ -286,9 +428,20 @@ export async function getSiteSettings() {
   const data = await gqlFetch(SITE_SETTINGS_QUERY);
   const s = data.siteSettings ?? {};
   return {
+    general: {
+      siteName: s.general?.siteName ?? "",
+      logo: s.general?.logo?.node?.sourceUrl ?? null,
+      logoAlt: s.general?.logoAlt?.node?.sourceUrl ?? null,
+      favicon: s.general?.favicon?.node?.sourceUrl ?? null,
+      seoTitleSuffix: s.general?.seoTitleSuffix ?? "",
+      seoDefaultDescription: s.general?.seoDefaultDescription ?? "",
+      seoDefaultOgImage: s.general?.seoDefaultOgImage?.node?.sourceUrl ?? null,
+    },
     navLinks: s.navigation?.navLinks ?? [],
     menuFooterLinks: s.navigation?.menuFooterLinks ?? [],
     footer: {
+      leadHead: s.footer?.footerLeadHead ?? "",
+      leadBody: s.footer?.footerLeadBody ?? "",
       offices: s.footer?.footerOffices ?? [],
       email: s.footer?.footerEmail ?? "",
       phone: s.footer?.footerPhone ?? "",
@@ -298,26 +451,21 @@ export async function getSiteSettings() {
       ctaText: s.footer?.footerCtaText ?? "",
       ctaLink: s.footer?.footerCtaLink ?? "",
     },
-    home: {
-      howWeDoIt: {
-        title: s.homeContent?.howWeDoIt?.title ?? "",
-        text: s.homeContent?.howWeDoIt?.text ?? "",
-        text2: s.homeContent?.howWeDoIt?.text2 ?? "",
-        cards: (s.homeContent?.howWeDoIt?.cards ?? []).map((c) => ({
-          title: c.title,
-          textTop: c.textTop,
-          textBottom: c.textBottom,
-        })),
-      },
-      whatWeDo: s.homeContent?.whatWeDo ?? {},
-      whatWeveCreated: s.homeContent?.whatWeveCreated ?? {},
-      randomSentences: (s.homeContent?.randomSentences ?? []).map((r) => r.text),
-      showreel: mapMedia(s.homeContent?.showreel),
-    },
+    randomSentences: (s.interfaceSettings?.randomSentences ?? []).map(
+      (r) => r.text,
+    ),
     cookieBanner: {
+      title: s.cookieBanner?.cookieTitle ?? "",
       message: s.cookieBanner?.cookieMessage ?? "",
       accept: s.cookieBanner?.cookieAccept ?? "",
       reject: s.cookieBanner?.cookieReject ?? "",
+      moreLabel: s.cookieBanner?.cookieMoreLabel ?? "",
+      privacyUrl: s.cookieBanner?.privacyDocument?.node?.mediaItemUrl ?? null,
+    },
+    notFound: {
+      title: s.notFound?.notFoundTitle ?? "",
+      ctaText: s.notFound?.notFoundCtaText ?? "",
+      ctaLink: s.notFound?.notFoundCtaLink ?? "",
     },
     uiStrings: Object.fromEntries(
       (s.uiStrings?.uiStrings ?? []).map((u) => [u.stringKey, u.text]),

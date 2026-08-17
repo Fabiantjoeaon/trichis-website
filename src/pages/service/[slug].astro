@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ServicePage from "@/components/service/ServicePage.jsx";
-import { getService, getServices } from "@/lib/content";
+import { getPageByKey, getService, getServices } from "@/lib/content";
 
 export async function getStaticPaths() {
   const services = await getServices();
@@ -16,8 +16,15 @@ const service = await getService(slug);
 if (!service) {
   return Astro.redirect("/404");
 }
+
+// The service carousel at the foot of every service page reuses the one the
+// editor configured on the homepage, so the list lives in a single place.
+const home = await getPageByKey("home");
+const servicesNav = (home?.content ?? []).find(
+  (block) => block.__typename === "HomewhatwedoRecord",
+);
 ---
 
-<BaseLayout title={`${service.title} — Nine Creative Agency`}>
-  <ServicePage client:load service={service} />
+<BaseLayout title={service.title} seo={service.seo}>
+  <ServicePage client:load service={service} servicesNav={servicesNav} />
 </BaseLayout>

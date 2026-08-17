@@ -23,6 +23,77 @@ add_action('acf/init', function () {
         ]);
     }
 
+    // ── General / branding / SEO defaults ──
+    acf_add_local_field_group([
+        'key'    => 'group_site_general',
+        'title'  => 'General',
+        'fields' => [
+            [
+                'key'     => 'field_general_site_name',
+                'label'   => 'Site name',
+                'name'    => 'site_name',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ],
+            [
+                'key'           => 'field_general_logo',
+                'label'         => 'Logo',
+                'name'          => 'logo',
+                'type'          => 'image',
+                'return_format' => 'array',
+                'preview_size'  => 'medium',
+                'wrapper'       => ['width' => '25'],
+            ],
+            [
+                'key'           => 'field_general_logo_alt',
+                'label'         => 'Logo (alternate)',
+                'name'          => 'logo_alt',
+                'type'          => 'image',
+                'return_format' => 'array',
+                'preview_size'  => 'medium',
+                'instructions'  => 'Inverted variant for dark backgrounds.',
+                'wrapper'       => ['width' => '25'],
+            ],
+            [
+                'key'           => 'field_general_favicon',
+                'label'         => 'Favicon',
+                'name'          => 'favicon',
+                'type'          => 'image',
+                'return_format' => 'array',
+                'wrapper'       => ['width' => '50'],
+            ],
+            [
+                'key'          => 'field_general_seo_title_suffix',
+                'label'        => 'SEO title suffix',
+                'name'         => 'seo_title_suffix',
+                'type'         => 'text',
+                'instructions' => 'Appended to every page title, e.g. " — Trichis".',
+                'wrapper'      => ['width' => '50'],
+            ],
+            [
+                'key'          => 'field_general_seo_description',
+                'label'        => 'Default meta description',
+                'name'         => 'seo_default_description',
+                'type'         => 'textarea',
+                'rows'         => 3,
+            ],
+            [
+                'key'           => 'field_general_seo_og_image',
+                'label'         => 'Default social share image',
+                'name'          => 'seo_default_og_image',
+                'type'          => 'image',
+                'return_format' => 'array',
+                'preview_size'  => 'medium',
+            ],
+        ],
+        'location' => [[
+            ['param' => 'options_page', 'operator' => '==', 'value' => 'site-settings'],
+        ]],
+        'menu_order'         => 0,
+        'show_in_graphql'    => 1,
+        'graphql_field_name' => 'general',
+    ]);
+
     // ── Navigation ──
     acf_add_local_field_group([
         'key'    => 'group_site_nav',
@@ -82,7 +153,7 @@ add_action('acf/init', function () {
         'location' => [[
             ['param' => 'options_page', 'operator' => '==', 'value' => 'site-settings'],
         ]],
-        'menu_order'         => 0,
+        'menu_order'         => 1,
         'show_in_graphql'    => 1,
         'graphql_field_name' => 'navigation',
     ]);
@@ -92,6 +163,20 @@ add_action('acf/init', function () {
         'key'    => 'group_site_footer',
         'title'  => 'Footer',
         'fields' => [
+            [
+                'key'     => 'field_footer_lead_head',
+                'label'   => 'Lead heading',
+                'name'    => 'footer_lead_head',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ],
+            [
+                'key'     => 'field_footer_lead_body',
+                'label'   => 'Lead body',
+                'name'    => 'footer_lead_body',
+                'type'    => 'textarea',
+                'rows'    => 3,
+            ],
             [
                 'key'          => 'field_footer_offices',
                 'label'        => 'Offices',
@@ -115,6 +200,21 @@ add_action('acf/init', function () {
                         'rows'      => 3,
                         'new_lines' => 'br',
                         'wrapper'   => ['width' => '60'],
+                    ],
+                    [
+                        'key'     => 'field_footer_office_phone',
+                        'label'   => 'Phone',
+                        'name'    => 'phone',
+                        'type'    => 'text',
+                        'wrapper' => ['width' => '50'],
+                    ],
+                    [
+                        'key'          => 'field_footer_office_phone_href',
+                        'label'        => 'Phone link',
+                        'name'         => 'phone_href',
+                        'type'         => 'text',
+                        'instructions' => 'Leave empty to derive a tel: link from the number.',
+                        'wrapper'      => ['width' => '50'],
                     ],
                 ],
             ],
@@ -206,136 +306,24 @@ add_action('acf/init', function () {
         'location' => [[
             ['param' => 'options_page', 'operator' => '==', 'value' => 'site-settings'],
         ]],
-        'menu_order'         => 1,
+        'menu_order'         => 2,
         'show_in_graphql'    => 1,
         'graphql_field_name' => 'footer',
     ]);
 
-    // ── Home content (sections that were hard-coded in nine-ca) ──
+    // ── Interface ──
+    //
+    // Chrome that belongs to no single page. The former "Home Content" group
+    // lived here too; its sections are now page blocks (how_we_do_it,
+    // home_what_we_do, home_what_weve_created, home_hero) so an editor can
+    // place and reorder them like any other section.
     acf_add_local_field_group([
-        'key'    => 'group_site_home_content',
-        'title'  => 'Home Content',
+        'key'    => 'group_site_interface',
+        'title'  => 'Interface',
         'fields' => [
             [
-                'key'        => 'field_home_how_we_do_it',
-                'label'      => 'How we do it',
-                'name'       => 'how_we_do_it',
-                'type'       => 'group',
-                'layout'     => 'block',
-                'sub_fields' => [
-                    [
-                        'key'   => 'field_hwdi_title',
-                        'label' => 'Title',
-                        'name'  => 'title',
-                        'type'  => 'text',
-                    ],
-                    [
-                        'key'   => 'field_hwdi_text',
-                        'label' => 'Text',
-                        'name'  => 'text',
-                        'type'  => 'textarea',
-                        'rows'  => 2,
-                    ],
-                    [
-                        'key'   => 'field_hwdi_text2',
-                        'label' => 'Text 2',
-                        'name'  => 'text2',
-                        'type'  => 'textarea',
-                        'rows'  => 2,
-                    ],
-                    [
-                        'key'          => 'field_hwdi_cards',
-                        'label'        => 'Cards',
-                        'name'         => 'cards',
-                        'type'         => 'repeater',
-                        'layout'       => 'block',
-                        'button_label' => 'Add Card',
-                        'sub_fields'   => [
-                            [
-                                'key'   => 'field_hwdi_card_title',
-                                'label' => 'Title',
-                                'name'  => 'title',
-                                'type'  => 'text',
-                            ],
-                            [
-                                'key'   => 'field_hwdi_card_text_top',
-                                'label' => 'Text top',
-                                'name'  => 'text_top',
-                                'type'  => 'textarea',
-                                'rows'  => 3,
-                            ],
-                            [
-                                'key'   => 'field_hwdi_card_text_bottom',
-                                'label' => 'Text bottom',
-                                'name'  => 'text_bottom',
-                                'type'  => 'textarea',
-                                'rows'  => 3,
-                            ],
-                        ],
-                    ],
-                ],
-            ],
-            [
-                'key'        => 'field_home_what_we_do',
-                'label'      => 'What we do',
-                'name'       => 'what_we_do',
-                'type'       => 'group',
-                'layout'     => 'block',
-                'sub_fields' => [
-                    [
-                        'key'   => 'field_wwd_title',
-                        'label' => 'Title',
-                        'name'  => 'title',
-                        'type'  => 'text',
-                    ],
-                    [
-                        'key'   => 'field_wwd_text',
-                        'label' => 'Text',
-                        'name'  => 'text',
-                        'type'  => 'textarea',
-                        'rows'  => 2,
-                    ],
-                    [
-                        'key'   => 'field_wwd_text2',
-                        'label' => 'Text 2',
-                        'name'  => 'text2',
-                        'type'  => 'textarea',
-                        'rows'  => 2,
-                    ],
-                ],
-            ],
-            [
-                'key'        => 'field_home_what_weve_created',
-                'label'      => "What we've created",
-                'name'       => 'what_weve_created',
-                'type'       => 'group',
-                'layout'     => 'block',
-                'sub_fields' => [
-                    [
-                        'key'   => 'field_wwc_title',
-                        'label' => 'Title',
-                        'name'  => 'title',
-                        'type'  => 'text',
-                    ],
-                    [
-                        'key'   => 'field_wwc_text',
-                        'label' => 'Text',
-                        'name'  => 'text',
-                        'type'  => 'textarea',
-                        'rows'  => 2,
-                    ],
-                    [
-                        'key'   => 'field_wwc_text2',
-                        'label' => 'Text 2',
-                        'name'  => 'text2',
-                        'type'  => 'textarea',
-                        'rows'  => 3,
-                    ],
-                ],
-            ],
-            [
                 'key'          => 'field_home_random_sentences',
-                'label'        => 'Random sentences (hero / loader shuffle)',
+                'label'        => 'Random sentences (loader shuffle)',
                 'name'         => 'random_sentences',
                 'type'         => 'repeater',
                 'layout'       => 'table',
@@ -349,14 +337,13 @@ add_action('acf/init', function () {
                     ],
                 ],
             ],
-            trichis_media_group('field_home_showreel', 'showreel', 'Showreel media'),
         ],
         'location' => [[
             ['param' => 'options_page', 'operator' => '==', 'value' => 'site-settings'],
         ]],
-        'menu_order'         => 2,
+        'menu_order'         => 4,
         'show_in_graphql'    => 1,
-        'graphql_field_name' => 'homeContent',
+        'graphql_field_name' => 'interfaceSettings',
     ]);
 
     // ── Cookie banner ──
@@ -364,6 +351,12 @@ add_action('acf/init', function () {
         'key'    => 'group_site_cookie_banner',
         'title'  => 'Cookie Banner',
         'fields' => [
+            [
+                'key'   => 'field_cookie_title',
+                'label' => 'Title',
+                'name'  => 'cookie_title',
+                'type'  => 'text',
+            ],
             [
                 'key'   => 'field_cookie_message',
                 'label' => 'Message',
@@ -385,6 +378,22 @@ add_action('acf/init', function () {
                 'type'    => 'text',
                 'wrapper' => ['width' => '50'],
             ],
+            [
+                'key'     => 'field_cookie_more_label',
+                'label'   => 'More info label',
+                'name'    => 'cookie_more_label',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ],
+            [
+                'key'           => 'field_cookie_privacy_document',
+                'label'         => 'Privacy document',
+                'name'          => 'privacy_document',
+                'type'          => 'file',
+                'return_format' => 'array',
+                'instructions'  => 'The "more info" link is hidden when this is empty.',
+                'wrapper'       => ['width' => '50'],
+            ],
         ],
         'location' => [[
             ['param' => 'options_page', 'operator' => '==', 'value' => 'site-settings'],
@@ -392,6 +401,43 @@ add_action('acf/init', function () {
         'menu_order'         => 3,
         'show_in_graphql'    => 1,
         'graphql_field_name' => 'cookieBanner',
+    ]);
+
+    // ── 404 ──
+    //
+    // Not a WP page: the 404 route is prerendered and has no slug to look up,
+    // so its copy has to resolve from settings alone.
+    acf_add_local_field_group([
+        'key'    => 'group_site_not_found',
+        'title'  => '404 page',
+        'fields' => [
+            [
+                'key'   => 'field_not_found_title',
+                'label' => 'Title',
+                'name'  => 'not_found_title',
+                'type'  => 'text',
+            ],
+            [
+                'key'     => 'field_not_found_cta_text',
+                'label'   => 'CTA text',
+                'name'    => 'not_found_cta_text',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ],
+            [
+                'key'     => 'field_not_found_cta_link',
+                'label'   => 'CTA link',
+                'name'    => 'not_found_cta_link',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ],
+        ],
+        'location' => [[
+            ['param' => 'options_page', 'operator' => '==', 'value' => 'site-settings'],
+        ]],
+        'menu_order'         => 5,
+        'show_in_graphql'    => 1,
+        'graphql_field_name' => 'notFound',
     ]);
 
     // ── UI strings (interface copy previously hardcoded in the frontend) ──
@@ -428,7 +474,7 @@ add_action('acf/init', function () {
         'location' => [[
             ['param' => 'options_page', 'operator' => '==', 'value' => 'site-settings'],
         ]],
-        'menu_order'         => 4,
+        'menu_order'         => 6,
         'show_in_graphql'    => 1,
         'graphql_field_name' => 'uiStrings',
     ]);

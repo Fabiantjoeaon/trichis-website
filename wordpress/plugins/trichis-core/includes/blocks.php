@@ -14,6 +14,12 @@
  *   section_line     ← SectionlineRecord
  *   scrolling_title  ← ScrollingTitleRecord
  *
+ * A second set of blocks (home_hero, home_who_we_are, home_what_we_do,
+ * home_what_weve_created, how_we_do_it, home_showreel, link_band, about_hero,
+ * about_intro, offices, expertises, service_teaser) has no DatoCMS ancestor.
+ * Those lift the sections that used to be hard-coded into React, so the home,
+ * about and what-we-do routes become ordinary editable pages.
+ *
  * Every content type gets the same flexible content field (`page_blocks`),
  * assembled from block layouts defined once in this file. A "context" prefix
  * keeps ACF field keys globally unique per content type.
@@ -55,6 +61,21 @@ function trichis_bf(string $ctx, string $block, string $name, array $def): array
     ], $def);
 }
 
+/** Every block opens with an optional anchor, rendered as the section's id. */
+function trichis_anchor_field(string $ctx, string $block): array {
+    return trichis_bf($ctx, $block, 'anchor_id', [
+        'label'        => 'Anchor ID',
+        'type'         => 'text',
+        'instructions' => 'Optional. Enables in-page linking to this section, e.g. "contact" for /page#contact.',
+        'wrapper'      => ['width' => '50'],
+    ]);
+}
+
+/** Shorthand for a media sub field inside a block. */
+function trichis_block_media(string $ctx, string $block, string $name, string $label): array {
+    return trichis_media_group("field_{$ctx}_blk_{$block}_{$name}", $name, $label);
+}
+
 // ─────────────────────────────────────────
 // Header blocks
 // ─────────────────────────────────────────
@@ -66,6 +87,7 @@ function trichis_block_page_header(string $ctx): array {
         'label'      => 'Page Header',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_anchor_field($ctx, 'page_header'),
             trichis_bf($ctx, 'page_header', 'section_title', [
                 'label'   => 'Section title',
                 'type'    => 'text',
@@ -108,6 +130,7 @@ function trichis_block_project_header(string $ctx): array {
         'label'      => 'Project Header',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_anchor_field($ctx, 'project_header'),
             trichis_bf($ctx, 'project_header', 'section_title', [
                 'label'   => 'Section title',
                 'type'    => 'text',
@@ -143,6 +166,7 @@ function trichis_block_paragraph(string $ctx): array {
         'label'      => 'Paragraph',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_anchor_field($ctx, 'paragraph'),
             trichis_bf($ctx, 'paragraph', 'content', [
                 'label'        => 'Content',
                 'type'         => 'wysiwyg',
@@ -160,6 +184,7 @@ function trichis_block_section_line(string $ctx): array {
         'label'      => 'Section Line',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_anchor_field($ctx, 'section_line'),
             trichis_bf($ctx, 'section_line', 'title', [
                 'label' => 'Title',
                 'type'  => 'text',
@@ -175,6 +200,7 @@ function trichis_block_scrolling_title(string $ctx): array {
         'label'      => 'Scrolling Title (marquee)',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_anchor_field($ctx, 'scrolling_title'),
             trichis_bf($ctx, 'scrolling_title', 'text', [
                 'label' => 'Text',
                 'type'  => 'text',
@@ -194,6 +220,7 @@ function trichis_block_column_row(string $ctx): array {
         'label'      => 'Column Row',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_anchor_field($ctx, 'column_row'),
             trichis_bf($ctx, 'column_row', 'columns', [
                 'label'        => 'Columns',
                 'type'         => 'repeater',
@@ -302,6 +329,13 @@ function trichis_block_project_numbers(string $ctx): array {
         'label'      => 'Project Numbers',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_anchor_field($ctx, 'project_numbers'),
+            trichis_bf($ctx, 'project_numbers', 'section_title', [
+                'label'        => 'Section title',
+                'type'         => 'text',
+                'instructions' => 'Small label above the block.',
+                'wrapper'      => ['width' => '50'],
+            ]),
             trichis_bf($ctx, 'project_numbers', 'title_left', [
                 'label'   => 'Title left',
                 'type'    => 'textarea',
@@ -342,6 +376,7 @@ function trichis_block_cta_section(string $ctx): array {
         'label'      => 'CTA Section',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_anchor_field($ctx, 'cta_section'),
             trichis_bf($ctx, 'cta_section', 'title', [
                 'label'        => 'Title',
                 'type'         => 'wysiwyg',
@@ -369,6 +404,7 @@ function trichis_block_form_section(string $ctx): array {
         'label'      => 'Form Section',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_anchor_field($ctx, 'form_section'),
             trichis_bf($ctx, 'form_section', 'title', [
                 'label'        => 'Title',
                 'type'         => 'wysiwyg',
@@ -440,11 +476,14 @@ function trichis_block_form_section(string $ctx): array {
                         'wrapper' => ['width' => '15'],
                     ]),
                     trichis_bf($ctx, 'form_section', 'width', [
-                        'label'   => 'Width (%)',
-                        'type'    => 'number',
-                        'min'     => 0,
-                        'max'     => 100,
-                        'wrapper' => ['width' => '15'],
+                        'label'         => 'Width',
+                        'type'          => 'select',
+                        'choices'       => [
+                            'full' => 'Full',
+                            'half' => 'Half',
+                        ],
+                        'default_value' => 'full',
+                        'wrapper'       => ['width' => '15'],
                     ]),
                     trichis_bf($ctx, 'form_section', 'placeholder', [
                         'label'   => 'Placeholder',
@@ -464,9 +503,528 @@ function trichis_block_form_section(string $ctx): array {
     ];
 }
 
+// ─────────────────────────────────────────
+// Page section blocks
+//
+// These have no DatoCMS ancestor. They lift the sections that nine-ca (and,
+// until now, Trichis) hard-coded into React out of the components, so the
+// home, about and what-we-do routes become ordinary editable pages.
+// ─────────────────────────────────────────
+
+function trichis_block_home_hero(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_home_hero",
+        'name'       => 'home_hero',
+        'label'      => 'Home Hero (fullscreen showreel)',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'home_hero'),
+            trichis_block_media($ctx, 'home_hero', 'media', 'Media (desktop)'),
+            trichis_block_media($ctx, 'home_hero', 'mobile_media', 'Media (mobile)'),
+        ],
+    ];
+}
+
+function trichis_block_home_who_we_are(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_home_who_we_are",
+        'name'       => 'home_who_we_are',
+        'label'      => 'Who We Are',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'home_who_we_are'),
+            trichis_bf($ctx, 'home_who_we_are', 'section_title', [
+                'label'   => 'Section title',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'home_who_we_are', 'body', [
+                'label' => 'Body',
+                'type'  => 'textarea',
+                'rows'  => 4,
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_home_what_we_do(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_home_what_we_do",
+        'name'       => 'home_what_we_do',
+        'label'      => 'What We Do (service carousel)',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'home_what_we_do'),
+            trichis_bf($ctx, 'home_what_we_do', 'section_title', [
+                'label'   => 'Section title',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'home_what_we_do', 'scrolling_text', [
+                'label'   => 'Scrolling text',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'home_what_we_do', 'intro', [
+                'label' => 'Intro',
+                'type'  => 'textarea',
+                'rows'  => 3,
+            ]),
+            trichis_bf($ctx, 'home_what_we_do', 'services', [
+                'label'        => 'Services',
+                'type'         => 'repeater',
+                'layout'       => 'block',
+                'button_label' => 'Add Service',
+                'sub_fields'   => [
+                    trichis_bf($ctx, 'home_what_we_do', 'label', [
+                        'label'   => 'Label',
+                        'type'    => 'text',
+                        'wrapper' => ['width' => '50'],
+                    ]),
+                    trichis_bf($ctx, 'home_what_we_do', 'link', [
+                        'label'        => 'Link',
+                        'type'         => 'text',
+                        'instructions' => 'e.g. /service/identity',
+                        'wrapper'      => ['width' => '50'],
+                    ]),
+                    trichis_block_media($ctx, 'home_what_we_do', 'media', 'Media'),
+                ],
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_home_what_weve_created(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_home_what_weve_created",
+        'name'       => 'home_what_weve_created',
+        'label'      => "What We've Created (featured projects)",
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'home_what_weve_created'),
+            trichis_bf($ctx, 'home_what_weve_created', 'section_title', [
+                'label'   => 'Section title',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'home_what_weve_created', 'scrolling_text', [
+                'label'   => 'Scrolling text',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'home_what_weve_created', 'intro', [
+                'label' => 'Intro',
+                'type'  => 'textarea',
+                'rows'  => 3,
+            ]),
+            trichis_bf($ctx, 'home_what_weve_created', 'list_label', [
+                'label'        => 'List label',
+                'type'         => 'text',
+                'instructions' => 'Small heading above the project list.',
+                'wrapper'      => ['width' => '34'],
+            ]),
+            trichis_bf($ctx, 'home_what_weve_created', 'cta_text', [
+                'label'        => 'CTA text',
+                'type'         => 'text',
+                'instructions' => 'Basic HTML allowed, e.g. All our <strong>projects</strong>.',
+                'wrapper'      => ['width' => '33'],
+            ]),
+            trichis_bf($ctx, 'home_what_weve_created', 'cta_link', [
+                'label'   => 'CTA link',
+                'type'    => 'text',
+                'wrapper' => ['width' => '33'],
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_how_we_do_it(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_how_we_do_it",
+        'name'       => 'how_we_do_it',
+        'label'      => 'How We Do It (glass cards)',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'how_we_do_it'),
+            trichis_bf($ctx, 'how_we_do_it', 'title', [
+                'label'   => 'Title',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'how_we_do_it', 'gl_word', [
+                'label'        => 'Background word',
+                'type'         => 'text',
+                'instructions' => 'Word rendered into the WebGL mask behind the cards.',
+                'wrapper'      => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'how_we_do_it', 'cards', [
+                'label'        => 'Cards',
+                'type'         => 'repeater',
+                'layout'       => 'block',
+                'button_label' => 'Add Card',
+                'sub_fields'   => [
+                    trichis_bf($ctx, 'how_we_do_it', 'title', [
+                        'key'   => "field_{$ctx}_blk_how_we_do_it_card_title",
+                        'label' => 'Title',
+                        'type'  => 'text',
+                    ]),
+                    trichis_bf($ctx, 'how_we_do_it', 'text_top', [
+                        'label'   => 'Text top',
+                        'type'    => 'textarea',
+                        'rows'    => 3,
+                        'wrapper' => ['width' => '50'],
+                    ]),
+                    trichis_bf($ctx, 'how_we_do_it', 'text_bottom', [
+                        'label'   => 'Text bottom',
+                        'type'    => 'textarea',
+                        'rows'    => 3,
+                        'wrapper' => ['width' => '50'],
+                    ]),
+                ],
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_home_showreel(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_home_showreel",
+        'name'       => 'home_showreel',
+        'label'      => 'Showreel (inline player)',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'home_showreel'),
+            trichis_bf($ctx, 'home_showreel', 'text_top', [
+                'label'   => 'Text top',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'home_showreel', 'text_bottom', [
+                'label'   => 'Text bottom',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_block_media($ctx, 'home_showreel', 'media', 'Media (desktop)'),
+            trichis_block_media($ctx, 'home_showreel', 'mobile_media', 'Media (mobile)'),
+        ],
+    ];
+}
+
+function trichis_block_link_band(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_link_band",
+        'name'       => 'link_band',
+        'label'      => 'Link Band (big centred link)',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'link_band'),
+            trichis_bf($ctx, 'link_band', 'title', [
+                'label'        => 'Title',
+                'type'         => 'text',
+                'instructions' => 'Basic HTML allowed, e.g. More About <strong>trichis</strong>.',
+            ]),
+            trichis_bf($ctx, 'link_band', 'link', [
+                'label'   => 'Link',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_service_hero(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_service_hero",
+        'name'       => 'service_hero',
+        'label'      => 'Service Hero',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'service_hero'),
+            trichis_bf($ctx, 'service_hero', 'title', [
+                'label'   => 'Title',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'service_hero', 'header_text', [
+                'label'   => 'Header',
+                'type'    => 'textarea',
+                'rows'    => 2,
+            ]),
+            trichis_bf($ctx, 'service_hero', 'paragraph', [
+                'label'        => 'Paragraph',
+                'type'         => 'textarea',
+                'rows'         => 4,
+                'instructions' => 'Blank lines separate paragraphs. **Double asterisks** render bold.',
+            ]),
+            trichis_bf($ctx, 'service_hero', 'cta_text', [
+                'label'   => 'CTA text',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'service_hero', 'cta_link', [
+                'label'   => 'CTA link',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_about_hero(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_about_hero",
+        'name'       => 'about_hero',
+        'label'      => 'About Hero (WebGL wordmark grid)',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'about_hero'),
+            trichis_bf($ctx, 'about_hero', 'brand_text', [
+                'label'        => 'Wordmark',
+                'type'         => 'text',
+                'instructions' => 'Word cut out of the hero grid on desktop.',
+                'wrapper'      => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'about_hero', 'brand_mobile', [
+                'label'        => 'Wordmark (mobile)',
+                'type'         => 'text',
+                'instructions' => 'Usually a single character.',
+                'wrapper'      => ['width' => '50'],
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_about_intro(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_about_intro",
+        'name'       => 'about_intro',
+        'label'      => 'About Intro',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'about_intro'),
+            trichis_bf($ctx, 'about_intro', 'section_title', [
+                'label'   => 'Section title',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'about_intro', 'scrolling_text', [
+                'label'   => 'Scrolling text',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'about_intro', 'lead', [
+                'label' => 'Lead paragraph',
+                'type'  => 'textarea',
+                'rows'  => 4,
+            ]),
+            trichis_bf($ctx, 'about_intro', 'cta_text', [
+                'label'   => 'CTA text',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'about_intro', 'cta_link', [
+                'label'   => 'CTA link',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_block_media($ctx, 'about_intro', 'image_a', 'Image A (small, left)'),
+            trichis_block_media($ctx, 'about_intro', 'image_b', 'Image B (small, right)'),
+            trichis_block_media($ctx, 'about_intro', 'image_wide', 'Image wide (full width)'),
+            trichis_bf($ctx, 'about_intro', 'body', [
+                'label' => 'Body',
+                'type'  => 'textarea',
+                'rows'  => 4,
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_offices(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_offices",
+        'name'       => 'offices',
+        'label'      => 'Offices',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'offices'),
+            trichis_bf($ctx, 'offices', 'section_title', [
+                'label'   => 'Section title',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'offices', 'intro', [
+                'label' => 'Intro',
+                'type'  => 'textarea',
+                'rows'  => 2,
+            ]),
+            trichis_bf($ctx, 'offices', 'offices', [
+                'label'        => 'Offices',
+                'type'         => 'repeater',
+                'layout'       => 'block',
+                'button_label' => 'Add Office',
+                'sub_fields'   => [
+                    trichis_bf($ctx, 'offices', 'title', [
+                        'label'        => 'Title',
+                        'type'         => 'text',
+                        'instructions' => 'Short label shown on the card, e.g. R\'dam.',
+                        'wrapper'      => ['width' => '40'],
+                    ]),
+                    trichis_bf($ctx, 'offices', 'address', [
+                        'label'        => 'Address',
+                        'type'         => 'textarea',
+                        'rows'         => 3,
+                        'instructions' => 'One line per row.',
+                        'wrapper'      => ['width' => '60'],
+                    ]),
+                    trichis_block_media($ctx, 'offices', 'media', 'Media'),
+                ],
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_expertises(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_expertises",
+        'name'       => 'expertises',
+        'label'      => 'Expertises',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'expertises'),
+            trichis_bf($ctx, 'expertises', 'section_title', [
+                'label'   => 'Section title',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'expertises', 'heading', [
+                'label'   => 'Heading',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'expertises', 'body', [
+                'label' => 'Body',
+                'type'  => 'textarea',
+                'rows'  => 4,
+            ]),
+            trichis_bf($ctx, 'expertises', 'cta_text', [
+                'label'   => 'CTA text',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'expertises', 'cta_link', [
+                'label'   => 'CTA link',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_service_teaser(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_service_teaser",
+        'name'       => 'service_teaser',
+        'label'      => 'Service Teaser',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_anchor_field($ctx, 'service_teaser'),
+            trichis_bf($ctx, 'service_teaser', 'section_title', [
+                'label'        => 'Section title',
+                'type'         => 'text',
+                'instructions' => 'Leave empty to use "What we do - {full service name}".',
+                'wrapper'      => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'service_teaser', 'full_service_name', [
+                'label'        => 'Full service name',
+                'type'         => 'text',
+                'instructions' => 'Used in the section title when the name is split over two lines.',
+                'wrapper'      => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'service_teaser', 'service_name', [
+                'label'   => 'Service name',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'service_teaser', 'service_name_bottom', [
+                'label'        => 'Service name (second line)',
+                'type'         => 'text',
+                'instructions' => 'For two-line treatments, e.g. "Web-" / "design".',
+                'wrapper'      => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'service_teaser', 'paragraphs', [
+                'label'        => 'Paragraphs',
+                'type'         => 'repeater',
+                'layout'       => 'block',
+                'button_label' => 'Add Paragraph',
+                'sub_fields'   => [
+                    trichis_bf($ctx, 'service_teaser', 'text', [
+                        'label' => 'Text',
+                        'type'  => 'textarea',
+                        'rows'  => 4,
+                    ]),
+                ],
+            ]),
+            trichis_bf($ctx, 'service_teaser', 'cta_text', [
+                'label'        => 'CTA text',
+                'type'         => 'text',
+                'instructions' => 'Basic HTML allowed.',
+                'wrapper'      => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'service_teaser', 'cta_link', [
+                'label'   => 'CTA link',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            // Rows of media below the header. Each row lays its columns out
+            // side by side, exactly like a Column Row block.
+            trichis_bf($ctx, 'service_teaser', 'rows', [
+                'label'        => 'Media rows',
+                'type'         => 'repeater',
+                'layout'       => 'block',
+                'button_label' => 'Add Row',
+                'sub_fields'   => [
+                    trichis_bf($ctx, 'service_teaser', 'columns', [
+                        'label'        => 'Columns',
+                        'type'         => 'repeater',
+                        'layout'       => 'block',
+                        'button_label' => 'Add Column',
+                        'sub_fields'   => [
+                            trichis_bf($ctx, 'service_teaser', 'width', [
+                                'label'   => 'Width (%)',
+                                'type'    => 'number',
+                                'min'     => 0,
+                                'max'     => 100,
+                                'wrapper' => ['width' => '30'],
+                            ]),
+                            trichis_block_media($ctx, 'service_teaser', 'media', 'Media'),
+                        ],
+                    ]),
+                ],
+            ]),
+            // Optional closing text block, used by the Strategy teaser.
+            trichis_bf($ctx, 'service_teaser', 'trailing_text', [
+                'label' => 'Closing text',
+                'type'  => 'textarea',
+                'rows'  => 3,
+            ]),
+            trichis_bf($ctx, 'service_teaser', 'trailing_cta_text', [
+                'label'   => 'Closing CTA text',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'service_teaser', 'trailing_cta_link', [
+                'label'   => 'Closing CTA link',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+        ],
+    ];
+}
+
 /**
- * Which blocks each context offers. Mirrors the DatoCMS modular content
- * configuration per model in nine-ca.
+ * Which blocks each context offers. Projects and services mirror the DatoCMS
+ * modular content configuration per model in nine-ca; pages get everything,
+ * because the fixed routes (home, about, what we do) are pages too.
  */
 function trichis_blocks_for_context(string $ctx): array {
     switch ($ctx) {
@@ -475,6 +1033,10 @@ function trichis_blocks_for_context(string $ctx): array {
                 'page_header', 'project_header', 'cta_section', 'form_section',
                 'column_row', 'project_numbers', 'paragraph', 'section_line',
                 'scrolling_title',
+                'home_hero', 'home_who_we_are', 'home_what_we_do',
+                'home_what_weve_created', 'how_we_do_it', 'home_showreel',
+                'link_band', 'service_hero', 'about_hero', 'about_intro',
+                'offices', 'expertises', 'service_teaser',
             ];
         case 'project':
             return ['project_header', 'column_row', 'project_numbers', 'paragraph'];

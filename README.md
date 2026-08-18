@@ -30,6 +30,7 @@ Copy `.env.example` to `.env`. Key variables:
 
 - `PUBLIC_WP_SOURCE` — `local` or `flywheel`
 - `PUBLIC_WP_GRAPHQL_URL_LOCAL` — `http://trichis.local/graphql`
+- `PUBLIC_WP_GRAPHQL_URL_FLYWHEEL` — `https://trichis.flywheelsites.com/graphql`
 - `USE_SEED_DATA` — `1` builds pages from the exported DatoCMS JSON instead of
   WordPress (useful before WP is installed/seeded)
 

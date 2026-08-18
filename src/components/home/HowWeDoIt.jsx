@@ -149,6 +149,7 @@ export default function HowWeDoIt({ data }) {
 
       <section
         ref={track}
+        id={data?.anchorId || undefined}
         className="how-we-do-it__wrapper"
         style={{
           ["--hwdi-count"]: cards.length || 1,

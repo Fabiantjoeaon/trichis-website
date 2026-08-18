@@ -29,8 +29,3 @@ export function convertMultiParagraphToNineFormat(text) {
       return { tag: "p", text: paragraph };
     });
 }
-
-export function isMediaVideo(url = "", video) {
-  if (video?.mp4Url || video?.streamingUrl) return true;
-  return /\.(mp4|webm|m3u8|mov)(\?|$)/i.test(url);
-}

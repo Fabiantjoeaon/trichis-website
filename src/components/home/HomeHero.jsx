@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
 import usePageEnter from "@/hooks/usePageEnter";
 import { map } from "@/lib/math";
-import { isMediaVideo } from "@/lib/cms";
 import { useGlobalStore } from "@/stores/global";
 
 function HeroVideo({ track, media, mobileMedia, ...props }) {
@@ -64,7 +63,7 @@ function HeroVideo({ track, media, mobileMedia, ...props }) {
     <NineGLImageElement
       ref={videoRef}
       className="home-hero__gl"
-      isVideo={isMediaVideo(videoSrc, active?.video)}
+      isVideo={!!active?.isVideo}
       src={videoSrc}
       animateOnScroll={false}
       useHover={false}

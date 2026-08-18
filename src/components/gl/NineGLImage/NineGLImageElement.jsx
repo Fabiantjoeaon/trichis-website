@@ -40,7 +40,6 @@ const DOMFallback = forwardRef(function DOMFallback(
     onFacadeReady,
     onTextureReady,
     darken,
-    video,
     ...props
   },
   ref,
@@ -55,10 +54,10 @@ const DOMFallback = forwardRef(function DOMFallback(
   const canHover = useHover && isLink;
   const baseFilter = darken ? `brightness(${1 - darken})` : "";
 
-  const videoSrc = useMemo(() => {
-    if (!isVideo) return null;
-    return video?.mp4Url || _src || video?.streamingUrl || null;
-  }, [isVideo, video, _src]);
+  const videoSrc = useMemo(
+    () => (isVideo ? _src || null : null),
+    [isVideo, _src],
+  );
 
   const imageSrc = useMemo(
     () => (!isVideo && _src ? _src : null),
@@ -141,7 +140,6 @@ const DOMFallback = forwardRef(function DOMFallback(
         <video
           ref={mediaRef}
           src={videoSrc}
-          poster={video?.thumbnailUrl}
           loop
           muted
           playsInline

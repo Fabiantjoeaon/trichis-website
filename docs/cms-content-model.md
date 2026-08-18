@@ -31,27 +31,44 @@ Deliberately **not** created: `project_category`, `project_tag`, project↔servi
 
 ## 2. Block library
 
-### 2.1 Shared additions to every layout
+### 2.1 Anchors
 
-Every layout gains one field, prepended:
+Every block renders an `id` on its section wrapper for in-page linking, and nothing in
+the CMS controls it. `assignAnchors()` in `src/lib/normalize.js` derives the id from the
+block type — `home_who_we_are` → `#home-who-we-are` — and numbers repeats within a page,
+so five service teasers become `#service-teaser` through `#service-teaser-5`.
 
-- `anchor_id` — text. Renders as the `id` attribute on the section wrapper for in-page
-  linking. Empty means no id.
+Deriving from the type rather than the heading means an editor rewriting copy cannot
+silently break a link that already points at the section. Reordering a page does renumber
+repeated blocks, which is the one case where an existing link can move.
 
-### 2.2 Existing layouts (unchanged)
+### 2.2 Media
+
+Anywhere a layout says "media" below, the field is a single media library item built by
+`trichis_media_group()` in `includes/media-fields.php` — an ACF `file` field restricted to
+image and video mime types. There is no separate video field and no place to paste a URL:
+an editor picks a file, and the front end reads the attachment's mime type to decide
+whether to render an image or a video.
+
+`mapMedia()` flattens that to `{ url, alt, width, height, isVideo }`, which is the only
+media shape components see. The seed JSON is a DatoCMS export, where a video is an image
+record carrying Mux metadata; `normalizeAsset()` in `src/lib/normalize.js` collapses it to
+the same five keys so neither source is special-cased downstream.
+
+### 2.3 Existing layouts (unchanged)
 
 `page_header`, `project_header`, `paragraph`, `section_line`, `scrolling_title`,
 `column_row`, `project_numbers`, `cta_section`, `form_section`. Field lists are in
 section 2b of the audit.
 
-### 2.3 New layouts
+### 2.4 New layouts
 
 Twelve layouts, each mapping 1:1 to a component that currently hardcodes its content.
 
 #### `home_hero` → `home/HomeHero.jsx`
 
-- `media` — media group (desktop showreel)
-- `mobile_media` — media group
+- `media` — media (desktop showreel)
+- `mobile_media` — media
 
 #### `home_who_we_are` → `home/HomeWhoWeAre.jsx`
 
@@ -66,7 +83,7 @@ Twelve layouts, each mapping 1:1 to a component that currently hardcodes its con
 - `services` — repeater
   - `label` — text
   - `link` — text
-  - `media` — media group
+  - `media` — media
 
 #### `home_what_weve_created` → `home/HomeWhatWeveCreated.jsx`
 
@@ -92,8 +109,8 @@ Replaces `siteSettings.homeContent.how_we_do_it`, which is removed.
 
 #### `home_showreel` → `home/HomeShowReel.jsx`
 
-- `media` — media group
-- `mobile_media` — media group
+- `media` — media
+- `mobile_media` — media
 - `text_top` — text
 - `text_bottom` — text
 
@@ -114,9 +131,9 @@ Replaces `siteSettings.homeContent.how_we_do_it`, which is removed.
 - `lead` — textarea
 - `cta_text` — text
 - `cta_link` — text
-- `image_a` — media group
-- `image_b` — media group
-- `image_wide` — media group
+- `image_a` — media
+- `image_b` — media
+- `image_wide` — media
 - `body` — textarea
 
 #### `offices` → `about/AboutUsOffices.jsx`
@@ -126,7 +143,7 @@ Replaces `siteSettings.homeContent.how_we_do_it`, which is removed.
 - `offices` — repeater
   - `title` — text (short label, e.g. `R'dam`)
   - `address` — textarea, one line per row
-  - `media` — media group
+  - `media` — media
 
 #### `expertises` → `whatwedo/WhatWeDoExpertises.jsx`
 
@@ -149,9 +166,9 @@ two-line treatment (`Web-` / `design`, `Photo /` / `video`).
 - `cta_text` — text (HTML allowed)
 - `cta_link` — text
 - `media` — repeater
-  - `media` — media group
+  - `media` — media
 
-### 2.4 Context assignment
+### 2.5 Context assignment
 
 - `page` — all nine existing layouts plus all twelve new ones. A page can be anything.
 - `project` — `project_header`, `column_row`, `project_numbers`, `paragraph` (unchanged).
@@ -282,7 +299,9 @@ the route pages, and every Site Settings group. Two details worth knowing:
 - Route-page media reference files in `public/` (`/video/showreel.mp4`,
   `/images/services/identity.webp`). The seeder resolves any URL starting with `/` against
   `public/` and sideloads it, so those assets end up in the media library like the Dato ones.
-  Video paths are stored in `video_mp4_url` rather than the image field.
+- The Dato export never downloaded the videos, because Dato served them through Mux. The
+  seeder pulls those from the R2 mirror instead, reading `PUBLIC_R2_PUBLIC_URL` out of
+  `.env`, so a fresh seed imports roughly 38 video files and takes a few minutes.
 - Form field widths were a number (0–100) in ACF but the renderer only understands
   `"half"`. The field is now a `full`/`half` select, and the seeder normalises the numeric
   values in the Dato export.
@@ -294,7 +313,7 @@ Forms 1.9 (copied from the Plan Brabant install), `wp trichis seed --fresh` has 
 `.env` has `USE_SEED_DATA=0`. Seed JSON is still a working fallback: flip the flag back and
 the build produces the same pages.
 
-Two things about the WPGraphQL/ACF surface that are easy to trip over again:
+Three things about the WPGraphQL/ACF surface that are easy to trip over again:
 
 - **Every ACF `select` is typed as a list**, even single-value ones, so `columnType` arrives
   as `["image"]`. `wordpress.js` unwraps these through a `choice()` helper. Five fields are
@@ -302,6 +321,8 @@ Two things about the WPGraphQL/ACF surface that are easy to trip over again:
 - **`page_blocks`, `cover` and `mobile_cover` exist on the page, project and service groups
   alike.** `update_field()` resolves an ambiguous name to whichever group registered last, so
   the seeder writes every post field by key (`field_page_page_blocks`), never by name.
+- **`sourceUrl` is null on a video attachment.** It resolves an image size, so media fields
+  query `mediaItemUrl` alongside it and `mapMedia` takes the first that answers.
 
 Layout type names come out as `{FieldGroup}PageBlocks{Layout}Layout`, matching what
 `src/lib/queries.js` assumes — verified against the live schema for all 22 layouts.

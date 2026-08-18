@@ -4,7 +4,6 @@ import SplitText from "@/components/ui/SplitText";
 import ShuffledText from "@/components/ui/ShuffledText";
 import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
 import useInView from "@/hooks/useInView";
-import { isMediaVideo } from "@/lib/cms";
 
 export const Project = forwardRef(function Project(
   {
@@ -51,10 +50,7 @@ export const Project = forwardRef(function Project(
     return { ..._coverImage };
   }, [_coverImage]);
 
-  const isVideo = useMemo(() => {
-    if (!coverImage) return false;
-    return isMediaVideo(coverImage.url, coverImage.video);
-  }, [coverImage]);
+  const isVideo = !!coverImage?.isVideo;
 
   if (!coverImage?.url) return null;
 

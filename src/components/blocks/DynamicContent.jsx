@@ -22,7 +22,6 @@ import ServiceTeaser from "@/components/whatwedo/ServiceTeaser";
 import { SectionTitle } from "@/components/ui/Divider";
 import { ScrollingText } from "@/components/ui/ScrollingText";
 import { useGlobalStore } from "@/stores/global";
-import { isMediaVideo } from "@/lib/cms";
 
 function ScrollingTitle({ data }) {
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
@@ -79,9 +78,7 @@ export const ContentComponents = {
 
 function hasVideoColumn(item) {
   return !!item?.columns?.some(
-    (c) =>
-      c.__typename === "ImagecolumnRecord" &&
-      isMediaVideo(c.image?.url, c.image?.video),
+    (c) => c.__typename === "ImagecolumnRecord" && c.image?.isVideo,
   );
 }
 

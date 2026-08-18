@@ -7,6 +7,7 @@
 // (seed-source.js) can pass Dato exports through untouched.
 
 import { gqlFetch } from "./graphql.js";
+import { LAYOUT_TO_TYPENAME, assignAnchors, isVideoMedia } from "./normalize.js";
 import {
   ALL_PAGES_QUERY,
   ALL_PROJECTS_QUERY,
@@ -25,60 +26,19 @@ function choice(value) {
 // ── media ──────────────────────────────────────────────────────────────
 
 function mapMedia(media) {
-  if (!media) return null;
-  const node = media.image?.node;
-  const hasVideo =
-    media.videoStreamingUrl || media.videoMuxPlaybackId || media.videoMp4Url;
-  if (!node && !hasVideo) return null;
+  const node = media?.node;
+  const url = node?.sourceUrl || node?.mediaItemUrl;
+  if (!url) return null;
   return {
-    // Components read `url` as the poster; a video with no still falls back to
-    // the video itself, which is what the GL element loads anyway.
-    url:
-      node?.sourceUrl ??
-      media.videoThumbnailUrl ??
-      media.videoMp4Url ??
-      media.videoStreamingUrl ??
-      null,
-    alt: node?.altText ?? null,
-    width: node?.mediaDetails?.width ?? null,
-    height: node?.mediaDetails?.height ?? null,
-    video: hasVideo
-      ? {
-          streamingUrl: media.videoStreamingUrl || null,
-          muxPlaybackId: media.videoMuxPlaybackId || null,
-          mp4Url: media.videoMp4Url || null,
-          thumbnailUrl: media.videoThumbnailUrl || null,
-        }
-      : null,
+    url,
+    alt: node.altText || null,
+    width: node.mediaDetails?.width ?? null,
+    height: node.mediaDetails?.height ?? null,
+    isVideo: isVideoMedia(node.mimeType, url),
   };
 }
 
 // ── blocks ─────────────────────────────────────────────────────────────
-
-const LAYOUT_TO_TYPENAME = {
-  PageHeaderLayout: "PageheaderRecord",
-  ProjectHeaderLayout: "ProjectheaderRecord",
-  ParagraphLayout: "ParagraphRecord",
-  SectionLineLayout: "SectionlineRecord",
-  ScrollingTitleLayout: "ScrollingTitleRecord",
-  ColumnRowLayout: "ColumnrowRecord",
-  ProjectNumbersLayout: "ProjectnumberRecord",
-  CtaSectionLayout: "CtasectionRecord",
-  FormSectionLayout: "FormSectionRecord",
-  HomeHeroLayout: "HomeheroRecord",
-  HomeWhoWeAreLayout: "HomewhoweareRecord",
-  HomeWhatWeDoLayout: "HomewhatwedoRecord",
-  HomeWhatWeveCreatedLayout: "HomewhatwevecreatedRecord",
-  HowWeDoItLayout: "HowwedoitRecord",
-  HomeShowreelLayout: "HomeshowreelRecord",
-  LinkBandLayout: "LinkbandRecord",
-  ServiceHeroLayout: "ServiceheroRecord",
-  AboutHeroLayout: "AboutheroRecord",
-  AboutIntroLayout: "AboutintroRecord",
-  OfficesLayout: "OfficesRecord",
-  ExpertisesLayout: "ExpertisesRecord",
-  ServiceTeaserLayout: "ServiceteaserRecord",
-};
 
 function layoutName(gqlTypename) {
   for (const suffix of Object.keys(LAYOUT_TO_TYPENAME)) {
@@ -296,13 +256,9 @@ export function mapBlocks(blocks) {
     const typename = LAYOUT_TO_TYPENAME[layout];
     const mapped = mapBlock(typename, block);
     if (!mapped) continue;
-    result.push({
-      __typename: typename,
-      anchorId: block.anchorId || null,
-      ...mapped,
-    });
+    result.push({ __typename: typename, ...mapped });
   }
-  return result;
+  return assignAnchors(result);
 }
 
 // ── entities ───────────────────────────────────────────────────────────

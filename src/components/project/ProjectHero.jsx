@@ -3,7 +3,6 @@ import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
 import emitter from "@/lib/emitter";
 import usePageEnter from "@/hooks/usePageEnter";
 import { useGlobalStore } from "@/stores/global";
-import { isMediaVideo } from "@/lib/cms";
 
 export default function ProjectHero({
   project: { coverImage, mobileCoverImage } = {},
@@ -37,9 +36,8 @@ export default function ProjectHero({
   });
 
   const activeAsset = isMobileLayout ? mobileCoverImage || coverImage : coverImage;
-  const video = activeAsset?.video;
-  const src = video?.mp4Url || video?.streamingUrl || activeAsset?.url;
-  const isVideo = isMediaVideo(src, video);
+  const src = activeAsset?.url;
+  const isVideo = !!activeAsset?.isVideo;
 
   if (!src) return null;
 
@@ -51,7 +49,6 @@ export default function ProjectHero({
         className="project-hero__gl"
         isVideo={isVideo}
         src={src}
-        video={video}
         animateOnScroll={false}
         useHover={false}
         darken={0.2}

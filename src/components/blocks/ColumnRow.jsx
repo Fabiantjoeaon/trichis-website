@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import SplitText from "@/components/ui/SplitText";
 import BorderedIcon from "@/components/ui/BorderedIcon";
 import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
-import { convertMultiParagraphToNineFormat, isMediaVideo } from "@/lib/cms";
+import { convertMultiParagraphToNineFormat } from "@/lib/cms";
 import { useGlobalStore } from "@/stores/global";
 
 export const columnRowTypeNames = {
@@ -61,6 +61,7 @@ export default function ColumnRow({
 
   return (
     <div
+      id={data?.anchorId || undefined}
       className={`column-row-wrap inner-width${hasMultipleColumns ? " multi" : ""}${isColumnRowAndNeedsMoreSpacingBottom ? " more-bottom" : ""}`}
     >
       {showSwoosh && (
@@ -91,7 +92,7 @@ export default function ColumnRow({
           ...(isJustTextColumn ? { margin: "250rem 0" } : null),
         };
 
-        const isVideo = isMediaVideo(image?.url, image?.video);
+        const isVideo = !!image?.isVideo;
 
         return (
           <div
@@ -107,7 +108,6 @@ export default function ColumnRow({
                 isLink={false}
                 src={image.url}
                 isVideo={isVideo}
-                video={image.video}
                 offset={-0.5}
               />
             )}

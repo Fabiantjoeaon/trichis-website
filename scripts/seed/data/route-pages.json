@@ -14,19 +14,16 @@
     "content": [
       {
         "__typename": "HomeheroRecord",
-        "anchorId": null,
         "media": { "url": "/video/showreel.mp4" },
         "mobileMedia": { "url": "/video/showreel_mobile.mp4" }
       },
       {
         "__typename": "HomewhoweareRecord",
-        "anchorId": null,
         "sectionTitle": "Who we are",
         "body": "Nine is een onafhankelijk creatief bureau met een culture driven visie. Met strategy, identity en design, creëren we nieuwe werelden voor brands we love."
       },
       {
         "__typename": "HomewhatwedoRecord",
-        "anchorId": null,
         "sectionTitle": "What we do",
         "scrollingText": "You got the vibe, we got the tools.",
         "intro": "Opvallen is niet genoeg. Wij zorgen ervoor dat jouw merk onthouden wordt. Voorbij de hype, recht het hart in. Alleen zo blijf je top of mind.",
@@ -60,7 +57,6 @@
       },
       {
         "__typename": "HowwedoitRecord",
-        "anchorId": null,
         "title": "How we do it",
         "glWord": "nine",
         "cards": [
@@ -88,13 +84,11 @@
       },
       {
         "__typename": "LinkbandRecord",
-        "anchorId": null,
         "title": "More About <strong>nine</strong>",
         "link": "/about-us"
       },
       {
         "__typename": "HomewhatwevecreatedRecord",
-        "anchorId": null,
         "sectionTitle": "What we've done so far",
         "scrollingText": "Discover your impact",
         "intro": "Nine is een onafhankelijk creatief bureau dat de toekomst opnieuw vormgeeft. Met slim design, een heldere visie en grensverleggende ideeën bouwen we samen aan een nieuwe wereld.",
@@ -104,7 +98,6 @@
       },
       {
         "__typename": "HomeshowreelRecord",
-        "anchorId": null,
         "textTop": "Watch our",
         "textBottom": "showreel",
         "media": { "url": "/video/showreel.mp4" },
@@ -112,7 +105,6 @@
       },
       {
         "__typename": "FormSectionRecord",
-        "anchorId": null,
         "title": "Wil je een gratis <strong>Quickscan?</strong>",
         "subtitle": "Neem contact op en wij laten je zien waar de kansen liggen!",
         "ctaText": "Verzenden",
@@ -179,13 +171,11 @@
     "content": [
       {
         "__typename": "AboutheroRecord",
-        "anchorId": null,
         "brandText": "nine",
         "brandMobile": "n"
       },
       {
         "__typename": "AboutintroRecord",
-        "anchorId": null,
         "sectionTitle": "First things first",
         "scrollingText": "Wij zijn nine creative agency.",
         "lead": "Als je zegt dat de wereld snel verandert, ben je eigenlijk al een stap te laat. Anno nu is reageren niet meer genoeg. Daarom denken wij niet vanuit wat hip of on trend is, maar vanuit wat morgen impact maakt. Wij zien veranderingen, herkennen patronen en anticiperen erop voordat ze trends worden. ",
@@ -198,7 +188,6 @@
       },
       {
         "__typename": "OfficesRecord",
-        "anchorId": null,
         "sectionTitle": "Our offices",
         "intro": "Bakske of bakkie pleur? Wees welkom in Breda en Rotterdam.",
         "offices": [
@@ -231,7 +220,6 @@
     "content": [
       {
         "__typename": "ServiceheroRecord",
-        "anchorId": null,
         "title": "What we do",
         "headerText": "Merkidentiteit ontwikkelen - jouw merk, jouw fundament.",
         "paragraph": "**Waarom blijven klanten terugkomen? Door een merk dat indruk maakt.**\nWil jij dat jouw merk opvalt en impact maakt? Ontdek hoe een sterke merkidentiteit deuren opent naar meer klanten, vertrouwen en groei.",
@@ -240,7 +228,6 @@
       },
       {
         "__typename": "ExpertisesRecord",
-        "anchorId": null,
         "sectionTitle": "Our expertises",
         "heading": "Wij zorgen dat merken gezien worden.",
         "body": "Opvallen in een wereld waar iedereen aandacht wil hebben? Dit is de vraag waar wij elke dag de wekker voor zetten. Nine gaat altijd voor spraakmakend, buitengewoon & zoekt de randen op, met zoveel mogelijke impact voor je merk creëren als einddoel.",
@@ -249,7 +236,6 @@
       },
       {
         "__typename": "ServiceteaserRecord",
-        "anchorId": null,
         "sectionTitle": null,
         "fullServiceName": null,
         "serviceName": "Identity",
@@ -279,7 +265,6 @@
       },
       {
         "__typename": "ServiceteaserRecord",
-        "anchorId": null,
         "sectionTitle": null,
         "fullServiceName": null,
         "serviceName": "Strategy",
@@ -305,7 +290,6 @@
       },
       {
         "__typename": "ServiceteaserRecord",
-        "anchorId": null,
         "sectionTitle": null,
         "fullServiceName": "Webdesign",
         "serviceName": "Web-",
@@ -344,7 +328,6 @@
       },
       {
         "__typename": "ServiceteaserRecord",
-        "anchorId": null,
         "sectionTitle": null,
         "fullServiceName": "Photo / Video",
         "serviceName": "Photo /",
@@ -380,7 +363,6 @@
       },
       {
         "__typename": "ServiceteaserRecord",
-        "anchorId": null,
         "sectionTitle": null,
         "fullServiceName": null,
         "serviceName": "Campaigns",
@@ -407,7 +389,6 @@
       },
       {
         "__typename": "HowwedoitRecord",
-        "anchorId": null,
         "title": "How we do it",
         "glWord": "nine",
         "cards": [
@@ -435,7 +416,6 @@
       },
       {
         "__typename": "LinkbandRecord",
-        "anchorId": null,
         "title": "More About <strong>nine</strong>",
         "link": "/about-us"
       }

@@ -3,7 +3,6 @@ import BorderedIcon from "@/components/ui/BorderedIcon";
 import SplitText from "@/components/ui/SplitText";
 import emitter from "@/lib/emitter";
 import { VIDEO_PLAYER_PLAY } from "@/lib/constants";
-import { isMediaVideo } from "@/lib/cms";
 import { useGlobalStore } from "@/stores/global";
 
 export default function HomeShowReel({ data }) {
@@ -21,7 +20,7 @@ export default function HomeShowReel({ data }) {
       <div className="home-showreel__reel">
         <NineGLImageElement
           className="home-showreel__gl"
-          isVideo={isMediaVideo(videoSrc, active?.video)}
+          isVideo={!!active?.isVideo}
           src={videoSrc}
           animateOnScroll
           useHover={false}

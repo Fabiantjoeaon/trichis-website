@@ -15,6 +15,7 @@ export default function WhatWeDoServiceHeader({
   fullServiceName = null,
   showSectionTitle = true,
   sectionTitle = null,
+  anchorId = null,
 }) {
   return (
     <>
@@ -27,7 +28,10 @@ export default function WhatWeDoServiceHeader({
             )}
         </SectionTitle>
       )}
-      <header className={`service-header inner-width ${className}`}>
+      <header
+        className={`service-header inner-width ${className}`}
+        id={anchorId || undefined}
+      >
         <div className="service-header__left">
           {service && (
             <SplitText tag="h1" animateOnScroll animation="charClipped">

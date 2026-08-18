@@ -31,6 +31,8 @@ class Trichis_Seed_Command {
 
     private string $public_dir;
 
+    private ?string $r2_base = null;
+
     /** @var array<string,int> source URL → attachment ID */
     private array $attachment_cache = [];
 
@@ -59,6 +61,7 @@ class Trichis_Seed_Command {
         $default_dir      = "{$repo_root}/scripts/seed/data";
         $this->data_dir   = rtrim($assoc_args['dir'] ?? $default_dir, '/');
         $this->public_dir = "{$repo_root}/public";
+        $this->r2_base    = $this->read_r2_base($repo_root);
 
         if (!is_dir($this->data_dir)) {
             WP_CLI::error("Seed data directory not found: {$this->data_dir}. Run `pnpm seed:export` first.");
@@ -78,6 +81,21 @@ class Trichis_Seed_Command {
         $this->seed_forms();
 
         WP_CLI::success('Seed complete.');
+    }
+
+    /**
+     * The exporter never downloaded the videos, so importing them means
+     * pulling from the same R2 mirror the front end reads. Its base URL lives
+     * in the repo's .env rather than in WordPress.
+     */
+    private function read_r2_base(string $repo_root): ?string {
+        $env = "{$repo_root}/.env";
+        if (!file_exists($env)) return null;
+
+        if (preg_match('/^\s*PUBLIC_R2_PUBLIC_URL\s*=\s*(\S+)/m', (string) file_get_contents($env), $m)) {
+            return rtrim(trim($m[1], "\"'"), '/');
+        }
+        return null;
     }
 
     private function read_json(string $file) {
@@ -103,10 +121,16 @@ class Trichis_Seed_Command {
     // ── media ────────────────────────────────────────────────────────────
 
     /**
-     * Sideload an exported image (by its original Dato URL) into the media
-     * library. Returns the attachment ID or 0.
+     * Sideload an exported asset into the media library, by its original
+     * source URL. Returns the attachment ID or 0.
+     *
+     * The file is found in one of three places, in order: the export directory
+     * (via assets-manifest.json), the repo's public/ directory for URLs that
+     * are already site-relative, or the R2 mirror for anything the exporter
+     * did not download — which is every video, since Dato served those through
+     * Mux rather than as files.
      */
-    private function attach_image(?array $asset): int {
+    private function attach_media(?array $asset): int {
         if (!$asset || empty($asset['url'])) return 0;
         $url = $asset['url'];
 
@@ -125,33 +149,52 @@ class Trichis_Seed_Command {
             return $this->attachment_cache[$url] = (int) $existing[0];
         }
 
-        $entry = $this->manifest[$url] ?? null;
-        if ($entry) {
-            $local = "{$this->data_dir}/{$entry['file']}";
-        } elseif (str_starts_with($url, '/')) {
-            // Route-page content references files shipped in the repo's
-            // public/ directory rather than the DatoCMS export.
-            $local = $this->public_dir . $url;
-        } else {
-            WP_CLI::warning("No local file for {$url}");
-            return 0;
-        }
-
-        if (!file_exists($local)) {
-            WP_CLI::warning("Missing asset file {$local}");
-            return 0;
-        }
-
         require_once ABSPATH . 'wp-admin/includes/media.php';
         require_once ABSPATH . 'wp-admin/includes/file.php';
         require_once ABSPATH . 'wp-admin/includes/image.php';
 
+        $entry = $this->manifest[$url] ?? null;
+        $remote = null;
+
+        if ($entry) {
+            $local = "{$this->data_dir}/{$entry['file']}";
+        } elseif (str_starts_with($url, '/')) {
+            $local = $this->public_dir . $url;
+        } else {
+            $remote = $this->mirror_url($url);
+            if (!$remote) {
+                WP_CLI::warning("No local file and no mirror for {$url}");
+                return 0;
+            }
+            $local = null;
+        }
+
+        if ($local !== null && !file_exists($local)) {
+            WP_CLI::warning("Missing asset file {$local}");
+            return 0;
+        }
+
         // media_handle_sideload moves the file, so hand it a temp copy.
-        $tmp = wp_tempnam(basename($local));
-        copy($local, $tmp);
+        if ($remote) {
+            // Videos run to several megabytes and a seed pulls dozens of them,
+            // so the odd timeout is expected rather than fatal.
+            for ($attempt = 1; $attempt <= 3; $attempt++) {
+                $tmp = download_url($remote, 120);
+                if (!is_wp_error($tmp)) break;
+                WP_CLI::warning("Download attempt {$attempt} failed for {$remote}: " . $tmp->get_error_message());
+                sleep($attempt);
+            }
+            if (is_wp_error($tmp)) return 0;
+
+            $name = basename(parse_url($url, PHP_URL_PATH));
+        } else {
+            $tmp = wp_tempnam(basename($local));
+            copy($local, $tmp);
+            $name = basename($local);
+        }
 
         $id = media_handle_sideload([
-            'name'     => preg_replace('/^[0-9a-f]{10}-/', '', basename($local)),
+            'name'     => preg_replace('/^[0-9a-f]{10}-/', '', $name),
             'tmp_name' => $tmp,
         ], 0);
 
@@ -167,28 +210,29 @@ class Trichis_Seed_Command {
             update_post_meta($id, '_wp_attachment_image_alt', $asset['alt']);
         }
 
-        WP_CLI::log('  media: ' . basename($local));
+        WP_CLI::log('  media: ' . preg_replace('/^[0-9a-f]{10}-/', '', $name));
         return $this->attachment_cache[$url] = (int) $id;
     }
 
-    /** Build the value for a trichis media group from a Dato image asset. */
-    private function media_value(?array $asset): array {
-        $video = $asset['video'] ?? null;
-        $url   = $asset['url'] ?? '';
+    /** Map a Dato or Mux URL onto the R2 bucket that mirrors both. */
+    private function mirror_url(string $url): ?string {
+        if (!$this->r2_base) return null;
 
-        // The asset URL points at a video file: on Dato records it is the
-        // source next to the Mux fields, on route pages it is a file in
-        // public/video. Either way it belongs in the video fields, and there
-        // is no still image to sideload.
-        $is_video = $url !== '' && preg_match('/\.(mp4|webm|m3u8|mov)(\?|$)/i', $url);
+        foreach (['datocms-assets\.com', 'stream\.mux\.com', 'image\.mux\.com'] as $host) {
+            if (preg_match("#{$host}/(.*)#", $url, $m)) {
+                return "{$this->r2_base}/{$m[1]}";
+            }
+        }
+        return null;
+    }
 
-        return [
-            'image'                 => $is_video ? 0 : $this->attach_image($asset),
-            'video_streaming_url'   => $video['streamingUrl'] ?? '',
-            'video_mux_playback_id' => $video['muxPlaybackId'] ?? '',
-            'video_mp4_url'         => $video['mp4Url'] ?? ($is_video ? $url : ''),
-            'video_thumbnail_url'   => $video['thumbnailUrl'] ?? '',
-        ];
+    /**
+     * A media field now holds one attachment. Dato assets that were videos
+     * carry Mux metadata next to a source URL; the source file is what gets
+     * imported, and the front end detects the type from the mime.
+     */
+    private function media_value(?array $asset): int {
+        return $this->attach_media($asset);
     }
 
     // ── content blocks ───────────────────────────────────────────────────
@@ -197,8 +241,7 @@ class Trichis_Seed_Command {
     private function map_blocks(?array $content): array {
         $rows = [];
         foreach ((array) $content as $block) {
-            $type   = $block['__typename'] ?? '';
-            $before = count($rows);
+            $type = $block['__typename'] ?? '';
 
             switch ($type) {
                 case 'ProjectheaderRecord':
@@ -450,11 +493,6 @@ class Trichis_Seed_Command {
                     ];
                     break;
             }
-
-            // Every layout carries an anchor; set it once rather than in each arm.
-            if (count($rows) > $before) {
-                $rows[count($rows) - 1]['anchor_id'] = $block['anchorId'] ?? '';
-            }
         }
         return $rows;
     }
@@ -521,7 +559,7 @@ class Trichis_Seed_Command {
             update_field('field_project_page_blocks', $this->map_blocks($p['content'] ?? []), $id);
 
             // Featured image doubles as the WP thumbnail for admin lists.
-            $thumb = $this->attach_image($p['coverImage'] ?? null);
+            $thumb = $this->attach_media($p['coverImage'] ?? null);
             if ($thumb) set_post_thumbnail($id, $thumb);
 
             $term_ids = [];
@@ -616,7 +654,7 @@ class Trichis_Seed_Command {
         update_field('field_seo_description', $seo['description'] ?? '', $post_id);
         update_field('field_seo_noindex', !empty($seo['noindex']), $post_id);
         if (!empty($seo['ogImage'])) {
-            update_field('field_seo_og_image', $this->attach_image(['url' => $seo['ogImage']]), $post_id);
+            update_field('field_seo_og_image', $this->attach_media(['url' => $seo['ogImage']]), $post_id);
         }
     }
 

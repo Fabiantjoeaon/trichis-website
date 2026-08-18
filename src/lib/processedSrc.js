@@ -1,33 +1,23 @@
+// WordPress media is served from the site itself and needs no rewriting. This
+// only matters in seed mode, where the DatoCMS export still points at Dato and
+// Mux — both mirrored to R2, which unlike the originals sends CORS headers and
+// so can be read back into a WebGL texture.
+
 const R2_PUBLIC_URL =
   import.meta.env.PUBLIC_R2_PUBLIC_URL || import.meta.env.R2_PUBLIC_URL;
 
-function extractR2Path(url) {
-  if (!R2_PUBLIC_URL) return null;
-
-  const datoMatch = url.match(/datocms-assets\.com\/(.*)/);
-  if (datoMatch) return `${R2_PUBLIC_URL}/${datoMatch[1]}`;
-
-  const muxStreamMatch = url.match(/stream\.mux\.com\/(.*)/);
-  if (muxStreamMatch) return `${R2_PUBLIC_URL}/${muxStreamMatch[1]}`;
-
-  const muxImageMatch = url.match(/image\.mux\.com\/(.*)/);
-  if (muxImageMatch) return `${R2_PUBLIC_URL}/${muxImageMatch[1]}`;
-
-  return null;
-}
+const MIRRORED_HOSTS = [
+  /datocms-assets\.com\/(.*)/,
+  /stream\.mux\.com\/(.*)/,
+  /image\.mux\.com\/(.*)/,
+];
 
 export function getProcessedSrc(srcUrl) {
-  if (!srcUrl) return srcUrl;
-  if (srcUrl.startsWith("/api/video-proxy?url=")) return srcUrl;
+  if (!srcUrl || !R2_PUBLIC_URL) return srcUrl;
 
-  const r2Direct = extractR2Path(srcUrl);
-  if (r2Direct) return r2Direct;
-
-  if (
-    srcUrl.includes("datocms-assets.com") ||
-    srcUrl.includes("stream.mux.com")
-  ) {
-    return `/api/video-proxy?url=${encodeURIComponent(srcUrl)}`;
+  for (const host of MIRRORED_HOSTS) {
+    const match = srcUrl.match(host);
+    if (match) return `${R2_PUBLIC_URL}/${match[1]}`;
   }
 
   return srcUrl;

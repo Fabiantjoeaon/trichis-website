@@ -313,9 +313,8 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
   );
 });
 
-function WithVideoTexture({ src, video, children }) {
-  const url = video?.streamingUrl || video?.mp4Url || src || null;
-  const texture = useVideoTexture(url, {
+function WithVideoTexture({ src, children }) {
+  const texture = useVideoTexture(src || null, {
     crossOrigin: "anonymous",
     unsuspend: "canplay",
   });
@@ -339,7 +338,7 @@ const NineGLImage = forwardRef(function NineGLImage(props, ref) {
 
   if (isVideo) {
     return (
-      <WithVideoTexture src={src} video={props.video}>
+      <WithVideoTexture src={src}>
         {(texture) => <NineGLImageImpl ref={ref} {...props} tMap={texture} />}
       </WithVideoTexture>
     );

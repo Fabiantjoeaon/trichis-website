@@ -2,11 +2,14 @@
 // the same API as wordpress.js, so the whole site can be developed and built
 // before WordPress is installed/seeded. Enabled with USE_SEED_DATA=1.
 //
-// The exported JSON is already in the normalized (nine-ca/Dato) shape the
-// components consume; images point at the Dato CDN.
+// The export still carries Dato's asset shape, so records pass through the
+// shared normalizer on the way out and come back looking exactly like the
+// WordPress ones. Media URLs point at the Dato/Mux CDN mirror.
 
 import { readFileSync } from "node:fs";
 import path from "node:path";
+
+import { assignAnchors, normalizeMedia } from "./normalize.js";
 
 const DATA_DIR = path.resolve(process.cwd(), "scripts/seed/data");
 
@@ -15,12 +18,24 @@ const cache = {};
 function readJson(file) {
   if (!(file in cache)) {
     try {
-      cache[file] = JSON.parse(readFileSync(path.join(DATA_DIR, file), "utf8"));
+      cache[file] = normalize(
+        JSON.parse(readFileSync(path.join(DATA_DIR, file), "utf8")),
+      );
     } catch {
       cache[file] = null;
     }
   }
   return cache[file];
+}
+
+function normalize(records) {
+  if (!Array.isArray(records)) return records;
+  return records.map((record) => {
+    const mapped = normalizeMedia(record);
+    return mapped.content
+      ? { ...mapped, content: assignAnchors(mapped.content) }
+      : mapped;
+  });
 }
 
 export async function getProjects() {

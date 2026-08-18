@@ -19,6 +19,7 @@ export default function PageHeader({ data }) {
       serviceBottom={data?.titleBottom}
       showSectionTitle={!!data?.sectionTitle}
       sectionTitle={data?.sectionTitle}
+      anchorId={data?.anchorId}
     >
       {paragraphs.length > 0 && (
         <div className="page-header__paragraph">

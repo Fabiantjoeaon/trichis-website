@@ -8,24 +8,20 @@
 // - Site-wide settings live on one options page (`siteSettings`).
 // - Single-language site (NL) — no language filtering anywhere.
 
-const IMG = /* GraphQL */ `
+// One media library item. `mimeType` is what tells the front end whether to
+// render an image or a video, so nothing has to be configured per field.
+// `sourceUrl` resolves image sizes and is null on a video, hence mediaItemUrl.
+const MEDIA = /* GraphQL */ `
   node {
     sourceUrl
+    mediaItemUrl
     altText
+    mimeType
     mediaDetails {
       width
       height
     }
   }
-`;
-
-// The trichis media group: image attachment + Mux video metadata.
-const MEDIA = /* GraphQL */ `
-  image { ${IMG} }
-  videoStreamingUrl
-  videoMuxPlaybackId
-  videoMp4Url
-  videoThumbnailUrl
 `;
 
 /**
@@ -255,17 +251,7 @@ function blockFragments(prefix, blocks) {
       }
     `,
   };
-  // Every block also carries an anchor id, on the same inline fragment.
-  return blocks
-    .map((name) => {
-      const def = defs[name];
-      if (!def) return "";
-      return def.replace(
-        /^(\s*\.\.\. on \S+ \{)/m,
-        `$1\n        anchorId`,
-      );
-    })
-    .join("\n");
+  return blocks.map((name) => defs[name] ?? "").join("\n");
 }
 
 const PAGE_BLOCKS = blockFragments("PageBuilderPageBlocks", [
@@ -298,7 +284,7 @@ const SEO_FIELDS = /* GraphQL */ `
   seo {
     seoTitle
     seoDescription
-    ogImage { ${IMG} }
+    ogImage { ${MEDIA} }
     noindex
   }
 `;
@@ -437,12 +423,12 @@ export const SITE_SETTINGS_QUERY = /* GraphQL */ `
     siteSettings {
       general {
         siteName
-        logo { ${IMG} }
-        logoAlt { ${IMG} }
-        favicon { ${IMG} }
+        logo { ${MEDIA} }
+        logoAlt { ${MEDIA} }
+        favicon { ${MEDIA} }
         seoTitleSuffix
         seoDefaultDescription
-        seoDefaultOgImage { ${IMG} }
+        seoDefaultOgImage { ${MEDIA} }
       }
       navigation {
         navLinks {

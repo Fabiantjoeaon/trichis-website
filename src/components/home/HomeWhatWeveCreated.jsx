@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
 import SplitText from "@/components/ui/SplitText";
-import ShuffledText from "@/components/ui/ShuffledText";
 import BorderedIcon from "@/components/ui/BorderedIcon";
 import { SectionTitle } from "@/components/ui/Divider";
 import { ScrollingText } from "@/components/ui/ScrollingText";
@@ -47,11 +46,6 @@ export default function HomeWhatWeveCreated({ data, projects = [] }) {
           <SplitText className="home-wwc__projects-label" tag="h5" animateOnScroll>
             {data?.listLabel}
           </SplitText>
-          <div className="home-wwc__random">
-            <ShuffledText animateOnScroll useRandomText />
-            <ShuffledText animateOnScroll useRandomText />
-            <ShuffledText animateOnScroll useRandomText />
-          </div>
         </div>
 
         <div className="home-wwc__projects" ref={projectsRef}>

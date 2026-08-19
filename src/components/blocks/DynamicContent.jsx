@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import CTAFooter from "@/components/layout/CTAFooter";
 import ProjectHeader from "./ProjectHeader";
 import ProjectNumbers from "./ProjectNumbers";
+import Accordion from "./Accordion";
 import PageHeader from "./PageHeader";
 import Paragraph from "./Paragraph";
 import ColumnRow from "./ColumnRow";
@@ -39,6 +40,7 @@ function ScrollingTitle({ data }) {
 export const ContentComponents = {
   ProjectheaderRecord: ProjectHeader,
   ProjectnumberRecord: ProjectNumbers,
+  AccordionRecord: Accordion,
   PageheaderRecord: PageHeader,
   ParagraphRecord: Paragraph,
   ColumnrowRecord: ColumnRow,

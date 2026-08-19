@@ -92,6 +92,16 @@ function blockFragments(prefix, blocks) {
         }
       }
     `,
+    accordion: `
+      ... on ${prefix}AccordionLayout {
+        title
+        media { ${MEDIA} }
+        items {
+          question
+          answer
+        }
+      }
+    `,
     cta_section: `
       ... on ${prefix}CtaSectionLayout {
         title
@@ -261,6 +271,7 @@ const PAGE_BLOCKS = blockFragments("PageBuilderPageBlocks", [
   "form_section",
   "column_row",
   "project_numbers",
+  "accordion",
   "paragraph",
   "section_line",
   "scrolling_title",
@@ -293,6 +304,7 @@ const PROJECT_BLOCKS = blockFragments("ProjectDetailsPageBlocks", [
   "project_header",
   "column_row",
   "project_numbers",
+  "accordion",
   "paragraph",
 ]);
 
@@ -462,11 +474,6 @@ export const SITE_SETTINGS_QUERY = /* GraphQL */ `
         footerCtaTitle
         footerCtaText
         footerCtaLink
-      }
-      interfaceSettings {
-        randomSentences {
-          text
-        }
       }
       cookieBanner {
         cookieTitle

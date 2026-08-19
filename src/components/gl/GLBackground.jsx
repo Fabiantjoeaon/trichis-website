@@ -100,6 +100,10 @@ export default memo(function GLBackground() {
     };
   }, [theme]);
 
+  // Build once and never rebuild: the GSAP callbacks inside useAnimation close
+  // over this object, so a rebuilt material would keep rendering while the
+  // animation drives the detached one (wipe stuck invisible after a theme
+  // switch). Theme colors are uniforms — the effect below updates them in place.
   const wipe = useMemo(
     () =>
       buildWipeMaterial({
@@ -107,9 +111,8 @@ export default memo(function GLBackground() {
         borderColor: colors.accent,
         tTransition,
       }),
-    // Rebuild when theme/texture identity changes
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [theme, tTransition],
+    [tTransition],
   );
 
   useEffect(() => {
@@ -193,8 +196,11 @@ export default memo(function GLBackground() {
     if (group.current) group.current.visible = false;
   }, []);
 
+  // Visibility is managed imperatively (animateIn/animateOut + mount effect);
+  // a `visible` prop here would be re-applied on re-renders and could hide the
+  // wipe mid-transition.
   return (
-    <group ref={group} visible={false}>
+    <group ref={group}>
       <mesh renderOrder={1000} geometry={fullscreenTriangle} frustumCulled={false}>
         <primitive object={wipe.material} attach="material" />
       </mesh>

@@ -12,6 +12,7 @@ const LAYOUTS = [
   ["ScrollingTitleLayout", "ScrollingTitleRecord"],
   ["ColumnRowLayout", "ColumnrowRecord"],
   ["ProjectNumbersLayout", "ProjectnumberRecord"],
+  ["AccordionLayout", "AccordionRecord"],
   ["CtaSectionLayout", "CtasectionRecord"],
   ["FormSectionLayout", "FormSectionRecord"],
   ["HomeHeroLayout", "HomeheroRecord"],

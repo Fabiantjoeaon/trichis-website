@@ -330,11 +330,23 @@ Layout type names come out as `{FieldGroup}PageBlocks{Layout}Layout`, matching w
 ### CORS on uploads
 
 `NineGLImageElement` requests every image with `crossorigin="anonymous"` so WebGL can read
-its pixels, which means the host serving `/wp-content/uploads/` must send
-`Access-Control-Allow-Origin`. nginx serves uploads directly, so no WordPress filter can add
-it — it has to come from the server config. Locally that means a block in
-`Local Sites/trichis/conf/nginx/site.conf.hbs` (Local's own template already does this for
-fonts):
+its pixels. Flywheel (and most WordPress hosts) serve `/wp-content/uploads/` without
+`Access-Control-Allow-Origin`, and nginx skips any PHP header filter.
+
+The front end therefore rewrites upload URLs to a same-origin path:
+
+- `https://trichis.flywheelsites.com/wp-content/uploads/…`
+  → `/wp-uploads/…`
+- Dev: Vite proxies `/wp-uploads` to the active WordPress origin
+  (`astro.config.mjs`, driven by `PUBLIC_WP_SOURCE`).
+- Prod: Netlify proxies the same path (`netlify.toml` redirect, status 200).
+
+SEO / Open Graph still use the absolute WordPress URL; only media that WebGL
+consumes goes through `getProcessedSrc()`.
+
+For Local by Flywheel you can also add CORS on the WordPress host itself
+(`Local Sites/trichis/conf/nginx/site.conf.hbs`), which is useful if something
+loads the upload URL directly:
 
 ```nginx
 location ^~ /wp-content/uploads/ {
@@ -346,7 +358,3 @@ location ^~ /wp-content/uploads/ {
     add_header        Access-Control-Allow-Origin *;
 }
 ```
-
-This file lives outside the repo, so anyone setting up a fresh Local site has to add it
-again, and the production WordPress host needs the equivalent. Without it every GL image
-fails to load with an opaque CORS error while the network tab shows `200 OK`.

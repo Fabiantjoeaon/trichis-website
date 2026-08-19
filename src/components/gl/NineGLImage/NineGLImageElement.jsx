@@ -9,6 +9,7 @@ import {
 } from "react";
 import { useGlobalStore } from "@/stores/global";
 import useInView from "@/hooks/useInView";
+import { getProcessedSrc } from "@/lib/processedSrc";
 import UseCanvas from "../UseCanvas";
 import ScrollScene from "../ScrollScene";
 import NineGLImage from "./index";
@@ -320,12 +321,14 @@ const GLImageElement = forwardRef(function GLImageElement(
 
 const NineGLImageElement = forwardRef(function NineGLImageElement(props, ref) {
   const noWebGLImages = useGlobalStore((s) => s.noWebGLImages);
+  const src = useMemo(() => getProcessedSrc(props.src), [props.src]);
+  const next = src === props.src ? props : { ...props, src };
 
   if (noWebGLImages) {
-    return <DOMFallback ref={ref} {...props} />;
+    return <DOMFallback ref={ref} {...next} />;
   }
 
-  return <GLImageElement ref={ref} {...props} />;
+  return <GLImageElement ref={ref} {...next} />;
 });
 
 export default NineGLImageElement;

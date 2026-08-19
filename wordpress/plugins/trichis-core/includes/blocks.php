@@ -9,6 +9,7 @@
  *   paragraph        ← ParagraphRecord
  *   column_row       ← ColumnrowRecord (Image/Text/Empty columns)
  *   project_numbers  ← ProjectnumberRecord
+ *   accordion        ← AccordionRecord
  *   cta_section      ← CtasectionRecord
  *   form_section     ← FormSectionRecord
  *   section_line     ← SectionlineRecord
@@ -345,6 +346,40 @@ function trichis_block_project_numbers(string $ctx): array {
                         'label'   => 'Text',
                         'type'    => 'text',
                         'wrapper' => ['width' => '70'],
+                    ]),
+                ],
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_accordion(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_accordion",
+        'name'       => 'accordion',
+        'label'      => 'Accordion',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_bf($ctx, 'accordion', 'title', [
+                'label'   => 'Title',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_block_media($ctx, 'accordion', 'media', 'Media'),
+            trichis_bf($ctx, 'accordion', 'items', [
+                'label'        => 'Items',
+                'type'         => 'repeater',
+                'layout'       => 'block',
+                'button_label' => 'Add Item',
+                'sub_fields'   => [
+                    trichis_bf($ctx, 'accordion', 'question', [
+                        'label' => 'Question',
+                        'type'  => 'text',
+                    ]),
+                    trichis_bf($ctx, 'accordion', 'answer', [
+                        'label' => 'Answer',
+                        'type'  => 'textarea',
+                        'rows'  => 4,
                     ]),
                 ],
             ]),
@@ -999,7 +1034,8 @@ function trichis_blocks_for_context(string $ctx): array {
         case 'page':
             return [
                 'page_header', 'project_header', 'cta_section', 'form_section',
-                'column_row', 'project_numbers', 'paragraph', 'section_line',
+                'column_row', 'project_numbers', 'accordion', 'paragraph',
+                'section_line',
                 'scrolling_title',
                 'home_hero', 'home_who_we_are', 'home_what_we_do',
                 'home_what_weve_created', 'how_we_do_it', 'home_showreel',
@@ -1007,7 +1043,7 @@ function trichis_blocks_for_context(string $ctx): array {
                 'offices', 'expertises', 'service_teaser',
             ];
         case 'project':
-            return ['project_header', 'column_row', 'project_numbers', 'paragraph'];
+            return ['project_header', 'column_row', 'project_numbers', 'accordion', 'paragraph'];
         case 'service':
             return ['section_line', 'scrolling_title', 'column_row'];
         default:

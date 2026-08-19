@@ -9,16 +9,6 @@ import {
   useState,
 } from "react";
 
-let randomSentences = [];
-export const setRandomSentences = (sentences) => {
-  if (Array.isArray(sentences)) randomSentences = sentences;
-};
-
-const getRandomSentence = () => {
-  if (randomSentences.length === 0) return "";
-  return randomSentences[Math.floor(Math.random() * randomSentences.length)];
-};
-
 const ShuffledText = forwardRef(
   (
     {
@@ -28,8 +18,6 @@ const ShuffledText = forwardRef(
       text: initialText,
       immediate = false,
       removeOnOut = false,
-      useRandomText = false,
-      // kept for call-site compatibility; animation removed
       shuffleOptions: _shuffleOptions,
       hoverAnimation: _hoverAnimation,
       animateOnScroll: _animateOnScroll,
@@ -42,10 +30,6 @@ const ShuffledText = forwardRef(
     const [text, setText] = useState(initialText);
     const textRef = useRef();
     const containerRef = useRef();
-
-    useEffect(() => {
-      if (useRandomText) setText(getRandomSentence());
-    }, [useRandomText]);
 
     useEffect(() => {
       if (initialText !== undefined) setText(initialText);

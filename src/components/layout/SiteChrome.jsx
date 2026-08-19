@@ -12,7 +12,6 @@ import { TRANSITION_DURATION, waitForEvent } from "@/lib/transitions";
 import { useCanvasStore } from "@/lib/gl/canvasStore";
 import { useGlobalStore } from "@/stores/global";
 import useEvent from "@/hooks/useEvent";
-import { setRandomSentences } from "@/components/ui/ShuffledText";
 import NavigationBar from "./NavigationBar";
 import Menu from "./Menu";
 import Loader from "./Loader";
@@ -212,8 +211,7 @@ export default function SiteChrome({ settings = {}, siteName }) {
 
   useEffect(() => {
     bindMouse();
-    setRandomSentences(settings.randomSentences ?? []);
-  }, [settings]);
+  }, []);
 
   useEvent(events.LOADING_OUT_COMPLETE, () => {
     useGlobalStore.setState({ pageRevealed: true });

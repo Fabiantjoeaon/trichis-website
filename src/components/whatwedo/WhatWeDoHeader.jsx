@@ -1,5 +1,4 @@
 import SplitText from "@/components/ui/SplitText";
-import ShuffledText from "@/components/ui/ShuffledText";
 import { SectionTitle } from "@/components/ui/Divider";
 import { t } from "@/lib/i18n";
 
@@ -43,16 +42,6 @@ export default function WhatWeDoServiceHeader({
               {serviceBottom}
             </SplitText>
           )}
-          <ShuffledText
-            wrapperClassName="shuffled-text-left"
-            useRandomText
-            animateOnScroll
-          />
-          <ShuffledText
-            wrapperClassName="shuffled-text-right"
-            useRandomText
-            animateOnScroll
-          />
         </div>
         <div className="service-header__right">{children}</div>
       </header>

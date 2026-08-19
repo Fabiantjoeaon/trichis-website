@@ -311,41 +311,6 @@ add_action('acf/init', function () {
         'graphql_field_name' => 'footer',
     ]);
 
-    // ── Interface ──
-    //
-    // Chrome that belongs to no single page. The former "Home Content" group
-    // lived here too; its sections are now page blocks (how_we_do_it,
-    // home_what_we_do, home_what_weve_created, home_hero) so an editor can
-    // place and reorder them like any other section.
-    acf_add_local_field_group([
-        'key'    => 'group_site_interface',
-        'title'  => 'Interface',
-        'fields' => [
-            [
-                'key'          => 'field_home_random_sentences',
-                'label'        => 'Random sentences (loader shuffle)',
-                'name'         => 'random_sentences',
-                'type'         => 'repeater',
-                'layout'       => 'table',
-                'button_label' => 'Add Sentence',
-                'sub_fields'   => [
-                    [
-                        'key'   => 'field_home_random_sentence_text',
-                        'label' => 'Text',
-                        'name'  => 'text',
-                        'type'  => 'text',
-                    ],
-                ],
-            ],
-        ],
-        'location' => [[
-            ['param' => 'options_page', 'operator' => '==', 'value' => 'site-settings'],
-        ]],
-        'menu_order'         => 4,
-        'show_in_graphql'    => 1,
-        'graphql_field_name' => 'interfaceSettings',
-    ]);
-
     // ── Cookie banner ──
     acf_add_local_field_group([
         'key'    => 'group_site_cookie_banner',

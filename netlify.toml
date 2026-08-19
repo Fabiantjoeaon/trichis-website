@@ -2,3 +2,13 @@
   # These PUBLIC_* / seed flags are config, not secrets. Their values (especially
   # PUBLIC_WP_SOURCE=local) appear all over the repo and trip Netlify's scanner.
   SECRETS_SCAN_OMIT_KEYS = "PUBLIC_WP_SOURCE,PUBLIC_WP_GRAPHQL_URL_LOCAL,PUBLIC_WP_GRAPHQL_URL_FLYWHEEL,PUBLIC_USE_SEED_DATA,PUBLIC_R2_PUBLIC_URL,USE_SEED_DATA"
+
+# Same-origin proxy for WordPress uploads. WebGL loads media with
+# crossorigin="anonymous"; Flywheel does not send CORS headers on
+# /wp-content/uploads, so the front end rewrites those URLs to /wp-uploads/*
+# and Netlify (or the Vite proxy in dev) fetches the file from WordPress.
+[[redirects]]
+  from = "/wp-uploads/*"
+  to = "https://trichis.flywheelsites.com/wp-content/uploads/:splat"
+  status = 200
+  force = true

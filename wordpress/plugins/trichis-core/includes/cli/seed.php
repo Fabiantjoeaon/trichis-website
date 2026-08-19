@@ -329,6 +329,17 @@ class Trichis_Seed_Command {
                         ], (array) ($block['numbers'] ?? [])),
                     ];
                     break;
+                case 'AccordionRecord':
+                    $rows[] = [
+                        'acf_fc_layout' => 'accordion',
+                        'title'         => $block['title'] ?? '',
+                        'media'         => $this->media_value($block['media'] ?? null),
+                        'items'         => array_map(fn($i) => [
+                            'question' => $i['question'] ?? '',
+                            'answer'   => $i['answer'] ?? '',
+                        ], (array) ($block['items'] ?? [])),
+                    ];
+                    break;
                 case 'ParagraphRecord':
                     $rows[] = [
                         'acf_fc_layout' => 'paragraph',
@@ -685,8 +696,6 @@ class Trichis_Seed_Command {
             'footer_cta_title'    => $site['footer']['footer_cta_title'] ?? '',
             'footer_cta_text'     => $site['footer']['footer_cta_text'] ?? '',
             'footer_cta_link'     => $site['footer']['footer_cta_link'] ?? '',
-
-            'random_sentences' => $site['interfaceSettings']['random_sentences'] ?? [],
 
             'cookie_title'      => $site['cookieBanner']['cookie_title'] ?? '',
             'cookie_message'    => $site['cookieBanner']['cookie_message'] ?? '',

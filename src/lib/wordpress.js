@@ -112,6 +112,15 @@ function mapBlock(typename, block) {
           text: n.text,
         })),
       };
+    case "AccordionRecord":
+      return {
+        title: block.title,
+        media: mapMedia(block.media),
+        items: (block.items ?? []).map((item) => ({
+          question: item.question,
+          answer: item.answer,
+        })),
+      };
     case "CtasectionRecord":
       return {
         title: block.title,
@@ -407,9 +416,6 @@ export async function getSiteSettings() {
       ctaText: s.footer?.footerCtaText ?? "",
       ctaLink: s.footer?.footerCtaLink ?? "",
     },
-    randomSentences: (s.interfaceSettings?.randomSentences ?? []).map(
-      (r) => r.text,
-    ),
     cookieBanner: {
       title: s.cookieBanner?.cookieTitle ?? "",
       message: s.cookieBanner?.cookieMessage ?? "",

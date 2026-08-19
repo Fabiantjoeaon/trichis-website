@@ -110,9 +110,6 @@ export async function getSiteSettings() {
       ctaText: site.footer?.footer_cta_text ?? "",
       ctaLink: site.footer?.footer_cta_link ?? "",
     },
-    randomSentences: (
-      site.interfaceSettings?.random_sentences ?? []
-    ).map((r) => r.text),
     cookieBanner: {
       title: site.cookieBanner?.cookie_title ?? "",
       message: site.cookieBanner?.cookie_message ?? "",

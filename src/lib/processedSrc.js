@@ -1,10 +1,14 @@
-// WordPress media is served from the site itself and needs no rewriting. This
-// only matters in seed mode, where the DatoCMS export still points at Dato and
-// Mux — both mirrored to R2, which unlike the originals sends CORS headers and
-// so can be read back into a WebGL texture.
+// Media URLs may come from three places:
+//   1. WordPress uploads (local or Flywheel) — rewritten to a same-origin
+//      `/wp-uploads/...` proxy so WebGL can read pixels without CORS.
+//   2. The Dato/Mux CDN (seed mode) — rewritten to the R2 mirror, which
+//      already sends Access-Control-Allow-Origin.
+//   3. Site-relative paths (`/video/...`) — left alone.
 
 const R2_PUBLIC_URL =
   import.meta.env.PUBLIC_R2_PUBLIC_URL || import.meta.env.R2_PUBLIC_URL;
+
+const WP_UPLOADS = /^https?:\/\/[^/]+\/wp-content\/uploads\/(.+)$/i;
 
 const MIRRORED_HOSTS = [
   /datocms-assets\.com\/(.*)/,
@@ -13,7 +17,12 @@ const MIRRORED_HOSTS = [
 ];
 
 export function getProcessedSrc(srcUrl) {
-  if (!srcUrl || !R2_PUBLIC_URL) return srcUrl;
+  if (!srcUrl) return srcUrl;
+
+  const uploads = srcUrl.match(WP_UPLOADS);
+  if (uploads) return `/wp-uploads/${uploads[1]}`;
+
+  if (!R2_PUBLIC_URL) return srcUrl;
 
   for (const host of MIRRORED_HOSTS) {
     const match = srcUrl.match(host);

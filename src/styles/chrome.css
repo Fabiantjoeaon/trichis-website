@@ -365,7 +365,9 @@
   z-index: 7;
   width: 100vw;
   height: calc(var(--vh, 1vh) * 100);
-  background-color: var(--color-menuBackground);
+  /* No background: the GL wipe (gl-canvas-root--overlay, same z-index but
+     earlier in the DOM) is the menu's animated background, as in nine-ca.
+     An opaque color here would hide the wipe entirely. */
 }
 
 .menu__inner {

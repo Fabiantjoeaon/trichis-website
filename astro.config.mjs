@@ -1,9 +1,27 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
-import { loadEnv } from 'vite';
 
-const env = loadEnv('development', process.cwd(), '');
+function readEnv() {
+  const env = { ...process.env };
+  try {
+    const text = readFileSync(resolve(process.cwd(), '.env'), 'utf8');
+    for (const line of text.split('\n')) {
+      const match = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+      if (!match) continue;
+      const [, key, raw] = match;
+      if (env[key] != null && env[key] !== '') continue;
+      env[key] = raw.replace(/^['"]|['"]$/g, '').trim();
+    }
+  } catch {
+    // no .env — Netlify injects vars into process.env
+  }
+  return env;
+}
+
+const env = readEnv();
 const source = String(env.PUBLIC_WP_SOURCE || 'local').trim().toLowerCase();
 const graphql = ['flywheel', 'remote', 'staging', 'prod', 'production'].includes(source)
   ? env.PUBLIC_WP_GRAPHQL_URL_FLYWHEEL || env.PUBLIC_WP_GRAPHQL_URL

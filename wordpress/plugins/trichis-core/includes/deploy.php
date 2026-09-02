@@ -22,15 +22,26 @@ const TRICHIS_DEPLOY_STATUS_OPTION = 'trichis_netlify_last_deploy';
 const TRICHIS_DEPLOY_CRON_EVENT    = 'trichis_netlify_deploy_event';
 const TRICHIS_DEPLOY_DELAY         = 45; // seconds — coalesces bursts of edits into one build.
 
-function trichis_deploy_hook_url() {
-    if (defined('TRICHIS_NETLIFY_BUILD_HOOK') && TRICHIS_NETLIFY_BUILD_HOOK) {
-        return TRICHIS_NETLIFY_BUILD_HOOK;
+function trichis_deploy_env($key) {
+    if (defined($key) && constant($key)) {
+        return (string) constant($key);
     }
+    foreach ([getenv($key), $_ENV[$key] ?? null, $_SERVER[$key] ?? null] as $value) {
+        if ($value !== false && $value !== null && $value !== '') {
+            return (string) $value;
+        }
+    }
+    return '';
+}
+
+function trichis_deploy_hook_url() {
+    $from_env = trim(trichis_deploy_env('TRICHIS_NETLIFY_BUILD_HOOK'));
+    if ($from_env) return $from_env;
     return trim((string) get_option(TRICHIS_DEPLOY_HOOK_OPTION, ''));
 }
 
 function trichis_deploy_hook_is_locked() {
-    return defined('TRICHIS_NETLIFY_BUILD_HOOK') && TRICHIS_NETLIFY_BUILD_HOOK;
+    return trichis_deploy_env('TRICHIS_NETLIFY_BUILD_HOOK') !== '';
 }
 
 function trichis_deploy_parse_bool($value) {
@@ -214,10 +225,13 @@ function trichis_deploy_render_page() {
         <hr>
         <h2>Deploy now</h2>
         <p>Trigger a rebuild immediately without changing content.</p>
+        <?php if (!trichis_deploy_hook_url()): ?>
+            <p class="description">Save a Netlify build hook URL above first. Deploy now will fail until one is set.</p>
+        <?php endif; ?>
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
             <input type="hidden" name="action" value="trichis_deploy_now">
             <?php wp_nonce_field('trichis_deploy_now'); ?>
-            <?php submit_button('Deploy now', 'primary', 'submit', false, trichis_deploy_hook_url() ? [] : ['disabled' => 'disabled']); ?>
+            <?php submit_button('Deploy now', 'primary', 'submit', false); ?>
         </form>
 
         <?php if (is_array($status) && !empty($status['time'])): ?>

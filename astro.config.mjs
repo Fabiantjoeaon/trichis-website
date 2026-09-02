@@ -33,6 +33,14 @@ try {
   // keep Flywheel default
 }
 
+let r2Origin = 'https://pub-6d1ccefa62e04dcf8d87eb9cf388173b.r2.dev';
+try {
+  const r2 = env.PUBLIC_R2_PUBLIC_URL || env.R2_PUBLIC_URL;
+  if (r2) r2Origin = new URL(r2).origin;
+} catch {
+  // keep default R2 public host
+}
+
 export default defineConfig({
   output: 'static',
   integrations: [
@@ -61,6 +69,12 @@ export default defineConfig({
           secure: true,
           rewrite: (path) =>
             path.replace(/^\/wp-uploads/, '/wp-content/uploads'),
+        },
+        '/r2': {
+          target: r2Origin,
+          changeOrigin: true,
+          secure: true,
+          rewrite: (path) => path.replace(/^\/r2/, ''),
         },
       },
     },

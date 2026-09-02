@@ -34,8 +34,7 @@ export default function VideoPlayer() {
     if (wrapper.current) wrapper.current.style.visibility = "visible";
     setActive(true);
     useGlobalStore.getState().lenis?.stop?.();
-    const noGL = useGlobalStore.getState().noWebGLImages;
-    const next = noGL ? rawSrc : getProcessedSrc(rawSrc);
+    const next = getProcessedSrc(rawSrc);
     setSrc(next?.startsWith("http") || next?.startsWith("/") ? next : `/${next}`);
     emitter.emit(events.CURSOR_SHOW, { text: t("video.closeHint") });
   }, []);

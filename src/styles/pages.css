@@ -615,6 +615,17 @@
   position: absolute;
 }
 
+.home-wwc__projects .project-card a {
+  display: block;
+}
+
+.home-wwc__projects .project-image {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: unset;
+}
+
 /* Featured project collage positions — nine-ca HomeWhatWeveCreated */
 .home-wwc__projects .project-0 {
   left: 50rem;
@@ -624,6 +635,23 @@
 .home-wwc__projects .project-0 .project-image,
 .home-wwc__projects .project-0 video {
   aspect-ratio: 16 / 9;
+}
+
+.home-wwc__projects .project-0 .project-image img,
+.home-wwc__projects .project-0 .project-image video,
+.home-wwc__projects .project-1 .project-image img,
+.home-wwc__projects .project-1 .project-image video,
+.home-wwc__projects .project-2 .project-image img,
+.home-wwc__projects .project-2 .project-image video,
+.home-wwc__projects .project-3 .project-image img,
+.home-wwc__projects .project-3 .project-image video,
+.home-wwc__projects .project-4 .project-image img,
+.home-wwc__projects .project-4 .project-image video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .home-wwc__projects .project-1 {
@@ -692,6 +720,26 @@
   width: 1200rem;
 }
 
+@media (min-width: 712px) and (max-width: 1024px) {
+  .home-wwc__projects .project-card {
+    width: 50%;
+  }
+
+  .home-wwc__projects .project-card .project-image {
+    aspect-ratio: 3 / 2;
+    position: relative;
+  }
+
+  .home-wwc__projects .project-card .project-image img,
+  .home-wwc__projects .project-card .project-image video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
 .home-wwc__more {
   display: flex;
   justify-content: center;
@@ -736,6 +784,16 @@
 
   .home-wwc__projects .project-card .project-image {
     aspect-ratio: 6 / 5;
+    position: relative;
+  }
+
+  .home-wwc__projects .project-card .project-image img,
+  .home-wwc__projects .project-card .project-image video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .home-wwc__more {
@@ -768,8 +826,11 @@
 
 .project-card .project-image {
   width: 100%;
-  aspect-ratio: 6 / 5;
   overflow: hidden;
+  display: block;
+}
+
+.project-card a {
   display: block;
 }
 
@@ -814,6 +875,16 @@
 .projects-basic__item .project-image {
   aspect-ratio: 6 / 5;
   overflow: hidden;
+  position: relative;
+}
+
+.projects-basic__item .project-image img,
+.projects-basic__item .project-image video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 711px) {

@@ -145,13 +145,16 @@ export default memo(function GLBackground() {
         onStart: () => {
           isAnimating.current = true;
           wipe.uDirection.value = -1;
-          wipe.uTransition.value = 0;
+          // Stay fully covered; the tween walks 1→0. Zeroing here is what
+          // made the live out-animation pop before the first GSAP tick.
+          wipe.uTransition.value = 1;
         },
         onUpdate: (v) => {
           wipe.uTransition.value = v;
         },
         onComplete: () => {
           isAnimating.current = false;
+          useGlobalStore.setState({ wipeCovered: false });
           if (group.current) group.current.visible = false;
           setCanvasOverlay(false);
           emitter.emit(events.GL_BACKGROUND_OUT_COMPLETE);
@@ -168,15 +171,17 @@ export default memo(function GLBackground() {
     }
     if (group.current) group.current.visible = true;
     visible.current = true;
+    useGlobalStore.setState({ wipeCovered: true });
     setCanvasOverlay(true);
     animateBackgroundIn();
   }
 
   function animateOut() {
-    if (!visible.current) {
+    if (!visible.current && !useGlobalStore.getState().wipeCovered) {
       emitter.emit(events.GL_BACKGROUND_OUT_COMPLETE);
       return;
     }
+    if (group.current) group.current.visible = true;
     visible.current = false;
     animateBackgroundOut();
   }
@@ -193,8 +198,15 @@ export default memo(function GLBackground() {
   });
 
   useEffect(() => {
+    if (useGlobalStore.getState().wipeCovered) {
+      visible.current = true;
+      wipe.uTransition.value = 1;
+      if (group.current) group.current.visible = true;
+      setCanvasOverlay(true);
+      return;
+    }
     if (group.current) group.current.visible = false;
-  }, []);
+  }, [wipe]);
 
   // Visibility is managed imperatively (animateIn/animateOut + mount effect);
   // a `visible` prop here would be re-applied on re-renders and could hide the

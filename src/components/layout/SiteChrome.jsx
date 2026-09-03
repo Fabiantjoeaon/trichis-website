@@ -1,7 +1,7 @@
 // Top-level chrome island (port of nine-ca's ClientLayout responsibilities):
 // Lenis smooth scroll, viewport tracking, theme switching, GL page-transition
 // wipe, nav, menu, loader, cursor and cookie banner.
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect } from "react";
 import Lenis from "lenis";
 import emitter from "@/lib/emitter";
 import { events } from "@/lib/events";
@@ -18,8 +18,7 @@ import Loader from "./Loader";
 import CookieBanner from "./CookieBanner";
 import { Cursor } from "./Cursor";
 import VideoPlayer from "@/components/VideoPlayer";
-
-const GLCanvas = lazy(() => import("@/components/gl/Canvas"));
+import GLCanvas from "@/components/gl/Canvas";
 
 const THEME_KEY = "trichis:theme";
 // Matches --theme-transition-duration in global.css
@@ -220,9 +219,7 @@ export default function SiteChrome({ settings = {}, siteName }) {
 
   return (
     <>
-      <Suspense fallback={null}>
-        <GLCanvas />
-      </Suspense>
+      <GLCanvas />
       <Loader />
       <Menu settings={settings} />
       <NavigationBar siteName={siteName} />

@@ -15,6 +15,9 @@ export const useGlobalStore = create((set) => ({
   // False while the loader / GL transition wipe covers the page; pages hold
   // their entrance animations until it flips true (see usePageEnter).
   pageRevealed: false,
+  // True while the GL wipe is covering the screen. Survives a canvas remount
+  // during an Astro swap so the out animation can still play from full cover.
+  wipeCovered: false,
   mouse: { x: 0, y: 0 },
   // Set true to force DOM fallback for NineGLImageElement
   noWebGLImages: false,

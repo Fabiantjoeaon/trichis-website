@@ -72,9 +72,7 @@
      margins collapse; here they would stack, so only add basePadding) */
   margin-top: var(--basePadding);
   margin-bottom: 150rem;
-  max-height: calc(
-    100vh - var(--navigationHeight) - (var(--basePadding) * 2)
-  );
+  max-height: calc(100vh - var(--navigationHeight) - (var(--basePadding) * 2));
   overflow: hidden;
 }
 
@@ -1383,6 +1381,7 @@
    pages put the two side by side (nine-ca ProjectHeader). */
 .project-header.is-project .project-header__copy {
   margin-left: 55%;
+  margin-top: 100rem;
 }
 
 .project-header.is-page {

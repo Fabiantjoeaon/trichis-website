@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import SplitText from "@/components/ui/SplitText";
 import BorderedIcon from "@/components/ui/BorderedIcon";
-import { convertMultiParagraphToNineFormat } from "@/lib/cms";
+import CmsHtml from "@/components/ui/CmsHtml";
 import usePageEnter from "@/hooks/usePageEnter";
 
 export default function ServicePageHero({
@@ -13,7 +13,6 @@ export default function ServicePageHero({
 }) {
   const titleRef = useRef(null);
   const headerRef = useRef(null);
-  const formatted = convertMultiParagraphToNineFormat(paragraph);
 
   function animateIn() {
     titleRef.current?.animateIn?.();
@@ -58,11 +57,7 @@ export default function ServicePageHero({
 
       <div className="service-page-hero__content">
         <div className="service-page-hero__paragraph">
-          {formatted.map((p, i) => (
-            <SplitText key={i} tag={p.tag} animateOnScroll={false}>
-              {p.text}
-            </SplitText>
-          ))}
+          <CmsHtml text={paragraph} animateOnScroll={false} />
         </div>
         {cta?.text && (
           <BorderedIcon

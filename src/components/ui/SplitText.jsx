@@ -410,6 +410,13 @@ const SplitText = forwardRef(
     };
 
     if (!isMounted) {
+      if (shouldDangerouslySetInnerHTML) {
+        return createElement(tag, {
+          className,
+          dangerouslySetInnerHTML,
+          ...props,
+        });
+      }
       return createElement(tag, { className, ...props }, content);
     }
 

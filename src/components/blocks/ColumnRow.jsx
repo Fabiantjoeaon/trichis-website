@@ -1,8 +1,7 @@
 import { useMemo } from "react";
-import SplitText from "@/components/ui/SplitText";
 import BorderedIcon from "@/components/ui/BorderedIcon";
+import CmsHtml from "@/components/ui/CmsHtml";
 import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
-import { convertMultiParagraphToNineFormat } from "@/lib/cms";
 import { useGlobalStore } from "@/stores/global";
 
 export const columnRowTypeNames = {
@@ -12,7 +11,6 @@ export const columnRowTypeNames = {
 };
 
 function ColumnTextItem({ text, cta, align = "center", applyMarginBottom }) {
-  const formatted = convertMultiParagraphToNineFormat(text);
   const alignMap = {
     top: "flex-start",
     center: "center",
@@ -25,11 +23,7 @@ function ColumnTextItem({ text, cta, align = "center", applyMarginBottom }) {
       style={{ justifyContent: alignMap[align] || "center" }}
     >
       <div className="column-text__inner">
-        {formatted.map((p, i) => (
-          <SplitText key={i} tag={p.tag} animateOnScroll>
-            {p.text}
-          </SplitText>
-        ))}
+        <CmsHtml text={text} />
         {cta && (
           <BorderedIcon
             dontTriggerPageTransition={cta.isExternal}

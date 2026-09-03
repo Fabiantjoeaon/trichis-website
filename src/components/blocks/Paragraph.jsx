@@ -1,9 +1,7 @@
-import SplitText from "@/components/ui/SplitText";
-import { convertMultiParagraphToNineFormat } from "@/lib/cms";
+import CmsHtml from "@/components/ui/CmsHtml";
 
 export default function Paragraph({ data }) {
-  const formatted = convertMultiParagraphToNineFormat(data?.content);
-  if (!formatted.length) return null;
+  if (!data?.content) return null;
 
   return (
     <section
@@ -11,11 +9,7 @@ export default function Paragraph({ data }) {
       id={data?.anchorId || undefined}
     >
       <div className="cms-paragraph__inner">
-        {formatted.map((p, i) => (
-          <SplitText key={i} tag={p.tag} animateOnScroll>
-            {p.text}
-          </SplitText>
-        ))}
+        <CmsHtml text={data.content} />
       </div>
     </section>
   );

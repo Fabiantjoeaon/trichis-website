@@ -64,7 +64,16 @@ function AccordionItem({ question, answer, isOpen, onToggle }) {
         </button>
       </h3>
       <div className="project-acc__a" ref={panelRef} hidden>
-        {answer && <p>{answer}</p>}
+        {answer && (
+          /<\/?[a-z][\s\S]*>/i.test(answer) ? (
+            <div
+              className="project-acc__html"
+              dangerouslySetInnerHTML={{ __html: answer }}
+            />
+          ) : (
+            <p>{answer}</p>
+          )
+        )}
       </div>
     </div>
   );

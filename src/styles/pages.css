@@ -1289,6 +1289,61 @@
   max-width: 50%;
 }
 
+.cms-paragraph__inner a,
+.column-text__inner a,
+.project-header__copy a,
+.service-page-hero__paragraph a,
+.project-acc__html a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  color: inherit;
+}
+
+.cms-paragraph__inner em,
+.column-text__inner em,
+.project-header__copy em,
+.service-page-hero__paragraph em,
+.project-acc__html em {
+  font-style: italic;
+}
+
+.cms-paragraph__inner ul,
+.cms-paragraph__inner ol,
+.column-text__inner ul,
+.column-text__inner ol,
+.project-header__copy ul,
+.project-header__copy ol,
+.cms-html ul,
+.cms-html ol {
+  display: flex;
+  flex-direction: column;
+  gap: 12rem;
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.cms-paragraph__inner ul,
+.column-text__inner ul,
+.cms-html ul {
+  list-style: disc;
+}
+
+.cms-paragraph__inner ol,
+.column-text__inner ol,
+.cms-html ol {
+  list-style: decimal;
+}
+
+.cms-paragraph__inner li,
+.column-text__inner li,
+.cms-html li,
+.project-acc__html li {
+  font-family: "SG Grotesk", sans-serif;
+  font-size: 50rem;
+  line-height: 1.4;
+  font-weight: 100;
+}
+
 .column-row-wrap {
   display: flex;
   flex-flow: row wrap;
@@ -1357,7 +1412,7 @@
   height: auto;
 }
 
-.column-text a {
+.column-text__cta {
   width: fit-content;
   margin-left: 250rem;
   margin-top: 50rem;

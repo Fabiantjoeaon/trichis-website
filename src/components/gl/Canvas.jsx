@@ -3,6 +3,7 @@ import { Canvas as R3FCanvas, extend } from "@react-three/fiber";
 import * as THREE from "three/webgpu";
 import { createWebGpuRenderer } from "@/lib/gl/createWebGpuRenderer";
 import { useCanvasStore } from "@/lib/gl/canvasStore";
+import { useGlobalStore } from "@/stores/global";
 import ScrollCamera from "./ScrollCamera";
 import { CanvasChildren } from "./UseCanvas";
 import GLBackground from "./GLBackground";
@@ -12,16 +13,21 @@ extend(THREE);
 
 function ReflowOnResize() {
   useEffect(() => {
-    const reflow = () => useCanvasStore.getState().triggerReflow();
+    let raf = 0;
+    const reflow = () => {
+      cancelAnimationFrame(raf);
+      // Wait two frames so vw-rem layout and Lenis internals settle, then
+      // remasure every ScrollScene / HowWeDoIt card (nine-ca pageReflow).
+      raf = requestAnimationFrame(() => {
+        raf = requestAnimationFrame(() => {
+          useGlobalStore.getState().lenis?.resize?.();
+          useCanvasStore.getState().triggerReflow();
+        });
+      });
+    };
     window.addEventListener("resize", reflow);
 
-    // Re-measure trackers when page content resizes too (images/fonts
-    // loading shift layout long after mount) — scroll-rig does the same.
-    let raf = 0;
-    const observer = new ResizeObserver(() => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(reflow);
-    });
+    const observer = new ResizeObserver(reflow);
     observer.observe(document.body);
 
     return () => {

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useGlobalStore } from "@/stores/global";
 import { useCanvasStore } from "./canvasStore";
 import { map } from "@/lib/math";
@@ -72,6 +72,8 @@ export function useTracker(track, { autoUpdate = true, rootMargin = "0px" } = {}
     const el = track?.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
+    // Skip collapsed frames so ScrollScene doesn't unmount (textures / tweens)
+    if (!r.width || !r.height) return;
     const { scrollY, scrollX } = getScroll();
     rect.top = r.top + scrollY;
     rect.bottom = r.bottom + scrollY;
@@ -117,10 +119,30 @@ export function useTracker(track, { autoUpdate = true, rootMargin = "0px" } = {}
     [track, windowSize, scaleMultiplier, getScroll],
   );
 
-  useEffect(() => {
+  // nine-ca remasures in useLayoutEffect so GL scale matches the post-resize
+  // rem layout before paint.
+  useLayoutEffect(() => {
     measure();
     update();
   }, [measure, update, pageReflow, windowSize]);
+
+  useEffect(() => {
+    const el = track?.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    let raf = 0;
+    const ro = new ResizeObserver(() => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        measure();
+        update();
+      });
+    });
+    ro.observe(el);
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
+  }, [track, measure, update]);
 
   useEffect(() => {
     const el = track?.current;

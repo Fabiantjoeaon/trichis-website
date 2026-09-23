@@ -41,9 +41,8 @@ const SplitText = forwardRef(
 
     const [isMounted, setIsMounted] = useState(false);
     const isAnimatedIn = useRef(false);
-    // Entrance tween in flight — needed because autoSplit can replace the
-    // split nodes mid-tween (persisted islands get moved on Astro page swaps)
     const isAnimatingIn = useRef(false);
+    const hasSplitOnce = useRef(false);
     const lastInParams = useRef(undefined);
 
     const hasSplitPromise = useRef(null);
@@ -76,6 +75,12 @@ const SplitText = forwardRef(
       if (t.includes("chars")) return "chars";
       if (t.includes("words")) return "words";
       return "lines";
+    }, [type]);
+
+    const splitType = useMemo(() => {
+      const t = typeof type === "string" ? type : "lines";
+      if (t.includes("chars") && !t.includes("words")) return `${t},words`;
+      return t;
     }, [type]);
 
     const animation = useMemo(
@@ -124,9 +129,36 @@ const SplitText = forwardRef(
       }
     }, [typeKey, isDouble, animation]);
 
+    // After autoSplit replaces nodes, put them at the completed in-state so
+    // we never replay the entrance (double anim / clip) or leave chars at
+    // y:100% (invisible). nine-ca skips setAnimateIn once isAnimatedIn.
+    const snapToInEnd = useCallback(() => {
+      const params = lastInParams.current || {};
+      if (isDouble) {
+        const { original, double } = animation.in(params);
+        if (hasTargets(splitRefOriginal.current?.[typeKey]))
+          gsap.set(splitRefOriginal.current[typeKey], {
+            y: original.y,
+            opacity: 1,
+          });
+        if (hasTargets(splitRefDouble.current?.[typeKey]))
+          gsap.set(splitRefDouble.current[typeKey], {
+            y: double.y,
+            opacity: 1,
+          });
+      } else if (hasTargets(splitRefChild.current?.[typeKey])) {
+        const { original } = animation.in(params);
+        gsap.set(splitRefChild.current[typeKey], {
+          y: original.y,
+          opacity: 1,
+        });
+      }
+    }, [animation, typeKey, isDouble]);
+
     const setup = useCallback(async () => {
       if (!isMounted) return;
 
+      hasSplitOnce.current = false;
       localRef.current?.classList.remove("splittext-ready");
       hide();
       resetSplitPromises();
@@ -134,15 +166,23 @@ const SplitText = forwardRef(
       await document.fonts.ready;
 
       const handleOnSplit = () => {
-        if (isAnimatingIn.current) {
-          // autoSplit replaced the nodes while the entrance tween was running
-          // (layout shift / persisted island moved on page swap) — the tween
-          // now targets orphaned nodes, so restart it on the fresh ones.
-          setAnimateIn();
-          animateInRef.current?.(lastInParams.current);
-        } else if (!isAnimatedIn.current) {
+        // First split: same as nine-ca — park chars at the in-start pose.
+        // Later autoSplit (collage measure / image load): never replay the
+        // entrance. If it already played or is playing, snap to the in-end
+        // so fresh nodes aren't left clipped at y:100% or stacked twice.
+        if (
+          hasSplitOnce.current &&
+          (isAnimatedIn.current || isAnimatingIn.current)
+        ) {
+          killAll();
+          show();
+          snapToInEnd();
+          isAnimatedIn.current = true;
+          isAnimatingIn.current = false;
+        } else {
           setAnimateIn();
         }
+        hasSplitOnce.current = true;
         if (hasSplitPromiseResolve.current) hasSplitPromiseResolve.current();
         localRef.current?.classList.add("splittext-ready");
       };
@@ -159,11 +199,13 @@ const SplitText = forwardRef(
       }
 
       const commonOptions = {
-        type,
+        type: splitType,
         linesClass: "splittext-child",
         charsClass: "splittext-char",
+        wordsClass: "splittext-word",
         mask: isMasked ? typeKey : undefined,
         autoSplit: true,
+        onInterrupt: () => {},
       };
 
       if (isDouble) {
@@ -189,13 +231,20 @@ const SplitText = forwardRef(
       isMasked,
       type,
       typeKey,
+      splitType,
       shouldDangerouslySetInnerHTML,
       isMounted,
       setAnimateIn,
+      snapToInEnd,
+      killAll,
     ]);
 
     const animateIn = useCallback(
       async (params = {}) => {
+        if (isAnimatedIn.current || isAnimatingIn.current) return;
+        isAnimatingIn.current = true;
+        lastInParams.current = params;
+
         // Wait until GSAP SplitText has produced targets — animateIn can be
         // triggered (scroll/parent) before setup has run after hydration.
         const targetSplit = isDouble ? splitRefOriginal : splitRefChild;
@@ -209,15 +258,16 @@ const SplitText = forwardRef(
           if (hasSplitPromise.current) await hasSplitPromise.current;
         }
 
-        // Component may have unmounted (page swap) while waiting
-        if (!hasTargets(targetSplit.current?.[typeKey])) return;
+        // autoSplit may have snapped to the in-state while we waited
+        if (isAnimatedIn.current) return;
+        if (!hasTargets(targetSplit.current?.[typeKey])) {
+          isAnimatingIn.current = false;
+          return;
+        }
 
         killAll();
         setAnimateIn();
         show();
-
-        isAnimatingIn.current = true;
-        lastInParams.current = params;
 
         const handleOnComplete = () => {
           isAnimatedIn.current = true;
@@ -247,10 +297,6 @@ const SplitText = forwardRef(
       },
       [animation, typeKey, isDouble, setAnimateIn, killAll],
     );
-
-    // setup() is declared before animateIn — reach it through a ref
-    const animateInRef = useRef(null);
-    animateInRef.current = animateIn;
 
     const animateOut = useCallback(
       (params = {}) => {
@@ -353,6 +399,7 @@ const SplitText = forwardRef(
         isMasked,
         type,
         typeKey,
+        splitType,
         isMounted,
         shouldDangerouslySetInnerHTML,
       ],

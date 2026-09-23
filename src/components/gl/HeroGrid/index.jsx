@@ -53,9 +53,9 @@ const THEME_COLORS = {
     accent2: "#ffd401",
   },
   dark: {
-    background: "#161817",
+    background: "#b84626",
     heroGridSecondary: "#231f20",
-    accent: "#b84626",
+    accent: "#f0ece1",
     accent2: "#ffd401",
   },
 };
@@ -159,7 +159,10 @@ export default function HeroGrid({ scale, brandText = "trichis", brandMobile = "
         "--color-heroGridSecondary",
         base.heroGridSecondary,
       ),
-      accent: cssVar("--color-accent", base.accent),
+      accent:
+        theme === "dark"
+          ? cssVar("--color-text", base.accent)
+          : cssVar("--color-accent", base.accent),
       accent2: cssVar("--color-accent2", base.accent2),
     };
   }, [theme]);

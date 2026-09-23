@@ -53,6 +53,9 @@ const MenuItem = forwardRef(function MenuItem({ href, text, i }, ref) {
 });
 
 const MAX_WIDTH = 2000;
+// nine-ca's menu has 4 links; typography/spacing scale relative to that so the
+// links block always occupies the same height regardless of CMS item count.
+const BASELINE_ITEM_COUNT = 4;
 
 export default memo(function Menu({ settings = {} }) {
   const wrapper = useRef();
@@ -143,8 +146,10 @@ export default memo(function Menu({ settings = {} }) {
 
   let shuffleIndex = navLinks.length;
 
+  const menuItemScale = BASELINE_ITEM_COUNT / Math.max(navLinks.length, 1);
+
   return (
-    <div className="menu" ref={wrapper}>
+    <div className="menu" ref={wrapper} style={{ "--menuItemScale": menuItemScale }}>
       <div className="menu__inner">
         <div className="menu__links" ref={menuLinks}>
           {navLinks.map((link, i) => (

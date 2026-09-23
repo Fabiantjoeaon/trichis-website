@@ -10,7 +10,7 @@ function easeOutExpo(x) {
 const RANGE_START = 0.15;
 const RANGE_END = 0.75;
 
-export function ScrollingText({ children, maxWidth = "100%", className = "" }) {
+export function ScrollingText({ children, maxWidth, className = "" }) {
   const el = useRef(null);
   const splitRef = useRef(null);
   const positions = useRef([]);
@@ -69,7 +69,10 @@ export function ScrollingText({ children, maxWidth = "100%", className = "" }) {
     <h3
       ref={el}
       className={`scrolling-text ${className}`}
-      style={{ maxWidth, "--scroll-progress": 0 }}
+      style={{
+        ...(maxWidth != null ? { maxWidth } : null),
+        "--scroll-progress": 0,
+      }}
     >
       {children}
     </h3>

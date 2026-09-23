@@ -37,9 +37,17 @@ function setCanvasOverlay(on) {
     ?.classList.toggle("gl-canvas-root--overlay", on);
 }
 
+function cssVar(name, fallback) {
+  if (typeof document === "undefined") return fallback;
+  const v = getComputedStyle(document.documentElement)
+    .getPropertyValue(name)
+    .trim();
+  return v || fallback;
+}
+
 const COLORS = {
-  light: { background: "#161817", accent: "#b84626" },
-  dark: { background: "#0f1010", accent: "#b84626" },
+  light: { background: "#b84626", accent: "#f0ece1" },
+  dark: { background: "#b84626", accent: "#f0ece1" },
 };
 
 function buildWipeMaterial({ backgroundColor, borderColor, tTransition }) {
@@ -95,8 +103,8 @@ export default memo(function GLBackground() {
   const colors = useMemo(() => {
     const c = COLORS[theme] || COLORS.light;
     return {
-      background: new Color(c.background),
-      accent: new Color(c.accent),
+      background: new Color(cssVar("--color-menuBackground", c.background)),
+      accent: new Color(cssVar("--color-menuText", c.accent)),
     };
   }, [theme]);
 

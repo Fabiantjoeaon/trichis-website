@@ -79,7 +79,7 @@ export const Project = forwardRef(function Project(
         <SplitText
           tag="h3"
           ref={titleRef}
-          className="project-title"
+          className="project-title t-projects-title"
           animateOnScroll={false}
           animation="charDoubleClipped"
           type="chars"

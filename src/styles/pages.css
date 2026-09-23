@@ -48,6 +48,7 @@
 
 .scrolling-text {
   color: var(--color-text);
+  max-width: 100%;
   --fade-window: 0.2;
 }
 
@@ -193,6 +194,7 @@
   justify-content: space-between;
   align-items: flex-start;
   position: relative;
+  padding-bottom: 100rem;
 }
 
 .home-what-we-do__top .scrolling-text {
@@ -519,6 +521,12 @@
 
 .home-more h3 {
   font-weight: 100;
+}
+
+.home-more h3 strong {
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
 }
 
 .home-showreel {

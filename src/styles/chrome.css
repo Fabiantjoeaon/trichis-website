@@ -355,6 +355,9 @@
 
 .menu {
   --menuWidthMultiplier: 8;
+  /* Set from Menu.jsx: baseline item count (4, as in nine-ca) divided by the
+     actual CMS item count, so the links block always ends up the same height. */
+  --menuItemScale: 1;
 
   position: fixed;
   top: 0;
@@ -429,16 +432,16 @@
 
 .menu__links h2 {
   font-family: "SG Grotesk", sans-serif;
-  font-size: 150rem;
+  font-size: calc(150rem * var(--menuItemScale));
   line-height: 1.2;
   font-weight: 100;
   white-space: nowrap;
-  margin-bottom: 40rem;
+  margin-bottom: calc(40rem * var(--menuItemScale));
 }
 
 @media (min-width: 1025px) and (min-height: 600px) {
   .menu__links h2 {
-    font-size: 180rem;
+    font-size: calc(180rem * var(--menuItemScale));
     line-height: 1.4;
   }
 }
@@ -502,7 +505,7 @@
 
 .site-footer {
   background: var(--color-accent);
-  color: var(--color-background);
+  color: #f0ece1;
   padding-top: 91rem;
   border-top: 1px solid rgba(22, 24, 23, 0.36);
 }
@@ -517,7 +520,7 @@
   line-height: 1.2;
   font-weight: 200;
   letter-spacing: -0.005em;
-  color: var(--color-background);
+  color: #f0ece1;
 }
 
 .site-footer__cols {
@@ -743,7 +746,7 @@
   font-size: 500rem;
   line-height: 1;
   font-weight: 500;
-  color: var(--color-accent);
+  color: var(--color-menuText);
   position: absolute;
   margin-right: var(--basePadding);
   margin-bottom: var(--basePadding);
@@ -792,7 +795,7 @@
     opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 
-  color: var(--color-background) !important;
+  color: #f0ece1 !important;
 }
 
 .cookie-banner * {
@@ -820,7 +823,7 @@
 }
 
 .cookie-banner h4::before {
-  background: var(--color-background) !important;
+  background: #f0ece1 !important;
 }
 
 .cookie-banner .more-info {
@@ -841,16 +844,16 @@
 }
 
 .cookie-banner .icon-container .icon-wrapper {
-  border-color: var(--color-background) !important;
+  border-color: #f0ece1 !important;
 }
 
 .cookie-banner .icon-container .icon-background {
-  background-color: var(--color-background) !important;
+  background-color: #f0ece1 !important;
 }
 
 .cookie-banner .icon-container path {
-  fill: var(--color-background) !important;
-  stroke: var(--color-background) !important;
+  fill: #f0ece1 !important;
+  stroke: #f0ece1 !important;
 }
 
 .cookie-banner .icon-container .icon-duplicate path {

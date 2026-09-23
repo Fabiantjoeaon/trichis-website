@@ -34,6 +34,7 @@ function useViewport() {
         "--vh",
         `${window.innerHeight * 0.01}px`,
       );
+      useGlobalStore.getState().lenis?.resize?.();
     };
     setSize();
     window.addEventListener("resize", setSize);

@@ -60,12 +60,23 @@ function Card({ children, i, trackRef }) {
     );
   }, [i, trackRef]);
 
-  // Re-measure on mount, resize and page reflow (fonts/images shifting
-  // layout trigger the body ResizeObserver → pageReflow).
+  // Re-measure on mount, resize, card box changes and page reflow.
   useEffect(() => {
-    const raf = requestAnimationFrame(sync);
+    const el = innerRef.current;
+    let raf = requestAnimationFrame(sync);
     document.fonts?.ready?.then(sync);
-    return () => cancelAnimationFrame(raf);
+    const ro =
+      el && typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => {
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(sync);
+          })
+        : null;
+    if (el) ro?.observe(el);
+    return () => {
+      cancelAnimationFrame(raf);
+      ro?.disconnect();
+    };
   }, [sync, pageReflow, windowSize]);
 
   return (

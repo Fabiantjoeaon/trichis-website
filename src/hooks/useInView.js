@@ -1,9 +1,8 @@
 // Scroll-trigger hook replacing nine-ca's useScrollRigScrollTrigger.
-// Fires handleIn once when the element enters the viewport. `offset` shifts
-// the trigger line as a fraction of viewport height (positive = element must
-// scroll further in before firing; negative = fires early), mirroring the
-// scroll-rig offset semantics closely enough for the entrance animations.
+// `offset` is an IntersectionObserver threshold (fraction of the element that
+// must be visible), matching scroll-rig's useTracker({ threshold: abs(offset) }).
 import { useEffect, useRef } from "react";
+import { useGlobalStore } from "@/stores/global";
 
 export default function useInView({
   el,
@@ -20,28 +19,46 @@ export default function useInView({
     const element = el?.current;
     if (!element || typeof IntersectionObserver === "undefined") return;
 
-    const marginBottom = -(offset * 100);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            if (once && hasFired.current) return;
-            hasFired.current = true;
-            handlers.current.handleIn?.();
-            if (once) observer.disconnect();
-          } else if (!once) {
-            handlers.current.handleOut?.();
-          }
-        }
-      },
-      {
-        rootMargin: `0px 0px ${marginBottom}% 0px`,
-        threshold: 0,
-      },
-    );
+    let observer;
 
-    observer.observe(element);
-    return () => observer.disconnect();
+    const start = () => {
+      if (observer) return;
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              if (once && hasFired.current) return;
+              hasFired.current = true;
+              handlers.current.handleIn?.();
+              if (once) observer.disconnect();
+            } else if (!once) {
+              handlers.current.handleOut?.();
+            }
+          }
+        },
+        {
+          rootMargin: "0px",
+          threshold: Math.abs(offset),
+        },
+      );
+      observer.observe(element);
+    };
+
+    // Don't fire while the loader / wipe still covers the page — otherwise
+    // the entrance plays (or completes) behind the cover and never reads.
+    let unsub;
+    if (useGlobalStore.getState().pageRevealed) {
+      start();
+    } else {
+      unsub = useGlobalStore.subscribe((state) => {
+        if (state.pageRevealed) start();
+      });
+    }
+
+    return () => {
+      unsub?.();
+      observer?.disconnect();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [el, offset, once]);
 }

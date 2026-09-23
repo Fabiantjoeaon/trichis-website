@@ -281,9 +281,9 @@ html {
   --color-scrollTextBackground: #b84626;
   --color-accent: #b84626;
   --color-accent2: #ffd401;
-  --color-menuBackground: #161817;
-  --color-menuBackgroundText: #231f20;
-  --color-menuText: #ffd401;
+  --color-menuBackground: #b84626;
+  --color-menuBackgroundText: #f0ece1;
+  --color-menuText: #f0ece1;
   --color-projectMeta: #231f20;
   --color-howWeDoItText: #b84626;
   --color-floatingTitle: #b84626;
@@ -311,7 +311,7 @@ html {
 }
 
 html[data-theme="dark"] {
-  --color-background: #161817;
+  --color-background: #b84626;
   --color-backgroundAccent: #231f20;
   --color-backgroundAccentLight: #231f20;
   --color-text: #f0ece1;
@@ -320,13 +320,13 @@ html[data-theme="dark"] {
   --color-scrollTextBackground: #b84626;
   --color-accent: #b84626;
   --color-accent2: #ffd401;
-  --color-menuBackground: #0f1010;
-  --color-menuBackgroundText: #1a1c1b;
-  --color-menuText: #b9b3a4;
+  --color-menuBackground: #b84626;
+  --color-menuBackgroundText: #f0ece1;
+  --color-menuText: #f0ece1;
   --color-projectMeta: #f0ece1;
-  --color-howWeDoItText: #a1a0a1;
-  --color-floatingTitle: #a1a0a1;
-  --color-smallDivider: #a1a0a1;
+  --color-howWeDoItText: #f0ece1;
+  --color-floatingTitle: #f0ece1;
+  --color-smallDivider: #f0ece1;
   --color-heroGridSecondary: #231f20;
 }
 
@@ -339,8 +339,9 @@ html[data-theme="pink"] {
   --color-scrollTextBackground: #b84626;
   --color-accent: #b84626;
   --color-accent2: #ffd401;
-  --color-menuBackground: #f0ece1;
-  --color-menuBackgroundText: #231f20;
+  --color-menuBackground: #b84626;
+  --color-menuBackgroundText: #f0ece1;
+  --color-menuText: #f0ece1;
 }
 
 /* ==========================================================================
@@ -506,7 +507,15 @@ span {
 
 .splittext-parent {
   position: relative;
+  display: block;
+  width: 100%;
   overflow: hidden;
+}
+
+.splittext-original,
+.splittext-double {
+  display: block;
+  width: 100%;
 }
 
 .splittext-original {
@@ -518,6 +527,14 @@ span {
 .splittext-child {
   margin-bottom: -0.5rem;
   padding-bottom: 0.5rem;
+}
+
+/* Clip the char wipe to the word box so a wrapped row can't travel through
+   the row above. Line-splitting dropped words; word overflow does not. */
+.splittext-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
 }
 
 .splittext-child-mask,
@@ -677,7 +694,8 @@ span {
     font-weight: 400;
   }
 
-  .t-projects-title {
+  .t-projects-title,
+  .project-title {
     font-family: "SG Grotesk", sans-serif;
     font-size: 80rem;
     line-height: 1.2;

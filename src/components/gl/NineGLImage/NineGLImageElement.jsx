@@ -10,6 +10,7 @@ import {
 import { useGlobalStore } from "@/stores/global";
 import useInView from "@/hooks/useInView";
 import { getProcessedSrc } from "@/lib/processedSrc";
+import { useCanvasStore } from "@/lib/gl/canvasStore";
 import UseCanvas from "../UseCanvas";
 import ScrollScene from "../ScrollScene";
 import NineGLImage from "./index";
@@ -161,11 +162,15 @@ const DOMFallback = forwardRef(function DOMFallback(
       ) : imageSrc ? (
         <img
           ref={mediaRef}
+          className="gl-image-sizer"
           src={imageSrc}
           alt={alt || ""}
+          width={props.width || undefined}
+          height={props.height || undefined}
           loading="eager"
           style={{
             width: "100%",
+            height: "100%",
             display: "block",
             objectFit: "cover",
             opacity: 0,
@@ -200,6 +205,9 @@ const GLImageElement = forwardRef(function GLImageElement(
     tMap = null,
     onFacadeReady,
     onTextureReady,
+    width: mediaWidth,
+    height: mediaHeight,
+    url: _url,
     ...props
   },
   ref,
@@ -252,19 +260,37 @@ const GLImageElement = forwardRef(function GLImageElement(
     },
   });
 
+  useEffect(() => {
+    const media = img.current;
+    if (!media) return;
+    const remasure = () => useCanvasStore.getState().triggerReflow();
+    media.addEventListener("load", remasure);
+    media.addEventListener("loadeddata", remasure);
+    if (
+      (media.tagName === "IMG" && media.complete && media.naturalWidth) ||
+      (media.tagName === "VIDEO" && media.readyState >= 2)
+    ) {
+      remasure();
+    }
+    return () => {
+      media.removeEventListener("load", remasure);
+      media.removeEventListener("loadeddata", remasure);
+    };
+  }, [src]);
+
   return (
     <>
       <div className={className} ref={el}>
         {!isVideo && src && (
           <img
+            className="gl-image-sizer"
             style={{
-              width: "100%",
-              height: "auto",
-              display: "block",
               // Tracker only — the GL plane renders the image (nine-ca parity)
               visibility: "hidden",
               opacity: 0,
             }}
+            width={mediaWidth || undefined}
+            height={mediaHeight || undefined}
             crossOrigin="anonymous"
             ref={img}
             src={src}
@@ -273,17 +299,17 @@ const GLImageElement = forwardRef(function GLImageElement(
         )}
         {isVideo && src && (
           <video
+            className="gl-image-sizer"
             ref={img}
             src={src}
+            width={mediaWidth || undefined}
+            height={mediaHeight || undefined}
             crossOrigin="anonymous"
             loop
             muted
             playsInline
             preload="auto"
             style={{
-              width: "100%",
-              height: "auto",
-              display: "block",
               visibility: "hidden",
             }}
           />

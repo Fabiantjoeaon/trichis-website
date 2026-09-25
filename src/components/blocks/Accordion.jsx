@@ -97,6 +97,8 @@ export default function Accordion({ data }) {
               className="project-accordion__image"
               isLink={false}
               src={media.url}
+              width={media.width}
+              height={media.height}
               isVideo={!!media.isVideo}
               offset={-0.5}
             />

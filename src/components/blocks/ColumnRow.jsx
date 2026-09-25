@@ -101,6 +101,8 @@ export default function ColumnRow({
                 }
                 isLink={false}
                 src={image.url}
+                width={image.width}
+                height={image.height}
                 isVideo={isVideo}
                 offset={-0.5}
               />

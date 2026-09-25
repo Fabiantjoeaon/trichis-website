@@ -49,6 +49,8 @@ export default function ProjectHero({
         className="project-hero__gl"
         isVideo={isVideo}
         src={src}
+        width={activeAsset?.width}
+        height={activeAsset?.height}
         animateOnScroll={false}
         useHover={false}
         darken={0.2}

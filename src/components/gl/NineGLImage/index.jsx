@@ -136,10 +136,20 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
   useEffect(() => {
     if (!tMap || !built) return;
     const mediaEl = tMap.source?.data || tMap.image;
+    // Prefer intrinsic pixels. HTMLImageElement.width/height are the laid-out
+    // CSS box and will invert cover when the tracker img is stretched or collapsed.
     const textureWidth =
-      mediaEl?.videoWidth || mediaEl?.width || tMap.image?.width || 0;
+      mediaEl?.naturalWidth ||
+      mediaEl?.videoWidth ||
+      mediaEl?.width ||
+      tMap.image?.width ||
+      0;
     const textureHeight =
-      mediaEl?.videoHeight || mediaEl?.height || tMap.image?.height || 0;
+      mediaEl?.naturalHeight ||
+      mediaEl?.videoHeight ||
+      mediaEl?.height ||
+      tMap.image?.height ||
+      0;
     if (!textureWidth || !textureHeight) return;
 
     const sx = scale?.x || 1;

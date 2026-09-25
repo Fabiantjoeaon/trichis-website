@@ -472,6 +472,14 @@ img {
   object-fit: cover !important;
 }
 
+/* Hidden tracker media that gives GL planes their DOM box.
+   Default to intrinsic aspect so flex rows can size before stretch. */
+.gl-image-sizer {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 h1,
 h2,
 h3,

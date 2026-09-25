@@ -25,15 +25,21 @@ function choice(value) {
 
 // ── media ──────────────────────────────────────────────────────────────
 
+function mediaPx(value) {
+  const n = Number(value);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
 function mapMedia(media) {
-  const node = media?.node;
-  const url = node?.sourceUrl || node?.mediaItemUrl;
+  const node = media?.node ?? media;
+  if (!node || typeof node !== "object") return null;
+  const url = node.sourceUrl || node.mediaItemUrl || node.url;
   if (!url) return null;
   return {
     url,
-    alt: node.altText || null,
-    width: node.mediaDetails?.width ?? null,
-    height: node.mediaDetails?.height ?? null,
+    alt: node.altText || node.alt || null,
+    width: mediaPx(node.mediaDetails?.width ?? node.width),
+    height: mediaPx(node.mediaDetails?.height ?? node.height),
     isVideo: isVideoMedia(node.mimeType, url),
   };
 }
@@ -298,7 +304,8 @@ function mapProject(node) {
     })),
     coverImage: mapMedia(d.cover),
     mobileCoverImage: mapMedia(d.mobileCover),
-    featuredImage: mapMedia(d.featuredMedia),
+    featuredImage:
+      mapMedia(node.featuredImage) || mapMedia(d.featuredMedia),
     seo: mapSeo(node.seo),
     content: mapBlocks(d.pageBlocks),
   };

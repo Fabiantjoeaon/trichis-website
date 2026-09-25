@@ -2,6 +2,7 @@ import {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useLayoutEffect,
   useMemo,
   useRef,
 } from "react";
@@ -41,6 +42,37 @@ import NineGLImageOverlay from "./NineGLImageOverlay";
 const sharedGeometry = new PlaneGeometry(1, 1, 1, 1);
 const _local = new Vector3();
 
+function toSize(value) {
+  const n = Number(value);
+  return Number.isFinite(n) && n > 0 ? n : 0;
+}
+
+/** The uploaded source is authoritative; CMS dimensions are a fallback. */
+function resolveImageSize(tex, fallbackW, fallbackH) {
+  const el = tex?.source?.data || tex?.image;
+  return [
+    toSize(el?.naturalWidth) ||
+      toSize(el?.videoWidth) ||
+      toSize(el?.width) ||
+      toSize(fallbackW),
+    toSize(el?.naturalHeight) ||
+      toSize(el?.videoHeight) ||
+      toSize(el?.height) ||
+      toSize(fallbackH),
+  ];
+}
+
+/** nine-ca cover: scale the sampled UV so the image fills the mesh. */
+function coverScale(imageW, imageH, elementW, elementH) {
+  const imageRatio = imageW / imageH;
+  const meshAspect = elementW / elementH || 1;
+  let scaleWidth = 1;
+  let scaleHeight = 1;
+  if (imageRatio > meshAspect) scaleWidth = imageRatio / meshAspect;
+  else if (imageRatio < meshAspect) scaleHeight = meshAspect / imageRatio;
+  return [scaleWidth, scaleHeight];
+}
+
 function buildImageMaterial({ map, darken = 0 }) {
   const uTransition = uniform(0);
   const uCursorTransition = uniform(0);
@@ -58,7 +90,12 @@ function buildImageMaterial({ map, darken = 0 }) {
 
   material.fragmentNode = Fn(() => {
     const st = uv();
-    let textureUV = float(0.5).add(st.sub(0.5).div(uImageDimensions)).toVar();
+    // nine-ca vertex cover: vImageUV = 0.5 + (uv - 0.5) / uImageDimensions
+    // Component-wise so TSL does not treat the vec2 uniform as a scalar.
+    let textureUV = vec2(
+      st.x.sub(0.5).div(uImageDimensions.x).add(0.5),
+      st.y.sub(0.5).div(uImageDimensions.y).add(0.5),
+    ).toVar();
     textureUV.assign(translateUV(textureUV, uImageOffset));
     textureUV.assign(scaleUV(textureUV, uImageScale, vec2(0.5)));
 
@@ -116,6 +153,8 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
     onReady,
     i = 0,
     src,
+    imageWidth = 0,
+    imageHeight = 0,
     ...props
   },
   ref,
@@ -133,39 +172,28 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
     return buildImageMaterial({ map: tMap, darken });
   }, [tMap, darken]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!tMap || !built) return;
-    const mediaEl = tMap.source?.data || tMap.image;
-    // Prefer intrinsic pixels. HTMLImageElement.width/height are the laid-out
-    // CSS box and will invert cover when the tracker img is stretched or collapsed.
-    const textureWidth =
-      mediaEl?.naturalWidth ||
-      mediaEl?.videoWidth ||
-      mediaEl?.width ||
-      tMap.image?.width ||
-      0;
-    const textureHeight =
-      mediaEl?.naturalHeight ||
-      mediaEl?.videoHeight ||
-      mediaEl?.height ||
-      tMap.image?.height ||
-      0;
-    if (!textureWidth || !textureHeight) return;
+    const [textureWidth, textureHeight] = resolveImageSize(
+      tMap,
+      imageWidth,
+      imageHeight,
+    );
+    const sx = toSize(scale?.x);
+    const sy = toSize(scale?.y);
+    if (!textureWidth || !textureHeight || !sx || !sy) return;
 
-    const sx = scale?.x || 1;
-    const sy = scale?.y || 1;
+    const [scaleWidth, scaleHeight] = coverScale(
+      textureWidth,
+      textureHeight,
+      sx,
+      sy,
+    );
     built.uniforms.uElementSize.value.set(sx, sy);
-
-    const imageRatio = textureWidth / textureHeight;
-    const meshAspect = sx / sy || 1;
-    let scaleWidth = 1;
-    let scaleHeight = 1;
-    if (imageRatio > meshAspect) scaleWidth = imageRatio / meshAspect;
-    else if (imageRatio < meshAspect) scaleHeight = meshAspect / imageRatio;
     built.uniforms.uImageDimensions.value.set(scaleWidth, scaleHeight);
     built.setMap(tMap);
     onReady?.();
-  }, [tMap, scale, built, onReady]);
+  }, [tMap, scale, built, onReady, imageWidth, imageHeight]);
 
   const {
     animateIn: animateInUp,
@@ -331,8 +359,8 @@ function WithVideoTexture({ src, children }) {
   return children(texture);
 }
 
-function WithImageRefTexture({ imgRef, children }) {
-  const texture = useImageAsTexture(imgRef);
+function WithImageRefTexture({ imgRef, src, children }) {
+  const texture = useImageAsTexture(imgRef, src);
   return texture ? children(texture) : null;
 }
 
@@ -355,7 +383,7 @@ const NineGLImage = forwardRef(function NineGLImage(props, ref) {
   }
 
   return (
-    <WithImageRefTexture imgRef={imgRef}>
+    <WithImageRefTexture imgRef={imgRef} src={src}>
       {(texture) => <NineGLImageImpl ref={ref} {...props} tMap={texture} />}
     </WithImageRefTexture>
   );

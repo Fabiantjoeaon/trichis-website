@@ -22,6 +22,8 @@ export default function HomeShowReel({ data }) {
           className="home-showreel__gl"
           isVideo={!!active?.isVideo}
           src={videoSrc}
+          width={active?.width}
+          height={active?.height}
           animateOnScroll
           useHover={false}
           darken={0.5}

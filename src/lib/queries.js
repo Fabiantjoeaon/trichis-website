@@ -318,6 +318,7 @@ const PROJECT_FIELDS = /* GraphQL */ `
   id
   title
   slug
+  featuredImage { ${MEDIA} }
   deliverables {
     nodes {
       databaseId

@@ -333,6 +333,8 @@ const GLImageElement = forwardRef(function GLImageElement(
                 imgRef={img}
                 isVideo={isVideo}
                 src={src}
+                imageWidth={Number(mediaWidth) || 0}
+                imageHeight={Number(mediaHeight) || 0}
                 {...scrollSceneProps}
                 {...props}
                 onReady={onTextureReady}

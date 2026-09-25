@@ -65,6 +65,8 @@ function HeroVideo({ track, media, mobileMedia, ...props }) {
       className="home-hero__gl"
       isVideo={!!active?.isVideo}
       src={videoSrc}
+      width={active?.width}
+      height={active?.height}
       animateOnScroll={false}
       useHover={false}
       isLink={false}

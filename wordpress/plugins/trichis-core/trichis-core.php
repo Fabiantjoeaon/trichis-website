@@ -25,4 +25,5 @@ require_once TRICHIS_CORE_DIR . '/includes/deploy.php';
 if (defined('WP_CLI') && WP_CLI) {
     require_once TRICHIS_CORE_DIR . '/includes/cli/seed.php';
     require_once TRICHIS_CORE_DIR . '/includes/cli/home-design.php';
+    require_once TRICHIS_CORE_DIR . '/includes/cli/home-artwork.php';
 }

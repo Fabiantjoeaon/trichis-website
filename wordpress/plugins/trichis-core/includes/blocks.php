@@ -71,7 +71,7 @@ function trichis_block_media(string $ctx, string $block, string $name, string $l
 function trichis_block_glyph(string $ctx, string $block): array {
     $field = trichis_block_media($ctx, $block, 'glyph_media', 'Yellow glyph artwork (optional)');
     $field['mime_types'] = 'jpg,jpeg,png,webp,gif,svg,avif';
-    $field['instructions'] = 'Leave empty until the final artwork is ready. Its position is already reserved.';
+    $field['instructions'] = 'Uses the supplied yellow glyph by default. Select another image to replace it.';
     return $field;
 }
 

@@ -1,4 +1,6 @@
 import TransitionLink from "@/components/ui/TransitionLink";
+import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
+import SplitText from "@/components/ui/SplitText";
 import HomeGlyph from "./HomeGlyph";
 import { boundedNumber, projectRows } from "@/lib/home-layout";
 
@@ -6,7 +8,7 @@ export default function HomeWhatWeveCreated({ data, projects = [] }) {
   const rows = projectRows(data?.projectRows, projects);
   return (
     <section className="home-work home-section" id={data?.anchorId}>
-      <h2>{data?.sectionTitle}</h2>
+      <SplitText tag="h2" animateOnScroll>{data?.sectionTitle}</SplitText>
       <div className="home-work__rows">
         {rows.map((row, index) => {
           const { project } = row;
@@ -17,23 +19,25 @@ export default function HomeWhatWeveCreated({ data, projects = [] }) {
           return (
             <div className={`home-work__row home-work__row--${alignment}`} key={`${project.slug}-${index}`}
               style={{ "--project-width": `${boundedNumber(row.width, 66, 20, 100)}%`, "--project-ratio": ratio }}>
-              {row.glyphEnabled && <HomeGlyph media={row.glyphMedia} className={`home-work__glyph home-work__glyph--${position}`}
+              {row.glyphEnabled && <HomeGlyph variant={position.endsWith("left") ? "work-left" : "work-right"} media={row.glyphMedia} className={`home-work__glyph home-work__glyph--${position}`}
                 style={{ "--glyph-width": `${boundedNumber(row.glyphWidth, 35, 10, 60)}%`,
                   "--glyph-rotation": `${boundedNumber(row.glyphRotation, 0, -180, 180)}deg`,
                   "--glyph-flip": row.glyphFlip ? -1 : 1 }} />}
               <TransitionLink className="home-work__project" href={`/project/${project.slug}`}>
-                <div className="home-work__image">
-                  {media?.url && (media.isVideo ? <video src={media.url} autoPlay loop muted playsInline /> :
-                    <img src={media.url} alt={media.alt || project.title} loading="lazy" />)}
-                </div>
-                <h3>{project.title}</h3>
+                {media?.url ? <NineGLImageElement className="home-work__image"
+                  src={media.url} alt={media.alt || project.title} isVideo={media.isVideo}
+                  width={media.width} height={media.height} animateOnScroll offset={0.1} isLink /> :
+                  <div className="home-work__image" />}
+                <SplitText tag="h3" type="chars" animation="charClipped" animateOnScroll>{project.title}</SplitText>
               </TransitionLink>
             </div>
           );
         })}
       </div>
       {data?.ctaLink && <TransitionLink className="home-work__more" href={data.ctaLink}>
-        {data.ctaText?.replace(/<[^>]*>/g, "") || "Alle projecten"} →
+        <SplitText type="chars" animation="charDoubleClipped" animateOnScroll>
+          {`${data.ctaText?.replace(/<[^>]*>/g, "") || "Alle projecten"} →`}
+        </SplitText>
       </TransitionLink>}
     </section>
   );

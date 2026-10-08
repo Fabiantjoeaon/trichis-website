@@ -76,12 +76,12 @@ The hero uses native DOM image/video rendering and supports separate mobile medi
 
 - `section_title` — heading (Wat heb jij te vertellen)
 - `body` — textarea; blank lines separate paragraphs
-- `glyph_media` — optional yellow artwork, positioned beside the heading
+- `glyph_media` — yellow question-mark artwork, positioned beside the heading
 
 #### `home_what_we_do` → `home/HomeWhatWeDo.jsx`
 
 - `section_title`, `intro` — heading and copy
-- `glyph_media` — optional artwork in the upper right of the introduction
+- `glyph_media` — wide yellow loop in the upper right of the introduction
 - `services` — ordered repeater of `label`, `link`, and `media`
 
 Services sit horizontally above the large media panel. Hover, focus, or tap selects
@@ -96,7 +96,7 @@ an image/video; the media links to the selected service. The list scrolls on nar
   - `alignment` — left, center, right
   - `image_ratio` — landscape, portrait, square, wide, original
   - `glyph_enabled` — show/hide the row's glyph
-  - `glyph_media` — optional artwork; an empty positioned slot until supplied
+  - `glyph_media` — artwork; defaults to the supplied left/right loop
   - `glyph_position` — top-left, top-right, bottom-left, bottom-right
   - `glyph_width` — 10–60% of the row
   - `glyph_rotation` — -180 to 180 degrees
@@ -137,6 +137,22 @@ project rows, and moves the existing homepage form into the footer. Existing ser
 images/links are reused where they match; missing service artwork stays empty. Subsequent
 runs preserve editor changes. `wp trichis home-design --restore` restores the saved content.
 The backup is stored in the `trichis_home_design_backup_v1` WordPress option.
+
+The four supplied SVGs are optimized in `public/images/glyphs/`. The known artwork
+renders inline for a stroke-dashoffset entrance; the filled question mark uses a stroke
+mask to preserve its outline. Custom CMS replacements remain ordinary image elements.
+Reduced-motion users see completed glyphs and immediate image changes.
+
+To import the supplied SVGs into an existing local CMS and fill empty card paragraphs:
+
+```sh
+wp trichis home-artwork
+wp trichis home-artwork --apply
+```
+
+This command deduplicates attachments, fills only empty media/copy fields, and saves
+original blocks in `trichis_home_artwork_backup_v1`. Card copy is editable under
+**Wij zijn Trichis → Cards → Text top / Text bottom**. Both title and copy use yellow.
 
 Fresh installations use `wp trichis seed`, which includes the new fields and footer form.
 For a local preview without a CMS migration, run with `USE_SEED_DATA=1 PUBLIC_USE_SEED_DATA=1`.

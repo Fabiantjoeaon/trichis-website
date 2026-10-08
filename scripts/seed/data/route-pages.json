@@ -25,7 +25,10 @@
       {
         "__typename": "HomewhoweareRecord",
         "sectionTitle": "Wat heb jij\nte vertellen",
-        "body": "In iedereen en achter ieder merk schuilt een idee, een ambitie, een missie: een verhaal dat ertoe doet. Soms zit het nog verstopt in je hoofd, in losse documenten, in toekomstplannen of juist in gepassioneerde gesprekken.\n\nWij helpen je de kern van jouw verhaal te vinden. En geven het vorm met woorden, beelden en design. We verbinden het aan het hoofd, gevoel, geest en hart. Zodat het raakt en blijft hangen."
+        "body": "In iedereen en achter ieder merk schuilt een idee, een ambitie, een missie: een verhaal dat ertoe doet. Soms zit het nog verstopt in je hoofd, in losse documenten, in toekomstplannen of juist in gepassioneerde gesprekken.\n\nWij helpen je de kern van jouw verhaal te vinden. En geven het vorm met woorden, beelden en design. We verbinden het aan het hoofd, gevoel, geest en hart. Zodat het raakt en blijft hangen.",
+        "glyphMedia": {
+          "url": "/images/glyphs/trichis-question.svg"
+        }
       },
       {
         "__typename": "HomewhatwedoRecord",
@@ -87,7 +90,10 @@
             "link": "",
             "media": null
           }
-        ]
+        ],
+        "glyphMedia": {
+          "url": "/images/glyphs/trichis-services.svg"
+        }
       },
       {
         "__typename": "HowwedoitRecord",
@@ -95,17 +101,17 @@
         "cards": [
           {
             "title": "Hoe werken we?",
-            "textTop": "",
+            "textTop": "We beginnen met luisteren. Samen ontdekken we de kern van jouw verhaal en vertalen die naar een helder concept. Van het eerste idee tot de laatste punt: we maken het samen.",
             "textBottom": ""
           },
           {
             "title": "Wat kenmerkt ons?",
-            "textTop": "",
+            "textTop": "Nieuwsgierig, betrokken en met oog voor detail. We combineren scherpe vragen met frisse ideeën en een praktische aanpak. Zo maken we communicatie die bij jouw organisatie past.",
             "textBottom": ""
           },
           {
             "title": "Wat heb je aan ons?",
-            "textTop": "",
+            "textTop": "Een verhaal dat klopt, herkenbaar is en blijft hangen. We helpen je om keuzes te maken en geven je merk de woorden en beelden waarmee je verder kunt.",
             "textBottom": ""
           }
         ],
@@ -126,7 +132,10 @@
             "glyphPosition": "top-left",
             "glyphWidth": 35,
             "glyphRotation": 0,
-            "glyphFlip": false
+            "glyphFlip": false,
+            "glyphMedia": {
+              "url": "/images/glyphs/trichis-work-left.svg"
+            }
           },
           {
             "projectSlug": "ab-inbev",
@@ -148,7 +157,10 @@
             "glyphPosition": "top-right",
             "glyphWidth": 35,
             "glyphRotation": 0,
-            "glyphFlip": false
+            "glyphFlip": false,
+            "glyphMedia": {
+              "url": "/images/glyphs/trichis-work-right.svg"
+            }
           },
           {
             "projectSlug": "traksi",
@@ -181,7 +193,10 @@
             "glyphPosition": "top-left",
             "glyphWidth": 35,
             "glyphRotation": 0,
-            "glyphFlip": false
+            "glyphFlip": false,
+            "glyphMedia": {
+              "url": "/images/glyphs/trichis-work-left.svg"
+            }
           },
           {
             "projectSlug": "hotel-keyser",
@@ -203,7 +218,10 @@
             "glyphPosition": "top-right",
             "glyphWidth": 35,
             "glyphRotation": 0,
-            "glyphFlip": false
+            "glyphFlip": false,
+            "glyphMedia": {
+              "url": "/images/glyphs/trichis-work-right.svg"
+            }
           },
           {
             "projectSlug": "yeaz",

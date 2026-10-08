@@ -1,13 +1,14 @@
 import HomeGlyph from "./HomeGlyph";
+import SplitText from "@/components/ui/SplitText";
 
 export default function HomeWhoWeAre({ data }) {
   return (
     <section className="home-story home-section" id={data?.anchorId}>
       <div className="home-story__heading">
-        <h2>{data?.sectionTitle}</h2>
-        <HomeGlyph className="home-story__glyph" media={data?.glyphMedia} />
+        <SplitText tag="h2" animateOnScroll>{data?.sectionTitle}</SplitText>
+        <HomeGlyph variant="question" className="home-story__glyph" media={data?.glyphMedia} />
       </div>
-      <div className="home-copy">{data?.body}</div>
+      <SplitText tag="div" className="home-copy" animateOnScroll>{data?.body}</SplitText>
     </section>
   );
 }

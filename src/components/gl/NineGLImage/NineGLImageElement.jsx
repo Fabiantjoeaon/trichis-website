@@ -85,6 +85,7 @@ const DOMFallback = forwardRef(function DOMFallback(
       animateIn: () => {
         if (!mediaRef.current) return;
         isVisible.current = true;
+        mediaRef.current.play?.()?.catch(() => {});
         requestAnimationFrame(() => {
           if (!mediaRef.current) return;
           mediaRef.current.style.opacity = "1";

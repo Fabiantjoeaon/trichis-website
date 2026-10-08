@@ -9,13 +9,39 @@
 import { gqlFetch } from "./graphql.js";
 import { LAYOUT_TO_TYPENAME, assignAnchors, isVideoMedia } from "./normalize.js";
 import {
-  ALL_PAGES_QUERY,
+  allPagesQuery,
   ALL_PROJECTS_QUERY,
   ALL_SERVICES_QUERY,
   PROJECT_QUERY,
   SERVICE_QUERY,
-  SITE_SETTINGS_QUERY,
+  siteSettingsQuery,
 } from "./queries.js";
+
+// The homepage controls can be deployed independently of the frontend.
+// Detect these additions once per process; all content still comes from WP.
+const homepageTypes = [
+  "PageBuilderPageBlocksHomeHeroLayout",
+  "PageBuilderPageBlocksHomeWhoWeAreLayout",
+  "PageBuilderPageBlocksHomeWhatWeDoLayout",
+  "PageBuilderPageBlocksHomeWhatWeveCreatedLayout",
+  "PageBuilderPageBlocksHowWeDoItLayout",
+  "Footer",
+];
+let homepageFieldsPromise;
+function getHomepageFields() {
+  homepageFieldsPromise ??= gqlFetch(`query HomepageFields {
+    ${homepageTypes.map((type) => `${type}: __type(name: "${type}") { fields { name } }`).join("\n")}
+  }`).then((schema) => {
+    const fields = new Map(homepageTypes.map((type) => [type,
+      new Set((schema[type]?.fields ?? []).map((field) => field.name)),
+    ]));
+    return (type, field) => fields.get(type)?.has(field) ?? false;
+  }).catch((error) => {
+    homepageFieldsPromise = undefined;
+    throw error;
+  });
+  return homepageFieldsPromise;
+}
 
 // wpgraphql-acf types every `select` as a list, even when the field is
 // single-value, so choice fields arrive as ["image"] rather than "image".
@@ -380,7 +406,7 @@ export async function getService(slug) {
 }
 
 async function getAllPages() {
-  const data = await gqlFetch(ALL_PAGES_QUERY);
+  const data = await gqlFetch(allPagesQuery(await getHomepageFields()));
   return (data.pages?.nodes ?? []).map(mapPage);
 }
 
@@ -400,7 +426,7 @@ export async function getCustomPage(slug) {
 }
 
 export async function getSiteSettings() {
-  const data = await gqlFetch(SITE_SETTINGS_QUERY);
+  const data = await gqlFetch(siteSettingsQuery(await getHomepageFields()));
   const s = data.siteSettings ?? {};
   return {
     general: {

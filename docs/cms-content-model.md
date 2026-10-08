@@ -360,8 +360,15 @@ the route pages, and every Site Settings group. Two details worth knowing:
 
 Done. The local install runs ACF Pro 6.8, WPGraphQL 2.11, WPGraphQL for ACF 2.5 and Advanced
 Forms 1.9 (copied from the Plan Brabant install), `wp trichis seed --fresh` has run, and
-`.env` has `USE_SEED_DATA=0`. Seed JSON is still a working fallback: flip the flag back and
-the build produces the same pages.
+Development now uses the live Flywheel CMS (`PUBLIC_WP_SOURCE=flywheel`), with both
+`USE_SEED_DATA=0` and `PUBLIC_USE_SEED_DATA=0`, matching the production data source.
+Set `PUBLIC_WP_SOURCE=local` explicitly when testing the local WordPress installation.
+Seed JSON remains an opt-in offline data source; it can differ from live content.
+
+The frontend checks for the new homepage layout and footer form fields once per
+process before querying them. This allows live content to render before the updated
+`trichis-core` plugin is deployed to Flywheel. Until that deployment, project rows use
+their default layout and the new CMS controls and footer form settings are unavailable.
 
 Three things about the WPGraphQL/ACF surface that are easy to trip over again:
 

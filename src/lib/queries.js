@@ -31,7 +31,7 @@ const MEDIA = /* GraphQL */ `
  *   PageBuilderPageBlocksPageHeaderLayout,
  *   ProjectDetailsPageBlocksColumnRowLayout
  */
-function blockFragments(prefix, blocks) {
+function blockFragments(prefix, blocks, hasField = () => true) {
   const defs = {
     page_header: `
       ... on ${prefix}PageHeaderLayout {
@@ -133,21 +133,21 @@ function blockFragments(prefix, blocks) {
     // hard-coded home / about / what-we-do sections into the page builder.
     home_hero: `
       ... on ${prefix}HomeHeroLayout {
-        fullscreen
+        ${hasField(`${prefix}HomeHeroLayout`, "fullscreen") ? "fullscreen" : ""}
         media { ${MEDIA} }
         mobileMedia { ${MEDIA} }
       }
     `,
     home_who_we_are: `
       ... on ${prefix}HomeWhoWeAreLayout {
-        glyphMedia { ${MEDIA} }
+        ${hasField(`${prefix}HomeWhoWeAreLayout`, "glyphMedia") ? `glyphMedia { ${MEDIA} }` : ""}
         sectionTitle
         body
       }
     `,
     home_what_we_do: `
       ... on ${prefix}HomeWhatWeDoLayout {
-        glyphMedia { ${MEDIA} }
+        ${hasField(`${prefix}HomeWhatWeDoLayout`, "glyphMedia") ? `glyphMedia { ${MEDIA} }` : ""}
         sectionTitle
         intro
         services {
@@ -160,10 +160,10 @@ function blockFragments(prefix, blocks) {
     home_what_weve_created: `
       ... on ${prefix}HomeWhatWeveCreatedLayout {
         sectionTitle
-        projectRows {
+        ${hasField(`${prefix}HomeWhatWeveCreatedLayout`, "projectRows") ? `projectRows {
           projectSlug width alignment imageRatio glyphEnabled glyphPosition glyphWidth glyphRotation glyphFlip
           glyphMedia { ${MEDIA} }
-        }
+        }` : ""}
         ctaText
         ctaLink
       }
@@ -171,7 +171,7 @@ function blockFragments(prefix, blocks) {
     how_we_do_it: `
       ... on ${prefix}HowWeDoItLayout {
         title
-        intro
+        ${hasField(`${prefix}HowWeDoItLayout`, "intro") ? "intro" : ""}
         cards {
           title
           textTop
@@ -267,7 +267,7 @@ function blockFragments(prefix, blocks) {
   return blocks.map((name) => defs[name] ?? "").join("\n");
 }
 
-const PAGE_BLOCKS = blockFragments("PageBuilderPageBlocks", [
+const pageBlocks = (hasField) => blockFragments("PageBuilderPageBlocks", [
   "page_header",
   "project_header",
   "cta_section",
@@ -291,7 +291,7 @@ const PAGE_BLOCKS = blockFragments("PageBuilderPageBlocks", [
   "offices",
   "expertises",
   "service_teaser",
-]);
+], hasField);
 
 // Per-record SEO, identical on every content type.
 const SEO_FIELDS = /* GraphQL */ `
@@ -410,7 +410,7 @@ export const SERVICE_QUERY = /* GraphQL */ `
 
 // ── Pages ──
 
-export const ALL_PAGES_QUERY = /* GraphQL */ `
+export const allPagesQuery = (hasField) => /* GraphQL */ `
   query GetPages {
     pages(first: 100) {
       nodes {
@@ -424,7 +424,7 @@ export const ALL_PAGES_QUERY = /* GraphQL */ `
           mobileCover { ${MEDIA} }
           pageBlocks {
             __typename
-            ${PAGE_BLOCKS}
+            ${pageBlocks(hasField)}
           }
         }
       }
@@ -434,7 +434,7 @@ export const ALL_PAGES_QUERY = /* GraphQL */ `
 
 // ── Site settings ──
 
-export const SITE_SETTINGS_QUERY = /* GraphQL */ `
+export const siteSettingsQuery = (hasField = () => true) => /* GraphQL */ `
   query GetSiteSettings {
     siteSettings {
       general {
@@ -457,11 +457,11 @@ export const SITE_SETTINGS_QUERY = /* GraphQL */ `
         }
       }
       footer {
-        footerFormEnabled
-        footerForm {
+        ${hasField("Footer", "footerFormEnabled") ? "footerFormEnabled" : ""}
+        ${hasField("Footer", "footerForm") ? `footerForm {
           title subtitle formName ctaText successTitle successMessage
           formFields { label name fieldType required options placeholder width }
-        }
+        }` : ""}
         footerLeadHead
         footerLeadBody
         footerOffices {

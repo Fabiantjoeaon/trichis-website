@@ -24,10 +24,11 @@ export const Divider = forwardRef(({ className = "", ...props }, ref) => {
 
 Divider.displayName = "Divider";
 
-export function SectionTitle({ children }) {
+export function SectionTitle({ children, meta, id }) {
   const wrapper = useRef();
   const divider = useRef();
   const title = useRef();
+  const metaRef = useRef();
 
   const { animateIn } = useAnimation({
     inParams: {
@@ -37,6 +38,8 @@ export function SectionTitle({ children }) {
       onUpdate: (v) => {
         if (title.current)
           title.current.style.transform = `translateY(${(1 - v) * 100}%)`;
+        if (metaRef.current)
+          metaRef.current.style.transform = `translateY(${(1 - v) * 100}%)`;
       },
     },
   });
@@ -50,12 +53,15 @@ export function SectionTitle({ children }) {
   });
 
   return (
-    <div ref={wrapper} className="section-title">
+    <div ref={wrapper} className={`section-title${meta ? " section-title--with-meta" : ""}`} id={id}>
+      <div className="section-title__row">
       {children && (
         <h6 ref={title} className="section-title__text">
           {children}
         </h6>
       )}
+      {meta && <p className="section-title__meta" ref={metaRef}>{meta}</p>}
+      </div>
       <Divider ref={divider} />
     </div>
   );

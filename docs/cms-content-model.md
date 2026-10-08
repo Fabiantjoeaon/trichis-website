@@ -221,11 +221,61 @@ two-line treatment (`Web-` / `design`, `Photo /` / `video`).
 ### 2.5 Context assignment
 
 - `page` — all nine existing layouts plus all twelve new ones. A page can be anything.
-- `project` — `project_header`, `column_row`, `project_numbers`, `paragraph` (unchanged).
+- `project` — `project_header`, `section_line`, `column_row`, `project_numbers`, `accordion`, `paragraph`, `cta_section`.
 - `service` — `section_line`, `scrolling_title`, `column_row` (unchanged).
 
 The four fixed routes are `page` records distinguished by `page_key`, so they draw from the
 full page block set.
+
+### 2.6 Project design and Column Row editing
+
+The project template reuses `Project Header`, `Section Line`, `Column Row`,
+`Accordion` and `CTA Section`. No dedicated quote or full-width-image block is needed.
+Delivered services come from the project's existing Deliverables taxonomy and appear
+alongside the header's section label. On older content, `paragraph_header` supplies
+that label when `section_title` is empty.
+
+Suggested block order for the supplied design:
+
+1. Project Header, then a Column Row with one 100% image column.
+2. Section Line “Ons werk”, a text row, then an image row with a spacer and glyph.
+3. Section Line “Het resultaat”, a full-width image row, then an image/text row.
+4. Accordion: title “Wat vragen?”, a portrait image, and question/answer items.
+5. Section Line “Hun woorden”, a centered text row with a quote, then a full-width image.
+6. CTA Section “Tijd voor koffie?” with a contact link. The next-project cards follow automatically.
+
+**Text and quotes:** Column Row text already uses WYSIWYG. The editor now exposes
+the full toolbar and HTML tab. “Horizontal text alignment” sets a column-wide
+alignment, while “Use editor formatting” preserves each paragraph's own alignment.
+“Vertical alignment” controls placement next to an image. For a centered, narrower
+quote, use 20% empty / 60% text / 20% empty columns, with mobile widths 0 / 100 / 0.
+Enter this in the text column's HTML tab:
+
+```html
+<blockquote style="text-align: center">
+  <p>The customer's quote.</p>
+  <cite>Customer name</cite>
+</blockquote>
+```
+
+**Glyphs:** Each Column Row has a Decorative glyphs repeater. Choose one of the four
+bundled animated SVGs or a custom media image. Anchor column 0 means the row's content
+area; 1, 2, etc. mean that individual column. X/Y offsets locate the glyph's centre:
+0/0 is top left, 100/100 is bottom right; negative values extend outside the anchor.
+Width is a percentage of the anchor. Rotation, horizontal mirroring, above/behind
+image layering, mobile X/Y/width overrides and “Hide on mobile” are available.
+Blank mobile values inherit desktop values. Glyphs attached to a hidden mobile spacer
+are hidden with that column; use a row anchor to keep them visible on mobile.
+
+For the loop left of a right-aligned image, use a row anchor, X=4, Y=45, width=30.
+For the loop above/right of the quote, use X=94, Y=3, width=35. Adjust mobile values
+independently to keep the text readable. Existing rows receive no automatic glyphs.
+
+**Deployment:** The local WordPress plugin is symlinked to this repository, so its new
+fields are available locally. Deploy the updated `trichis-core` plugin to Flywheel to
+enable these editor controls there, then rebuild the frontend. Live CMS content is
+never replaced with seed data; older schemas omit the new fields until the plugin
+is updated. Installing the plugin does not rewrite existing project blocks or copy.
 
 ---
 

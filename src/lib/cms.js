@@ -51,7 +51,12 @@ export function splitRichBlocks(html) {
     const tag = match[1].toLowerCase();
     const inner = match[3];
     if (!isEmptyHtml(inner) || tag === "ul" || tag === "ol") {
-      blocks.push({ tag, html: inner });
+      // Keep WYSIWYG alignment on its outer paragraph/heading/quote. Other
+      // attributes are deliberately not copied into React props.
+      const attributes = match[2] || "";
+      const textAlign = attributes.match(/text-align\s*:\s*(left|center|right|justify)\b/i)?.[1]?.toLowerCase()
+        || attributes.match(/\balign(?:left|center|right)\b/i)?.[0]?.slice(5).toLowerCase();
+      blocks.push({ tag, html: inner, ...(textAlign ? { textAlign } : {}) });
     }
     last = match.index + match[0].length;
   }
@@ -89,6 +94,7 @@ export function convertMultiParagraphToNineFormat(text) {
           tag: "strong",
           text: strongOnly,
           html: true,
+          textAlign: block.textAlign,
         };
       }
       const isList = block.tag === "ul" || block.tag === "ol";
@@ -96,7 +102,8 @@ export function convertMultiParagraphToNineFormat(text) {
         tag: block.tag,
         text: block.html,
         html: true,
-        static: isList || block.tag === "blockquote" || block.tag === "div",
+        textAlign: block.textAlign,
+        static: isList || block.tag === "div",
       };
     });
   }

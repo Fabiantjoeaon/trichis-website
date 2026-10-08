@@ -18,13 +18,13 @@ export default function ProjectPage({ project, nextProject, nextProjects }) {
   }, [project?.content]);
 
   return (
-    <>
+    <div className="project-page">
       <ProjectHero project={project} />
       <DynamicContent
         content={sortedContent}
         page={{ ...project, __typename: "ProjectRecord" }}
       />
       <ProjectNext projects={upcoming} />
-    </>
+    </div>
   );
 }

@@ -15,6 +15,7 @@ export default function CmsHtml({
         <div
           key={i}
           className={`cms-html cms-html--${block.tag} ${className}`.trim()}
+          style={block.textAlign ? { textAlign: block.textAlign } : undefined}
           dangerouslySetInnerHTML={{
             __html: `<${block.tag}>${block.text}</${block.tag}>`,
           }}
@@ -27,6 +28,7 @@ export default function CmsHtml({
         key={i}
         tag={block.tag}
         className={className}
+        {...(block.textAlign ? { style: { textAlign: block.textAlign } } : {})}
         animateOnScroll={animateOnScroll}
         dangerouslySetInnerHTML={block.html ? { __html: block.text } : false}
       >

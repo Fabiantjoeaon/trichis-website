@@ -12,35 +12,40 @@ import {
   allPagesQuery,
   ALL_PROJECTS_QUERY,
   ALL_SERVICES_QUERY,
-  PROJECT_QUERY,
-  SERVICE_QUERY,
+  projectQuery,
+  serviceQuery,
   siteSettingsQuery,
 } from "./queries.js";
 
-// The homepage controls can be deployed independently of the frontend.
+// CMS controls can be deployed independently of the frontend.
 // Detect these additions once per process; all content still comes from WP.
-const homepageTypes = [
+const contentTypes = [
   "PageBuilderPageBlocksHomeHeroLayout",
   "PageBuilderPageBlocksHomeWhoWeAreLayout",
   "PageBuilderPageBlocksHomeWhatWeDoLayout",
   "PageBuilderPageBlocksHomeWhatWeveCreatedLayout",
   "PageBuilderPageBlocksHowWeDoItLayout",
   "Footer",
+  "ProjectDetailsPageBlocksSectionLineLayout",
+  "ProjectDetailsPageBlocksCtaSectionLayout",
+  ...["PageBuilder", "ProjectDetails", "ServiceDetails"].flatMap((context) => [
+    `${context}PageBlocksColumnRowLayout`, `${context}PageBlocksColumns`,
+  ]),
 ];
-let homepageFieldsPromise;
-function getHomepageFields() {
-  homepageFieldsPromise ??= gqlFetch(`query HomepageFields {
-    ${homepageTypes.map((type) => `${type}: __type(name: "${type}") { fields { name } }`).join("\n")}
+let contentFieldsPromise;
+function getContentFields() {
+  contentFieldsPromise ??= gqlFetch(`query ContentFields {
+    ${contentTypes.map((type) => `${type}: __type(name: "${type}") { fields { name } }`).join("\n")}
   }`).then((schema) => {
-    const fields = new Map(homepageTypes.map((type) => [type,
+    const fields = new Map(contentTypes.filter((type) => schema[type]).map((type) => [type,
       new Set((schema[type]?.fields ?? []).map((field) => field.name)),
     ]));
-    return (type, field) => fields.get(type)?.has(field) ?? false;
+    return (type, field) => field ? (fields.get(type)?.has(field) ?? false) : fields.has(type);
   }).catch((error) => {
-    homepageFieldsPromise = undefined;
+    contentFieldsPromise = undefined;
     throw error;
   });
-  return homepageFieldsPromise;
+  return contentFieldsPromise;
 }
 
 // wpgraphql-acf types every `select` as a list, even when the field is
@@ -96,6 +101,7 @@ function mapColumn(col) {
       mobileWidth: col.mobileWidth,
       text: col.text,
       align: choice(col.align),
+      textAlign: choice(col.textAlign),
       cta: col.ctaText
         ? { text: col.ctaText, url: col.ctaUrl, isExternal: !!col.ctaIsExternal }
         : null,
@@ -133,7 +139,13 @@ function mapBlock(typename, block) {
     case "ScrollingTitleRecord":
       return { text: block.text };
     case "ColumnrowRecord":
-      return { columns: (block.columns ?? []).map(mapColumn) };
+      return {
+        columns: (block.columns ?? []).map(mapColumn),
+        glyphs: (block.glyphs ?? []).map((glyph) => ({
+          ...glyph, variant: choice(glyph.variant), layer: choice(glyph.layer),
+          glyphMedia: mapMedia(glyph.glyphMedia),
+        })),
+      };
     case "ProjectnumberRecord":
       return {
         sectionTitle: block.sectionTitle,
@@ -391,7 +403,7 @@ export async function getFeaturedProjects() {
 }
 
 export async function getProject(slug) {
-  const data = await gqlFetch(PROJECT_QUERY, { slug });
+  const data = await gqlFetch(projectQuery(await getContentFields()), { slug });
   return mapProject(data.project);
 }
 
@@ -401,12 +413,12 @@ export async function getServices() {
 }
 
 export async function getService(slug) {
-  const data = await gqlFetch(SERVICE_QUERY, { slug });
+  const data = await gqlFetch(serviceQuery(await getContentFields()), { slug });
   return mapService(data.service);
 }
 
 async function getAllPages() {
-  const data = await gqlFetch(allPagesQuery(await getHomepageFields()));
+  const data = await gqlFetch(allPagesQuery(await getContentFields()));
   return (data.pages?.nodes ?? []).map(mapPage);
 }
 
@@ -426,7 +438,7 @@ export async function getCustomPage(slug) {
 }
 
 export async function getSiteSettings() {
-  const data = await gqlFetch(siteSettingsQuery(await getHomepageFields()));
+  const data = await gqlFetch(siteSettingsQuery(await getContentFields()));
   const s = data.siteSettings ?? {};
   return {
     general: {

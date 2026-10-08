@@ -207,6 +207,46 @@ function trichis_block_scrolling_title(string $ctx): array {
 // Layout blocks
 // ─────────────────────────────────────────
 
+function trichis_block_column_glyphs(string $ctx): array {
+    $fields = [
+        trichis_bf($ctx, 'column_glyph', 'variant', [
+            'label' => 'Artwork', 'type' => 'select', 'default_value' => 'services',
+            'choices' => ['services' => 'Loop', 'work-left' => 'Left loop', 'work-right' => 'Right loop', 'question' => 'Question mark'],
+        ]),
+        trichis_block_glyph($ctx, 'column_glyph'),
+        trichis_bf($ctx, 'column_glyph', 'column', [
+            'label' => 'Anchor column', 'type' => 'number', 'min' => 0, 'step' => 1, 'default_value' => 0,
+            'instructions' => '0 = entire row content area; 1 = first column, 2 = second column, etc.',
+        ]),
+    ];
+    foreach ([
+        'x' => ['Horizontal offset (%)', 0, -100, 200],
+        'y' => ['Vertical offset (%)', 50, -100, 200],
+        'width' => ['Width (% of anchor)', 30, 5, 150],
+        'rotation' => ['Rotation (degrees)', 0, -180, 180],
+        'mobile_x' => ['Mobile horizontal offset (%)', null, -100, 200],
+        'mobile_y' => ['Mobile vertical offset (%)', null, -100, 200],
+        'mobile_width' => ['Mobile width (% of anchor)', null, 5, 150],
+    ] as $name => [$label, $default, $min, $max]) {
+        $fields[] = trichis_bf($ctx, 'column_glyph', $name, [
+            'label' => $label, 'type' => 'number', 'default_value' => $default,
+            'min' => $min, 'max' => $max, 'wrapper' => ['width' => '33'],
+            'instructions' => str_starts_with($name, 'mobile_') ? 'Leave blank to inherit the desktop value.' : '',
+        ]);
+    }
+    $fields[] = trichis_bf($ctx, 'column_glyph', 'flip', ['label' => 'Mirror horizontally', 'type' => 'true_false', 'ui' => 1]);
+    $fields[] = trichis_bf($ctx, 'column_glyph', 'hide_on_mobile', ['label' => 'Hide on mobile', 'type' => 'true_false', 'ui' => 1]);
+    $fields[] = trichis_bf($ctx, 'column_glyph', 'layer', [
+        'label' => 'Layer', 'type' => 'select', 'default_value' => 'above',
+        'choices' => ['above' => 'Above images', 'behind' => 'Behind images'],
+    ]);
+    return trichis_bf($ctx, 'column_row', 'glyphs', [
+        'label' => 'Decorative glyphs', 'type' => 'repeater', 'layout' => 'block',
+        'button_label' => 'Add Glyph', 'sub_fields' => $fields,
+        'instructions' => 'The centre of the glyph is positioned at the offsets: 0/0 = top left, 100/100 = bottom right. Negative offsets extend outside the anchor. Existing rows have no glyphs until you add one.',
+    ]);
+}
+
 function trichis_block_column_row(string $ctx): array {
     return [
         'key'        => "layout_key_{$ctx}_column_row",
@@ -249,7 +289,9 @@ function trichis_block_column_row(string $ctx): array {
                     trichis_bf($ctx, 'column_row', 'text', [
                         'label'             => 'Text',
                         'type'              => 'wysiwyg',
-                        'toolbar'           => 'basic',
+                        'toolbar'           => 'full',
+                        'tabs'              => 'all',
+                        'instructions'      => 'Rich text and HTML are supported, including headings, links, blockquotes and text alignment. For a quote attribution, add a <cite> inside the <blockquote> in Text mode.',
                         'media_upload'      => 0,
                         'conditional_logic' => [[[
                             'field'    => "field_{$ctx}_blk_column_row_column_type",
@@ -258,21 +300,28 @@ function trichis_block_column_row(string $ctx): array {
                         ]]],
                     ]),
                     trichis_bf($ctx, 'column_row', 'align', [
-                        'label'         => 'Text align',
+                        'label'         => 'Vertical alignment',
                         'type'          => 'select',
                         'choices'       => [
-                            'left'   => 'Left',
+                            'left'   => 'Middle (legacy left)',
+                            'top'    => 'Top',
                             'center' => 'Center',
-                            'right'  => 'Right',
+                            'right'  => 'Middle (legacy right)',
                             'bottom' => 'Bottom',
                         ],
-                        'default_value' => 'left',
+                        'default_value' => 'center',
                         'wrapper'       => ['width' => '34'],
                         'conditional_logic' => [[[
                             'field'    => "field_{$ctx}_blk_column_row_column_type",
                             'operator' => '==',
                             'value'    => 'text',
                         ]]],
+                    ]),
+                    trichis_bf($ctx, 'column_row', 'text_align', [
+                        'label' => 'Horizontal text alignment', 'type' => 'select',
+                        'choices' => ['inherit' => 'Use editor formatting', 'left' => 'Left', 'center' => 'Centre', 'right' => 'Right'],
+                        'default_value' => 'inherit',
+                        'conditional_logic' => [[['field' => "field_{$ctx}_blk_column_row_column_type", 'operator' => '==', 'value' => 'text']]],
                     ]),
                     trichis_bf($ctx, 'column_row', 'cta_text', [
                         'label'   => 'CTA text',
@@ -307,6 +356,7 @@ function trichis_block_column_row(string $ctx): array {
                     ]),
                 ],
             ]),
+            trichis_block_column_glyphs($ctx),
         ],
     ];
 }
@@ -386,8 +436,9 @@ function trichis_block_accordion(string $ctx): array {
                     ]),
                     trichis_bf($ctx, 'accordion', 'answer', [
                         'label' => 'Answer',
-                        'type'  => 'textarea',
-                        'rows'  => 4,
+                        'type'  => 'wysiwyg',
+                        'toolbar' => 'basic',
+                        'media_upload' => 0,
                     ]),
                 ],
             ]),
@@ -1074,7 +1125,7 @@ function trichis_blocks_for_context(string $ctx): array {
                 'offices', 'expertises', 'service_teaser',
             ];
         case 'project':
-            return ['project_header', 'column_row', 'project_numbers', 'accordion', 'paragraph'];
+            return ['project_header', 'section_line', 'column_row', 'project_numbers', 'accordion', 'paragraph', 'cta_section'];
         case 'service':
             return ['section_line', 'scrolling_title', 'column_row'];
         default:

@@ -3,6 +3,8 @@ import BorderedIcon from "@/components/ui/BorderedIcon";
 import CmsHtml from "@/components/ui/CmsHtml";
 import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
 import { useGlobalStore } from "@/stores/global";
+import { boundedNumber } from "@/lib/home-layout";
+import ColumnGlyphs from "./ColumnGlyphs";
 
 export const columnRowTypeNames = {
   image: "ImagecolumnRecord",
@@ -10,7 +12,7 @@ export const columnRowTypeNames = {
   empty: "EmptycolumnRecord",
 };
 
-function ColumnTextItem({ text, cta, align = "center", applyMarginBottom }) {
+function ColumnTextItem({ text, cta, align = "center", textAlign, applyMarginBottom }) {
   const alignMap = {
     top: "flex-start",
     center: "center",
@@ -20,7 +22,8 @@ function ColumnTextItem({ text, cta, align = "center", applyMarginBottom }) {
   return (
     <div
       className={`column-text${applyMarginBottom ? " has-mb" : ""}`}
-      style={{ justifyContent: alignMap[align] || "center" }}
+      style={{ justifyContent: alignMap[align] || "center",
+        textAlign: ["left", "center", "right"].includes(textAlign) ? textAlign : undefined }}
     >
       <div className="column-text__inner">
         <CmsHtml text={text} />
@@ -43,7 +46,6 @@ export default function ColumnRow({
   isImageColumnAndNextItemIsImageColumn,
   isJustTextColumn,
   isColumnRowAndNeedsMoreSpacingBottom,
-  showSwoosh,
 }) {
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
   const columns = data?.columns || [];
@@ -58,14 +60,7 @@ export default function ColumnRow({
       id={data?.anchorId || undefined}
       className={`column-row-wrap inner-width${hasMultipleColumns ? " multi" : ""}${isColumnRowAndNeedsMoreSpacingBottom ? " more-bottom" : ""}`}
     >
-      {showSwoosh && (
-        <img
-          className="swoosh swoosh--b"
-          src="/images/swoosh-b.svg"
-          alt=""
-          aria-hidden="true"
-        />
-      )}
+      <ColumnGlyphs glyphs={data?.glyphs} />
       {columns.map((column, index) => {
         const {
           __typename,
@@ -78,10 +73,12 @@ export default function ColumnRow({
         const mobileWidth = _mobileWidth !== null && _mobileWidth !== undefined
           ? _mobileWidth
           : 100;
-        const width = isMobileLayout ? mobileWidth : _width;
+        const width = boundedNumber(isMobileLayout ? mobileWidth : _width, 100, 0, 100);
 
         const style = {
           "--width": `${width}%`,
+          "--gap-share": 1 - width / 100,
+          ...(width === 0 ? { display: "none" } : null),
           marginBottom: isImageColumnAndNextItemIsImageColumn ? "150rem" : "0",
           ...(isJustTextColumn ? { margin: "250rem 0" } : null),
         };
@@ -94,6 +91,7 @@ export default function ColumnRow({
             key={index}
             style={style}
           >
+            <ColumnGlyphs glyphs={data?.glyphs} column={index + 1} />
             {__typename === columnRowTypeNames.image && image && (
               <NineGLImageElement
                 className={
@@ -101,10 +99,11 @@ export default function ColumnRow({
                 }
                 isLink={false}
                 src={image.url}
+                alt={image.alt || ""}
                 width={image.width}
                 height={image.height}
                 isVideo={isVideo}
-                offset={-0.5}
+                offset={0.1}
               />
             )}
             {__typename === columnRowTypeNames.text && text && (

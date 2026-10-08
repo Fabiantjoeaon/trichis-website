@@ -68,6 +68,10 @@ function blockFragments(prefix, blocks, hasField = () => true) {
     `,
     column_row: `
       ... on ${prefix}ColumnRowLayout {
+        ${hasField(`${prefix}ColumnRowLayout`, "glyphs") ? `glyphs {
+          variant column x y width rotation flip mobileX mobileY mobileWidth hideOnMobile layer
+          glyphMedia { ${MEDIA} }
+        }` : ""}
         columns {
           columnType
           width
@@ -75,6 +79,7 @@ function blockFragments(prefix, blocks, hasField = () => true) {
           media { ${MEDIA} }
           text
           align
+          ${hasField(`${prefix}Columns`, "textAlign") ? "textAlign" : ""}
           ctaText
           ctaUrl
           ctaIsExternal
@@ -264,7 +269,12 @@ function blockFragments(prefix, blocks, hasField = () => true) {
       }
     `,
   };
-  return blocks.map((name) => defs[name] ?? "").join("\n");
+  return blocks.map((name) => {
+    // Older live CMS installs do not yet expose these project block types.
+    const optionalType = { section_line: "SectionLineLayout", cta_section: "CtaSectionLayout" }[name];
+    if (prefix === "ProjectDetailsPageBlocks" && optionalType && !hasField(`${prefix}${optionalType}`)) return "";
+    return defs[name] ?? "";
+  }).join("\n");
 }
 
 const pageBlocks = (hasField) => blockFragments("PageBuilderPageBlocks", [
@@ -303,19 +313,21 @@ const SEO_FIELDS = /* GraphQL */ `
   }
 `;
 
-const PROJECT_BLOCKS = blockFragments("ProjectDetailsPageBlocks", [
+const projectBlocks = (hasField) => blockFragments("ProjectDetailsPageBlocks", [
   "project_header",
   "column_row",
   "project_numbers",
   "accordion",
   "paragraph",
-]);
+  "section_line",
+  "cta_section",
+], hasField);
 
-const SERVICE_BLOCKS = blockFragments("ServiceDetailsPageBlocks", [
+const serviceBlocks = (hasField) => blockFragments("ServiceDetailsPageBlocks", [
   "section_line",
   "scrolling_title",
   "column_row",
-]);
+], hasField);
 
 const PROJECT_FIELDS = /* GraphQL */ `
   id
@@ -350,7 +362,7 @@ export const ALL_PROJECTS_QUERY = /* GraphQL */ `
   }
 `;
 
-export const PROJECT_QUERY = /* GraphQL */ `
+export const projectQuery = (hasField) => /* GraphQL */ `
   query GetProject($slug: ID!) {
     project(id: $slug, idType: SLUG) {
       ${PROJECT_FIELDS}
@@ -364,7 +376,7 @@ export const PROJECT_QUERY = /* GraphQL */ `
         featuredMedia { ${MEDIA} }
         pageBlocks {
           __typename
-          ${PROJECT_BLOCKS}
+          ${projectBlocks(hasField)}
         }
       }
     }
@@ -385,7 +397,7 @@ export const ALL_SERVICES_QUERY = /* GraphQL */ `
   }
 `;
 
-export const SERVICE_QUERY = /* GraphQL */ `
+export const serviceQuery = (hasField) => /* GraphQL */ `
   query GetService($slug: ID!) {
     service(id: $slug, idType: SLUG) {
       id
@@ -401,7 +413,7 @@ export const SERVICE_QUERY = /* GraphQL */ `
         }
         pageBlocks {
           __typename
-          ${SERVICE_BLOCKS}
+          ${serviceBlocks(hasField)}
         }
       }
     }

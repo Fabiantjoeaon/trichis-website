@@ -111,8 +111,7 @@
 
 .project-hero__gl .gl-image-sizer,
 .home-showreel__gl .gl-image-sizer,
-.project-accordion__image .gl-image-sizer,
-.project-next__card .project-image .gl-image-sizer {
+.project-accordion__image .gl-image-sizer {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -815,12 +814,12 @@
   width: var(--width, 100%);
   min-width: var(--width, 100%);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .column-row-wrap.multi .column-row {
-  width: calc(var(--width) - 30rem);
-  min-width: calc(var(--width) - 30rem);
+  width: calc(var(--width) - var(--column-gap, 30rem) * var(--gap-share, 1));
+  min-width: calc(var(--width) - var(--column-gap, 30rem) * var(--gap-share, 1));
 }
 
 .column-row img {
@@ -835,6 +834,7 @@
   min-height: min-content;
   position: relative;
   display: block;
+  overflow: hidden;
 }
 
 .column-row .gl-image-sizer {
@@ -1045,116 +1045,6 @@
   display: none;
 }
 
-.swoosh {
-  position: absolute;
-  pointer-events: none;
-  max-width: none;
-  display: block;
-}
-
-.swoosh--a {
-  width: 1213rem;
-  left: calc(var(--pagePadding) + 542rem);
-  top: -592rem;
-  z-index: 0;
-}
-
-.swoosh--b {
-  width: 1099rem;
-  left: calc(var(--pagePadding) + 2684rem);
-  top: -516rem;
-  z-index: 2;
-}
-
-.next-lead {
-  position: relative;
-  margin-top: 567rem;
-}
-
-.next-lead .section-title {
-  position: relative;
-  z-index: 1;
-}
-
-.project-next {
-  position: relative;
-  height: 2356rem;
-}
-
-.project-next__card {
-  position: absolute;
-  height: 1308rem;
-  overflow: hidden;
-}
-
-.project-next__card--1 {
-  left: 0;
-  top: 237rem;
-  width: 43.23%;
-}
-
-.project-next__card--2 {
-  right: 0;
-  top: 654rem;
-  width: 52.9%;
-}
-
-.project-next__card .project-card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.project-next__card .project-card > a {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* The prototype puts the title below the card, so hide the card's own title
-   and meta. The title stays in flow-less layout rather than display:none
-   because Project observes it to trigger the image entrance. */
-.project-next__card .project-card__title {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  margin: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.project-next__card .project-card__meta {
-  display: none;
-}
-
-.project-next__card .project-image {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: auto;
-}
-
-.project-next__label {
-  position: absolute;
-  font-family: "SG Grotesk", sans-serif;
-  font-size: 67rem;
-  line-height: 1.2;
-  font-weight: 200;
-  color: var(--color-text);
-  text-decoration: none;
-}
-
-.project-next__label--1 {
-  top: 1583rem;
-  left: var(--pagePadding);
-}
-
-.project-next__label--2 {
-  top: 2004rem;
-  left: 47.1%;
-}
-
 .about-intro__top {
   display: flex;
   gap: 5%;
@@ -1332,48 +1222,6 @@
 
   .project-header__title {
     margin-bottom: 150rem;
-  }
-
-  .next-lead {
-    margin-top: 200rem;
-  }
-
-  .swoosh--a {
-    width: 433rem;
-    left: -58rem;
-    top: -260rem;
-  }
-
-  .swoosh--b {
-    width: 346rem;
-    left: auto;
-    right: -87rem;
-    top: -202rem;
-  }
-
-  .project-next {
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 30rem;
-    padding-bottom: 120rem;
-  }
-
-  .project-next__card,
-  .project-next__label {
-    position: static;
-    width: auto;
-    height: auto;
-    margin: 0;
-  }
-
-  .project-next__card {
-    aspect-ratio: 16 / 11;
-  }
-
-  .project-next__label {
-    margin-inline: var(--pagePadding);
-    font-size: 44rem;
   }
 
   .service-header__left,

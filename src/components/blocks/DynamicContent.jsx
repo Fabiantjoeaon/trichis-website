@@ -45,7 +45,7 @@ export const ContentComponents = {
   ParagraphRecord: Paragraph,
   ColumnrowRecord: ColumnRow,
   ScrollingTitleRecord: ScrollingTitle,
-  SectionlineRecord: ({ data }) => <SectionTitle>{data?.title}</SectionTitle>,
+  SectionlineRecord: ({ data }) => <SectionTitle id={data?.anchorId}>{data?.title}</SectionTitle>,
   CtasectionRecord: ({ data }) => (
     <CTAFooter
       title={data?.title?.replace(/<\/?p>/g, "")}
@@ -78,18 +78,9 @@ export const ContentComponents = {
   ServiceteaserRecord: ServiceTeaser,
 };
 
-function hasVideoColumn(item) {
-  return !!item?.columns?.some(
-    (c) => c.__typename === "ImagecolumnRecord" && c.image?.isVideo,
-  );
-}
-
 export default function DynamicContent({ content, page }) {
   if (!content?.length) return null;
   const pageType = page?.__typename;
-
-  // The prototype hangs the yellow swoosh over the first video in the page
-  const swooshIndex = content.findIndex(hasVideoColumn);
 
   return content.map((item, index) => {
     const Component = ContentComponents[item.__typename];
@@ -139,7 +130,6 @@ export default function DynamicContent({ content, page }) {
         isColumnRowAndNeedsMoreSpacingBottom={
           isColumnRowAndNeedsMoreSpacingBottom
         }
-        showSwoosh={index === swooshIndex}
         {...page}
       />
     );

@@ -23,7 +23,8 @@ function waitForBrowserLoad() {
 }
 
 function waitForImages(onProgress) {
-  const images = Array.from(document.images);
+  // Below-the-fold lazy images load on scroll and must not hold the page entrance.
+  const images = Array.from(document.images).filter((img) => img.loading !== "lazy");
   if (images.length === 0) {
     onProgress(1);
     return Promise.resolve();

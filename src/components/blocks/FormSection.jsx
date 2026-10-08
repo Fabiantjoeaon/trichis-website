@@ -1,5 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
-import BorderedIcon from "@/components/ui/BorderedIcon";
+import { useCallback, useId, useMemo, useState } from "react";
 import FormField from "./FormField";
 import { submitForm } from "@/lib/forms";
 import { t } from "@/lib/i18n";
@@ -60,6 +59,7 @@ export default function FormSection({ data }) {
     formFields = [],
   } = data || {};
 
+  const formId = useId();
   const fields = formFields;
 
   const [values, setValues] = useState(() => {
@@ -146,7 +146,7 @@ export default function FormSection({ data }) {
   if (submitted) {
     return (
       <section className="form-section inner-width">
-        <div className="form-section__success">
+        <div className="form-section__success" role="status">
           <div className="form-section__success-icon" aria-hidden>
             <svg viewBox="0 0 48 48" fill="none">
               <path
@@ -181,7 +181,7 @@ export default function FormSection({ data }) {
         </div>
       )}
 
-      <form className="form-section__grid" onSubmit={handleSubmit} noValidate>
+      <form id={formId} className="form-section__grid" onSubmit={handleSubmit} noValidate>
         {fields.map((field) => (
           <FormField
             key={field.name}
@@ -197,20 +197,15 @@ export default function FormSection({ data }) {
       <div className="form-section__footer">
         <div className="form-section__error-area">
           {(submitError || hasErrors) && (
-            <div className="form-section__general-error">
+            <div className="form-section__general-error" role="alert">
               <span className="form-section__error-badge">!</span>
               {t("form.error")}
             </div>
           )}
         </div>
-        <BorderedIcon
-          icon="arrow"
-          text={pending ? t("form.submitting") : ctaText || t("form.submit")}
-          onClick={handleSubmit}
-          disabled={hasErrors || pending}
-          animateOnScroll={false}
-          disableSplitText
-        />
+        <button className="form-section__submit" type="submit" form={formId} disabled={pending}>
+          {pending ? t("form.submitting") : ctaText || t("form.submit")}
+        </button>
       </div>
     </section>
   );

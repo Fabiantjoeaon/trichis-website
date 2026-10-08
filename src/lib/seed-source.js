@@ -94,6 +94,8 @@ export async function getSiteSettings() {
     navLinks: site.navigation?.nav_links ?? [],
     menuFooterLinks: site.navigation?.menu_footer_links ?? [],
     footer: {
+      formEnabled: site.footer?.footer_form_enabled ?? true,
+      form: site.footer?.footer_form ?? null,
       leadHead: site.footer?.footer_lead_head ?? "",
       leadBody: site.footer?.footer_lead_body ?? "",
       offices: (site.footer?.footer_offices ?? []).map((o) => ({

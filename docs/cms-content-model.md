@@ -67,45 +67,79 @@ Twelve layouts, each mapping 1:1 to a component that currently hardcodes its con
 
 #### `home_hero` → `home/HomeHero.jsx`
 
-- `media` — media (desktop showreel)
-- `mobile_media` — media
+- `media`, `mobile_media` — desktop/mobile image or video
+- `fullscreen` — toggle, default on; fills the viewport below navigation. Off uses the inset hero.
+
+The hero uses native DOM image/video rendering and supports separate mobile media.
 
 #### `home_who_we_are` → `home/HomeWhoWeAre.jsx`
 
-- `section_title` — text
-- `body` — textarea
+- `section_title` — heading (Wat heb jij te vertellen)
+- `body` — textarea; blank lines separate paragraphs
+- `glyph_media` — optional yellow artwork, positioned beside the heading
 
 #### `home_what_we_do` → `home/HomeWhatWeDo.jsx`
 
-- `section_title` — text
-- `scrolling_text` — text
-- `intro` — textarea
-- `services` — repeater
-  - `label` — text
-  - `link` — text
-  - `media` — media
+- `section_title`, `intro` — heading and copy
+- `glyph_media` — optional artwork in the upper right of the introduction
+- `services` — ordered repeater of `label`, `link`, and `media`
+
+Services sit horizontally above the large media panel. Hover, focus, or tap selects
+an image/video; the media links to the selected service. The list scrolls on narrow screens.
 
 #### `home_what_weve_created` → `home/HomeWhatWeveCreated.jsx`
 
-- `section_title` — text
-- `scrolling_text` — text
-- `intro` — textarea
-- `list_label` — text
-- `cta_text` — text (HTML allowed, e.g. `All our <strong>projects</strong>`)
-- `cta_link` — text
+- `section_title` — Werk heading
+- `project_rows` — ordered repeater, one project per row:
+  - `project_slug` — project picker
+  - `width` — 20–100% of the row (minimum 70% on phones)
+  - `alignment` — left, center, right
+  - `image_ratio` — landscape, portrait, square, wide, original
+  - `glyph_enabled` — show/hide the row's glyph
+  - `glyph_media` — optional artwork; an empty positioned slot until supplied
+  - `glyph_position` — top-left, top-right, bottom-left, bottom-right
+  - `glyph_width` — 10–60% of the row
+  - `glyph_rotation` — -180 to 180 degrees
+  - `glyph_flip` — mirror horizontally
+- `cta_text`, `cta_link` — optional link after the projects
 
-Projects come from the `project` post type filtered on `featured`, not from this block.
+Rows can select any published project. With no configured rows, featured projects
+render in their featured order with alternating widths and alignment. Unpublished
+or deleted projects are omitted. Glyphs are decorative and excluded from accessibility output.
 
 #### `how_we_do_it` → `home/HowWeDoIt.jsx`
 
-- `title` — text
-- `gl_word` — text (word rendered into the WebGL mask)
-- `cards` — repeater
-  - `title` — text
-  - `text_top` — textarea
-  - `text_bottom` — textarea
+- `title`, `intro` — Wij zijn Trichis heading and introduction
+- `cards` — repeater of `title`, `text_top`, `text_bottom`
 
-Replaces `siteSettings.homeContent.how_we_do_it`, which is removed.
+Cards render as DOM elements in three columns, stacking on phones. The glass scene,
+render targets, tracking stores, and `gl_word` field have been removed.
+
+#### Homepage rollout and footer form
+
+Site Settings → Footer now includes `footer_form_enabled` and `footer_form`.
+The latter reuses the form block's fields (Advanced Forms key, labels, field types,
+options, required state, widths, submit label, and success copy). Use the intended
+Advanced Forms key; this does not subscribe contact submissions to a mailing list.
+
+Deploy the updated `trichis-core` plugin before building the frontend against WordPress:
+the GraphQL query requires the new fields. Existing content can be migrated without
+reimporting media or changing other pages:
+
+```sh
+wp trichis home-design --dir=/path/to/scripts/seed/data
+wp trichis home-design --dir=/path/to/scripts/seed/data --apply
+```
+
+The first command previews the migration. The second backs up the homepage blocks
+and affected footer settings, applies the five reference-design sections, creates
+project rows, and moves the existing homepage form into the footer. Existing service
+images/links are reused where they match; missing service artwork stays empty. Subsequent
+runs preserve editor changes. `wp trichis home-design --restore` restores the saved content.
+The backup is stored in the `trichis_home_design_backup_v1` WordPress option.
+
+Fresh installations use `wp trichis seed`, which includes the new fields and footer form.
+For a local preview without a CMS migration, run with `USE_SEED_DATA=1 PUBLIC_USE_SEED_DATA=1`.
 
 #### `home_showreel` → `home/HomeShowReel.jsx`
 

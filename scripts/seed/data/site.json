@@ -99,7 +99,58 @@
     ],
     "footer_cta_title": "Klaar voor de\nvolgende stap?",
     "footer_cta_text": "Neem contact op",
-    "footer_cta_link": "mailto:info@trichis.nl"
+    "footer_cta_link": "mailto:info@trichis.nl",
+    "footer_form_enabled": true,
+    "footer_form": {
+      "title": "",
+      "subtitle": "",
+      "ctaText": "Verzenden",
+      "successTitle": "Bedankt voor je reactie",
+      "successMessage": "We komen zo snel mogelijk bij je terug. Kijk in de tussentijd voor meer inspiratie ;)",
+      "formName": "quickscan",
+      "formFields": [
+        {
+          "label": "Naam",
+          "name": "naam",
+          "fieldType": "text",
+          "required": true,
+          "width": "half",
+          "placeholder": "Je volledige naam"
+        },
+        {
+          "label": "Bedrijfsnaam",
+          "name": "bedrijfsnaam",
+          "fieldType": "text",
+          "required": true,
+          "width": "half",
+          "placeholder": "Je bedrijfsnaam"
+        },
+        {
+          "label": "Emailadres",
+          "name": "email",
+          "fieldType": "email",
+          "required": true,
+          "width": "half",
+          "placeholder": "naam@bedrijf.nl"
+        },
+        {
+          "label": "Waar ben je naar op zoek?",
+          "name": "type",
+          "fieldType": "checkbox",
+          "required": true,
+          "width": "half",
+          "options": "Quickscan,Strategie,Brand Identity,Graphic Design,Beeld Visuals,Creatieve Campagne,Werving & Employer Branding,Online Marketing,Website,AI Oplossingen"
+        },
+        {
+          "label": "Bericht",
+          "name": "bericht",
+          "fieldType": "longtext",
+          "required": true,
+          "width": "full",
+          "placeholder": "Vertel ons meer over je project..."
+        }
+      ]
+    }
   },
   "cookieBanner": {
     "cookie_title": "Deze website maakt gebruik van cookies.",

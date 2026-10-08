@@ -133,20 +133,22 @@ function blockFragments(prefix, blocks) {
     // hard-coded home / about / what-we-do sections into the page builder.
     home_hero: `
       ... on ${prefix}HomeHeroLayout {
+        fullscreen
         media { ${MEDIA} }
         mobileMedia { ${MEDIA} }
       }
     `,
     home_who_we_are: `
       ... on ${prefix}HomeWhoWeAreLayout {
+        glyphMedia { ${MEDIA} }
         sectionTitle
         body
       }
     `,
     home_what_we_do: `
       ... on ${prefix}HomeWhatWeDoLayout {
+        glyphMedia { ${MEDIA} }
         sectionTitle
-        scrollingText
         intro
         services {
           label
@@ -158,9 +160,10 @@ function blockFragments(prefix, blocks) {
     home_what_weve_created: `
       ... on ${prefix}HomeWhatWeveCreatedLayout {
         sectionTitle
-        scrollingText
-        intro
-        listLabel
+        projectRows {
+          projectSlug width alignment imageRatio glyphEnabled glyphPosition glyphWidth glyphRotation glyphFlip
+          glyphMedia { ${MEDIA} }
+        }
         ctaText
         ctaLink
       }
@@ -168,7 +171,7 @@ function blockFragments(prefix, blocks) {
     how_we_do_it: `
       ... on ${prefix}HowWeDoItLayout {
         title
-        glWord
+        intro
         cards {
           title
           textTop
@@ -454,6 +457,11 @@ export const SITE_SETTINGS_QUERY = /* GraphQL */ `
         }
       }
       footer {
+        footerFormEnabled
+        footerForm {
+          title subtitle formName ctaText successTitle successMessage
+          formFields { label name fieldType required options placeholder width }
+        }
         footerLeadHead
         footerLeadBody
         footerOffices {

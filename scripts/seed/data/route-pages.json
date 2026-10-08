@@ -4,8 +4,8 @@
     "slug": "home",
     "pageKey": "home",
     "seo": {
-      "title": "Nine Creative Agency",
-      "description": "Nine is een onafhankelijk creatief bureau.",
+      "title": "Trichis",
+      "description": "Wij maken verhalen zichtbaar. Met woorden, beelden en design.",
       "ogImage": null,
       "noindex": false
     },
@@ -14,143 +14,207 @@
     "content": [
       {
         "__typename": "HomeheroRecord",
-        "media": { "url": "/video/showreel.mp4" },
-        "mobileMedia": { "url": "/video/showreel_mobile.mp4" }
+        "media": {
+          "url": "/video/showreel.mp4"
+        },
+        "mobileMedia": {
+          "url": "/video/showreel_mobile.mp4"
+        },
+        "fullscreen": true
       },
       {
         "__typename": "HomewhoweareRecord",
-        "sectionTitle": "Who we are",
-        "body": "Nine is een onafhankelijk creatief bureau met een culture driven visie. Met strategy, identity en design, creëren we nieuwe werelden voor brands we love."
+        "sectionTitle": "Wat heb jij\nte vertellen",
+        "body": "In iedereen en achter ieder merk schuilt een idee, een ambitie, een missie: een verhaal dat ertoe doet. Soms zit het nog verstopt in je hoofd, in losse documenten, in toekomstplannen of juist in gepassioneerde gesprekken.\n\nWij helpen je de kern van jouw verhaal te vinden. En geven het vorm met woorden, beelden en design. We verbinden het aan het hoofd, gevoel, geest en hart. Zodat het raakt en blijft hangen."
       },
       {
         "__typename": "HomewhatwedoRecord",
-        "sectionTitle": "What we do",
-        "scrollingText": "You got the vibe, we got the tools.",
-        "intro": "Opvallen is niet genoeg. Wij zorgen ervoor dat jouw merk onthouden wordt. Voorbij de hype, recht het hart in. Alleen zo blijf je top of mind.",
+        "sectionTitle": "Wij maken verhalen zichtbaar.",
+        "intro": "Met woorden die kloppen. Met beelden die blijven hangen. En met rake communicatie.\n\nWe helpen organisaties hun identiteit scherp te krijgen en tot leven te brengen. Met concepten, woorden, beelden en design. Van merkverhaal en huisstijl tot campagnes en webcommunicatie, waarmee onze opdrachtgevers op hun best voor de dag komen.",
         "services": [
           {
-            "label": "Identity",
+            "label": "Visual identity",
             "link": "/service/identity",
-            "media": { "url": "/images/services/identity.webp" }
+            "media": {
+              "url": "/images/services/identity.webp"
+            }
           },
           {
-            "label": "Webdesign",
-            "link": "/service/webdesign",
-            "media": { "url": "/images/services/web-design.webp" }
+            "label": "Huisstijlbewaking",
+            "link": "/service/identity",
+            "media": {
+              "url": "/images/services/identity.webp"
+            }
           },
           {
-            "label": "Photo & video",
-            "link": "/service/photo-video",
-            "media": { "url": "/images/services/photo-video.webp" }
-          },
-          {
-            "label": "Campaign",
-            "link": "/service/campaign",
-            "media": { "url": "/images/services/campaign.webp" }
-          },
-          {
-            "label": "Strategy",
+            "label": "Strategie",
             "link": "/service/strategy",
-            "media": { "url": "/images/services/strategy.webp" }
+            "media": {
+              "url": "/images/services/strategy.webp"
+            }
+          },
+          {
+            "label": "Copy",
+            "link": "",
+            "media": null
+          },
+          {
+            "label": "Social formats",
+            "link": "",
+            "media": null
+          },
+          {
+            "label": "Magazines",
+            "link": "",
+            "media": null
+          },
+          {
+            "label": "Websites",
+            "link": "/service/webdesign",
+            "media": {
+              "url": "/images/services/web-design.webp"
+            }
+          },
+          {
+            "label": "Campagnes",
+            "link": "/service/campaign",
+            "media": {
+              "url": "/images/services/campaign.webp"
+            }
+          },
+          {
+            "label": "Boeken",
+            "link": "",
+            "media": null
           }
         ]
       },
       {
         "__typename": "HowwedoitRecord",
-        "title": "How we do it",
-        "glWord": "nine",
+        "title": "Wij zijn Trichis.",
         "cards": [
           {
-            "title": "Identity",
-            "textTop": "Mensen moeten in 1 sec. weten dat het om jouw merk gaat. Maar hoe blijf je onderscheidend, met zoveel indrukken? Met een sterke en heldere identiteit.",
-            "textBottom": "Dus zoeken wij naar de kern, de stickiness van jouw merk. We maken het onmiskenbaar jou en zorgen dat het blijft plakken."
+            "title": "Hoe werken we?",
+            "textTop": "",
+            "textBottom": ""
           },
           {
-            "title": "Impact",
-            "textTop": "Impact maken betekent zelf de toekomst vormgeven. Als creatief bureau staan wij middenin de samenleving. ",
-            "textBottom": "Wij weten precies wat er speelt, zien veranderingen al vroeg en anticiperen op wat komen gaat. Zo zorgen wij ervoor dat jouw merk de koers niet volgt, maar bepaalt."
+            "title": "Wat kenmerkt ons?",
+            "textTop": "",
+            "textBottom": ""
           },
           {
-            "title": "Reach",
-            "textTop": "In een wereld vol ruis wil je niet hoeven schreeuwen om een punt te maken. Wij helpen je om de juiste mensen te bereiken",
-            "textBottom": "Samen met onze partners creëren we de perfecte balans tussen impact, frequentie en bereik. Zodat jij je merk kan laten spreken."
-          },
-          {
-            "title": "Result",
-            "textTop": "We streven vaak naar hetzelfde: groei, succes en bereik. We nemen verschillende routes, maar bewegen in dezelfde richting. Alleen, hoe maak je dan nog het verschil?",
-            "textBottom": "Wij zorgen ervoor dat jouw merk niet alleen doet wat het belooft, maar dat elke stap gericht is op concrete resultaten die je ziet en voelt. "
+            "title": "Wat heb je aan ons?",
+            "textTop": "",
+            "textBottom": ""
           }
-        ]
-      },
-      {
-        "__typename": "LinkbandRecord",
-        "title": "More About <strong>nine</strong>",
-        "link": "/about-us"
+        ],
+        "intro": "We denken, schrijven, ontwerpen en maken. Altijd vanuit één helder uitgangspunt: identiteit voor merken. We communiceren niet in losse flodders, maar zorgen voor samenhang en herkenbaarheid."
       },
       {
         "__typename": "HomewhatwevecreatedRecord",
-        "sectionTitle": "What we've done so far",
-        "scrollingText": "Discover your impact",
-        "intro": "Nine is een onafhankelijk creatief bureau dat de toekomst opnieuw vormgeeft. Met slim design, een heldere visie en grensverleggende ideeën bouwen we samen aan een nieuwe wereld.",
-        "listLabel": "Projects",
-        "ctaText": "All our <strong>projects</strong>",
-        "ctaLink": "/projects"
-      },
-      {
-        "__typename": "HomeshowreelRecord",
-        "textTop": "Watch our",
-        "textBottom": "showreel",
-        "media": { "url": "/video/showreel.mp4" },
-        "mobileMedia": { "url": "/video/showreel_mobile.mp4" }
-      },
-      {
-        "__typename": "FormSectionRecord",
-        "title": "Wil je een gratis <strong>Quickscan?</strong>",
-        "subtitle": "Neem contact op en wij laten je zien waar de kansen liggen!",
-        "ctaText": "Verzenden",
-        "successTitle": "Bedankt voor je reactie",
-        "successMessage": "We komen zo snel mogelijk bij je terug. Kijk in de tussentijd voor meer inspiratie ;)",
-        "formName": "quickscan",
-        "formFields": [
+        "sectionTitle": "Werk",
+        "ctaText": "",
+        "ctaLink": "",
+        "projectRows": [
           {
-            "label": "Naam",
-            "name": "naam",
-            "fieldType": "text",
-            "required": true,
-            "width": "half",
-            "placeholder": "Je volledige naam"
+            "projectSlug": "wicky",
+            "width": 40,
+            "alignment": "left",
+            "imageRatio": "landscape",
+            "glyphEnabled": true,
+            "glyphPosition": "top-left",
+            "glyphWidth": 35,
+            "glyphRotation": 0,
+            "glyphFlip": false
           },
           {
-            "label": "Bedrijfsnaam",
-            "name": "bedrijfsnaam",
-            "fieldType": "text",
-            "required": true,
-            "width": "half",
-            "placeholder": "Je bedrijfsnaam"
+            "projectSlug": "ab-inbev",
+            "width": 66,
+            "alignment": "right",
+            "imageRatio": "landscape",
+            "glyphEnabled": false,
+            "glyphPosition": "top-right",
+            "glyphWidth": 35,
+            "glyphRotation": 0,
+            "glyphFlip": false
           },
           {
-            "label": "Emailadres",
-            "name": "email",
-            "fieldType": "email",
-            "required": true,
-            "width": "half",
-            "placeholder": "naam@bedrijf.nl"
+            "projectSlug": "direct-source-international",
+            "width": 66,
+            "alignment": "left",
+            "imageRatio": "landscape",
+            "glyphEnabled": true,
+            "glyphPosition": "top-right",
+            "glyphWidth": 35,
+            "glyphRotation": 0,
+            "glyphFlip": false
           },
           {
-            "label": "Waar ben je naar op zoek?",
-            "name": "type",
-            "fieldType": "checkbox",
-            "required": true,
-            "width": "half",
-            "options": "Quickscan,Strategie,Brand Identity,Graphic Design,Beeld Visuals,Creatieve Campagne,Werving & Employer Branding,Online Marketing,Website,AI Oplossingen"
+            "projectSlug": "traksi",
+            "width": 40,
+            "alignment": "right",
+            "imageRatio": "portrait",
+            "glyphEnabled": false,
+            "glyphPosition": "top-right",
+            "glyphWidth": 35,
+            "glyphRotation": 0,
+            "glyphFlip": false
           },
           {
-            "label": "Bericht",
-            "name": "bericht",
-            "fieldType": "longtext",
-            "required": true,
-            "width": "full",
-            "placeholder": "Vertel ons meer over je project..."
+            "projectSlug": "ak-advocaten",
+            "width": 100,
+            "alignment": "left",
+            "imageRatio": "landscape",
+            "glyphEnabled": false,
+            "glyphPosition": "top-right",
+            "glyphWidth": 35,
+            "glyphRotation": 0,
+            "glyphFlip": false
+          },
+          {
+            "projectSlug": "yuki",
+            "width": 40,
+            "alignment": "right",
+            "imageRatio": "landscape",
+            "glyphEnabled": true,
+            "glyphPosition": "top-left",
+            "glyphWidth": 35,
+            "glyphRotation": 0,
+            "glyphFlip": false
+          },
+          {
+            "projectSlug": "hotel-keyser",
+            "width": 66,
+            "alignment": "left",
+            "imageRatio": "landscape",
+            "glyphEnabled": false,
+            "glyphPosition": "top-right",
+            "glyphWidth": 35,
+            "glyphRotation": 0,
+            "glyphFlip": false
+          },
+          {
+            "projectSlug": "het-badhuys",
+            "width": 66,
+            "alignment": "right",
+            "imageRatio": "landscape",
+            "glyphEnabled": true,
+            "glyphPosition": "top-right",
+            "glyphWidth": 35,
+            "glyphRotation": 0,
+            "glyphFlip": false
+          },
+          {
+            "projectSlug": "yeaz",
+            "width": 40,
+            "alignment": "left",
+            "imageRatio": "portrait",
+            "glyphEnabled": false,
+            "glyphPosition": "top-right",
+            "glyphWidth": 35,
+            "glyphRotation": 0,
+            "glyphFlip": false
           }
         ]
       }

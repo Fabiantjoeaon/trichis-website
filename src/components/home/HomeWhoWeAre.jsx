@@ -1,18 +1,13 @@
-import { SectionTitle } from "@/components/ui/Divider";
-import { ScrollingText } from "@/components/ui/ScrollingText";
-import { AcronymLogo } from "@/components/ui/Logo";
+import HomeGlyph from "./HomeGlyph";
 
 export default function HomeWhoWeAre({ data }) {
   return (
-    <>
-      <SectionTitle>{data?.sectionTitle}</SectionTitle>
-      <section
-        className="home-who-we-are inner-width"
-        id={data?.anchorId || undefined}
-      >
-        <ScrollingText>{data?.body}</ScrollingText>
-        <AcronymLogo />
-      </section>
-    </>
+    <section className="home-story home-section" id={data?.anchorId}>
+      <div className="home-story__heading">
+        <h2>{data?.sectionTitle}</h2>
+        <HomeGlyph className="home-story__glyph" media={data?.glyphMedia} />
+      </div>
+      <div className="home-copy">{data?.body}</div>
+    </section>
   );
 }

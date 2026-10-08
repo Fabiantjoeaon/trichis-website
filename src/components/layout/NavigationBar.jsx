@@ -7,7 +7,6 @@ import useEvent from "@/hooks/useEvent";
 import SplitText from "@/components/ui/SplitText";
 import AnimatedHoverText from "@/components/ui/AnimatedHoverText";
 import Badge from "@/components/ui/Badge";
-import Logo from "@/components/ui/Logo";
 import { Divider } from "@/components/ui/Divider";
 import { TransitionLink } from "@/components/ui/TransitionLink";
 import { t } from "@/lib/i18n";
@@ -35,9 +34,8 @@ const MobileMenuIcon = memo(function MobileMenuIcon() {
   );
 });
 
-export default function NavigationBar({ siteName = "Nine Creative Agency" }) {
+export default function NavigationBar({ siteName = "Trichis" }) {
   const border = useRef();
-  const logo = useRef();
   const [badge1, badge2] = [useRef(), useRef()];
   const menuText = useRef();
   const logoTextRef = useRef();
@@ -52,7 +50,6 @@ export default function NavigationBar({ siteName = "Nine Creative Agency" }) {
     border.current?.animateIn();
     badge1.current?.animateIn?.();
     badge2.current?.animateIn?.({ delay: 0.2 });
-    logo.current?.animateIn?.();
     menuText.current?.animateIn?.();
     setBadgesVisible(true);
   }
@@ -64,20 +61,16 @@ export default function NavigationBar({ siteName = "Nine Creative Agency" }) {
   return (
     <header className="navigation">
       <TransitionLink href="/">
-        {isMobileLayout ? (
-          <Logo ref={logo} />
-        ) : (
-          <SplitText
-            ref={logoTextRef}
-            className="nav-logo"
-            animateOnScroll={false}
-            type="chars"
-            tag="h2"
-            animation="charClipped"
-          >
-            {siteName}
-          </SplitText>
-        )}
+        <SplitText
+          ref={logoTextRef}
+          className="nav-logo"
+          animateOnScroll={false}
+          type="chars"
+          tag="h2"
+          animation="charClipped"
+        >
+          {siteName}
+        </SplitText>
       </TransitionLink>
       {!isMobileLayout && (
         <AnimatedHoverText

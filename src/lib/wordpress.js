@@ -155,15 +155,16 @@ function mapBlock(typename, block) {
     // ── page sections ──
     case "HomeheroRecord":
       return {
+        fullscreen: block.fullscreen ?? true,
         media: mapMedia(block.media),
         mobileMedia: mapMedia(block.mobileMedia),
       };
     case "HomewhoweareRecord":
-      return { sectionTitle: block.sectionTitle, body: block.body };
+      return { sectionTitle: block.sectionTitle, body: block.body, glyphMedia: mapMedia(block.glyphMedia) };
     case "HomewhatwedoRecord":
       return {
+        glyphMedia: mapMedia(block.glyphMedia),
         sectionTitle: block.sectionTitle,
-        scrollingText: block.scrollingText,
         intro: block.intro,
         services: (block.services ?? []).map((s) => ({
           label: s.label,
@@ -174,16 +175,18 @@ function mapBlock(typename, block) {
     case "HomewhatwevecreatedRecord":
       return {
         sectionTitle: block.sectionTitle,
-        scrollingText: block.scrollingText,
-        intro: block.intro,
-        listLabel: block.listLabel,
+        projectRows: (block.projectRows ?? []).map((row) => ({
+          ...row, projectSlug: choice(row.projectSlug), alignment: choice(row.alignment),
+          imageRatio: choice(row.imageRatio), glyphPosition: choice(row.glyphPosition),
+          glyphMedia: mapMedia(row.glyphMedia),
+        })),
         ctaText: block.ctaText,
         ctaLink: block.ctaLink,
       };
     case "HowwedoitRecord":
       return {
         title: block.title,
-        glWord: block.glWord,
+        intro: block.intro,
         cards: (block.cards ?? []).map((c) => ({
           title: c.title,
           textTop: c.textTop,
@@ -412,6 +415,11 @@ export async function getSiteSettings() {
     navLinks: s.navigation?.navLinks ?? [],
     menuFooterLinks: s.navigation?.menuFooterLinks ?? [],
     footer: {
+      formEnabled: s.footer?.footerFormEnabled ?? true,
+      form: s.footer?.footerForm ? {
+        ...s.footer.footerForm,
+        formFields: (s.footer.footerForm.formFields ?? []).map((f) => ({ ...f, fieldType: choice(f.fieldType), width: choice(f.width) })),
+      } : null,
       leadHead: s.footer?.footerLeadHead ?? "",
       leadBody: s.footer?.footerLeadBody ?? "",
       offices: s.footer?.footerOffices ?? [],

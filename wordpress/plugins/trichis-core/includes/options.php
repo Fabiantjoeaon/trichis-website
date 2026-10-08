@@ -164,6 +164,16 @@ add_action('acf/init', function () {
         'title'  => 'Footer',
         'fields' => [
             [
+                'key' => 'field_footer_form_enabled', 'name' => 'footer_form_enabled',
+                'label' => 'Show footer form', 'type' => 'true_false', 'ui' => 1, 'default_value' => 1,
+            ],
+            [
+                'key' => 'field_footer_form', 'name' => 'footer_form',
+                'label' => 'Newsletter / contact form', 'type' => 'group',
+                'instructions' => 'Use the Advanced Forms key for the intended form. Labels and field names must match that form.',
+                'sub_fields' => trichis_block_form_section('footer')['sub_fields'],
+            ],
+            [
                 'key'     => 'field_footer_lead_head',
                 'label'   => 'Lead heading',
                 'name'    => 'footer_lead_head',

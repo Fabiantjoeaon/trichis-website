@@ -84,6 +84,7 @@ export function normalizeAsset(asset) {
 }
 
 const MEDIA_KEYS = new Set([
+  "glyphMedia",
   "coverImage",
   "mobileCoverImage",
   "featuredImage",

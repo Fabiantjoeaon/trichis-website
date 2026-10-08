@@ -67,6 +67,14 @@ function trichis_block_media(string $ctx, string $block, string $name, string $l
     return trichis_media_group("field_{$ctx}_blk_{$block}_{$name}", $name, $label);
 }
 
+/** Decorative artwork only; video is not a glyph. */
+function trichis_block_glyph(string $ctx, string $block): array {
+    $field = trichis_block_media($ctx, $block, 'glyph_media', 'Yellow glyph artwork (optional)');
+    $field['mime_types'] = 'jpg,jpeg,png,webp,gif,svg,avif';
+    $field['instructions'] = 'Leave empty until the final artwork is ready. Its position is already reserved.';
+    return $field;
+}
+
 // ─────────────────────────────────────────
 // Header blocks
 // ─────────────────────────────────────────
@@ -534,6 +542,11 @@ function trichis_block_home_hero(string $ctx): array {
         'label'      => 'Home Hero (fullscreen showreel)',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_bf($ctx, 'home_hero', 'fullscreen', [
+                'label' => 'Fullscreen hero', 'type' => 'true_false', 'ui' => 1,
+                'default_value' => 1,
+                'instructions' => 'Fill the screen below the navigation. Disable for an inset hero.',
+            ]),
             trichis_block_media($ctx, 'home_hero', 'media', 'Media (desktop)'),
             trichis_block_media($ctx, 'home_hero', 'mobile_media', 'Media (mobile)'),
         ],
@@ -547,6 +560,7 @@ function trichis_block_home_who_we_are(string $ctx): array {
         'label'      => 'Who We Are',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_block_glyph($ctx, 'home_who_we_are'),
             trichis_bf($ctx, 'home_who_we_are', 'section_title', [
                 'label'   => 'Section title',
                 'type'    => 'text',
@@ -568,13 +582,9 @@ function trichis_block_home_what_we_do(string $ctx): array {
         'label'      => 'What We Do (service carousel)',
         'display'    => 'block',
         'sub_fields' => [
+            trichis_block_glyph($ctx, 'home_what_we_do'),
             trichis_bf($ctx, 'home_what_we_do', 'section_title', [
                 'label'   => 'Section title',
-                'type'    => 'text',
-                'wrapper' => ['width' => '50'],
-            ]),
-            trichis_bf($ctx, 'home_what_we_do', 'scrolling_text', [
-                'label'   => 'Scrolling text',
                 'type'    => 'text',
                 'wrapper' => ['width' => '50'],
             ]),
@@ -619,21 +629,45 @@ function trichis_block_home_what_weve_created(string $ctx): array {
                 'type'    => 'text',
                 'wrapper' => ['width' => '50'],
             ]),
-            trichis_bf($ctx, 'home_what_weve_created', 'scrolling_text', [
-                'label'   => 'Scrolling text',
-                'type'    => 'text',
-                'wrapper' => ['width' => '50'],
-            ]),
-            trichis_bf($ctx, 'home_what_weve_created', 'intro', [
-                'label' => 'Intro',
-                'type'  => 'textarea',
-                'rows'  => 3,
-            ]),
-            trichis_bf($ctx, 'home_what_weve_created', 'list_label', [
-                'label'        => 'List label',
-                'type'         => 'text',
-                'instructions' => 'Small heading above the project list.',
-                'wrapper'      => ['width' => '34'],
+            trichis_bf($ctx, 'home_what_weve_created', 'project_rows', [
+                'label' => 'Project rows', 'type' => 'repeater', 'layout' => 'block',
+                'button_label' => 'Add project row',
+                'instructions' => 'Drag to reorder. Empty uses featured projects. On phones widths are at least 70%. Glyph slots stay empty until artwork is supplied.',
+                'sub_fields' => [
+                    trichis_bf($ctx, 'home_what_weve_created', 'project_slug', [
+                        'label' => 'Project', 'type' => 'select', 'ui' => 1,
+                        'choices' => [], 'required' => 1,
+                    ]),
+                    trichis_bf($ctx, 'home_what_weve_created', 'width', [
+                        'label' => 'Project width (%)', 'type' => 'number',
+                        'min' => 20, 'max' => 100, 'default_value' => 66,
+                    ]),
+                    trichis_bf($ctx, 'home_what_weve_created', 'alignment', [
+                        'label' => 'Alignment', 'type' => 'select',
+                        'choices' => ['left' => 'Left', 'center' => 'Center', 'right' => 'Right'], 'default_value' => 'left',
+                    ]),
+                    trichis_bf($ctx, 'home_what_weve_created', 'image_ratio', [
+                        'label' => 'Image shape', 'type' => 'select',
+                        'choices' => ['landscape' => 'Landscape', 'portrait' => 'Portrait', 'square' => 'Square', 'wide' => 'Wide', 'original' => 'Original'], 'default_value' => 'landscape',
+                    ]),
+                    trichis_bf($ctx, 'home_what_weve_created', 'glyph_enabled', [
+                        'label' => 'Show yellow glyph', 'type' => 'true_false', 'ui' => 1,
+                    ]),
+                    trichis_block_glyph($ctx, 'home_what_weve_created'),
+                    trichis_bf($ctx, 'home_what_weve_created', 'glyph_position', [
+                        'label' => 'Glyph position', 'type' => 'select',
+                        'choices' => ['top-left' => 'Top left', 'top-right' => 'Top right', 'bottom-left' => 'Bottom left', 'bottom-right' => 'Bottom right'], 'default_value' => 'top-right',
+                    ]),
+                    trichis_bf($ctx, 'home_what_weve_created', 'glyph_width', [
+                        'label' => 'Glyph width (% of row)', 'type' => 'number', 'min' => 10, 'max' => 60, 'default_value' => 35,
+                    ]),
+                    trichis_bf($ctx, 'home_what_weve_created', 'glyph_rotation', [
+                        'label' => 'Glyph rotation (degrees)', 'type' => 'number', 'min' => -180, 'max' => 180, 'default_value' => 0,
+                    ]),
+                    trichis_bf($ctx, 'home_what_weve_created', 'glyph_flip', [
+                        'label' => 'Mirror glyph horizontally', 'type' => 'true_false', 'ui' => 1,
+                    ]),
+                ],
             ]),
             trichis_bf($ctx, 'home_what_weve_created', 'cta_text', [
                 'label'        => 'CTA text',
@@ -654,7 +688,7 @@ function trichis_block_how_we_do_it(string $ctx): array {
     return [
         'key'        => "layout_key_{$ctx}_how_we_do_it",
         'name'       => 'how_we_do_it',
-        'label'      => 'How We Do It (glass cards)',
+        'label'      => 'Wij zijn Trichis (cards)',
         'display'    => 'block',
         'sub_fields' => [
             trichis_bf($ctx, 'how_we_do_it', 'title', [
@@ -662,11 +696,8 @@ function trichis_block_how_we_do_it(string $ctx): array {
                 'type'    => 'text',
                 'wrapper' => ['width' => '50'],
             ]),
-            trichis_bf($ctx, 'how_we_do_it', 'gl_word', [
-                'label'        => 'Background word',
-                'type'         => 'text',
-                'instructions' => 'Word rendered into the WebGL mask behind the cards.',
-                'wrapper'      => ['width' => '50'],
+            trichis_bf($ctx, 'how_we_do_it', 'intro', [
+                'label' => 'Intro', 'type' => 'textarea', 'rows' => 4,
             ]),
             trichis_bf($ctx, 'how_we_do_it', 'cards', [
                 'label'        => 'Cards',
@@ -1050,3 +1081,13 @@ function trichis_blocks_for_context(string $ctx): array {
             return [];
     }
 }
+
+// Store project slugs so both WordPress and the static frontend resolve the same row.
+add_filter('acf/load_field/name=project_slug', function ($field) {
+    if (!str_contains($field['key'], 'home_what_weve_created')) return $field;
+    $field['choices'] = [];
+    foreach (get_posts(['post_type' => 'project', 'numberposts' => -1, 'orderby' => 'title', 'order' => 'ASC']) as $project) {
+        $field['choices'][$project->post_name] = $project->post_title;
+    }
+    return $field;
+});

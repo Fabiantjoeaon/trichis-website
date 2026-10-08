@@ -1,3 +1,4 @@
+import FormSection from "@/components/blocks/FormSection";
 import { useMemo } from "react";
 import { TransitionLink } from "@/components/ui/TransitionLink";
 import { t } from "@/lib/i18n";
@@ -71,6 +72,10 @@ export default function Footer({ settings = {} }) {
             </span>
           ))}
         </p>
+
+        {footer.formEnabled !== false && footer.form?.formFields?.length > 0 && (
+          <div className="site-footer__form"><FormSection data={footer.form} /></div>
+        )}
 
         <div className="site-footer__cols">
           <div className="site-footer__col site-footer__col--lead">

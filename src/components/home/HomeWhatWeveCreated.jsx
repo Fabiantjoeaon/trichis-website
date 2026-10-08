@@ -1,82 +1,40 @@
-import { useCallback, useEffect, useRef } from "react";
-import SplitText from "@/components/ui/SplitText";
-import BorderedIcon from "@/components/ui/BorderedIcon";
-import { SectionTitle } from "@/components/ui/Divider";
-import { ScrollingText } from "@/components/ui/ScrollingText";
-import { Project } from "@/components/Project";
+import TransitionLink from "@/components/ui/TransitionLink";
+import HomeGlyph from "./HomeGlyph";
+import { boundedNumber, projectRows } from "@/lib/home-layout";
 
 export default function HomeWhatWeveCreated({ data, projects = [] }) {
-  const projectsRef = useRef(null);
-
-  const measureProjectsHeight = useCallback(() => {
-    if (!projectsRef.current) return;
-    const children = projectsRef.current.children;
-    let maxHeight = 0;
-    for (const child of children) {
-      const rect = child.getBoundingClientRect();
-      const bottom = child.offsetTop + rect.height;
-      if (bottom > maxHeight) maxHeight = bottom;
-    }
-    projectsRef.current.style.height = `${maxHeight}px`;
-  }, []);
-
-  useEffect(() => {
-    if (!projectsRef.current) return;
-    requestAnimationFrame(() => {
-      measureProjectsHeight();
-      requestAnimationFrame(measureProjectsHeight);
-    });
-    const ro = new ResizeObserver(() => measureProjectsHeight());
-    Array.from(projectsRef.current.children).forEach((c) => ro.observe(c));
-    return () => ro.disconnect();
-  }, [projects, measureProjectsHeight]);
-
+  const rows = projectRows(data?.projectRows, projects);
   return (
-    <>
-      <SectionTitle>{data?.sectionTitle}</SectionTitle>
-      <section className="home-wwc inner-width" id={data?.anchorId || undefined}>
-        <div className="home-wwc__top">
-          <ScrollingText>{data?.scrollingText}</ScrollingText>
-          <SplitText tag="p" animateOnScroll>
-            {data?.intro}
-          </SplitText>
-        </div>
-
-        <div className="home-wwc__projects-title">
-          <SplitText className="home-wwc__projects-label" tag="h5" animateOnScroll>
-            {data?.listLabel}
-          </SplitText>
-        </div>
-
-        <div className="home-wwc__projects" ref={projectsRef}>
-          {projects.map((project, index) => {
-            const coverImage = project.featuredImage || project.coverImage;
-            return (
-              <Project
-                i={index}
-                key={project.id || project.slug || index}
-                {...project}
-                coverImage={coverImage}
-              />
-            );
-          })}
-        </div>
-
-        {(data?.ctaText || data?.ctaLink) && (
-          <div className="home-wwc__more">
-            <div className="home-wwc__more-inner">
-              <SplitText
-                tag="h3"
-                animation="charDoubleClipped"
-                type="chars"
-                animateOnScroll
-                dangerouslySetInnerHTML={{ __html: data?.ctaText ?? "" }}
-              />
-              {data?.ctaLink && <BorderedIcon href={data.ctaLink} />}
+    <section className="home-work home-section" id={data?.anchorId}>
+      <h2>{data?.sectionTitle}</h2>
+      <div className="home-work__rows">
+        {rows.map((row, index) => {
+          const { project } = row;
+          const media = project.featuredImage || project.coverImage;
+          const alignment = ["left", "center", "right"].includes(row.alignment) ? row.alignment : "left";
+          const ratio = { landscape: "5 / 3", square: "1", portrait: "4 / 5", wide: "8 / 3", original: "auto" }[row.imageRatio] || "5 / 3";
+          const position = ["top-left", "top-right", "bottom-left", "bottom-right"].includes(row.glyphPosition) ? row.glyphPosition : "top-right";
+          return (
+            <div className={`home-work__row home-work__row--${alignment}`} key={`${project.slug}-${index}`}
+              style={{ "--project-width": `${boundedNumber(row.width, 66, 20, 100)}%`, "--project-ratio": ratio }}>
+              {row.glyphEnabled && <HomeGlyph media={row.glyphMedia} className={`home-work__glyph home-work__glyph--${position}`}
+                style={{ "--glyph-width": `${boundedNumber(row.glyphWidth, 35, 10, 60)}%`,
+                  "--glyph-rotation": `${boundedNumber(row.glyphRotation, 0, -180, 180)}deg`,
+                  "--glyph-flip": row.glyphFlip ? -1 : 1 }} />}
+              <TransitionLink className="home-work__project" href={`/project/${project.slug}`}>
+                <div className="home-work__image">
+                  {media?.url && (media.isVideo ? <video src={media.url} autoPlay loop muted playsInline /> :
+                    <img src={media.url} alt={media.alt || project.title} loading="lazy" />)}
+                </div>
+                <h3>{project.title}</h3>
+              </TransitionLink>
             </div>
-          </div>
-        )}
-      </section>
-    </>
+          );
+        })}
+      </div>
+      {data?.ctaLink && <TransitionLink className="home-work__more" href={data.ctaLink}>
+        {data.ctaText?.replace(/<[^>]*>/g, "") || "Alle projecten"} →
+      </TransitionLink>}
+    </section>
   );
 }

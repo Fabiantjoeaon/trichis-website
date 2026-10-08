@@ -1,12 +1,13 @@
-import { useCallback } from "react";
+import { useCallback, useId } from "react";
 import { t } from "@/lib/i18n";
 
 const ERROR_COLOR = "#E74C3C";
 
-function TextInput({ name, value, onChange, onBlur, hasError, placeholder }) {
+function TextInput({ name, value, onChange, onBlur, hasError, placeholder, id }) {
   return (
     <input
       className={`form-field__input${hasError ? " is-error" : ""}${value ? " has-value" : ""}`}
+      id={id}
       type="text"
       name={name}
       value={value}
@@ -17,10 +18,11 @@ function TextInput({ name, value, onChange, onBlur, hasError, placeholder }) {
   );
 }
 
-function EmailInput({ name, value, onChange, onBlur, hasError, placeholder }) {
+function EmailInput({ name, value, onChange, onBlur, hasError, placeholder, id }) {
   return (
     <input
       className={`form-field__input${hasError ? " is-error" : ""}${value ? " has-value" : ""}`}
+      id={id}
       type="email"
       name={name}
       value={value}
@@ -31,7 +33,7 @@ function EmailInput({ name, value, onChange, onBlur, hasError, placeholder }) {
   );
 }
 
-function LongTextInput({ name, value, onChange, onBlur, hasError, placeholder }) {
+function LongTextInput({ name, value, onChange, onBlur, hasError, placeholder, id }) {
   return (
     <textarea
       className={`form-field__input form-field__textarea${hasError ? " is-error" : ""}${value ? " has-value" : ""}`}
@@ -39,6 +41,7 @@ function LongTextInput({ name, value, onChange, onBlur, hasError, placeholder })
       value={value}
       onChange={onChange}
       onBlur={onBlur}
+      id={id}
       rows={5}
       placeholder={placeholder}
     />
@@ -52,6 +55,7 @@ function SelectInput({
   onBlur,
   hasError,
   options = "",
+  id,
   placeholder,
 }) {
   const parsedOptions =
@@ -68,6 +72,7 @@ function SelectInput({
     <div className={`form-field__select-wrap${hasError ? " is-error" : ""}`}>
       <select
         className={`form-field__input form-field__select${hasError ? " is-error" : ""}${value ? " has-value" : ""}${!value ? " is-empty" : ""}`}
+        id={id}
         name={name}
         value={value}
         onChange={onChange}
@@ -137,6 +142,8 @@ function CheckboxGroup({
           return (
             <button
               type="button"
+              role="checkbox"
+              aria-checked={checked}
               key={opt}
               className="form-field__checkbox"
               onClick={(e) => {
@@ -167,6 +174,7 @@ function CheckboxGroup({
 }
 
 export default function FormField({ field, value, error, onChange, onBlur }) {
+  const id = useId();
   const { label, name, fieldType, required, options, placeholder, width } =
     field;
 
@@ -190,6 +198,7 @@ export default function FormField({ field, value, error, onChange, onBlur }) {
   }
 
   const inputProps = {
+    id,
     name,
     value: value || "",
     onChange,
@@ -203,7 +212,7 @@ export default function FormField({ field, value, error, onChange, onBlur }) {
     <div
       className={`form-field form-field--${width === "half" ? "half" : "full"}`}
     >
-      <label
+      <label htmlFor={id}
         className={`form-field__label${error ? " is-error" : ""}`}
         style={error ? { color: ERROR_COLOR } : undefined}
       >

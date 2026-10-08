@@ -363,6 +363,7 @@ class Trichis_Seed_Command {
                 case 'HomeheroRecord':
                     $rows[] = [
                         'acf_fc_layout' => 'home_hero',
+                        'fullscreen' => $block['fullscreen'] ?? true,
                         'media'         => $this->media_value($block['media'] ?? null),
                         'mobile_media'  => $this->media_value($block['mobileMedia'] ?? null),
                     ];
@@ -370,6 +371,7 @@ class Trichis_Seed_Command {
                 case 'HomewhoweareRecord':
                     $rows[] = [
                         'acf_fc_layout' => 'home_who_we_are',
+                        'glyph_media' => $this->media_value($block['glyphMedia'] ?? null),
                         'section_title' => $block['sectionTitle'] ?? '',
                         'body'          => $block['body'] ?? '',
                     ];
@@ -377,8 +379,8 @@ class Trichis_Seed_Command {
                 case 'HomewhatwedoRecord':
                     $rows[] = [
                         'acf_fc_layout'  => 'home_what_we_do',
+                        'glyph_media' => $this->media_value($block['glyphMedia'] ?? null),
                         'section_title'  => $block['sectionTitle'] ?? '',
-                        'scrolling_text' => $block['scrollingText'] ?? '',
                         'intro'          => $block['intro'] ?? '',
                         'services'       => array_map(fn($s) => [
                             'label' => $s['label'] ?? '',
@@ -390,10 +392,15 @@ class Trichis_Seed_Command {
                 case 'HomewhatwevecreatedRecord':
                     $rows[] = [
                         'acf_fc_layout'  => 'home_what_weve_created',
+                        'project_rows' => array_map(fn($r) => [
+                            'project_slug' => $r['projectSlug'], 'width' => $r['width'] ?? 66,
+                            'alignment' => $r['alignment'] ?? 'left', 'image_ratio' => $r['imageRatio'] ?? 'landscape',
+                            'glyph_enabled' => $r['glyphEnabled'] ?? false,
+                            'glyph_media' => $this->media_value($r['glyphMedia'] ?? null),
+                            'glyph_position' => $r['glyphPosition'] ?? 'top-right', 'glyph_width' => $r['glyphWidth'] ?? 35,
+                            'glyph_rotation' => $r['glyphRotation'] ?? 0, 'glyph_flip' => $r['glyphFlip'] ?? false,
+                        ], $block['projectRows'] ?? []),
                         'section_title'  => $block['sectionTitle'] ?? '',
-                        'scrolling_text' => $block['scrollingText'] ?? '',
-                        'intro'          => $block['intro'] ?? '',
-                        'list_label'     => $block['listLabel'] ?? '',
                         'cta_text'       => $block['ctaText'] ?? '',
                         'cta_link'       => $block['ctaLink'] ?? '',
                     ];
@@ -402,7 +409,7 @@ class Trichis_Seed_Command {
                     $rows[] = [
                         'acf_fc_layout' => 'how_we_do_it',
                         'title'         => $block['title'] ?? '',
-                        'gl_word'       => $block['glWord'] ?? '',
+                        'intro'         => $block['intro'] ?? '',
                         'cards'         => array_map(fn($c) => [
                             'title'       => $c['title'] ?? '',
                             'text_top'    => $c['textTop'] ?? '',
@@ -686,6 +693,8 @@ class Trichis_Seed_Command {
             'nav_links'         => $site['navigation']['nav_links'] ?? [],
             'menu_footer_links' => $site['navigation']['menu_footer_links'] ?? [],
 
+            'footer_form_enabled' => $site['footer']['footer_form_enabled'] ?? true,
+            'footer_form' => $this->map_blocks([array_merge($site['footer']['footer_form'] ?? [], ['__typename' => 'FormSectionRecord'])])[0],
             'footer_lead_head'    => $site['footer']['footer_lead_head'] ?? '',
             'footer_lead_body'    => $site['footer']['footer_lead_body'] ?? '',
             'footer_offices'      => $site['footer']['footer_offices'] ?? [],
@@ -731,7 +740,8 @@ class Trichis_Seed_Command {
             $this->read_json('route-pages.json') ?: [],
         );
 
-        $form_sections = [];
+        $footer_form = $this->read_json('site.json')['footer']['footer_form'] ?? null;
+        $form_sections = $footer_form && !empty($footer_form['formName']) ? [$footer_form['formName'] => $footer_form] : [];
         foreach ($sources as $p) {
             foreach ((array) ($p['content'] ?? []) as $block) {
                 if (($block['__typename'] ?? '') === 'FormSectionRecord' && !empty($block['formName'])) {

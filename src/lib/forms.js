@@ -27,15 +27,17 @@ export function formEndpoint(formKey) {
 
 /**
  * POST JSON to WP Advanced Forms REST adapter.
- * On seed builds / missing endpoint / network failure: returns { ok: true, mocked: true }.
+ * Seed builds simulate submission; missing configuration and network errors fail visibly.
  */
 export async function submitForm(formKey, values) {
   const endpoint = formEndpoint(formKey);
 
-  if (!endpoint || useSeed) {
+  if (useSeed) {
     await new Promise((r) => setTimeout(r, 400));
     return { ok: true, mocked: true };
   }
+
+  if (!endpoint) return { ok: false, mocked: false };
 
   try {
     const res = await fetch(endpoint, {
@@ -60,6 +62,6 @@ export async function submitForm(formKey, values) {
     const data = await res.json();
     return { ok: true, ...data, mocked: false };
   } catch {
-    return { ok: true, mocked: true };
+    return { ok: false, mocked: false };
   }
 }

@@ -23,6 +23,7 @@
 .home-glyph svg { overflow: visible; }
 .home-glyph img { width: 100%; height: 100%; object-fit: contain !important; }
 .home-hero { margin-bottom: 0; }
+.home-hero__visual { width: 100%; height: 100%; }
 .home-hero__media { display: block; width: 100%; height: 100%; object-fit: cover; }
 .home-hero.home-hero--fullscreen {
   width: 100%;

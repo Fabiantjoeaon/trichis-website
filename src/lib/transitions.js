@@ -7,7 +7,7 @@ import { events } from "./events";
 import { wait } from "./math";
 import { useGlobalStore } from "@/stores/global";
 
-export const TRANSITION_DURATION = 800;
+export const TRANSITION_DURATION = 650;
 
 /**
  * Resolve when an emitter event fires (or after `timeout` ms as a safety net

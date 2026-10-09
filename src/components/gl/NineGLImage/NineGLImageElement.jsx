@@ -6,6 +6,7 @@ import {
   useImperativeHandle,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import { useGlobalStore } from "@/stores/global";
 import useInView from "@/hooks/useInView";
@@ -38,6 +39,7 @@ const DOMFallback = forwardRef(function DOMFallback(
     className = "",
     isVideo = false,
     animateOnScroll = true,
+    loading = animateOnScroll ? "lazy" : "eager",
     offset = 0,
     onFacadeReady,
     onTextureReady,
@@ -146,7 +148,7 @@ const DOMFallback = forwardRef(function DOMFallback(
           loop
           muted
           playsInline
-          preload="none"
+          preload={loading === "lazy" ? "none" : "auto"}
           style={{
             width: "100%",
             height: "100%",
@@ -168,7 +170,8 @@ const DOMFallback = forwardRef(function DOMFallback(
           alt={alt || ""}
           width={props.width || undefined}
           height={props.height || undefined}
-          loading="eager"
+          loading={loading}
+          decoding="async"
           style={{
             width: "100%",
             height: "100%",
@@ -200,6 +203,7 @@ const GLImageElement = forwardRef(function GLImageElement(
     src,
     alt,
     animateOnScroll = true,
+    loading = animateOnScroll ? "lazy" : "eager",
     className = "",
     isVideo = false,
     offset = 0,
@@ -216,6 +220,22 @@ const GLImageElement = forwardRef(function GLImageElement(
   const el = useRef();
   const img = useRef();
   const internalRef = useRef();
+  const [nearViewport, setNearViewport] = useState(loading !== "lazy");
+
+  useEffect(() => {
+    if (nearViewport) return;
+    if (loading !== "lazy" || typeof IntersectionObserver === "undefined") {
+      setNearViewport(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setNearViewport(true);
+      observer.disconnect();
+    }, { rootMargin: "100% 0px" });
+    if (el.current) observer.observe(el.current);
+    return () => observer.disconnect();
+  }, [loading, nearViewport]);
   // The GL impl mounts only once its texture is loaded — queue imperative
   // calls made before that (nine-ca useDeferredFacade behavior) so e.g. an
   // animateIn fired for above-the-fold images isn't silently dropped.
@@ -296,6 +316,8 @@ const GLImageElement = forwardRef(function GLImageElement(
             ref={img}
             src={src}
             alt={alt || ""}
+            loading={loading}
+            decoding="async"
           />
         )}
         {isVideo && src && (
@@ -309,7 +331,7 @@ const GLImageElement = forwardRef(function GLImageElement(
             loop
             muted
             playsInline
-            preload="auto"
+            preload={nearViewport ? "auto" : "none"}
             style={{
               visibility: "hidden",
             }}
@@ -317,7 +339,7 @@ const GLImageElement = forwardRef(function GLImageElement(
         )}
       </div>
 
-      <UseCanvas>
+      {nearViewport && <UseCanvas>
         <ScrollScene
           track={el}
           hideOffscreen={animateOnScroll}
@@ -343,7 +365,7 @@ const GLImageElement = forwardRef(function GLImageElement(
             </Suspense>
           )}
         </ScrollScene>
-      </UseCanvas>
+      </UseCanvas>}
     </>
   );
 });

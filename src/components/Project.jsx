@@ -58,6 +58,7 @@ export const Project = forwardRef(function Project(
     <NineGLImageElement
       src={coverImage.url}
       animateOnScroll={false}
+      loading={animateOnScroll ? "lazy" : "eager"}
       offset={-0.5}
       isVideo={isVideo}
       ref={glImage}

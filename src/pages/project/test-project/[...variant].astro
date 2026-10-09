@@ -1,0 +1,19 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProjectPage from "@/components/project/ProjectPage.jsx";
+import { testProject, companionProjects } from "@/data/test-project";
+
+export function getStaticPaths() {
+  const projects = [testProject, ...companionProjects];
+  return projects.map((project) => ({
+    params: { variant: project.slug.split("/")[1] },
+    props: { project, nextProjects: projects.filter((item) => item.id !== project.id) },
+  }));
+}
+
+const { project, nextProjects } = Astro.props;
+---
+
+<BaseLayout title={project.title} seo={project.seo}>
+  <ProjectPage client:load project={project} nextProjects={nextProjects} />
+</BaseLayout>

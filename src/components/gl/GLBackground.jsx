@@ -170,7 +170,7 @@ export default memo(function GLBackground() {
       },
     });
 
-  function animateIn() {
+  function animateIn({ delay = overlayDelay } = {}) {
     if (visible.current) {
       // Already covering — let waiters (router loader) proceed immediately
       if (!isAnimating.current)
@@ -181,7 +181,7 @@ export default memo(function GLBackground() {
     visible.current = true;
     useGlobalStore.setState({ wipeCovered: true });
     setCanvasOverlay(true);
-    animateBackgroundIn();
+    animateBackgroundIn({ delay });
   }
 
   function animateOut() {
@@ -198,7 +198,7 @@ export default memo(function GLBackground() {
   useEvent(events.GL_BACKGROUND_OUT, animateOut);
   useEvent(events.ROUTE_CHANGE_START, () => {
     if (useGlobalStore.getState().menuOpen) return;
-    animateIn();
+    animateIn({ delay: 0 });
   });
 
   useFrame(({ clock }) => {

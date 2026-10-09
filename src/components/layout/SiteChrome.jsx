@@ -9,6 +9,7 @@ import { gsap } from "@/lib/gsap";
 import { bindMouse } from "@/lib/mouse";
 import { wait } from "@/lib/math";
 import { TRANSITION_DURATION, waitForEvent } from "@/lib/transitions";
+import { waitForPageReady, waitForLayout } from "@/lib/page-ready";
 import { useCanvasStore } from "@/lib/gl/canvasStore";
 import { useGlobalStore } from "@/stores/global";
 import useEvent from "@/hooks/useEvent";
@@ -112,6 +113,8 @@ function useTheme() {
 function useAstroNavigation() {
   useEffect(() => {
     let navigated = false;
+    let navigationId = 0;
+    let readiness;
 
     const coverScreen = async (route) => {
       useGlobalStore.setState({ pageRevealed: false });
@@ -134,6 +137,8 @@ function useAstroNavigation() {
 
     const onBeforePreparation = (event) => {
       navigated = true;
+      navigationId++;
+      readiness?.abort();
       const originalLoader = event.loader;
       event.loader = async function (...args) {
         await Promise.all([
@@ -164,11 +169,14 @@ function useAstroNavigation() {
     const onPageLoad = async () => {
       if (!navigated) return;
       navigated = false;
+      const currentId = navigationId;
+      readiness = new AbortController();
 
-      // Screen is covered — let the new page's islands hydrate and fonts
-      // settle so the reveal shows a finished page (nine-ca waits too).
-      await document.fonts.ready;
-      await wait(300);
+      // Keep the cover until the new page's visible content is ready, then
+      // measure on settled frames instead of holding for a fixed delay.
+      await waitForPageReady({ timeout: 2000, signal: readiness.signal });
+      await waitForLayout();
+      if (currentId !== navigationId) return;
 
       useGlobalStore.setState({ menuOpen: false });
       window.scrollTo(0, 0);
@@ -184,6 +192,7 @@ function useAstroNavigation() {
       });
       emitter.emit(events.GL_BACKGROUND_OUT);
       await revealed;
+      if (currentId !== navigationId) return;
 
       lenis?.start();
       emitter.emit(events.LOADING_OUT_COMPLETE);
@@ -193,6 +202,8 @@ function useAstroNavigation() {
     document.addEventListener("astro:after-swap", onAfterSwap);
     document.addEventListener("astro:page-load", onPageLoad);
     return () => {
+      navigationId++;
+      readiness?.abort();
       document.removeEventListener(
         "astro:before-preparation",
         onBeforePreparation,

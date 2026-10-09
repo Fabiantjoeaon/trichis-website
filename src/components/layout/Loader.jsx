@@ -1,5 +1,5 @@
 // Port of nine-ca components/views/LoaderView.js, adapted for the MPA world:
-// - first visit: full loader with progress counter (fonts + window load + images)
+// - first visit: full loader with progress counter (fonts + hydration + visible media)
 // - internal navigation (flag set by TransitionLink): quick wipe reveal only,
 //   so page transitions read as one continuous move like the SPA original.
 import { useEffect, useRef, useState } from "react";
@@ -7,47 +7,12 @@ import emitter from "@/lib/emitter";
 import { events } from "@/lib/events";
 import { gsap } from "@/lib/gsap";
 import { useGlobalStore } from "@/stores/global";
+import { waitForPageReady, waitForLayout } from "@/lib/page-ready";
 
-export const LOADER_OUT_DURATION = 1;
+export const LOADER_OUT_DURATION = 0.8;
 export const NAVIGATED_FLAG = "trichis:navigated";
 
 const format = (p) => `${p.toFixed(0)}`;
-
-function waitForFonts() {
-  return document.fonts?.ready ?? Promise.resolve();
-}
-
-function waitForBrowserLoad() {
-  if (document.readyState === "complete") return Promise.resolve();
-  return new Promise((res) => window.addEventListener("load", res, { once: true }));
-}
-
-function waitForImages(onProgress) {
-  // Below-the-fold lazy images load on scroll and must not hold the page entrance.
-  const images = Array.from(document.images).filter((img) => img.loading !== "lazy");
-  if (images.length === 0) {
-    onProgress(1);
-    return Promise.resolve();
-  }
-  let loaded = 0;
-  const bump = () => onProgress(++loaded / images.length);
-  return Promise.all(
-    images.map((img) => {
-      if (img.complete) {
-        bump();
-        return Promise.resolve();
-      }
-      return new Promise((res) => {
-        const done = () => {
-          bump();
-          res();
-        };
-        img.addEventListener("load", done, { once: true });
-        img.addEventListener("error", done, { once: true });
-      });
-    }),
-  );
-}
 
 export default function Loader() {
   const hasLoaded = useRef(false);
@@ -88,7 +53,7 @@ export default function Loader() {
       {
         clipPath: "inset(100% 0 0 0)",
         duration: LOADER_OUT_DURATION,
-        delay: isQuickReveal.current ? 0.1 : 0.5,
+        delay: 0.1,
         ease: "power2.inOut",
         onComplete: () => {
           if (wrapper.current) wrapper.current.style.display = "none";
@@ -131,35 +96,18 @@ export default function Loader() {
       });
     }
 
-    // Unified progress: fonts (20%), browser load (20%), images (60%)
-    const progress = { fonts: 0, load: 0, images: 0 };
-    const update = () => {
-      const total =
-        progress.fonts * 20 + progress.load * 20 + progress.images * 60;
-      writeDisplayProgress(total);
-    };
-
-    Promise.all([
-      waitForFonts().then(() => {
-        progress.fonts = 1;
-        update();
-      }),
-      waitForBrowserLoad().then(() => {
-        progress.load = 1;
-        update();
-      }),
-      waitForImages((p) => {
-        progress.images = p;
-        update();
-      }),
-    ]).then(() => {
+    const controller = new AbortController();
+    waitForPageReady({
+      timeout: 4000,
+      signal: controller.signal,
+      onProgress: (value) => writeDisplayProgress(value * 100),
+    }).then(async () => {
+      await waitForLayout();
+      if (controller.signal.aborted) return;
       writeDisplayProgress(100);
       doAnimateOut();
     });
-
-    // Safety net: never hang more than 8s
-    const timeout = setTimeout(doAnimateOut, 8000);
-    return () => clearTimeout(timeout);
+    return () => controller.abort();
   }, [isClient]);
 
   if (!isClient) return null;

@@ -3,12 +3,10 @@ import BorderedIcon from "@/components/ui/BorderedIcon";
 import SplitText from "@/components/ui/SplitText";
 import emitter from "@/lib/emitter";
 import { VIDEO_PLAYER_PLAY } from "@/lib/constants";
-import { useGlobalStore } from "@/stores/global";
+import useResponsiveMedia from "@/hooks/useResponsiveMedia";
 
 export default function HomeShowReel({ data }) {
-  const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
-
-  const active = (isMobileLayout && data?.mobileMedia) || data?.media;
+  const active = useResponsiveMedia(data?.media);
   const videoSrc = active?.url ?? "";
   if (!videoSrc) return null;
 

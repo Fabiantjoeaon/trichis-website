@@ -62,11 +62,11 @@ export const Project = forwardRef(function Project(
       offset={-0.5}
       isVideo={isVideo}
       ref={glImage}
-      alt={title}
       className="project-image"
       isLink={isLink}
       i={i}
       {...coverImage}
+      alt={coverImage.alt || title}
     />
   );
 

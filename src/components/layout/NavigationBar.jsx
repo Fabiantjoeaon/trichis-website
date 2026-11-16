@@ -4,7 +4,7 @@ import emitter from "@/lib/emitter";
 import { events } from "@/lib/events";
 import { useGlobalStore } from "@/stores/global";
 import useEvent from "@/hooks/useEvent";
-import SplitText from "@/components/ui/SplitText";
+import TrichisLogo from "@/components/ui/TrichisLogo";
 import AnimatedHoverText from "@/components/ui/AnimatedHoverText";
 import Badge from "@/components/ui/Badge";
 import { Divider } from "@/components/ui/Divider";
@@ -38,7 +38,6 @@ export default function NavigationBar({ siteName = "Trichis" }) {
   const border = useRef();
   const [badge1, badge2] = [useRef(), useRef()];
   const menuText = useRef();
-  const logoTextRef = useRef();
 
   const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
   const theme = useGlobalStore((s) => s.theme);
@@ -46,7 +45,6 @@ export default function NavigationBar({ siteName = "Trichis" }) {
   const [badgesVisible, setBadgesVisible] = useState(false);
 
   function animateIn() {
-    logoTextRef.current?.animateIn?.();
     border.current?.animateIn();
     badge1.current?.animateIn?.();
     badge2.current?.animateIn?.({ delay: 0.2 });
@@ -60,17 +58,11 @@ export default function NavigationBar({ siteName = "Trichis" }) {
 
   return (
     <header className="navigation">
-      <TransitionLink href="/">
-        <SplitText
-          ref={logoTextRef}
-          className="nav-logo"
-          animateOnScroll={false}
-          type="chars"
-          tag="h2"
-          animation="charClipped"
-        >
-          {siteName}
-        </SplitText>
+      <TransitionLink
+        href="/"
+        className={`nav-logo ${badgesVisible ? "active" : ""}`}
+      >
+        <TrichisLogo title={siteName || "Trichis"} />
       </TransitionLink>
       {!isMobileLayout && (
         <AnimatedHoverText

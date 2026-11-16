@@ -37,7 +37,7 @@ export default function AboutUsOffices({ data }) {
           {offices.map((office, i) => (
             <Project
               key={office.title || i}
-              coverImage={office.media?.url}
+              coverImage={office.media}
               title={office.title}
               i={i}
               isLink={false}

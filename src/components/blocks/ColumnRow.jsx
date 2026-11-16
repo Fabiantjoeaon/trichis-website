@@ -3,6 +3,7 @@ import BorderedIcon from "@/components/ui/BorderedIcon";
 import CmsHtml from "@/components/ui/CmsHtml";
 import NineGLImageElement from "@/components/gl/NineGLImage/NineGLImageElement";
 import { useGlobalStore } from "@/stores/global";
+import { pickMedia } from "@/hooks/useResponsiveMedia";
 import { boundedNumber } from "@/lib/home-layout";
 import ColumnGlyphs from "./ColumnGlyphs";
 
@@ -66,7 +67,7 @@ export default function ColumnRow({
           __typename,
           width: _width,
           mobileWidth: _mobileWidth,
-          image,
+          image: _image,
           text,
           ...rest
         } = column;
@@ -83,6 +84,7 @@ export default function ColumnRow({
           ...(isJustTextColumn ? { margin: "250rem 0" } : null),
         };
 
+        const image = pickMedia(_image, isMobileLayout);
         const isVideo = !!image?.isVideo;
 
         return (

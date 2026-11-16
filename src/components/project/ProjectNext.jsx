@@ -27,7 +27,7 @@ export default function ProjectNext({ projects = [], project }) {
               className={`project-next__card project-next__card--${i + 1}`}>
               {media && <NineGLImageElement key={media.url} className="project-next__image"
                 src={media.url} alt={media.alt || item.title} width={media.width} height={media.height}
-                isVideo={!!media.isVideo} animateOnScroll offset={0.1} isLink />}
+                isVideo={!!media.isVideo} mobile={media.mobile} animateOnScroll offset={0.1} isLink />}
               <SplitText tag="h3" className="project-next__label" type="chars" animation="charClipped" animateOnScroll>
                 {item.title}
               </SplitText>

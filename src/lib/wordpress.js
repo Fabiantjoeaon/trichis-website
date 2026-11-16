@@ -7,11 +7,12 @@
 // (seed-source.js) can pass Dato exports through untouched.
 
 import { gqlFetch } from "./graphql.js";
-import { LAYOUT_TO_TYPENAME, assignAnchors, isVideoMedia } from "./normalize.js";
+import { LAYOUT_TO_TYPENAME, assignAnchors, isVideoMedia, withMobile } from "./normalize.js";
 import {
   allPagesQuery,
-  ALL_PROJECTS_QUERY,
+  allProjectsQuery,
   ALL_SERVICES_QUERY,
+  MOBILE_MEDIA_PROBE,
   projectQuery,
   serviceQuery,
   siteSettingsQuery,
@@ -25,6 +26,8 @@ const contentTypes = [
   "PageBuilderPageBlocksHomeWhatWeDoLayout",
   "PageBuilderPageBlocksHomeWhatWeveCreatedLayout",
   "PageBuilderPageBlocksHowWeDoItLayout",
+  "PageBuilderPageBlocksTeamLayout",
+  MOBILE_MEDIA_PROBE[0],
   "Footer",
   "ProjectDetailsPageBlocksSectionLineLayout",
   "ProjectDetailsPageBlocksCtaSectionLayout",
@@ -75,6 +78,11 @@ function mapMedia(media) {
   };
 }
 
+function mapResponsiveMedia(source, field) {
+  const mobileField = `mobile${field[0].toUpperCase()}${field.slice(1)}`;
+  return withMobile(mapMedia(source?.[field]), mapMedia(source?.[mobileField]));
+}
+
 // ── blocks ─────────────────────────────────────────────────────────────
 
 function layoutName(gqlTypename) {
@@ -89,7 +97,7 @@ function mapColumn(col) {
   if (type === "image") {
     return {
       __typename: "ImagecolumnRecord",
-      image: mapMedia(col.media),
+      image: mapResponsiveMedia(col, "media"),
       width: col.width,
       mobileWidth: col.mobileWidth,
     };
@@ -159,7 +167,7 @@ function mapBlock(typename, block) {
     case "AccordionRecord":
       return {
         title: block.title,
-        media: mapMedia(block.media),
+        media: mapResponsiveMedia(block, "media"),
         items: (block.items ?? []).map((item) => ({
           question: item.question,
           answer: item.answer,
@@ -194,8 +202,7 @@ function mapBlock(typename, block) {
     case "HomeheroRecord":
       return {
         fullscreen: block.fullscreen ?? true,
-        media: mapMedia(block.media),
-        mobileMedia: mapMedia(block.mobileMedia),
+        media: mapResponsiveMedia(block, "media"),
       };
     case "HomewhoweareRecord":
       return { sectionTitle: block.sectionTitle, body: block.body, glyphMedia: mapMedia(block.glyphMedia) };
@@ -207,7 +214,7 @@ function mapBlock(typename, block) {
         services: (block.services ?? []).map((s) => ({
           label: s.label,
           link: s.link,
-          media: mapMedia(s.media),
+          media: mapResponsiveMedia(s, "media"),
         })),
       };
     case "HomewhatwevecreatedRecord":
@@ -235,8 +242,7 @@ function mapBlock(typename, block) {
       return {
         textTop: block.textTop,
         textBottom: block.textBottom,
-        media: mapMedia(block.media),
-        mobileMedia: mapMedia(block.mobileMedia),
+        media: mapResponsiveMedia(block, "media"),
       };
     case "LinkbandRecord":
       return { title: block.title, link: block.link };
@@ -257,9 +263,9 @@ function mapBlock(typename, block) {
         lead: block.lead,
         ctaText: block.ctaText,
         ctaLink: block.ctaLink,
-        imageA: mapMedia(block.imageA),
-        imageB: mapMedia(block.imageB),
-        imageWide: mapMedia(block.imageWide),
+        imageA: mapResponsiveMedia(block, "imageA"),
+        imageB: mapResponsiveMedia(block, "imageB"),
+        imageWide: mapResponsiveMedia(block, "imageWide"),
         body: block.body,
       };
     case "OfficesRecord":
@@ -269,7 +275,16 @@ function mapBlock(typename, block) {
         offices: (block.offices ?? []).map((o) => ({
           title: o.title,
           address: o.address,
-          media: mapMedia(o.media),
+          media: mapResponsiveMedia(o, "media"),
+        })),
+      };
+    case "TeamRecord":
+      return {
+        sectionTitle: block.sectionTitle,
+        members: (block.members ?? []).map((m) => ({
+          name: m.name,
+          role: m.role,
+          media: mapResponsiveMedia(m, "media"),
         })),
       };
     case "ExpertisesRecord":
@@ -292,7 +307,7 @@ function mapBlock(typename, block) {
         rows: (block.rows ?? []).map((row) => ({
           columns: (row.columns ?? []).map((c) => ({
             width: c.width,
-            media: mapMedia(c.media),
+            media: mapResponsiveMedia(c, "media"),
           })),
         })),
         trailingText: block.trailingText,
@@ -343,10 +358,12 @@ function mapProject(node) {
       id: t.databaseId,
       title: t.name,
     })),
-    coverImage: mapMedia(d.cover),
+    coverImage: mapResponsiveMedia(d, "cover"),
     mobileCoverImage: mapMedia(d.mobileCover),
-    featuredImage:
+    featuredImage: withMobile(
       mapMedia(node.featuredImage) || mapMedia(d.featuredMedia),
+      mapMedia(d.mobileFeaturedMedia),
+    ),
     seo: mapSeo(node.seo),
     content: mapBlocks(d.pageBlocks),
   };
@@ -381,7 +398,7 @@ function mapPage(node) {
     title: node.title,
     slug: node.slug,
     pageKey: choice(b.pageKey) ?? "custom",
-    coverImage: mapMedia(b.cover),
+    coverImage: mapResponsiveMedia(b, "cover"),
     mobileCoverImage: mapMedia(b.mobileCover),
     seo: mapSeo(node.seo),
     content: mapBlocks(b.pageBlocks),
@@ -391,7 +408,7 @@ function mapPage(node) {
 // ── public API ─────────────────────────────────────────────────────────
 
 export async function getProjects() {
-  const data = await gqlFetch(ALL_PROJECTS_QUERY);
+  const data = await gqlFetch(allProjectsQuery(await getContentFields()));
   return (data.projects?.nodes ?? []).map(mapProject);
 }
 
@@ -445,7 +462,8 @@ export async function getSiteSettings() {
       siteName: s.general?.siteName ?? "",
       logo: s.general?.logo?.node?.sourceUrl ?? null,
       logoAlt: s.general?.logoAlt?.node?.sourceUrl ?? null,
-      favicon: s.general?.favicon?.node?.sourceUrl ?? null,
+      favicon: mapMedia(s.general?.favicon)?.url ?? null,
+      faviconType: s.general?.favicon?.node?.mimeType ?? null,
       seoTitleSuffix: s.general?.seoTitleSuffix ?? "",
       seoDefaultDescription: s.general?.seoDefaultDescription ?? "",
       seoDefaultOgImage: s.general?.seoDefaultOgImage?.node?.sourceUrl ?? null,

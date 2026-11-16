@@ -30,3 +30,22 @@ function trichis_media_group(string $key, string $name, string $label): array {
         'instructions'  => 'Image or video from the media library.',
     ];
 }
+
+/**
+ * A media field plus its optional phone variant, stored as `mobile_{$name}`.
+ * The front end falls back to the desktop media when the mobile one is empty.
+ *
+ * @return array Two fields; spread into the surrounding field list.
+ */
+function trichis_media_pair(string $key, string $name, string $label): array {
+    $mobile_key = str_ends_with($key, "_{$name}")
+        ? substr($key, 0, -strlen($name)) . "mobile_{$name}"
+        : "{$key}_mobile";
+
+    $desktop = trichis_media_group($key, $name, $label);
+    $mobile  = trichis_media_group($mobile_key, "mobile_{$name}", "{$label} (mobile)");
+    $mobile['instructions'] = 'Optional. Shown on phones instead; leave empty to use the media on the left.';
+    $desktop['wrapper'] = $mobile['wrapper'] = ['width' => '50'];
+
+    return [$desktop, $mobile];
+}

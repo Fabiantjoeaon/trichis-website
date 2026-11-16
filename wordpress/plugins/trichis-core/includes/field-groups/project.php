@@ -36,7 +36,7 @@ add_action('acf/init', function () {
             ],
             trichis_media_group('field_project_cover', 'cover', 'Cover media'),
             trichis_media_group('field_project_mobile_cover', 'mobile_cover', 'Mobile cover media'),
-            trichis_media_group('field_project_featured_media', 'featured_media', 'Featured media (homepage)'),
+            ...trichis_media_pair('field_project_featured_media', 'featured_media', 'Featured media (homepage)'),
             trichis_page_blocks_field('project', trichis_blocks_for_context('project')),
         ],
         'location' => [[

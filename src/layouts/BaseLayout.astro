@@ -41,7 +41,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
     {description && <meta name="description" content={description} />}
     {seo?.noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
-    {general.favicon && <link rel="icon" href={general.favicon} />}
+    {general.favicon && (
+      <>
+        <link rel="icon" href={general.favicon} type={general.faviconType ?? undefined} />
+        <link rel="apple-touch-icon" href={general.favicon} />
+      </>
+    )}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     {description && <meta property="og:description" content={description} />}

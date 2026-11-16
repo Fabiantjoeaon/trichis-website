@@ -18,6 +18,7 @@ import ServicePageHero from "@/components/service/ServicePageHero";
 import AboutUsHero from "@/components/about/AboutUsHero";
 import AboutUsIntro from "@/components/about/AboutUsIntro";
 import AboutUsOffices from "@/components/about/AboutUsOffices";
+import AboutUsTeam from "@/components/about/AboutUsTeam";
 import WhatWeDoExpertises from "@/components/whatwedo/WhatWeDoExpertises";
 import ServiceTeaser from "@/components/whatwedo/ServiceTeaser";
 import { SectionTitle } from "@/components/ui/Divider";
@@ -74,6 +75,7 @@ export const ContentComponents = {
   AboutheroRecord: AboutUsHero,
   AboutintroRecord: AboutUsIntro,
   OfficesRecord: AboutUsOffices,
+  TeamRecord: AboutUsTeam,
   ExpertisesRecord: WhatWeDoExpertises,
   ServiceteaserRecord: ServiceTeaser,
 };

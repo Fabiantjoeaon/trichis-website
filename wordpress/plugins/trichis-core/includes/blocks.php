@@ -17,7 +17,7 @@
  *
  * A second set of blocks (home_hero, home_who_we_are, home_what_we_do,
  * home_what_weve_created, how_we_do_it, home_showreel, link_band, about_hero,
- * about_intro, offices, expertises, service_teaser) has no DatoCMS ancestor.
+ * about_intro, offices, team, expertises, service_teaser) has no DatoCMS ancestor.
  * Those lift the sections that used to be hard-coded into React, so the home,
  * about and what-we-do routes become ordinary editable pages.
  *
@@ -65,6 +65,11 @@ function trichis_bf(string $ctx, string $block, string $name, array $def): array
 /** Shorthand for a media sub field inside a block. */
 function trichis_block_media(string $ctx, string $block, string $name, string $label): array {
     return trichis_media_group("field_{$ctx}_blk_{$block}_{$name}", $name, $label);
+}
+
+/** Desktop + optional mobile media sub fields inside a block. */
+function trichis_block_media_pair(string $ctx, string $block, string $name, string $label): array {
+    return trichis_media_pair("field_{$ctx}_blk_{$block}_{$name}", $name, $label);
 }
 
 /** Decorative artwork only; video is not a glyph. */
@@ -285,7 +290,7 @@ function trichis_block_column_row(string $ctx): array {
                         'max'     => 100,
                         'wrapper' => ['width' => '35'],
                     ]),
-                    trichis_media_group("field_{$ctx}_blk_column_row_media", 'media', 'Media'),
+                    ...trichis_media_pair("field_{$ctx}_blk_column_row_media", 'media', 'Media'),
                     trichis_bf($ctx, 'column_row', 'text', [
                         'label'             => 'Text',
                         'type'              => 'wysiwyg',
@@ -423,7 +428,7 @@ function trichis_block_accordion(string $ctx): array {
                 'type'    => 'text',
                 'wrapper' => ['width' => '50'],
             ]),
-            trichis_block_media($ctx, 'accordion', 'media', 'Media'),
+            ...trichis_block_media_pair($ctx, 'accordion', 'media', 'Media'),
             trichis_bf($ctx, 'accordion', 'items', [
                 'label'        => 'Items',
                 'type'         => 'repeater',
@@ -661,7 +666,7 @@ function trichis_block_home_what_we_do(string $ctx): array {
                         'instructions' => 'e.g. /service/identity',
                         'wrapper'      => ['width' => '50'],
                     ]),
-                    trichis_block_media($ctx, 'home_what_we_do', 'media', 'Media'),
+                    ...trichis_block_media_pair($ctx, 'home_what_we_do', 'media', 'Media'),
                 ],
             ]),
         ],
@@ -915,9 +920,9 @@ function trichis_block_about_intro(string $ctx): array {
                 'type'    => 'text',
                 'wrapper' => ['width' => '50'],
             ]),
-            trichis_block_media($ctx, 'about_intro', 'image_a', 'Image A (small, left)'),
-            trichis_block_media($ctx, 'about_intro', 'image_b', 'Image B (small, right)'),
-            trichis_block_media($ctx, 'about_intro', 'image_wide', 'Image wide (full width)'),
+            ...trichis_block_media_pair($ctx, 'about_intro', 'image_a', 'Image A (small, left)'),
+            ...trichis_block_media_pair($ctx, 'about_intro', 'image_b', 'Image B (small, right)'),
+            ...trichis_block_media_pair($ctx, 'about_intro', 'image_wide', 'Image wide (full width)'),
             trichis_bf($ctx, 'about_intro', 'body', [
                 'label' => 'Body',
                 'type'  => 'textarea',
@@ -963,7 +968,42 @@ function trichis_block_offices(string $ctx): array {
                         'instructions' => 'One line per row.',
                         'wrapper'      => ['width' => '60'],
                     ]),
-                    trichis_block_media($ctx, 'offices', 'media', 'Media'),
+                    ...trichis_block_media_pair($ctx, 'offices', 'media', 'Media'),
+                ],
+            ]),
+        ],
+    ];
+}
+
+function trichis_block_team(string $ctx): array {
+    return [
+        'key'        => "layout_key_{$ctx}_team",
+        'name'       => 'team',
+        'label'      => 'Team',
+        'display'    => 'block',
+        'sub_fields' => [
+            trichis_bf($ctx, 'team', 'section_title', [
+                'label'   => 'Section title',
+                'type'    => 'text',
+                'wrapper' => ['width' => '50'],
+            ]),
+            trichis_bf($ctx, 'team', 'members', [
+                'label'        => 'Team members',
+                'type'         => 'repeater',
+                'layout'       => 'block',
+                'button_label' => 'Add Team Member',
+                'sub_fields'   => [
+                    trichis_bf($ctx, 'team', 'name', [
+                        'label'   => 'Name',
+                        'type'    => 'text',
+                        'wrapper' => ['width' => '50'],
+                    ]),
+                    trichis_bf($ctx, 'team', 'role', [
+                        'label'   => 'Role',
+                        'type'    => 'text',
+                        'wrapper' => ['width' => '50'],
+                    ]),
+                    ...trichis_block_media_pair($ctx, 'team', 'media', 'Photo'),
                 ],
             ]),
         ],
@@ -1081,7 +1121,7 @@ function trichis_block_service_teaser(string $ctx): array {
                                 'max'     => 100,
                                 'wrapper' => ['width' => '30'],
                             ]),
-                            trichis_block_media($ctx, 'service_teaser', 'media', 'Media'),
+                            ...trichis_block_media_pair($ctx, 'service_teaser', 'media', 'Media'),
                         ],
                     ]),
                 ],
@@ -1122,7 +1162,7 @@ function trichis_blocks_for_context(string $ctx): array {
                 'home_hero', 'home_who_we_are', 'home_what_we_do',
                 'home_what_weve_created', 'how_we_do_it', 'home_showreel',
                 'link_band', 'service_hero', 'about_hero', 'about_intro',
-                'offices', 'expertises', 'service_teaser',
+                'offices', 'team', 'expertises', 'service_teaser',
             ];
         case 'project':
             return ['project_header', 'section_line', 'column_row', 'project_numbers', 'accordion', 'paragraph', 'cta_section'];

@@ -393,8 +393,22 @@ const GLImageElement = forwardRef(function GLImageElement(
   );
 });
 
-const NineGLImageElement = forwardRef(function NineGLImageElement(props, ref) {
+const NineGLImageElement = forwardRef(function NineGLImageElement(
+  { mobile, ...rest },
+  ref,
+) {
   const noWebGLImages = useGlobalStore((s) => s.noWebGLImages);
+  const isMobileLayout = useGlobalStore((s) => s.isMobileLayout);
+  const props = isMobileLayout && mobile?.url
+    ? {
+        ...rest,
+        src: mobile.url,
+        isVideo: !!mobile.isVideo,
+        width: mobile.width,
+        height: mobile.height,
+        alt: mobile.alt || rest.alt,
+      }
+    : rest;
   const src = useMemo(() => getProcessedSrc(props.src), [props.src]);
   const next = src === props.src ? props : { ...props, src };
 

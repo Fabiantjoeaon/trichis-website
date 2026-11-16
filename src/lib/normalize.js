@@ -26,6 +26,7 @@ const LAYOUTS = [
   ["AboutHeroLayout", "AboutheroRecord"],
   ["AboutIntroLayout", "AboutintroRecord"],
   ["OfficesLayout", "OfficesRecord"],
+  ["TeamLayout", "TeamRecord"],
   ["ExpertisesLayout", "ExpertisesRecord"],
   ["ServiceTeaserLayout", "ServiceteaserRecord"],
 ];
@@ -55,6 +56,15 @@ export function assignAnchors(blocks) {
     seen.set(base, count);
     return { ...block, anchorId: count === 1 ? base : `${base}-${count}` };
   });
+}
+
+/**
+ * Desktop media carrying its phone variant as `.mobile`. Either one stands in
+ * for the other when it is missing.
+ */
+export function withMobile(media, mobile) {
+  if (!media) return mobile ?? null;
+  return mobile ? { ...media, mobile } : media;
 }
 
 const VIDEO_EXT = /\.(mp4|webm|mov|m4v|m3u8)(\?|$)/i;
@@ -104,6 +114,12 @@ export function normalizeMedia(value) {
   const out = {};
   for (const [key, val] of Object.entries(value)) {
     out[key] = MEDIA_KEYS.has(key) ? normalizeAsset(val) : normalizeMedia(val);
+  }
+  for (const [key, val] of Object.entries(out)) {
+    const desktop = key.startsWith("mobile") && `${key[6]?.toLowerCase()}${key.slice(7)}`;
+    if (desktop && MEDIA_KEYS.has(key) && desktop in out) {
+      out[desktop] = withMobile(out[desktop], val);
+    }
   }
   return out;
 }

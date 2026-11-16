@@ -301,7 +301,32 @@
 }
 
 .navigation .nav-logo {
-  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  font-size: 40rem;
+  line-height: 1;
+}
+
+.trichis-logo {
+  display: block;
+  height: 0.75em;
+  width: auto;
+  fill: var(--color-text);
+  transition: fill var(--theme-transition-duration) var(--theme-transition-ease);
+}
+
+.navigation .nav-logo .trichis-logo {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(30%);
+  transition:
+    clip-path 0.8s cubic-bezier(0.215, 0.61, 0.355, 1),
+    transform 0.8s cubic-bezier(0.215, 0.61, 0.355, 1),
+    fill var(--theme-transition-duration) var(--theme-transition-ease);
+}
+
+.navigation .nav-logo.active .trichis-logo {
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
 }
 
 @media (max-width: 711px) {

@@ -19,6 +19,7 @@
 .wwd-service__strategy-text,
 .about-intro,
 .about-offices,
+.about-team,
 .service-page-hero {
   padding-top: 70rem;
   padding-bottom: 280rem;
@@ -41,6 +42,7 @@
   .wwd-service__strategy-text,
   .about-intro,
   .about-offices,
+  .about-team,
   .service-page-hero {
     padding-bottom: 120rem;
   }
@@ -1095,6 +1097,31 @@
   width: 50%;
 }
 
+.about-team {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 200rem 300rem;
+}
+
+.about-team__member {
+  position: relative;
+}
+
+.about-team__member .project-image {
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  position: relative;
+}
+
+.about-team__member .project-image img,
+.about-team__member .project-image video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .what-we-do-expertises {
   display: flex;
   gap: 5%;
@@ -1256,6 +1283,11 @@
 
   .about-offices__right {
     flex-direction: column;
+  }
+
+  .about-team {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 120rem 50rem;
   }
 
   .project-numbers__inner {

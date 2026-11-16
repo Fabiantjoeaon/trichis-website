@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useGlobalStore } from "@/stores/global";
+import useResponsiveMedia from "@/hooks/useResponsiveMedia";
 import { map } from "@/lib/math";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { EASE_CUSTOM_4 } from "@/lib/easing";
@@ -11,8 +11,7 @@ export default function HomeHero({ data, className = "" }) {
   const mediaRef = useRef(null);
   const pageReady = useRef(false);
   const startEntrance = useRef(null);
-  const isMobileLayout = useGlobalStore((state) => state.isMobileLayout);
-  const media = (isMobileLayout && data?.mobileMedia) || data?.media;
+  const media = useResponsiveMedia(data?.media);
 
   usePageEnter(() => {
     pageReady.current = true;

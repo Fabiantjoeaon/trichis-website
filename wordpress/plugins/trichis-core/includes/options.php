@@ -60,6 +60,9 @@ add_action('acf/init', function () {
                 'name'          => 'favicon',
                 'type'          => 'image',
                 'return_format' => 'array',
+                'preview_size'  => 'thumbnail',
+                'mime_types'    => 'png,ico,svg,gif,jpg,jpeg,webp',
+                'instructions'  => 'Browser tab icon. A square PNG of at least 512×512 works best; also used as the iOS home screen icon.',
                 'wrapper'       => ['width' => '50'],
             ],
             [

@@ -25,7 +25,7 @@ export default function HomeWhatWeveCreated({ data, projects = [] }) {
                   "--glyph-flip": row.glyphFlip ? -1 : 1 }} />}
               <TransitionLink className="home-work__project" href={`/project/${project.slug}`}>
                 {media?.url ? <NineGLImageElement className="home-work__image"
-                  src={media.url} alt={media.alt || project.title} isVideo={media.isVideo}
+                  src={media.url} alt={media.alt || project.title} isVideo={media.isVideo} mobile={media.mobile}
                   width={media.width} height={media.height} animateOnScroll offset={0.1} isLink /> :
                   <div className="home-work__image" />}
                 <SplitText tag="h3" type="chars" animation="charClipped" animateOnScroll>{project.title}</SplitText>

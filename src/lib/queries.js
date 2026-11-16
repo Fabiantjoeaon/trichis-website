@@ -24,6 +24,20 @@ const MEDIA = /* GraphQL */ `
   }
 `;
 
+// Media fields have an optional `mobile{Field}` sibling. Older installs lack
+// all of them at once, so one field stands in for the lot.
+export const MOBILE_MEDIA_PROBE = ["ProjectDetails", "mobileFeaturedMedia"];
+
+function mediaFields(hasField, ...names) {
+  const mobile = hasField(...MOBILE_MEDIA_PROBE);
+  return names
+    .map((name) => {
+      const mobileName = `mobile${name[0].toUpperCase()}${name.slice(1)}`;
+      return `${name} { ${MEDIA} }${mobile ? ` ${mobileName} { ${MEDIA} }` : ""}`;
+    })
+    .join("\n");
+}
+
 /**
  * Inline fragments for every block layout of a given ACF flexible content
  * context. GraphQL type names follow wpgraphql-acf 2.x:
@@ -32,6 +46,7 @@ const MEDIA = /* GraphQL */ `
  *   ProjectDetailsPageBlocksColumnRowLayout
  */
 function blockFragments(prefix, blocks, hasField = () => true) {
+  const media = (...names) => mediaFields(hasField, ...names);
   const defs = {
     page_header: `
       ... on ${prefix}PageHeaderLayout {
@@ -68,15 +83,19 @@ function blockFragments(prefix, blocks, hasField = () => true) {
     `,
     column_row: `
       ... on ${prefix}ColumnRowLayout {
-        ${hasField(`${prefix}ColumnRowLayout`, "glyphs") ? `glyphs {
+        ${
+          hasField(`${prefix}ColumnRowLayout`, "glyphs")
+            ? `glyphs {
           variant column x y width rotation flip mobileX mobileY mobileWidth hideOnMobile layer
           glyphMedia { ${MEDIA} }
-        }` : ""}
+        }`
+            : ""
+        }
         columns {
           columnType
           width
           mobileWidth
-          media { ${MEDIA} }
+          ${media("media")}
           text
           align
           ${hasField(`${prefix}Columns`, "textAlign") ? "textAlign" : ""}
@@ -100,7 +119,7 @@ function blockFragments(prefix, blocks, hasField = () => true) {
     accordion: `
       ... on ${prefix}AccordionLayout {
         title
-        media { ${MEDIA} }
+        ${media("media")}
         items {
           question
           answer
@@ -158,17 +177,21 @@ function blockFragments(prefix, blocks, hasField = () => true) {
         services {
           label
           link
-          media { ${MEDIA} }
+          ${media("media")}
         }
       }
     `,
     home_what_weve_created: `
       ... on ${prefix}HomeWhatWeveCreatedLayout {
         sectionTitle
-        ${hasField(`${prefix}HomeWhatWeveCreatedLayout`, "projectRows") ? `projectRows {
+        ${
+          hasField(`${prefix}HomeWhatWeveCreatedLayout`, "projectRows")
+            ? `projectRows {
           projectSlug width alignment imageRatio glyphEnabled glyphPosition glyphWidth glyphRotation glyphFlip
           glyphMedia { ${MEDIA} }
-        }` : ""}
+        }`
+            : ""
+        }
         ctaText
         ctaLink
       }
@@ -220,9 +243,7 @@ function blockFragments(prefix, blocks, hasField = () => true) {
         lead
         ctaText
         ctaLink
-        imageA { ${MEDIA} }
-        imageB { ${MEDIA} }
-        imageWide { ${MEDIA} }
+        ${media("imageA", "imageB", "imageWide")}
         body
       }
     `,
@@ -233,7 +254,17 @@ function blockFragments(prefix, blocks, hasField = () => true) {
         offices {
           title
           address
-          media { ${MEDIA} }
+          ${media("media")}
+        }
+      }
+    `,
+    team: `
+      ... on ${prefix}TeamLayout {
+        sectionTitle
+        members {
+          name
+          role
+          ${media("media")}
         }
       }
     `,
@@ -260,7 +291,7 @@ function blockFragments(prefix, blocks, hasField = () => true) {
         rows {
           columns {
             width
-            media { ${MEDIA} }
+            ${media("media")}
           }
         }
         trailingText
@@ -269,39 +300,56 @@ function blockFragments(prefix, blocks, hasField = () => true) {
       }
     `,
   };
-  return blocks.map((name) => {
-    // Older live CMS installs do not yet expose these project block types.
-    const optionalType = { section_line: "SectionLineLayout", cta_section: "CtaSectionLayout" }[name];
-    if (prefix === "ProjectDetailsPageBlocks" && optionalType && !hasField(`${prefix}${optionalType}`)) return "";
-    return defs[name] ?? "";
-  }).join("\n");
+  return blocks
+    .map((name) => {
+      // Older live CMS installs do not yet expose these project block types.
+      const optionalType = {
+        section_line: "SectionLineLayout",
+        cta_section: "CtaSectionLayout",
+      }[name];
+      if (
+        prefix === "ProjectDetailsPageBlocks" &&
+        optionalType &&
+        !hasField(`${prefix}${optionalType}`)
+      )
+        return "";
+      if (name === "team" && !hasField(`${prefix}TeamLayout`)) return "";
+      return defs[name] ?? "";
+    })
+    .join("\n");
 }
 
-const pageBlocks = (hasField) => blockFragments("PageBuilderPageBlocks", [
-  "page_header",
-  "project_header",
-  "cta_section",
-  "form_section",
-  "column_row",
-  "project_numbers",
-  "accordion",
-  "paragraph",
-  "section_line",
-  "scrolling_title",
-  "home_hero",
-  "home_who_we_are",
-  "home_what_we_do",
-  "home_what_weve_created",
-  "how_we_do_it",
-  "home_showreel",
-  "link_band",
-  "service_hero",
-  "about_hero",
-  "about_intro",
-  "offices",
-  "expertises",
-  "service_teaser",
-], hasField);
+const pageBlocks = (hasField) =>
+  blockFragments(
+    "PageBuilderPageBlocks",
+    [
+      "page_header",
+      "project_header",
+      "cta_section",
+      "form_section",
+      "column_row",
+      "project_numbers",
+      "accordion",
+      "paragraph",
+      "section_line",
+      "scrolling_title",
+      "home_hero",
+      "home_who_we_are",
+      "home_what_we_do",
+      "home_what_weve_created",
+      "how_we_do_it",
+      "home_showreel",
+      "link_band",
+      "service_hero",
+      "about_hero",
+      "about_intro",
+      "offices",
+      "team",
+      "expertises",
+      "service_teaser",
+    ],
+    hasField,
+  );
 
 // Per-record SEO, identical on every content type.
 const SEO_FIELDS = /* GraphQL */ `
@@ -313,23 +361,29 @@ const SEO_FIELDS = /* GraphQL */ `
   }
 `;
 
-const projectBlocks = (hasField) => blockFragments("ProjectDetailsPageBlocks", [
-  "project_header",
-  "column_row",
-  "project_numbers",
-  "accordion",
-  "paragraph",
-  "section_line",
-  "cta_section",
-], hasField);
+const projectBlocks = (hasField) =>
+  blockFragments(
+    "ProjectDetailsPageBlocks",
+    [
+      "project_header",
+      "column_row",
+      "project_numbers",
+      "accordion",
+      "paragraph",
+      "section_line",
+      "cta_section",
+    ],
+    hasField,
+  );
 
-const serviceBlocks = (hasField) => blockFragments("ServiceDetailsPageBlocks", [
-  "section_line",
-  "scrolling_title",
-  "column_row",
-], hasField);
+const serviceBlocks = (hasField) =>
+  blockFragments(
+    "ServiceDetailsPageBlocks",
+    ["section_line", "scrolling_title", "column_row"],
+    hasField,
+  );
 
-const PROJECT_FIELDS = /* GraphQL */ `
+const projectFields = (hasField) => /* GraphQL */ `
   id
   title
   slug
@@ -346,17 +400,17 @@ const PROJECT_FIELDS = /* GraphQL */ `
     featuredOrder
     cover { ${MEDIA} }
     mobileCover { ${MEDIA} }
-    featuredMedia { ${MEDIA} }
+    ${mediaFields(hasField, "featuredMedia")}
   }
 `;
 
 // ── Projects ──
 
-export const ALL_PROJECTS_QUERY = /* GraphQL */ `
+export const allProjectsQuery = (hasField) => /* GraphQL */ `
   query GetProjects {
     projects(first: 100, where: { orderby: { field: DATE, order: ASC } }) {
       nodes {
-        ${PROJECT_FIELDS}
+        ${projectFields(hasField)}
       }
     }
   }
@@ -365,15 +419,9 @@ export const ALL_PROJECTS_QUERY = /* GraphQL */ `
 export const projectQuery = (hasField) => /* GraphQL */ `
   query GetProject($slug: ID!) {
     project(id: $slug, idType: SLUG) {
-      ${PROJECT_FIELDS}
+      ${projectFields(hasField)}
       ${SEO_FIELDS}
       projectDetails {
-        year
-        featured
-        featuredOrder
-        cover { ${MEDIA} }
-        mobileCover { ${MEDIA} }
-        featuredMedia { ${MEDIA} }
         pageBlocks {
           __typename
           ${projectBlocks(hasField)}
@@ -470,10 +518,14 @@ export const siteSettingsQuery = (hasField = () => true) => /* GraphQL */ `
       }
       footer {
         ${hasField("Footer", "footerFormEnabled") ? "footerFormEnabled" : ""}
-        ${hasField("Footer", "footerForm") ? `footerForm {
+        ${
+          hasField("Footer", "footerForm")
+            ? `footerForm {
           title subtitle formName ctaText successTitle successMessage
           formFields { label name fieldType required options placeholder width }
-        }` : ""}
+        }`
+            : ""
+        }
         footerLeadHead
         footerLeadBody
         footerOffices {

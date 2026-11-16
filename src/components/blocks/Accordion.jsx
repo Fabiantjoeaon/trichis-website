@@ -113,6 +113,7 @@ export default function Accordion({ data }) {
               width={media.width}
               height={media.height}
               isVideo={!!media.isVideo}
+              mobile={media.mobile}
               offset={0.1}
             />
           </div>

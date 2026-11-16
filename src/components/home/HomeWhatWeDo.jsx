@@ -3,6 +3,7 @@ import TransitionLink from "@/components/ui/TransitionLink";
 import SplitText from "@/components/ui/SplitText";
 import BorderedIcon from "@/components/ui/BorderedIcon";
 import usePageEnter from "@/hooks/usePageEnter";
+import useResponsiveMedia from "@/hooks/useResponsiveMedia";
 import HomeGlyph from "./HomeGlyph";
 import { playVideo, pauseVideo } from "@/lib/playVideo";
 
@@ -28,7 +29,7 @@ function ServiceButton({ service, selected, panelId, onSelect }) {
 
 function ServiceMedia({ service, active }) {
   const video = useRef(null);
-  const media = service.media;
+  const media = useResponsiveMedia(service.media);
   useEffect(() => {
     if (!video.current) return;
     if (active) playVideo(video.current);

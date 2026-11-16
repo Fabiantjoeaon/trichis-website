@@ -1122,6 +1122,27 @@
   object-fit: cover;
 }
 
+.about-team__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+  margin-top: 30rem;
+  text-align: left;
+}
+
+.about-team__name {
+  font-size: 50rem;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.about-team__role {
+  font-size: 32rem;
+  line-height: 1.4;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
 .what-we-do-expertises {
   display: flex;
   gap: 5%;

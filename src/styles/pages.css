@@ -1235,6 +1235,10 @@
     flex-direction: column;
   }
 
+  .service-header {
+    gap: 60rem;
+  }
+
   .project-header {
     display: block;
   }

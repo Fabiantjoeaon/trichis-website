@@ -1,8 +1,10 @@
 import { useEffect, useId, useRef, useState } from "react";
 import TransitionLink from "@/components/ui/TransitionLink";
 import SplitText from "@/components/ui/SplitText";
+import BorderedIcon from "@/components/ui/BorderedIcon";
 import usePageEnter from "@/hooks/usePageEnter";
 import HomeGlyph from "./HomeGlyph";
+import { playVideo, pauseVideo } from "@/lib/playVideo";
 
 function ServiceButton({ service, selected, panelId, onSelect }) {
   const label = useRef(null);
@@ -29,8 +31,8 @@ function ServiceMedia({ service, active }) {
   const media = service.media;
   useEffect(() => {
     if (!video.current) return;
-    if (active) video.current.play()?.catch(() => {});
-    else video.current.pause();
+    if (active) playVideo(video.current);
+    else pauseVideo(video.current);
   }, [active, media?.url]);
   if (!media?.url) return null;
   return media.isVideo ? (
@@ -38,11 +40,44 @@ function ServiceMedia({ service, active }) {
   ) : <img src={media.url} alt={media.alt || service.label} loading="lazy" />;
 }
 
+function NavArrow({ direction, label, onClick }) {
+  return (
+    <BorderedIcon
+      className={`home-services__arrow home-services__arrow--${direction < 0 ? "prev" : "next"}`}
+      icon={direction < 0 ? "chevronLeft" : "chevronRight"}
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+      onClick={onClick}
+      onKeyDown={(event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        onClick();
+      }}
+    />
+  );
+}
+
 export default function HomeWhatWeDo({ data, currentService } = {}) {
   const services = data?.services ?? [];
   const [currIndex, setCurrIndex] = useState(Math.max(0,
     services.findIndex((service) => service.link?.endsWith(`/${currentService}`))));
   const panelId = useId();
+  const nav = useRef(null);
+
+  const move = (direction) =>
+    setCurrIndex((index) => (index + direction + services.length) % services.length);
+
+  useEffect(() => {
+    const scroller = nav.current;
+    const item = scroller?.children[currIndex];
+    if (!item || scroller.scrollWidth <= scroller.clientWidth) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    scroller.scrollTo({
+      left: item.offsetLeft - (scroller.clientWidth - item.offsetWidth) / 2,
+      behavior: reduce ? "auto" : "smooth",
+    });
+  }, [currIndex]);
 
   return (
     <section className="home-services home-section" id={data?.anchorId}>
@@ -53,11 +88,15 @@ export default function HomeWhatWeDo({ data, currentService } = {}) {
       </div>
       {services.length > 0 && (
         <>
-          <div className="home-services__nav" aria-label={data?.sectionTitle}>
-            {services.map((service, index) => (
-              <ServiceButton key={index} service={service} selected={index === currIndex}
-                panelId={panelId} onSelect={() => setCurrIndex(index)} />
-            ))}
+          <div className="home-services__nav-wrap">
+            <NavArrow direction={-1} label="Previous service" onClick={() => move(-1)} />
+            <div className="home-services__nav" ref={nav} aria-label={data?.sectionTitle}>
+              {services.map((service, index) => (
+                <ServiceButton key={index} service={service} selected={index === currIndex}
+                  panelId={panelId} onSelect={() => setCurrIndex(index)} />
+              ))}
+            </div>
+            <NavArrow direction={1} label="Next service" onClick={() => move(1)} />
           </div>
           <div className="home-services__media" id={panelId}>
             {services.map((service, index) => {

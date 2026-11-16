@@ -4,6 +4,7 @@ import { map } from "@/lib/math";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { EASE_CUSTOM_4 } from "@/lib/easing";
 import usePageEnter from "@/hooks/usePageEnter";
+import { playVideo } from "@/lib/playVideo";
 
 export default function HomeHero({ data, className = "" }) {
   const track = useRef(null);
@@ -30,7 +31,7 @@ export default function HomeHero({ data, className = "" }) {
       const ready = element.tagName === "VIDEO" ? element.readyState >= 2 : element.complete;
       if (!ready && !element.error) return;
       started = true;
-      element.play?.()?.catch(() => {});
+      if (element.tagName === "VIDEO") playVideo(element);
       tween = gsap.to(element, { opacity: 1, scale: 1, duration: motion.matches ? 0 : 1.2,
         ease: EASE_CUSTOM_4, clearProps: "opacity,transform" });
     };
@@ -46,7 +47,11 @@ export default function HomeHero({ data, className = "" }) {
     motion.addEventListener("change", stopMotion);
     // Astro adopts the next page from a parsed document. A video can arrive
     // with an empty/failed media state even though its src is unchanged.
-    if (element.tagName === "VIDEO" && (!element.currentSrc || element.error)) element.load();
+    if (element.tagName === "VIDEO") {
+      if (!element.currentSrc || element.error) element.load();
+      // iOS buffers no frame until playback starts, so loadeddata waits on this.
+      playVideo(element);
+    }
     start();
     return () => {
       startEntrance.current = null;

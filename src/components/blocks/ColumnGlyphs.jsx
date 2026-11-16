@@ -14,10 +14,10 @@ export default function ColumnGlyphs({ glyphs = [], column = 0 }) {
       return <HomeGlyph key={index} media={glyph.glyphMedia} variant={variant}
         className={`column-glyph${glyph.hideOnMobile ? " column-glyph--hide-mobile" : ""}`}
         style={{
-          "--glyph-x": `${x}%`, "--glyph-y": `${y}%`, "--glyph-size": `${width}%`,
+          "--glyph-x": `${x}%`, "--glyph-y": `${y}%`, "--glyph-size": `calc(var(--glyph-base-size) * ${width / 30})`,
           "--glyph-mobile-x": `${boundedNumber(glyph.mobileX, x, -100, 200)}%`,
           "--glyph-mobile-y": `${boundedNumber(glyph.mobileY, y, -100, 200)}%`,
-          "--glyph-mobile-size": `${boundedNumber(glyph.mobileWidth, width, 5, 150)}%`,
+          "--glyph-mobile-size": `calc(var(--glyph-base-size) * ${boundedNumber(glyph.mobileWidth, width, 5, 150) / 30})`,
           "--glyph-rotation": `${boundedNumber(glyph.rotation, 0, -180, 180)}deg`,
           "--glyph-flip": glyph.flip ? -1 : 1,
           zIndex: glyph.layer === "behind" ? 1 : 5,

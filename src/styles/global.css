@@ -426,6 +426,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: "SG Grotesk", sans-serif;
+  font-weight: 300;
 }
 
 /* Block (not flex) so the hero's nav+base margin collapses with
@@ -562,21 +563,21 @@ span {
     font-family: "SG Grotesk", sans-serif;
     font-size: 400rem;
     line-height: 1;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .t-heading1 {
     font-family: "SG Grotesk", sans-serif;
     font-size: 220rem;
     line-height: 1;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .t-heading2 {
     font-family: "SG Grotesk", sans-serif;
     font-size: 100rem;
     line-height: 1;
-    font-weight: 900;
+    font-weight: 300;
   }
 
   /* Scrolling text */
@@ -584,7 +585,7 @@ span {
     font-family: "SG Grotesk", sans-serif;
     font-size: 80rem;
     line-height: 1.1;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   /* Menu text */
@@ -592,14 +593,14 @@ span {
     font-family: "SG Grotesk", sans-serif;
     font-size: 48rem;
     line-height: 1;
-    font-weight: 100;
+    font-weight: 300;
   }
 
   .t-heading5 {
     font-family: "SG Grotesk", sans-serif;
     font-size: 250rem;
     line-height: 1;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   /* Section titles */
@@ -614,27 +615,27 @@ span {
     font-family: "SG Grotesk", sans-serif;
     font-size: 500rem;
     line-height: 1;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .t-what-we-do-mobile-slider {
     font-family: "SG Grotesk", sans-serif;
     font-size: 70rem;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .t-paragraph {
     font-family: "SG Grotesk", sans-serif;
     font-size: 50rem;
     line-height: 1.4;
-    font-weight: 100;
+    font-weight: 300;
   }
 
   .t-paragraph-strong {
     font-family: "SG Grotesk", sans-serif;
     font-size: 50rem;
     line-height: 1.4;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   /* Footer text */
@@ -642,21 +643,21 @@ span {
     font-family: "SG Grotesk", sans-serif;
     font-size: 40rem;
     line-height: 1.4;
-    font-weight: 100;
+    font-weight: 300;
   }
 
   .t-smaller-paragraph {
     font-family: "SG Grotesk", sans-serif;
     font-size: 30rem;
     line-height: 1.4;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .t-mono-small {
     font-family: "SG Grotesk", sans-serif;
     font-size: 25rem;
     line-height: 1.4;
-    font-weight: 400;
+    font-weight: 300;
     text-transform: uppercase;
   }
 
@@ -664,7 +665,7 @@ span {
     font-family: "SG Grotesk", sans-serif;
     font-size: 80rem;
     line-height: 1.4;
-    font-weight: 400;
+    font-weight: 300;
     text-transform: uppercase;
   }
 
@@ -672,34 +673,34 @@ span {
     font-family: "SG Grotesk", sans-serif;
     font-size: 75rem;
     line-height: 1.4;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .t-menu-links {
     font-family: "SG Grotesk", sans-serif;
     font-size: 150rem;
     line-height: 1.2;
-    font-weight: 100;
+    font-weight: 300;
   }
 
   .t-menu-mono {
     font-family: "SG Grotesk", sans-serif;
     font-size: 50rem;
     line-height: 1.2;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .t-project-number {
     font-family: "SG Grotesk", sans-serif;
     font-size: 160rem;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .t-floating-title {
     font-family: "SG Grotesk", sans-serif;
     font-size: 260rem;
     line-height: 1;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .t-projects-title,
@@ -707,49 +708,49 @@ span {
     font-family: "SG Grotesk", sans-serif;
     font-size: 80rem;
     line-height: 1.2;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .t-hero-text {
     font-family: "SG Grotesk", sans-serif;
     font-size: 180rem;
     line-height: 1.1;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .t-glass-card-number {
     font-family: "SG Grotesk", sans-serif;
     font-size: 100rem;
     line-height: 1.1;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .t-glass-card-title {
     font-family: "SG Grotesk", sans-serif;
     font-size: 70rem;
     line-height: 1.2;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .t-glass-card-paragraph {
     font-family: "SG Grotesk", sans-serif;
     font-size: 40rem;
     line-height: 1.4;
-    font-weight: 100;
+    font-weight: 300;
   }
 
   .t-service-hero-title {
     font-family: "SG Grotesk", sans-serif;
     font-size: 700rem;
     line-height: 1;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .t-service-hero-subtitle {
     font-family: "SG Grotesk", sans-serif;
     font-size: 80rem;
     line-height: 1;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   @media (min-width: 1025px) and (min-height: 600px) {
@@ -828,7 +829,7 @@ h1 {
   font-family: "SG Grotesk", sans-serif;
   font-size: 220rem;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 300;
   color: var(--color-text);
 }
 
@@ -836,7 +837,7 @@ h2 {
   font-family: "SG Grotesk", sans-serif;
   font-size: 100rem;
   line-height: 1;
-  font-weight: 900;
+  font-weight: 300;
   color: var(--color-text);
 }
 
@@ -844,7 +845,7 @@ h3 {
   font-family: "SG Grotesk", sans-serif;
   font-size: 80rem;
   line-height: 1.1;
-  font-weight: 500;
+  font-weight: 300;
   color: var(--color-text);
 }
 
@@ -852,7 +853,7 @@ h4 {
   font-family: "SG Grotesk", sans-serif;
   font-size: 48rem;
   line-height: 1;
-  font-weight: 100;
+  font-weight: 300;
   color: var(--color-text);
 }
 
@@ -860,7 +861,7 @@ h5 {
   font-family: "SG Grotesk", sans-serif;
   font-size: 250rem;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 300;
   color: var(--color-text);
 }
 
@@ -876,7 +877,7 @@ p {
   font-family: "SG Grotesk", sans-serif;
   font-size: 50rem;
   line-height: 1.4;
-  font-weight: 100;
+  font-weight: 300;
   color: var(--color-text);
 }
 
@@ -884,7 +885,7 @@ strong {
   font-family: "SG Grotesk", sans-serif;
   font-size: 50rem;
   line-height: 1.4;
-  font-weight: 500;
+  font-weight: 300;
   color: var(--color-text);
 }
 
@@ -900,7 +901,7 @@ strong {
   font-family: "SG Grotesk", sans-serif;
   font-size: 25rem;
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 300;
   text-transform: uppercase;
   color: var(--color-text);
 }

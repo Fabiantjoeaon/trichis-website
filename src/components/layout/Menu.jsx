@@ -6,8 +6,8 @@ import { events } from "@/lib/events";
 import { useGlobalStore } from "@/stores/global";
 import useEvent from "@/hooks/useEvent";
 import useAnimation from "@/hooks/useAnimation";
+import { gsap } from "@/lib/gsap";
 import AnimatedHoverText from "@/components/ui/AnimatedHoverText";
-import ShuffledText from "@/components/ui/ShuffledText";
 import BorderedIcon from "@/components/ui/BorderedIcon";
 import { TransitionLink } from "@/components/ui/TransitionLink";
 
@@ -61,6 +61,8 @@ export default memo(function Menu({ settings = {} }) {
   const wrapper = useRef();
   const menuLinks = useRef();
   const items = useRef([]);
+  const details = useRef();
+  const detailsTween = useRef();
   const isVisible = useRef(false);
   const closeIcon = useRef();
 
@@ -75,6 +77,11 @@ export default memo(function Menu({ settings = {} }) {
         items.current?.forEach((link, i) => {
           link?.animateIn({ duration: 0.4, delay: 0.1 * i });
         });
+        detailsTween.current?.kill();
+        detailsTween.current = gsap.to(details.current.querySelectorAll(".menu-detail"), {
+          yPercent: 0, autoAlpha: 1, duration: 0.45, stagger: 0.06,
+          ease: "power3.out",
+        });
       },
       onComplete: () => {
         isVisible.current = true;
@@ -85,6 +92,11 @@ export default memo(function Menu({ settings = {} }) {
         isVisible.current = false;
         items.current.forEach((link) => link?.animateOut({ duration: 0.1 }));
         closeIcon.current?.animateOut();
+        detailsTween.current?.kill();
+        detailsTween.current = gsap.to(details.current.querySelectorAll(".menu-detail"), {
+          yPercent: -100, autoAlpha: 0, duration: 0.2, stagger: 0.02,
+          ease: "power2.in",
+        });
       },
     },
   });
@@ -103,6 +115,8 @@ export default memo(function Menu({ settings = {} }) {
   }
 
   useEvent(events.MENU_OPEN, () => {
+    detailsTween.current?.kill();
+    gsap.set(details.current.querySelectorAll(".menu-detail"), { yPercent: 100, autoAlpha: 0 });
     useGlobalStore.setState({ menuOpen: true });
     emitter.emit(events.GL_BACKGROUND_IN);
     if (wrapper.current) wrapper.current.style.display = "flex";
@@ -132,7 +146,10 @@ export default memo(function Menu({ settings = {} }) {
     };
     applyWidth();
     window.addEventListener("resize", applyWidth);
-    return () => window.removeEventListener("resize", applyWidth);
+    return () => {
+      window.removeEventListener("resize", applyWidth);
+      detailsTween.current?.kill();
+    };
   }, []);
 
   if (!isClient) return null;
@@ -143,8 +160,6 @@ export default memo(function Menu({ settings = {} }) {
   const phone = footer.phone ?? "";
   const email = footer.email ?? "";
   const socials = footer.socialLinks ?? [];
-
-  let shuffleIndex = navLinks.length;
 
   const menuItemScale = BASELINE_ITEM_COUNT / Math.max(navLinks.length, 1);
 
@@ -162,26 +177,23 @@ export default memo(function Menu({ settings = {} }) {
             />
           ))}
         </div>
-        <div className="menu__bottom">
+        <div className="menu__bottom" ref={details}>
           <div className="menu__contact">
             {phone && (
               <a href={`tel:${phone.replace(/\s/g, "")}`}>
-                <ShuffledText ref={(r) => (items.current[shuffleIndex++] = r)} text={phone} />
+                <span className="menu-detail">{phone}</span>
               </a>
             )}
             {email && (
               <a href={`mailto:${email}`}>
-                <ShuffledText ref={(r) => (items.current[shuffleIndex++] = r)} text={email} />
+                <span className="menu-detail">{email}</span>
               </a>
             )}
           </div>
           <div className="menu__socials">
             {socials.map((social) => (
               <a key={social.label} href={social.url} target="_blank" rel="noopener noreferrer">
-                <ShuffledText
-                  ref={(r) => (items.current[shuffleIndex++] = r)}
-                  text={social.label}
-                />
+                <span className="menu-detail">{social.label}</span>
               </a>
             ))}
           </div>

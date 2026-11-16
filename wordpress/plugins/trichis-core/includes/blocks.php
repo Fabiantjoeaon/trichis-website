@@ -222,11 +222,11 @@ function trichis_block_column_glyphs(string $ctx): array {
     foreach ([
         'x' => ['Horizontal offset (%)', 0, -100, 200],
         'y' => ['Vertical offset (%)', 50, -100, 200],
-        'width' => ['Width (% of anchor)', 30, 5, 150],
+        'width' => ['Glyph size (30 = standard)', 30, 5, 150],
         'rotation' => ['Rotation (degrees)', 0, -180, 180],
         'mobile_x' => ['Mobile horizontal offset (%)', null, -100, 200],
         'mobile_y' => ['Mobile vertical offset (%)', null, -100, 200],
-        'mobile_width' => ['Mobile width (% of anchor)', null, 5, 150],
+        'mobile_width' => ['Mobile glyph size (30 = standard)', null, 5, 150],
     ] as $name => [$label, $default, $min, $max]) {
         $fields[] = trichis_bf($ctx, 'column_glyph', $name, [
             'label' => $label, 'type' => 'number', 'default_value' => $default,
@@ -710,7 +710,7 @@ function trichis_block_home_what_weve_created(string $ctx): array {
                         'choices' => ['top-left' => 'Top left', 'top-right' => 'Top right', 'bottom-left' => 'Bottom left', 'bottom-right' => 'Bottom right'], 'default_value' => 'top-right',
                     ]),
                     trichis_bf($ctx, 'home_what_weve_created', 'glyph_width', [
-                        'label' => 'Glyph width (% of row)', 'type' => 'number', 'min' => 10, 'max' => 60, 'default_value' => 35,
+                        'label' => 'Glyph size (35 = standard)', 'type' => 'number', 'min' => 10, 'max' => 60, 'default_value' => 35,
                     ]),
                     trichis_bf($ctx, 'home_what_weve_created', 'glyph_rotation', [
                         'label' => 'Glyph rotation (degrees)', 'type' => 'number', 'min' => -180, 'max' => 180, 'default_value' => 0,

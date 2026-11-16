@@ -50,10 +50,10 @@ export default function AboutUsIntro({ data }) {
           </div>
         </div>
       </section>
-
+      {/* 
       <div className="about-intro__logo inner-width">
         <Logo />
-      </div>
+      </div> */}
 
       {pair.length > 0 && <ColumnRow data={{ columns: pair }} />}
 

@@ -20,7 +20,7 @@ export default function HomeWhatWeveCreated({ data, projects = [] }) {
             <div className={`home-work__row home-work__row--${alignment}`} key={`${project.slug}-${index}`}
               style={{ "--project-width": `${boundedNumber(row.width, 66, 20, 100)}%`, "--project-ratio": ratio }}>
               {row.glyphEnabled && <HomeGlyph variant={position.endsWith("left") ? "work-left" : "work-right"} media={row.glyphMedia} className={`home-work__glyph home-work__glyph--${position}`}
-                style={{ "--glyph-width": `${boundedNumber(row.glyphWidth, 35, 10, 60)}%`,
+                style={{ "--glyph-size": `calc(var(--glyph-base-size) * ${boundedNumber(row.glyphWidth, 35, 10, 60) / 35})`,
                   "--glyph-rotation": `${boundedNumber(row.glyphRotation, 0, -180, 180)}deg`,
                   "--glyph-flip": row.glyphFlip ? -1 : 1 }} />}
               <TransitionLink className="home-work__project" href={`/project/${project.slug}`}>

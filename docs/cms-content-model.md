@@ -98,7 +98,7 @@ an image/video; the media links to the selected service. The list scrolls on nar
   - `glyph_enabled` — show/hide the row's glyph
   - `glyph_media` — artwork; defaults to the supplied left/right loop
   - `glyph_position` — top-left, top-right, bottom-left, bottom-right
-  - `glyph_width` — 10–60% of the row
+  - `glyph_width` — size multiplier: 35 uses the shared responsive glyph size; 10–60 scales it down/up independently of the row width
   - `glyph_rotation` — -180 to 180 degrees
   - `glyph_flip` — mirror horizontally
 - `cta_text`, `cta_link` — optional link after the projects
@@ -262,7 +262,8 @@ Enter this in the text column's HTML tab:
 bundled animated SVGs or a custom media image. Anchor column 0 means the row's content
 area; 1, 2, etc. mean that individual column. X/Y offsets locate the glyph's centre:
 0/0 is top left, 100/100 is bottom right; negative values extend outside the anchor.
-Width is a percentage of the anchor. Rotation, horizontal mirroring, above/behind
+Size uses a shared responsive base (`clamp(140px, 24vw, 360px)` along the longest
+edge): 30 is the standard size, independent of the anchor's width. Rotation, horizontal mirroring, above/behind
 image layering, mobile X/Y/width overrides and “Hide on mobile” are available.
 Blank mobile values inherit desktop values. Glyphs attached to a hidden mobile spacer
 are hidden with that column; use a row anchor to keep them visible on mobile.

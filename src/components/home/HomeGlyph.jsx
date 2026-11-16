@@ -7,6 +7,7 @@ import workLeft from "../../../public/images/glyphs/trichis-work-left.svg?raw";
 import workRight from "../../../public/images/glyphs/trichis-work-right.svg?raw";
 
 const artwork = { question, services, "work-left": workLeft, "work-right": workRight };
+const proportions = { question: "89.55 / 200.51", services: "269.64 / 185.49", "work-left": "372.61 / 208.09", "work-right": "218.43 / 203.53" };
 // Reveal the filled question mark along its centreline, preserving its original outline.
 const questionStroke = "M9.7 5.7C24 18 32 36 34 52C36 68 28 78 18 73C3 68 5 47 23 36C39 26 58 26 74 42C89 59 86 82 72 94C59 106 42 111 33 127C24 143 24 161 32 175";
 
@@ -56,7 +57,8 @@ export default function HomeGlyph({ media, variant = "services", className = "",
   useInView({ el: track, offset: 0.15, handleIn: () => { revealed.current = true; timeline.current?.play(); } });
 
   return (
-    <span ref={track} className={`home-glyph ${className}`} data-glyph={selected} style={style} aria-hidden="true">
+    <span ref={track} className={`home-glyph ${className}`} data-glyph={selected}
+      style={{ "--glyph-aspect": proportions[selected] || "1", "--glyph-width-ratio": selected === "question" ? 89.55 / 200.51 : 1, ...style }} aria-hidden="true">
       {svg ? <span className="home-glyph__art" dangerouslySetInnerHTML={markup} />
         : <img src={media.url} alt="" loading="lazy" />}
     </span>

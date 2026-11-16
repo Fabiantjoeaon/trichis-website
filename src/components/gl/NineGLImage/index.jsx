@@ -32,6 +32,8 @@ import {
   mapRange,
 } from "@/lib/gl/shaderChunks";
 import { useImageAsTexture } from "@/lib/gl/useImageAsTexture";
+import { useVideoAsTexture } from "@/lib/gl/useVideoAsTexture";
+import { playVideo, pauseVideo } from "@/lib/playVideo";
 import useAnimation from "@/hooks/useAnimation";
 import { EASE_CUSTOM_4 } from "@/lib/easing";
 import { lerp, map } from "@/lib/math";
@@ -248,7 +250,7 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
     const el = currentTexture?.source?.data || currentTexture?.image;
     if (!el?.play) return;
     el.currentTime = 0;
-    el.play()?.catch?.(() => {});
+    playVideo(el);
   }
 
   function handlePointerOver(_, override = false) {
@@ -289,10 +291,7 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
     getGroup: () => group.current,
     visible: () => visible.current,
     playVideo: () => resetAndPlayVideo(tMap),
-    stopVideo: () => {
-      const el = tMap?.source?.data || tMap?.image;
-      el?.pause?.();
-    },
+    stopVideo: () => pauseVideo(tMap?.source?.data || tMap?.image),
     seekVideo: (time) => {
       const el = tMap?.source?.data || tMap?.image;
       if (el) el.currentTime = time;
@@ -351,11 +350,15 @@ const NineGLImageImpl = forwardRef(function NineGLImageImpl(
   );
 });
 
-function WithVideoTexture({ src, children }) {
-  const texture = useVideoTexture(src || null, {
-    crossOrigin: "anonymous",
-    unsuspend: "canplay",
-  });
+function WithVideoTexture({ imgRef, src, children }) {
+  const texture = useVideoAsTexture(imgRef, src);
+  return texture ? children(texture) : null;
+}
+
+// Retain the existing HLS adapter for CMS streaming sources. Ordinary video
+// files share their DOM tracker instead of downloading into a second video.
+function WithStreamingTexture({ src, children }) {
+  const texture = useVideoTexture(src, { crossOrigin: "anonymous", unsuspend: "canplay" });
   return children(texture);
 }
 
@@ -375,10 +378,11 @@ const NineGLImage = forwardRef(function NineGLImage(props, ref) {
   if (tMap) return <NineGLImageImpl ref={ref} {...props} tMap={tMap} />;
 
   if (isVideo) {
+    const VideoSource = src?.endsWith(".m3u8") ? WithStreamingTexture : WithVideoTexture;
     return (
-      <WithVideoTexture src={src}>
+      <VideoSource imgRef={imgRef} src={src}>
         {(texture) => <NineGLImageImpl ref={ref} {...props} tMap={texture} />}
-      </WithVideoTexture>
+      </VideoSource>
     );
   }
 

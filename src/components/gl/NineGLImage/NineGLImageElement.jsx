@@ -240,11 +240,16 @@ const GLImageElement = forwardRef(function GLImageElement(
   // calls made before that (nine-ca useDeferredFacade behavior) so e.g. an
   // animateIn fired for above-the-fold images isn't silently dropped.
   const pendingCalls = useRef([]);
+  // Keep the requested visibility beyond the first attach: a texture/scene
+  // can remount after the one-shot scroll observer has already disconnected.
+  const entrance = useRef(null);
 
   const call = useCallback((name, args = []) => {
+    const isEntrance = name === "animateIn" || name === "animateOut";
+    if (isEntrance) entrance.current = [name, args];
     const target = internalRef.current;
     if (target?.[name]) return target[name](...args);
-    pendingCalls.current.push([name, args]);
+    if (!isEntrance) pendingCalls.current.push([name, args]);
     return undefined;
   }, []);
 
@@ -254,6 +259,10 @@ const GLImageElement = forwardRef(function GLImageElement(
       if (!instance) return;
       const queued = pendingCalls.current.splice(0);
       queued.forEach(([name, args]) => instance[name]?.(...args));
+      if (entrance.current) {
+        const [name, args] = entrance.current;
+        instance[name]?.(...args);
+      }
       onFacadeReady?.(instance);
     },
     [onFacadeReady],
@@ -281,21 +290,31 @@ const GLImageElement = forwardRef(function GLImageElement(
     },
   });
 
+  const onTextureReadyRef = useRef(onTextureReady);
+  onTextureReadyRef.current = onTextureReady;
+
   useEffect(() => {
     const media = img.current;
     if (!media) return;
     const remasure = () => useCanvasStore.getState().triggerReflow();
+    // An undecodable source never yields a texture; release loaders waiting on it.
+    const failed = () => onTextureReadyRef.current?.();
     media.addEventListener("load", remasure);
     media.addEventListener("loadeddata", remasure);
+    media.addEventListener("loadedmetadata", remasure);
+    media.addEventListener("error", failed);
     if (
       (media.tagName === "IMG" && media.complete && media.naturalWidth) ||
-      (media.tagName === "VIDEO" && media.readyState >= 2)
+      (media.tagName === "VIDEO" && media.readyState >= 1)
     ) {
       remasure();
     }
+    if (media.error) failed();
     return () => {
       media.removeEventListener("load", remasure);
       media.removeEventListener("loadeddata", remasure);
+      media.removeEventListener("loadedmetadata", remasure);
+      media.removeEventListener("error", failed);
     };
   }, [src]);
 
@@ -333,7 +352,11 @@ const GLImageElement = forwardRef(function GLImageElement(
             playsInline
             preload={nearViewport ? "auto" : "none"}
             style={{
-              visibility: "hidden",
+              // iOS refuses to autoplay a visibility:hidden video, which
+              // leaves it without a frame and the GL texture never ready.
+              opacity: 0,
+              pointerEvents: "none",
+              aspectRatio: mediaWidth && mediaHeight ? `auto ${mediaWidth} / ${mediaHeight}` : undefined,
             }}
           />
         )}
